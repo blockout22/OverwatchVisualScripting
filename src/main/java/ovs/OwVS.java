@@ -1,3 +1,5 @@
+package ovs;
+
 import org.lwjgl.opengl.GL11;
 
 public class OwVS {
@@ -7,7 +9,7 @@ public class OwVS {
 
     public OwVS(){
         window = new GlfwWindow(800, 600, "Overwatch Visual Scripting");
-        imGuiWindow = new ImGuiWindow(window.getWindowID());
+        imGuiWindow = new ImGuiWindow(window);
 
         while(!window.isCloseRequested())
         {

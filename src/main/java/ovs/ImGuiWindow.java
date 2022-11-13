@@ -1,3 +1,5 @@
+package ovs;
+
 import imgui.ImFontConfig;
 import imgui.ImFontGlyphRangesBuilder;
 import imgui.ImGui;
@@ -8,18 +10,28 @@ import imgui.flag.ImGuiConfigFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import org.lwjgl.glfw.GLFW;
+import ovs.graph.GraphWindow;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import static imgui.flag.ImGuiWindowFlags.*;
 
 public class ImGuiWindow {
+
+    private GlfwWindow glfwWindow;
 
     private final ImGuiImplGlfw imGuiGLFW = new ImGuiImplGlfw();
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
-    public ImGuiWindow(long glfwWindowID){
+    private ArrayList<GraphWindow> graphWindows = new ArrayList<>();
+    private ArrayList<GraphWindow> queueRemoveGraphWindow = new ArrayList<>();
+
+    public ImGuiWindow(GlfwWindow glfwWindow){
+        this.glfwWindow = glfwWindow;
         ImNodes.createContext();
         ImGui.createContext();
 
@@ -43,7 +55,7 @@ public class ImGuiWindow {
 
         fontConfig.destroy();
 
-        imGuiGLFW.init(glfwWindowID, true);
+        imGuiGLFW.init(glfwWindow.getWindowID(), true);
         imGuiGl3.init("#version 150");
     }
 
@@ -59,11 +71,28 @@ public class ImGuiWindow {
         imGuiGLFW.newFrame();
         ImGui.newFrame();
         {
-            if(ImGui.begin("New Window"));
-            {
 
+            createMainMenuBar();
+            float menuBarHeight = 20f;
+            ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight(), ImGuiCond.Always);
+            ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY(), ImGuiCond.Always);
+            ImGui.setNextWindowViewport(ImGui.getMainViewport().getID());
+
+
+            if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
+                ImGui.setCursorScreenPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
+                //fill screen widget here to enable snapping on viewport it's self
+                ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight, NoResize | NoScrollbar);
             }
             ImGui.end();
+
+            for(GraphWindow graphWindow : graphWindows){
+                graphWindow.show(menuBarHeight);
+            }
+
+            for (int i = 0; i < queueRemoveGraphWindow.size(); i++) {
+                graphWindows.remove(queueRemoveGraphWindow.get(i));
+            }
         }
 
         ImGui.render();
@@ -75,6 +104,24 @@ public class ImGuiWindow {
             ImGui.renderPlatformWindowsDefault();
             GLFW.glfwMakeContextCurrent(backupWindowPtr);
         }
+    }
+
+    public void createMainMenuBar(){
+        ImGui.beginMainMenuBar();
+        {
+            if(ImGui.beginMenu("File", true)){
+                if (ImGui.menuItem("New Graph")) {
+                    //lastMenuAction == "File";
+                    graphWindows.add(new GraphWindow(glfwWindow));
+                }
+                ImGui.endMenu();
+            }
+        }
+        ImGui.endMainMenuBar();
+    }
+
+    public void removeGraphWindow(GraphWindow graphWindow){
+        queueRemoveGraphWindow.add(graphWindow);
     }
 
     public void close(){
