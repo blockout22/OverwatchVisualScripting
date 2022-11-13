@@ -32,8 +32,6 @@ public class GlfwWindow {
     }
 
     public void update(){
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
         GLFW.glfwSwapBuffers(windowID);
         GLFW.glfwPollEvents();
     }
@@ -42,5 +40,9 @@ public class GlfwWindow {
     {
         GLFW.glfwDestroyWindow(windowID);
         GLFW.glfwTerminate();
+    }
+
+    public long getWindowID(){
+        return windowID;
     }
 }
