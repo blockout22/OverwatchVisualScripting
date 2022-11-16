@@ -3,6 +3,7 @@ package ovs.graph.pin;
 import imgui.ImColor;
 import imgui.ImDrawList;
 import imgui.ImVec4;
+import ovs.graph.PinData;
 import ovs.graph.node.Node;
 
 public abstract class Pin {
@@ -20,6 +21,7 @@ public abstract class Pin {
     private int ID;
     private String name = "";
     private PinType pinType;
+    private PinData data;
 
     public Pin()
     {
@@ -59,6 +61,8 @@ public abstract class Pin {
         }
     }
 
+    public abstract boolean UI();
+
     public void setPinType(PinType pinType){
         this.pinType = pinType;
     }
@@ -91,7 +95,19 @@ public abstract class Pin {
         return color;
     }
 
+    public void setColor(float r, float g, float b, float a) {
+        this.color.set(r, g, b, a);
+    }
+
     public PinType getPinType() {
         return pinType;
+    }
+
+    public PinData getData() {
+        return data;
+    }
+
+    public void setData(PinData data) {
+        this.data = data;
     }
 }

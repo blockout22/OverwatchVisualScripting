@@ -5,7 +5,7 @@ import ovs.graph.pin.Pin;
 
 import java.util.ArrayList;
 
-public class Node {
+public abstract class Node {
 
     private Node self;
     private final Graph graph;
@@ -16,6 +16,7 @@ public class Node {
     private int ID;
     private String name = "";
     private boolean hasTitleBar = true;
+    public boolean isEditing = false;
 
     public float width = -1;
 
@@ -66,4 +67,9 @@ public class Node {
     public void setHasTitleBar(boolean hasTitleBar) {
         this.hasTitleBar = hasTitleBar;
     }
+
+
+
+    public abstract String getOutput();
+    public abstract void UI();
 }
