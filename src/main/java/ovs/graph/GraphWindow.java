@@ -54,6 +54,7 @@ public class GraphWindow {
 
     private String[] items = {"Global", "Each Player"};
     private ImInt currentItem = new ImInt();
+    private Settings settings = new Settings();
 
     public void show(float menuBarHeight){
         cursorPos = ImGui.getMousePos();
@@ -82,6 +83,17 @@ public class GraphWindow {
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
                     {
+
+                        //SETTINGS
+                        ImGui.beginGroup();
+                        {
+                            ImGui.dummy(200, 0);
+                            settings.show();
+                        }
+                        ImGui.endGroup();
+
+                        ImGui.sameLine();
+
                         NodeEditor.begin("Editor");
                         {
                             for (Node node : graph.getNodes().values()) {
@@ -318,6 +330,10 @@ public class GraphWindow {
 
     private String compile(){
         StringBuilder output = new StringBuilder();
+
+        output.append(settings.getOutput());
+        output.append("\n");
+
         for(Node node : graph.getNodes().values()){
             if(node instanceof NodeRule){
                 output.append(handleNode(node));
