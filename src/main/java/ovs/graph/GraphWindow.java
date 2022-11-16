@@ -102,7 +102,7 @@ public class GraphWindow {
                                     }
 
                                     //Node Custom UI
-//                                    node.UI();
+                                    node.UI();
 
                                     int max = Math.max(node.outputPins.size(), node.inputPins.size());
                                     for (int i = 0; i < max; i++) {

@@ -21,9 +21,11 @@ public class ComboBox extends UiComponent{
         public boolean show() {
             for (int i = 0; i < items.length; i++) {
                 if(ImGui.menuItem(items[i])){
+                    String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
                     currentSelectedIndex = i;
+                    String newValue = items[currentSelectedIndex];
                     for (int j = 0; j < changeListeners.size(); j++) {
-                        changeListeners.get(j).onChanged();
+                        changeListeners.get(j).onChanged(oldValue, newValue);
                     }
                     return true;
                 }
@@ -34,9 +36,11 @@ public class ComboBox extends UiComponent{
     };
 
     public void select(int index){
+        String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
         currentSelectedIndex = index;
+        String newValue = items[currentSelectedIndex];
         for (int j = 0; j < changeListeners.size(); j++) {
-            changeListeners.get(j).onChanged();
+            changeListeners.get(j).onChanged(oldValue, newValue);
         }
     }
 
