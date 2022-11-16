@@ -8,7 +8,7 @@ public class OwVS {
     public ImGuiWindow imGuiWindow;
 
     public OwVS(){
-        window = new GlfwWindow(800, 600, "Overwatch Visual Scripting");
+        window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting");
         imGuiWindow = new ImGuiWindow(window);
 
         while(!window.isCloseRequested())

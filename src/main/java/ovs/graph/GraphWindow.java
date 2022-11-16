@@ -62,9 +62,6 @@ public class GraphWindow {
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
         if(ImGui.begin("Graph window")) {
-            if(ImGui.combo("OnGoing", currentItem, items)){
-                ImGui.endCombo();
-            }
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
 
@@ -87,7 +84,7 @@ public class GraphWindow {
                         //SETTINGS
                         ImGui.beginGroup();
                         {
-                            ImGui.dummy(200, 0);
+                            ImGui.dummy(400, 0);
                             settings.show();
                         }
                         ImGui.endGroup();
