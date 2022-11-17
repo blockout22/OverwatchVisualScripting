@@ -5,11 +5,12 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinString;
 
 public class NodeRule extends Node{
 
-    private PinString pinString, pinString2;
+    private PinString pinString;
 
     ComboBox comboEventOnGoing = new ComboBox();
     ComboBox comboTeam = new ComboBox();
@@ -25,14 +26,6 @@ public class NodeRule extends Node{
         pinString = new PinString();
         pinString.setNode(this);
         addCustomInput(pinString);
-
-        pinString = new PinString();
-        pinString.setNode(this);
-        addCustomInput(pinString);
-
-        pinString2 = new PinString();
-        pinString2.setNode(this);
-        addCustomOutput(pinString2);
 
         comboEventOnGoing.addOption("Global");
         comboEventOnGoing.addOption("Each Player");
@@ -95,11 +88,20 @@ public class NodeRule extends Node{
 
         //ACTIONS
         out+= "\tactions\n";
-        out += "\t{\n";
-        //TODO make array
-        PinData<ImString> pinAction1 = pinString.getData();
-        out += "\t\tDisable Movement Collision With Players(Event Player);\n";
-        out += "\t}\n";
+        {
+            out += "\t{\n";
+            //TODO make array
+            PinData<ImString> pinAction1 = pinString.getData();
+//            out += "\t\tDisable Movement Collision With Players(Event Player);\n";
+            PinData<ImString> data = pinString.getData();
+
+            if(pinString.isConnected())
+            {
+                Pin connectedPin = pinString.getConnectedPin();
+                out += "\t\t" + connectedPin.getNode().getOutput() + "\n";
+            }
+            out += "\t}\n";
+        }
 
 //        for(int i = 0; i < inputPins.size(); i++){
 //            Pin pin = inputPins.get(i);

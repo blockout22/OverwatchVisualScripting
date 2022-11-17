@@ -110,4 +110,16 @@ public abstract class Pin {
     public void setData(PinData data) {
         this.data = data;
     }
+
+    public boolean isConnected(){
+        return connectedTo != -1;
+    }
+
+    public Pin getConnectedPin(){
+        if(!isConnected()){
+            return null;
+        }
+
+        return node.getGraph().findPinById(connectedTo);
+    }
 }
