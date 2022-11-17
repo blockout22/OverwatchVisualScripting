@@ -14,6 +14,7 @@ import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
+import ovs.graph.UI.UiComponent;
 import ovs.graph.node.Node;
 import ovs.graph.node.NodeCreateHudText;
 import ovs.graph.node.NodeRule;
@@ -116,6 +117,10 @@ public class GraphWindow {
                                     }
 
                                     //Node Custom UI
+                                    for(UiComponent uiComponent : node.uiComponents)
+                                    {
+                                        uiComponent.show();
+                                    }
                                     node.UI();
 
                                     int max = Math.max(node.outputPins.size(), node.inputPins.size());

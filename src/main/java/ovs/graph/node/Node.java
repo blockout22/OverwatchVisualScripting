@@ -1,17 +1,19 @@
 package ovs.graph.node;
 
 import ovs.graph.Graph;
+import ovs.graph.UI.UiComponent;
 import ovs.graph.pin.Pin;
 
 import java.util.ArrayList;
 
 public abstract class Node {
 
-    private Node self;
+    public final Node self;
     private final Graph graph;
 
     public ArrayList<Pin> outputPins = new ArrayList<>();
     public ArrayList<Pin> inputPins = new ArrayList<>();
+    public ArrayList<UiComponent> uiComponents = new ArrayList<>();
 
     private int ID;
     private String name = "";
@@ -38,6 +40,10 @@ public abstract class Node {
         pin.setID(id);
         pin.setPinType(Pin.PinType.Output);
         outputPins.add(pin);
+    }
+
+    public void addUiComponent(UiComponent uiComponent){
+        this.uiComponents.add(uiComponent);
     }
 
     public int getID(){

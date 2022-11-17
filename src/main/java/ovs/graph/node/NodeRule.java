@@ -3,8 +3,10 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.UI.Button;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinString;
 
@@ -17,6 +19,8 @@ public class NodeRule extends Node{
     ComboBox comboPlayers = new ComboBox();
 
     boolean isGlobal = false;
+
+    Button button = new Button("Add Input");
 
     public NodeRule(Graph graph) {
         super(graph);
@@ -62,6 +66,18 @@ public class NodeRule extends Node{
         comboEventOnGoing.select(0);
         comboTeam.select(0);
         comboPlayers.select(0);
+
+        addUiComponent(button);
+
+        button.addLeftClickListener(new LeftClickListener() {
+            @Override
+            public void onClicked() {
+                Pin pin = new PinString();
+                pin.setNode(self);
+                addCustomInput(pin);
+                System.out.println("Clickedd");
+            }
+        });
     }
 
     @Override
