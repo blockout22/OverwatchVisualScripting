@@ -16,7 +16,8 @@ public abstract class Node {
     private int ID;
     private String name = "";
     private boolean hasTitleBar = true;
-    public boolean isEditing = false;
+    public boolean isEditingTitle = false;
+    public boolean canEditTitle = false;
 
     public float width = -1;
 

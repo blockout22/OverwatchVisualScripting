@@ -20,6 +20,7 @@ public class NodeRule extends Node{
     public NodeRule(Graph graph) {
         super(graph);
         setName("Rule");
+        canEditTitle = true;
 
         pinString = new PinString();
         pinString.setNode(this);

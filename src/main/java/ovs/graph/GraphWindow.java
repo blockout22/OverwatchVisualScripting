@@ -15,8 +15,12 @@ import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
 import ovs.graph.node.Node;
+import ovs.graph.node.NodeCreateHudText;
 import ovs.graph.node.NodeRule;
 import ovs.graph.pin.Pin;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 
 public class GraphWindow {
     private GlfwWindow window;
@@ -41,6 +45,12 @@ public class GraphWindow {
 
     private boolean justOpenedContextMenu = false;
 
+    protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
+    private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
+    private ImString nodeSearch = new ImString();
+
+    private Settings settings = new Settings();
+
     public GraphWindow(GlfwWindow window){
         this.window = window;
         graph = new Graph();
@@ -50,11 +60,10 @@ public class GraphWindow {
         NodeEditorConfig config = new NodeEditorConfig();
         config.setSettingsFile("Graph.json");
         context = new NodeEditorContext(config);
-    }
 
-    private String[] items = {"Global", "Each Player"};
-    private ImInt currentItem = new ImInt();
-    private Settings settings = new Settings();
+        addNodeToList(NodeRule.class);
+        addNodeToList(NodeCreateHudText.class);
+    }
 
     public void show(float menuBarHeight){
         cursorPos = ImGui.getMousePos();
@@ -64,12 +73,6 @@ public class GraphWindow {
         if(ImGui.begin("Graph window")) {
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
-
-            if (ImGui.button("Add Node")) {
-                NodeRule node = new NodeRule(graph);
-                node.setName("Hello Node");
-                graph.addNode(node);
-            }
 
             ImGui.sameLine();
             if(ImGui.button("Compile")){
@@ -97,16 +100,18 @@ public class GraphWindow {
                                 NodeEditor.beginNode(node.getID());
                                 {
                                     //Node Title
-                                    if(node.isEditing) {
+                                    if(node.isEditingTitle) {
                                         ImString string = new ImString();
+                                        ImGui.pushItemWidth(150);
                                         if(ImGui.inputText("##", string, ImGuiInputTextFlags.EnterReturnsTrue)){
                                             node.setName(string.get());
-                                            node.isEditing = false;
+                                            node.isEditingTitle = false;
                                         }
+                                        ImGui.popItemWidth();
                                     }else{
                                         ImGui.text(node.getName());
-                                        if(ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0)){
-                                            node.isEditing = true;
+                                        if(ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && node.canEditTitle){
+                                            node.isEditingTitle = true;
                                         }
                                     }
 
@@ -254,6 +259,46 @@ public class GraphWindow {
                             }
                         }
 
+                        if (NodeEditor.showBackgroundContextMenu()) {
+                            ImGui.openPopup("context_menu" + id);
+                            justOpenedContextMenu = true;
+                        }
+
+                        if(ImGui.isPopupOpen("context_menu" + id))
+                        {
+                            if(ImGui.beginPopup("context_menu" + id)){
+
+                                if(nodeInstanceCache.isEmpty())
+                                {
+                                    for (Class<? extends Node> node : nodeList) {
+                                        Constructor<? extends Node> nodeClass = null;
+                                        Node instance = null;
+                                        try {
+                                            nodeClass = node.getDeclaredConstructor(Graph.class);
+                                            instance = nodeClass.newInstance(graph);
+                                            nodeInstanceCache.add(instance);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        createContextMenuItem(instance, 0);
+                                    }
+                                }else{
+                                    if(justOpenedContextMenu){
+                                        ImGui.setKeyboardFocusHere(0);
+                                        justOpenedContextMenu = false;
+                                    }
+
+                                    ImGui.inputTextWithHint("##", "Search Node", nodeSearch);
+                                    for(Node instance : nodeInstanceCache){
+                                        createContextMenuItem(instance, 0);
+                                    }
+                                }
+
+                                ImGui.endPopup();
+                            }
+                        }
+
                         NodeEditor.resume();
                         NodeEditor.end();
 
@@ -271,6 +316,27 @@ public class GraphWindow {
             ImGui.sameLine();
         }
         ImGui.end();
+    }
+
+    private void createContextMenuItem(Node instance, int depth) {
+        if(nodeSearch.get().toLowerCase().length() > 0){
+            if(!instance.getName().toLowerCase().contains(nodeSearch.get())){
+                return;
+            }
+        }
+        if (ImGui.menuItem(instance.getName() + "##" + instance.getID())) {
+            try {
+                Node newInstance = instance.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
+                graph.addNode(newInstance);
+                //newInstance.init();
+                //nodeQPos.put(newInstance.getID(), new ImVec2());
+                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY()));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
+            ImGui.closeCurrentPopup();
+        }
     }
 
     private void checkPinConnections()
@@ -323,6 +389,10 @@ public class GraphWindow {
 //            pinDragSame = pin.getClass() == curSelectedPinDataType.getClass();
 //        }
         pin.draw(ImGui.getWindowDrawList(), posX, posY, pin.connectedTo != -1, pinDragSame);
+    }
+
+    public void addNodeToList(Class<? extends Node> node){
+        nodeList.add(node);
     }
 
     private String compile(){
