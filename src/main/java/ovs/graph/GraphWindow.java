@@ -183,6 +183,8 @@ public class GraphWindow {
                                     }
                                 }
                                 NodeEditor.endNode();
+
+                                node.execute();
                             }
                         }
 

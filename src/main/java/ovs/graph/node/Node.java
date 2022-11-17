@@ -77,6 +77,7 @@ public abstract class Node {
 
 
 
+    public abstract void execute();
     public abstract String getOutput();
     public abstract void UI();
 }

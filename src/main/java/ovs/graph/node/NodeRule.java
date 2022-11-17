@@ -75,9 +75,24 @@ public class NodeRule extends Node{
                 Pin pin = new PinString();
                 pin.setNode(self);
                 addCustomInput(pin);
-                System.out.println("Clickedd");
             }
         });
+    }
+
+    @Override
+    public void execute() {
+        for (int i = 0; i < inputPins.size(); i++) {
+            Pin pin = inputPins.get(i);
+
+            PinData<ImString> data = pin.getData();
+
+            if(pin.isConnected()){
+                Pin connectedPin = pin.getConnectedPin();
+
+                PinData<ImString> connectedData = connectedPin.getData();
+                data.getValue().set(connectedData.getValue().get());
+            }
+        }
     }
 
     @Override
@@ -107,15 +122,22 @@ public class NodeRule extends Node{
         {
             out += "\t{\n";
             //TODO make array
-            PinData<ImString> pinAction1 = pinString.getData();
-//            out += "\t\tDisable Movement Collision With Players(Event Player);\n";
-            PinData<ImString> data = pinString.getData();
+            for (int i = 0; i < inputPins.size(); i++) {
+                Pin pin = inputPins.get(i);
+                PinData<ImString> data = pin.getData();
 
-            if(pinString.isConnected())
-            {
-                Pin connectedPin = pinString.getConnectedPin();
-                out += "\t\t" + connectedPin.getNode().getOutput() + "\n";
+                String tempOut = data.getValue().get() + "\n";
+
+                if(pinString.isConnected())
+                {
+                    tempOut = "";
+                    Pin connectedPin = pinString.getConnectedPin();
+                    tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
+                }
+
+                out += tempOut;
             }
+
             out += "\t}\n";
         }
 

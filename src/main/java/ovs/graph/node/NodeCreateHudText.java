@@ -32,6 +32,14 @@ public class NodeCreateHudText extends Node{
     }
 
     @Override
+    public void execute() {
+        PinData<ImString> inputData = customStringPin.getData();
+        PinData<ImString> outputData = outputPin.getData();
+
+        outputData.getValue().set(inputData.getValue().get());
+    }
+
+    @Override
     public String getOutput() {
         PinData<ImString> customString = customStringPin.getData();
 
