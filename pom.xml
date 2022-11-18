@@ -47,6 +47,12 @@
             <artifactId>imgui-java-app</artifactId>
             <version>1.86.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10</version>
+        </dependency>
     </dependencies>
 
 </project>
