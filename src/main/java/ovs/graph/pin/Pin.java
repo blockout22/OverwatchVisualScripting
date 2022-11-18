@@ -83,8 +83,9 @@ public abstract class Pin {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        this.ID = id;
+        getNode().getGraph().setHighestPinID(++id);
     }
 
     public String getName() {

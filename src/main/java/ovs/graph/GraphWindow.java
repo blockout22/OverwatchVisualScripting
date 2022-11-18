@@ -18,6 +18,7 @@ import ovs.graph.UI.UiComponent;
 import ovs.graph.node.Node;
 import ovs.graph.node.NodeCreateHudText;
 import ovs.graph.node.NodeRule;
+import ovs.graph.node.NodeWait;
 import ovs.graph.pin.Pin;
 
 import java.lang.reflect.Constructor;
@@ -66,6 +67,7 @@ public class GraphWindow {
 
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
+        addNodeToList(NodeWait.class);
     }
 
     public void show(float menuBarHeight){

@@ -57,6 +57,12 @@ public class Graph {
         queuedForRemoval.add(node);
     }
 
+    public void setHighestPinID(int id){
+        if (id > nextPinID){
+            nextPinID = id;
+        }
+    }
+
     public Pin findPinById(final int ID) {
         for(Node node : nodes.values()){
             for(Pin pin : node.inputPins){

@@ -10,7 +10,6 @@ import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinString;
 
 public class NodeRule extends Node{
 
@@ -135,10 +134,10 @@ public class NodeRule extends Node{
 
                 String tempOut = ""; // data.getValue().get() + "\n";
 
-                if(inputPin.isConnected())
+                if(pin.isConnected())
                 {
                     tempOut = "";
-                    Pin connectedPin = inputPin.getConnectedPin();
+                    Pin connectedPin = pin.getConnectedPin();
                     tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
                 }
 

@@ -30,6 +30,7 @@ public abstract class Node {
 
     public void addCustomInput(Pin pin){
         int id = Graph.getNextAvailablePinID();
+        System.out.println("New ID: " + id);
         pin.setID(id);
         pin.setPinType(Pin.PinType.Input);
         inputPins.add(pin);
