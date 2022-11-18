@@ -52,6 +52,8 @@ public class GraphWindow {
 
     private Settings settings = new Settings();
 
+    Node editingNodeTitle = null;
+
     public GraphWindow(GlfwWindow window){
         this.window = window;
         graph = new Graph();
@@ -90,6 +92,28 @@ public class GraphWindow {
                         {
                             ImGui.dummy(400, 0);
                             settings.show();
+
+                            ImGui.text("Rules");
+
+                            ImInt currentItem = new ImInt();
+
+                            ArrayList<NodeRule> ruleNodes = new ArrayList<>();
+
+                            for (Node node : graph.getNodes().values()){
+                                if(node instanceof NodeRule)
+                                {
+                                    ruleNodes.add((NodeRule) node);
+                                }
+                            }
+
+                            String[] items = new String[ruleNodes.size()];
+                            for (int i = 0; i < ruleNodes.size(); i++) {
+                                items[i] = ruleNodes.get(i).getName();
+                            }
+
+                            ImGui.pushItemWidth(400);
+                            ImGui.listBox("##Rules", currentItem, items);
+                            ImGui.popItemWidth();
                         }
                         ImGui.endGroup();
 
@@ -101,8 +125,9 @@ public class GraphWindow {
                                 NodeEditor.beginNode(node.getID());
                                 {
                                     //Node Title
-                                    if(node.isEditingTitle) {
+                                    if(node.isEditingTitle && editingNodeTitle == node) {
                                         ImString string = new ImString();
+                                        string.set(node.getName());
                                         ImGui.pushItemWidth(150);
                                         if(ImGui.inputText("##", string, ImGuiInputTextFlags.EnterReturnsTrue)){
                                             node.setName(string.get());
@@ -113,6 +138,7 @@ public class GraphWindow {
                                         ImGui.text(node.getName());
                                         if(ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && node.canEditTitle){
                                             node.isEditingTitle = true;
+                                            editingNodeTitle = node;
                                         }
                                     }
 
