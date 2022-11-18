@@ -33,8 +33,13 @@ public class NodeRule extends Node{
         inputPin.setNode(this);
         addCustomInput(inputPin);
 
-        comboEventOnGoing.addOption("Global");
-        comboEventOnGoing.addOption("Each Player");
+        comboEventOnGoing.addOption("Ongoing - Global");
+        comboEventOnGoing.addOption("Ongoing - Each Player");
+        comboEventOnGoing.addOption("Player Earned Elimination");
+        comboEventOnGoing.addOption("Player Dealt Final Blow");
+        comboEventOnGoing.addOption("Player Took Damage");
+        comboEventOnGoing.addOption("Player Dealt Damage");
+        comboEventOnGoing.addOption("Player Died");
 
         comboTeam.addOption("All");
         comboTeam.addOption("Team 1");
@@ -57,7 +62,7 @@ public class NodeRule extends Node{
         comboEventOnGoing.addChangeListener(new ChangeListener() {
             @Override
             public void onChanged(String oldValue, String newValue) {
-                if(newValue == "Global"){
+                if(newValue == "Ongoing - Global"){
                     isGlobal = true;
                 }else{
                     isGlobal = false;
@@ -106,7 +111,7 @@ public class NodeRule extends Node{
         //EVENT
         out += "event\n";
         out += "\t{\n";
-        out += "\t\tOngoing - " + comboEventOnGoing.getSelectedValue() + ";\n";
+        out += "\t\t" + comboEventOnGoing.getSelectedValue() + ";\n";
 
         if(!isGlobal){
             out += "\t\t" + comboTeam.getSelectedValue() + ";\n";
