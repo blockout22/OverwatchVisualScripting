@@ -1,5 +1,6 @@
 package ovs.graph.node;
 
+import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
@@ -73,7 +74,7 @@ public class NodeRule extends Node{
         button.addLeftClickListener(new LeftClickListener() {
             @Override
             public void onClicked() {
-                Pin pin = new PinString();
+                Pin pin = new PinAction();
                 pin.setNode(self);
                 addCustomInput(pin);
             }
@@ -163,6 +164,7 @@ public class NodeRule extends Node{
 
     @Override
     public void UI() {
+        ImGui.text("Event");
         comboEventOnGoing.show();
 
         if(!isGlobal){
