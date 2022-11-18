@@ -8,11 +8,12 @@ import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.pin.Pin;
+import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinString;
 
 public class NodeRule extends Node{
 
-    private PinString pinString;
+    private PinAction inputPin;
 
     ComboBox comboEventOnGoing = new ComboBox();
     ComboBox comboTeam = new ComboBox();
@@ -27,9 +28,9 @@ public class NodeRule extends Node{
         setName("Rule");
         canEditTitle = true;
 
-        pinString = new PinString();
-        pinString.setNode(this);
-        addCustomInput(pinString);
+        inputPin = new PinAction();
+        inputPin.setNode(this);
+        addCustomInput(inputPin);
 
         comboEventOnGoing.addOption("Global");
         comboEventOnGoing.addOption("Each Player");
@@ -126,12 +127,12 @@ public class NodeRule extends Node{
                 Pin pin = inputPins.get(i);
                 PinData<ImString> data = pin.getData();
 
-                String tempOut = data.getValue().get() + "\n";
+                String tempOut = ""; // data.getValue().get() + "\n";
 
-                if(pinString.isConnected())
+                if(inputPin.isConnected())
                 {
                     tempOut = "";
-                    Pin connectedPin = pinString.getConnectedPin();
+                    Pin connectedPin = inputPin.getConnectedPin();
                     tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
                 }
 

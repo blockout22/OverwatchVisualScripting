@@ -1,26 +1,20 @@
 package ovs.graph.pin;
 
-import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.PinData;
 
-public class PinString extends Pin{
+public class PinAction extends Pin{
 
     public PinData<ImString> data = new PinData<>();
 
-    public PinString()
-    {
+    public PinAction(){
         setData(data);
-        setColor(0, 0.392156863f, 0.392156863f, 1);
+        setColor(0, 1, 0, 1);
         data.setValue(new ImString());
     }
 
     @Override
     public boolean UI() {
-        if(ImGui.inputText("##" + getID(), data.getValue())){
-
-        };
-
-        return true;
+        return false;
     }
 }

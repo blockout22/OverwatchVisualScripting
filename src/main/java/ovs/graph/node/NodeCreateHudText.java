@@ -4,12 +4,13 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinString;
 
 public class NodeCreateHudText extends Node{
 
     PinString customStringPin = new PinString();
-    PinString outputPin = new PinString();
+    PinAction outputPin = new PinAction();
 
     ComboBox comboBox = new ComboBox();
 
