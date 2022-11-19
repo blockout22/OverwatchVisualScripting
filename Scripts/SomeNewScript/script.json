@@ -2,45 +2,57 @@
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeRule",
-      "x": 202.0,
-      "y": 282.0,
+      "nodeName": "Rule",
+      "x": 447.0,
+      "y": 241.0,
       "inputPins": [
         {
           "ID": 1005,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
           "connectedTo": -1
+        },
+        {
+          "ID": 1008,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Some Value Here",
+          "connectedTo": 1007
+        },
+        {
+          "ID": 1009,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1
+        },
+        {
+          "ID": 1010,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1
         }
       ],
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeRule",
-      "x": 594.0,
-      "y": 285.0,
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 120.0,
+      "y": 363.0,
       "inputPins": [
         {
           "ID": 1006,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
+          "type": "ovs.graph.pin.PinString",
+          "value": "Some Value Here",
           "connectedTo": -1
         }
       ],
-      "outputPins": []
-    },
-    {
-      "className": "ovs.graph.node.NodeRule",
-      "x": 484.0,
-      "y": 475.0,
-      "inputPins": [
+      "outputPins": [
         {
           "ID": 1007,
           "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": -1
+          "connectedTo": 1008
         }
-      ],
-      "outputPins": []
+      ]
     }
   ]
 }

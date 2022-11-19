@@ -44,6 +44,7 @@ public class GraphSaver {
 
             NodeSave save = new NodeSave();
             save.className = className;
+            save.nodeName = node.getName();
             save.x = pos.x;
             save.y = pos.y;
 
@@ -130,7 +131,7 @@ public class GraphSaver {
                 }
 
                 Node node = (Node) classNode.getDeclaredConstructor(Graph.class).newInstance(graph);
-                System.out.println("Attempted to add node");
+                node.setName(save.nodeName);
                 graph.addNode(node);
                 node.posX = save.x;
                 node.posY = save.y;
@@ -138,6 +139,77 @@ public class GraphSaver {
                 loaded[i] = node;
 
             }
+
+            for (int i = 0; i < loaded.length; i++) {
+                Node node = loaded[i];
+
+                if(node != null){
+                    NodeSave save = gs.nodeSaves.get(i);
+
+                    //load input pins
+                    for (int j = 0; j < save.inputPins.size(); j++) {
+                        if(j >= node.inputPins.size()){
+                            Class classNode = null;
+
+                            ClassLoader loader = GraphSaver.class.getClassLoader();
+                            classNode = Class.forName(save.inputPins.get(j).type, true, loader);
+
+                            if(classNode == null){
+                                System.out.println("Class " + save.inputPins.get(j).type + " was null, couldn't load");
+                                return null;
+                            }
+
+//                            int id = Graph.getNextAvailablePinID();
+                            Pin pin = (Pin) classNode.getDeclaredConstructor().newInstance();
+                            pin.setNode(node);
+
+//                            pin.setCanDelete(true);
+                            node.inputPins.add(pin);
+                        }
+
+                        node.inputPins.get(j).setID(save.inputPins.get(j).ID);
+
+                        //Load any custom values set to pins that haven't got a connection
+                        //
+                        if(node.inputPins.get(j).getData() != null){
+                            node.inputPins.get(j).loadValue(save.inputPins.get(j).value);
+                        }
+
+                        //check and set the pin ID which this Pin is connected to
+                        if(save.inputPins.get(j).connectedTo != -1){
+                            node.inputPins.get(j).connectedTo = save.inputPins.get(j).connectedTo;
+                        }
+                    }
+
+                    //load output pins
+                    for (int j = 0; j < save.outputPins.size(); j++) {
+                        if(j >= node.outputPins.size())
+                        {
+                            Class classNode = null;
+
+                            ClassLoader loader = GraphSaver.class.getClassLoader();
+                            classNode = Class.forName(save.outputPins.get(j).type, true, loader);
+
+                            if(classNode == null){
+                                System.out.println("Class " + save.inputPins.get(j).type + " was null, couldn't load");
+                                return null;
+                            }
+
+                            Pin pin = (Pin) classNode.getDeclaredConstructor().newInstance();
+                            pin.setNode(node);
+
+//                            pin.setCanDelete(true);
+                            node.outputPins.add(pin);
+                        }
+
+                        node.outputPins.get(j).setID(save.outputPins.get(j).ID);
+                        if(save.outputPins.get(j).connectedTo != -1){
+                            node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
+                        }
+                    }
+                }
+            }
+
             return graph;
 
         }catch (FileNotFoundException e) {
@@ -158,6 +230,9 @@ public class GraphSaver {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -175,6 +250,7 @@ public class GraphSaver {
 
     private static class NodeSave{
         private String className;
+        private String nodeName;
         private float x;
         private float y;
         //save Pin array

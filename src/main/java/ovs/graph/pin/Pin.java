@@ -61,6 +61,10 @@ public abstract class Pin {
         }
     }
 
+    public void loadValue(String value){
+
+    }
+
     public abstract boolean UI();
 
     public void setPinType(PinType pinType){

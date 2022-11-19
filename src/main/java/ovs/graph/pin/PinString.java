@@ -16,6 +16,11 @@ public class PinString extends Pin{
     }
 
     @Override
+    public void loadValue(String value) {
+        data.getValue().set(value);
+    }
+
+    @Override
     public boolean UI() {
         if(ImGui.inputText("##" + getID(), data.getValue())){
 
