@@ -17,6 +17,7 @@ import ovs.GlfwWindow;
 import ovs.graph.UI.ListView;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.LeftClickListener;
+import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.*;
 import ovs.graph.pin.Pin;
@@ -54,6 +55,8 @@ public class GraphWindow {
 
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
+    private final ArrayList<TextField> tfGlobalVars = new ArrayList<>();
+    private final ArrayList<TextField> tfPlayerVars = new ArrayList<>();
 
 
     private ImString nodeSearch = new ImString();
@@ -82,6 +85,44 @@ public class GraphWindow {
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
+
+        graph.globalVariables.addListChangedListener(new ListChangedListener() {
+            @Override
+            public void onChanged() {
+                tfGlobalVars.clear();
+                for (int i = 0; i < graph.globalVariables.size(); i++) {
+                    TextField tf = new TextField();
+                    int j = i;
+                    tf.addChangedListener(new ChangeListener() {
+                        @Override
+                        public void onChanged(String oldValue, String newValue) {
+                            graph.globalVariables.get(j).name = newValue;
+                        }
+                    });
+                    tf.setText(graph.globalVariables.get(i).name);
+                    tfGlobalVars.add(tf);
+                }
+            }
+        });
+
+        graph.playerVariables.addListChangedListener(new ListChangedListener() {
+            @Override
+            public void onChanged() {
+                tfPlayerVars.clear();
+                for (int i = 0; i < graph.playerVariables.size(); i++) {
+                    TextField tf = new TextField();
+                    int j = i;
+                    tf.addChangedListener(new ChangeListener() {
+                        @Override
+                        public void onChanged(String oldValue, String newValue) {
+                            graph.playerVariables.get(j).name = newValue;
+                        }
+                    });
+                    tf.setText(graph.playerVariables.get(i).name);
+                    tfPlayerVars.add(tf);
+                }
+            }
+        });
     }
 
     public void setFileName(String name){
@@ -170,27 +211,18 @@ public class GraphWindow {
 
                                 ImGui.pushItemWidth(250);
                                 ImGui.text("Global Variable");
-                                for (int i = 0; i < graph.globalVariables.size(); i++) {
-                                    ImGui.text(graph.globalVariables.get(i).ID + ":");
+                                for (int i = 0; i < tfGlobalVars.size(); i++) {
+                                    ImGui.text(i + ":");
                                     ImGui.sameLine();
-
-                                    ImString varValue = new ImString();
-                                    ImGui.inputText("##" + i, varValue);
-
-//                                if(graph.variables.get(i).name != varValue.get())
-//                                {
-//                                    graph.variables.get(i).name = varValue.get();
-//                                }
+                                    tfGlobalVars.get(i).show();
                                 }
 
                                 ImGui.text("Player Variable");
 
-                                for (int i = 0; i < graph.playerVariables.size(); i++) {
-                                    ImGui.text(graph.playerVariables.get(i).ID + ":");
+                                for (int i = 0; i < tfPlayerVars.size(); i++) {
+                                    ImGui.text(i + ":");
                                     ImGui.sameLine();
-
-                                    ImString varValue = new ImString();
-                                    ImGui.inputText("##" + i, varValue);
+                                    tfPlayerVars.get(i).show();
                                 }
 
                                 ImGui.popItemWidth();

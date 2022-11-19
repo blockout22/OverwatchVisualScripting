@@ -11,8 +11,8 @@ public class Graph {
 
     private final Map<Integer, Node> nodes = new HashMap<>();
     private ArrayList<Integer> queuedForRemoval = new ArrayList<>();
-    public final ArrayList<Variable> globalVariables = new ArrayList<>();
-    public final ArrayList<Variable> playerVariables = new ArrayList<>();
+    public final AdvancedArrayList<Variable> globalVariables = new AdvancedArrayList<>();
+    public final AdvancedArrayList<Variable> playerVariables = new AdvancedArrayList<>();
 
     private static int nextNodeID = 1;
     private static int nextPinID = 1000;

@@ -4,12 +4,14 @@ import imgui.ImGui;
 import ovs.graph.Popup;
 import ovs.graph.PopupHandler;
 import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.UI.Listeners.OnOpenedListener;
 
 import java.util.ArrayList;
 
 public class ComboBox extends UiComponent{
 
-    protected ArrayList<ChangeListener> changeListeners = new ArrayList<>();
+    private ArrayList<ChangeListener> changeListeners = new ArrayList<>();
+    private ArrayList<OnOpenedListener> onOpenedListeners = new ArrayList<OnOpenedListener>();
     private boolean requestPopup = false;
 
     private int currentSelectedIndex = -1;
@@ -75,6 +77,9 @@ public class ComboBox extends UiComponent{
     public void show() {
         if(requestPopup){
             PopupHandler.open(popup);
+            for (int i = 0; i < onOpenedListeners.size(); i++) {
+                onOpenedListeners.get(i).onOpen();
+            }
             requestPopup = false;
         }
 //
@@ -102,4 +107,8 @@ public class ComboBox extends UiComponent{
     }
 
     public void addChangeListener(ChangeListener changeListener){ changeListeners.add(changeListener); }
+
+    public void addOnOpenedListener(OnOpenedListener onOpenedListener){
+        this.onOpenedListeners.add(onOpenedListener);
+    }
 }
