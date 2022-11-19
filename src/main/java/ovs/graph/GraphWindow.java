@@ -29,10 +29,10 @@ public class GraphWindow {
     private GlfwWindow window;
 
     private String id;
+    private String fileName = "";
 
     private NodeEditorContext context;
     private GraphSaver graphSaver;
-    private String fileName = "";
     protected Graph graph;
 
     private TextEditor EDITOR;
@@ -49,14 +49,16 @@ public class GraphWindow {
     private long lastActivePin = -1;
 
     private boolean justOpenedContextMenu = false;
+    private boolean isLoading = false;
 
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
+
     private ImString nodeSearch = new ImString();
 
     private Settings settings = new Settings();
 
-    Node editingNodeTitle = null;
+    private Node editingNodeTitle = null;
 
     public GraphWindow(GlfwWindow window, String loadFile){
         this.window = window;
@@ -109,6 +111,7 @@ public class GraphWindow {
             if(ImGui.button("Load"))
             {
                 graph = graphSaver.load(fileName);
+                isLoading = true;
             }
 
             if(ImGui.beginTabBar("TabBar")) {
@@ -125,6 +128,7 @@ public class GraphWindow {
 
                             ImInt currentItem = new ImInt();
 
+                            //TODO STOP CREATING NEW EVERY FRAME!!!!
                             ArrayList<NodeRule> ruleNodes = new ArrayList<>();
 
                             for (Node node : graph.getNodes().values()){
@@ -150,13 +154,18 @@ public class GraphWindow {
                         NodeEditor.begin("Editor");
                         {
                             for (Node node : graph.getNodes().values()) {
+                                if (isLoading) {
+                                    NodeEditor.setNodePosition(node.getID(), node.posX, node.posY);
+                                }
+                            }
+
+                            if(isLoading){
+                                isLoading = false;
+                            }
+
+                            for (Node node : graph.getNodes().values()) {
                                 NodeEditor.beginNode(node.getID());
                                 {
-
-//                                    if(NodeEditor.getNodePositionX(node.getID()) != node.posX || NodeEditor.getNodePositionY(node.getID()) != node.posY){
-//                                        NodeEditor.setNodePosition(node.getID(), node.posX, node.posX);
-//                                    }
-
                                     //Node Title
                                     if(node.isEditingTitle && editingNodeTitle == node) {
                                         ImString string = new ImString();

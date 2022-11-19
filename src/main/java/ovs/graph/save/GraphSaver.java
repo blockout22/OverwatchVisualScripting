@@ -112,8 +112,6 @@ public class GraphSaver {
 
             Graph graph = new Graph();
 
-            System.out.println("Size: " + gs.nodeSaves.size());
-
             for (int i = 0; i < gs.nodeSaves.size(); i++) {
                 NodeSave save = gs.nodeSaves.get(i);
                 Class classNode = null;
