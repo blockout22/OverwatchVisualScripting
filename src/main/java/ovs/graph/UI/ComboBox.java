@@ -93,5 +93,9 @@ public class ComboBox extends UiComponent{
         }
     }
 
+    public void clear(){
+        items = new String[0];
+    }
+
     public void addChangeListener(ChangeListener changeListener){ changeListeners.add(changeListener); }
 }

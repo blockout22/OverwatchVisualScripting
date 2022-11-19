@@ -11,6 +11,8 @@ public class Graph {
 
     private final Map<Integer, Node> nodes = new HashMap<>();
     private ArrayList<Integer> queuedForRemoval = new ArrayList<>();
+    public final ArrayList<Variable> globalVariables = new ArrayList<>();
+    public final ArrayList<Variable> playerVariables = new ArrayList<>();
 
     private static int nextNodeID = 1;
     private static int nextPinID = 1000;
@@ -24,6 +26,22 @@ public class Graph {
         node.setName(node.getName());
         nodes.put(node.getID(), node);
         return true;
+    }
+
+    public void addGlobalVariable(String name){
+        Variable var = new Variable();
+        var.type = Variable.Type.GLOBAL;
+        var.ID = globalVariables.size();
+        var.name = name;
+        globalVariables.add(var);
+    }
+
+    public void addPlayerVariable(String name){
+        Variable var = new Variable();
+        var.type = Variable.Type.PLAYER;
+        var.ID = playerVariables.size();
+        var.name = name;
+        playerVariables.add(var);
     }
 
     public Map<Integer, Node> getNodes()

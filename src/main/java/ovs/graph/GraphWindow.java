@@ -14,16 +14,17 @@ import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
+import ovs.graph.UI.ListView;
+import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.UI.UiComponent;
-import ovs.graph.node.Node;
-import ovs.graph.node.NodeCreateHudText;
-import ovs.graph.node.NodeRule;
-import ovs.graph.node.NodeWait;
+import ovs.graph.node.*;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GraphWindow {
     private GlfwWindow window;
@@ -54,6 +55,7 @@ public class GraphWindow {
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
 
+
     private ImString nodeSearch = new ImString();
 
     private Settings settings = new Settings();
@@ -76,6 +78,7 @@ public class GraphWindow {
         config.setSettingsFile(null);
         context = new NodeEditorContext(config);
 
+        addNodeToList(NodeVariable.class);
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
@@ -87,8 +90,10 @@ public class GraphWindow {
 
     public void show(float menuBarHeight){
         cursorPos = ImGui.getMousePos();
+        graph.update();
         ImGui.setNextWindowSize(window.getWidth(), window.getHeight() - menuBarHeight, ImGuiCond.Once);
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
+
 
         if(ImGui.begin("Graph window")) {
             NodeEditor.setCurrentEditor(context);
@@ -117,37 +122,82 @@ public class GraphWindow {
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
                     {
-
-                        //SETTINGS
-                        ImGui.beginGroup();
                         {
-                            ImGui.dummy(400, 0);
-                            settings.show();
+                            ImGui.beginGroup();
+                            {
+                                ImGui.dummy(400, 0);
+                                //SETTINGS
+                                settings.show();
 
-                            ImGui.text("Rules");
-
-                            ImInt currentItem = new ImInt();
-
-                            //TODO STOP CREATING NEW EVERY FRAME!!!!
-                            ArrayList<NodeRule> ruleNodes = new ArrayList<>();
-
-                            for (Node node : graph.getNodes().values()){
-                                if(node instanceof NodeRule)
+                                //List of Rules on graph
                                 {
-                                    ruleNodes.add((NodeRule) node);
+                                    ImGui.separator();
+                                    ImGui.text("Rules");
+
+                                    ImInt currentItem = new ImInt();
+
+                                    //TODO STOP CREATING NEW EVERY FRAME!!!!
+                                    ArrayList<NodeRule> ruleNodes = new ArrayList<>();
+
+                                    for (Node node : graph.getNodes().values()) {
+                                        if (node instanceof NodeRule) {
+                                            ruleNodes.add((NodeRule) node);
+                                        }
+                                    }
+
+                                    String[] items = new String[ruleNodes.size()];
+                                    for (int i = 0; i < ruleNodes.size(); i++) {
+                                        items[i] = ruleNodes.get(i).getName();
+                                    }
+
+
+                                    ImGui.pushItemWidth(400);
+                                    ImGui.listBox("##Rules", currentItem, items);
+                                    ImGui.popItemWidth();
                                 }
-                            }
 
-                            String[] items = new String[ruleNodes.size()];
-                            for (int i = 0; i < ruleNodes.size(); i++) {
-                                items[i] = ruleNodes.get(i).getName();
-                            }
+                                ImGui.separator();
+                                ImGui.text("Variables");
+                                if (ImGui.button("Add Global Variable")) {
+                                    graph.addGlobalVariable("Some Name");
+                                }
 
-                            ImGui.pushItemWidth(400);
-                            ImGui.listBox("##Rules", currentItem, items);
-                            ImGui.popItemWidth();
+                                ImGui.sameLine();
+
+                                if (ImGui.button("Add Player Variable")) {
+                                    graph.addPlayerVariable("Some Name");
+                                }
+
+                                ImGui.pushItemWidth(250);
+                                ImGui.text("Global Variable");
+                                for (int i = 0; i < graph.globalVariables.size(); i++) {
+                                    ImGui.text(graph.globalVariables.get(i).ID + ":");
+                                    ImGui.sameLine();
+
+                                    ImString varValue = new ImString();
+                                    ImGui.inputText("##" + i, varValue);
+
+//                                if(graph.variables.get(i).name != varValue.get())
+//                                {
+//                                    graph.variables.get(i).name = varValue.get();
+//                                }
+                                }
+
+                                ImGui.text("Player Variable");
+
+                                for (int i = 0; i < graph.playerVariables.size(); i++) {
+                                    ImGui.text(graph.playerVariables.get(i).ID + ":");
+                                    ImGui.sameLine();
+
+                                    ImString varValue = new ImString();
+                                    ImGui.inputText("##" + i, varValue);
+                                }
+
+                                ImGui.popItemWidth();
+
+                            }
+                            ImGui.endGroup();
                         }
-                        ImGui.endGroup();
 
                         ImGui.sameLine();
 
