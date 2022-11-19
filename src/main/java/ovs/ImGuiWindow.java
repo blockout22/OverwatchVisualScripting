@@ -112,7 +112,9 @@ public class ImGuiWindow {
             if(ImGui.beginMenu("File", true)){
                 if (ImGui.menuItem("New Graph")) {
                     //lastMenuAction == "File";
-                    graphWindows.add(new GraphWindow(glfwWindow));
+                    GraphWindow window = new GraphWindow(glfwWindow, null);
+                    window.setFileName("SomeNewScript");
+                    graphWindows.add(window);
                 }
                 ImGui.endMenu();
             }

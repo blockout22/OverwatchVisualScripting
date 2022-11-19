@@ -1,0 +1,46 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "x": 202.0,
+      "y": 282.0,
+      "inputPins": [
+        {
+          "ID": 1005,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "x": 594.0,
+      "y": 285.0,
+      "inputPins": [
+        {
+          "ID": 1006,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "x": 484.0,
+      "y": 475.0,
+      "inputPins": [
+        {
+          "ID": 1007,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": []
+    }
+  ]
+}

@@ -20,6 +20,7 @@ import ovs.graph.node.NodeCreateHudText;
 import ovs.graph.node.NodeRule;
 import ovs.graph.node.NodeWait;
 import ovs.graph.pin.Pin;
+import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class GraphWindow {
     private String id;
 
     private NodeEditorContext context;
+    private GraphSaver graphSaver;
+    private String fileName = "";
     protected Graph graph;
 
     private TextEditor EDITOR;
@@ -55,19 +58,29 @@ public class GraphWindow {
 
     Node editingNodeTitle = null;
 
-    public GraphWindow(GlfwWindow window){
+    public GraphWindow(GlfwWindow window, String loadFile){
         this.window = window;
-        graph = new Graph();
+        graphSaver = new GraphSaver();
+        if(loadFile != null) {
+            graph = graphSaver.load(loadFile);
+            fileName = loadFile;
+        }else {
+            graph = new Graph();
+        }
 
         EDITOR = new TextEditor();
 
         NodeEditorConfig config = new NodeEditorConfig();
-        config.setSettingsFile("Graph.json");
+        config.setSettingsFile(null);
         context = new NodeEditorContext(config);
 
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
+    }
+
+    public void setFileName(String name){
+        this.fileName = name;
     }
 
     public void show(float menuBarHeight){
@@ -79,10 +92,23 @@ public class GraphWindow {
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
 
-            ImGui.sameLine();
             if(ImGui.button("Compile")){
                 String compiledText = compile();
                 EDITOR.setText(compiledText);
+            }
+
+            ImGui.sameLine();
+
+            if(ImGui.button("Save"))
+            {
+                graphSaver.save(fileName, graph);
+            }
+
+            ImGui.sameLine();
+
+            if(ImGui.button("Load"))
+            {
+                graph = graphSaver.load(fileName);
             }
 
             if(ImGui.beginTabBar("TabBar")) {
@@ -126,6 +152,11 @@ public class GraphWindow {
                             for (Node node : graph.getNodes().values()) {
                                 NodeEditor.beginNode(node.getID());
                                 {
+
+//                                    if(NodeEditor.getNodePositionX(node.getID()) != node.posX || NodeEditor.getNodePositionY(node.getID()) != node.posY){
+//                                        NodeEditor.setNodePosition(node.getID(), node.posX, node.posX);
+//                                    }
+
                                     //Node Title
                                     if(node.isEditingTitle && editingNodeTitle == node) {
                                         ImString string = new ImString();
@@ -365,7 +396,11 @@ public class GraphWindow {
                 graph.addNode(newInstance);
                 //newInstance.init();
                 //nodeQPos.put(newInstance.getID(), new ImVec2());
-                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY()));
+                float x = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
+                float y = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
+                newInstance.posX = x;
+                newInstance.posY = y;
+                NodeEditor.setNodePosition(newInstance.getID(), x, y);
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

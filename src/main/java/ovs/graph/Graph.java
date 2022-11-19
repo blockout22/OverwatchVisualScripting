@@ -23,6 +23,7 @@ public class Graph {
         node.setID(nextNodeID++);
         node.setName(node.getName());
         nodes.put(node.getID(), node);
+        System.out.println("Added Node");
         return true;
     }
 

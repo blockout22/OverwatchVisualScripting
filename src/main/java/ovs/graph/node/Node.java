@@ -23,6 +23,9 @@ public abstract class Node {
 
     public float width = -1;
 
+    public float posX = 0;
+    public float posY = 0;
+
     public Node(Graph graph){
         this.self = this;
         this.graph = graph;
@@ -30,7 +33,6 @@ public abstract class Node {
 
     public void addCustomInput(Pin pin){
         int id = Graph.getNextAvailablePinID();
-        System.out.println("New ID: " + id);
         pin.setID(id);
         pin.setPinType(Pin.PinType.Input);
         inputPins.add(pin);
