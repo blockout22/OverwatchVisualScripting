@@ -44,6 +44,10 @@ public class ComboBox extends UiComponent{
         }
     }
 
+    public int size(){
+        return items.length;
+    }
+
     public void addOption(String option){
         String[] temp = new String[items.length + 1];
 

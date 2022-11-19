@@ -4,6 +4,7 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinString;
 
@@ -36,6 +37,13 @@ public class NodeCreateHudText extends Node{
     public void execute() {
         PinData<ImString> inputData = customStringPin.getData();
         PinData<ImString> outputData = outputPin.getData();
+
+        if(customStringPin.isConnected()){
+            Pin connectedPin = customStringPin.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            inputData.getValue().set(connectedData.getValue().get());
+        }
 
         outputData.getValue().set(inputData.getValue().get());
     }

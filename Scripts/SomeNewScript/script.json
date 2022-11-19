@@ -1,58 +1,54 @@
 {
   "nodeSaves": [
     {
-      "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Rule",
-      "x": 447.0,
-      "y": 241.0,
-      "inputPins": [
+      "className": "ovs.graph.node.NodeVariable",
+      "nodeName": "Variable",
+      "x": 84.0,
+      "y": 306.0,
+      "inputPins": [],
+      "outputPins": [
         {
-          "ID": 1005,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": -1
-        },
-        {
-          "ID": 1008,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Some Value Here",
-          "connectedTo": 1007
-        },
-        {
-          "ID": 1009,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": -1
-        },
-        {
-          "ID": 1010,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": -1
+          "ID": 1013,
+          "type": "ovs.graph.pin.PinString",
+          "connectedTo": 1014
         }
-      ],
-      "outputPins": []
+      ]
     },
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": 120.0,
-      "y": 363.0,
+      "x": 376.0,
+      "y": 283.0,
       "inputPins": [
         {
-          "ID": 1006,
+          "ID": 1014,
           "type": "ovs.graph.pin.PinString",
-          "value": "Some Value Here",
-          "connectedTo": -1
+          "value": "",
+          "connectedTo": 1013
         }
       ],
       "outputPins": [
         {
-          "ID": 1007,
+          "ID": 1015,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1008
+          "connectedTo": 1016
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 600.0,
+      "y": 243.0,
+      "inputPins": [
+        {
+          "ID": 1016,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1015
+        }
+      ],
+      "outputPins": []
     }
   ]
 }
