@@ -81,10 +81,12 @@ public class GraphWindow {
         config.setSettingsFile(null);
         context = new NodeEditorContext(config);
 
+        //Add Nodes to list (this will also auto-populate context menu)
         addNodeToList(NodeVariable.class);
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
+        addNodeToList(NodeCustomString.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -438,7 +440,9 @@ public class GraphWindow {
                                             e.printStackTrace();
                                         }
 
-                                        createContextMenuItem(instance, 0);
+                                        if(instance != null) {
+                                            createContextMenuItem(instance, 0);
+                                        }
                                     }
                                 }else{
                                     if(justOpenedContextMenu){

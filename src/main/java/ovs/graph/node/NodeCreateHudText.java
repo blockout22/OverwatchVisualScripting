@@ -6,11 +6,11 @@ import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinString;
+import ovs.graph.pin.PinVar;
 
 public class NodeCreateHudText extends Node{
 
-    PinString customStringPin = new PinString();
+    PinVar input = new PinVar();
     PinAction outputPin = new PinAction();
 
     ComboBox comboBox = new ComboBox();
@@ -20,8 +20,8 @@ public class NodeCreateHudText extends Node{
         setName("Create Hud Text");
 
 
-        customStringPin.setNode(this);
-        addCustomInput(customStringPin);
+        input.setNode(this);
+        addCustomInput(input);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
@@ -35,11 +35,11 @@ public class NodeCreateHudText extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> inputData = customStringPin.getData();
+        PinData<ImString> inputData = input.getData();
         PinData<ImString> outputData = outputPin.getData();
 
-        if(customStringPin.isConnected()){
-            Pin connectedPin = customStringPin.getConnectedPin();
+        if(input.isConnected()){
+            Pin connectedPin = input.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
             inputData.getValue().set(connectedData.getValue().get());
@@ -50,10 +50,10 @@ public class NodeCreateHudText extends Node{
 
     @Override
     public String getOutput() {
-        PinData<ImString> customString = customStringPin.getData();
+        PinData<ImString> var = input.getData();
 
         String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(All Players(All Teams), Null, Custom String(\"" + customString.getValue().get() + "\"), Null, " + location + ", -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
+        String output = "Create HUD Text(All Players(All Teams), Null, " + var.getValue().get() + ", Null, " + location + ", -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
         return output;
     }
 
