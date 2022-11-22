@@ -6,7 +6,7 @@ import ovs.graph.PinData;
 
 public class PinFloat extends Pin{
 
-    PinData<ImFloat> data = new PinData<>();
+    private PinData<ImFloat> data = new PinData<>();
 
     ImFloat floatData = new ImFloat();
 

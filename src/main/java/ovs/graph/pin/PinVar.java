@@ -5,7 +5,7 @@ import ovs.graph.PinData;
 
 public class PinVar extends Pin{
 
-    public PinData<ImString> data = new PinData<>();
+    private PinData<ImString> data = new PinData<>();
 
     public PinVar(){
         setData(data);
