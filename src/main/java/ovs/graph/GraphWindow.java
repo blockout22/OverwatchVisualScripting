@@ -96,6 +96,9 @@ public class GraphWindow {
                     tf.addChangedListener(new ChangeListener() {
                         @Override
                         public void onChanged(String oldValue, String newValue) {
+                            if(newValue.contains(" ")){
+                                System.out.println("Error: Variables won't accept spaces" );
+                            }
                             graph.globalVariables.get(j).name = newValue;
                         }
                     });
@@ -200,13 +203,13 @@ public class GraphWindow {
                                 ImGui.separator();
                                 ImGui.text("Variables");
                                 if (ImGui.button("Add Global Variable")) {
-                                    graph.addGlobalVariable("Some Name");
+                                    graph.addGlobalVariable("VarName");
                                 }
 
                                 ImGui.sameLine();
 
                                 if (ImGui.button("Add Player Variable")) {
-                                    graph.addPlayerVariable("Some Name");
+                                    graph.addPlayerVariable("varName");
                                 }
 
                                 ImGui.pushItemWidth(250);
@@ -569,6 +572,30 @@ public class GraphWindow {
 
         output.append(settings.getOutput());
         output.append("\n");
+
+        if (graph.globalVariables.size() > 0 || graph.playerVariables.size() > 0){
+            output.append("variables\n");
+            output.append("{\n");
+            if(graph.globalVariables.size() > 0){
+                output.append("\tglobal:\n");
+
+                for (int i = 0; i < graph.globalVariables.size(); i++) {
+                    output.append("\t\t" + graph.globalVariables.get(i).ID + ": " + graph.globalVariables.get(i).name + "\n");
+                }
+
+                output.append("\n");
+            }
+            if(graph.playerVariables.size() > 0){
+                output.append("\tplayer:\n");
+
+                for (int i = 0; i < graph.playerVariables.size(); i++) {
+                    output.append("\t\t" + graph.playerVariables.get(i).ID + ": " + graph.playerVariables.get(i).name + "\n");
+                }
+
+            }
+            output.append("}\n");
+            output.append("\n");
+        }
 
         for(Node node : graph.getNodes().values()){
             if(node instanceof NodeRule){

@@ -1,6 +1,7 @@
 package ovs.graph.UI;
 
 import imgui.ImGui;
+import imgui.ImGuiTextFilter;
 import imgui.type.ImString;
 import ovs.graph.UI.Listeners.ChangeListener;
 
@@ -22,7 +23,9 @@ public class TextField extends UiComponent{
 
     @Override
     public void show() {
-        ImGui.inputText("##" + uniqueID, string);
+        if(ImGui.inputText("##" + uniqueID, string)){
+
+        }
 
         if(lastText != string.get()){
             for (int i = 0; i < changeListeners.size(); i++) {
