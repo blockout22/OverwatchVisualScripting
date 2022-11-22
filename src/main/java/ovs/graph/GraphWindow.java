@@ -358,7 +358,7 @@ public class GraphWindow {
                                     NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowDuration, 1000);
                                     NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowSpeed, 25);
 
-                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedTo, pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 1);
+                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedTo, pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 2);
 
                                     NodeEditor.popStyleVar(3);
                                 }

@@ -45,6 +45,41 @@ public abstract class Node {
         outputPins.add(pin);
     }
 
+    public boolean removePinById(int id){
+        boolean found = false;
+        for (int i = 0; i < inputPins.size(); i++) {
+            Pin targetPin = inputPins.get(i);
+            if(targetPin.getID() == id){
+                found = true;
+                if(targetPin.connectedTo != -1){
+                    Pin connection = getGraph().findPinById(targetPin.connectedTo);
+                    connection.connectedTo = -1;
+                }
+                targetPin.connectedTo = -1;
+                inputPins.remove(i);
+                break;
+            }
+        }
+
+        if(!found){
+            for (int i = 0; i < outputPins.size(); i++) {
+                Pin targetPin = outputPins.get(i);
+                if(targetPin.getID() == id){
+                    found = true;
+                    if(targetPin.connectedTo != -1){
+                        Pin connection = getGraph().findPinById(targetPin.connectedTo);
+                        connection.connectedTo = -1;
+                    }
+                    targetPin.connectedTo = -1;
+                    outputPins.remove(i);
+                    break;
+                }
+            }
+        }
+
+        return found;
+    }
+
     public void addUiComponent(UiComponent uiComponent){
         this.uiComponents.add(uiComponent);
     }
