@@ -14,9 +14,7 @@ import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
-import ovs.graph.UI.ListView;
 import ovs.graph.UI.Listeners.ChangeListener;
-import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.*;
@@ -25,7 +23,6 @@ import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GraphWindow {
     private GlfwWindow window;
@@ -82,7 +79,8 @@ public class GraphWindow {
         context = new NodeEditorContext(config);
 
         //Add Nodes to list (this will also auto-populate context menu)
-        addNodeToList(NodeVariable.class);
+        addNodeToList(NodeGetVariable.class);
+        addNodeToList(NodeSetVariable.class);
         addNodeToList(NodeRule.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
@@ -277,6 +275,7 @@ public class GraphWindow {
 
                                     int max = Math.max(node.outputPins.size(), node.inputPins.size());
                                     for (int i = 0; i < max; i++) {
+                                        ImGui.newLine();
                                         if (node.inputPins.size() > i) {
                                             Pin inPin = node.inputPins.get(i);
 
@@ -308,12 +307,11 @@ public class GraphWindow {
                                             if (!node.hasTitleBar()) {
                                                 ImGui.sameLine(1);
                                             } else {
-                                                ImGui.sameLine(node.width - 10);
+                                                ImGui.sameLine(node.width);
                                             }
                                         }
 
                                         if (node.outputPins.size() > i) {
-                                            ImGui.sameLine();
                                             Pin outPin = node.outputPins.get(i);
 
                                             NodeEditor.beginPin(outPin.getID(), NodeEditorPinKind.Output);
@@ -336,6 +334,12 @@ public class GraphWindow {
                                 }
                                 NodeEditor.endNode();
 
+                                if (node.width == -1)
+                                {
+                                    node.width = NodeEditor.getNodeSizeX(node.getID());
+                                }
+
+                                //TODO Throttle execute as this doesn't need to run a million times a second
                                 node.execute();
                             }
                         }

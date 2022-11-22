@@ -5,26 +5,31 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.OnOpenedListener;
-import ovs.graph.pin.PinString;
+import ovs.graph.pin.Pin;
+import ovs.graph.pin.PinAction;
+import ovs.graph.pin.PinVar;
 
-public class NodeVariable extends Node{
+public class NodeSetVariable extends Node{
 
-    PinString outputPin = new PinString();
+    PinAction outputPin = new PinAction();
+    PinVar inputPin = new PinVar();
     private ComboBox comboBox = new ComboBox();
 
-    private int lastVariableCount = 0;
-
-    public NodeVariable(Graph graph) {
+    public NodeSetVariable(Graph graph) {
         super(graph);
-        setName("Variable");
+        setName("Set Variable");
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
+
+        inputPin.setNode(this);
+        addCustomInput(inputPin);
 
         comboBox.addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
                 comboBox.clear();
+
                 for (int i = 0; i < getGraph().globalVariables.size(); i++) {
                     comboBox.addOption("Global: " + getGraph().globalVariables.get(i).name);
                 }
@@ -32,18 +37,22 @@ public class NodeVariable extends Node{
                 for (int i = 0; i < getGraph().playerVariables.size(); i++) {
                     comboBox.addOption("Player: " + getGraph().playerVariables.get(i).name);
                 }
-
-                lastVariableCount = getGraph().globalVariables.size() + getGraph().playerVariables.size();
             }
         });
     }
 
     @Override
     public void execute() {
-//        if(lastVariableCount != getGraph().globalVariables.size() + getGraph().playerVariables.size()){
-//
-//            return;
-//        }
+
+        if(inputPin.isConnected()){
+            Pin connectedPin = inputPin.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            PinData<ImString> inputData = inputPin.getData();
+
+            inputData.getValue().set(connectedData.getValue().get());
+        }
+
         if (outputPin.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
             PinData<ImString> data = outputPin.getData();
             String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
@@ -53,8 +62,15 @@ public class NodeVariable extends Node{
 
     @Override
     public String getOutput() {
-        String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
-        return val[0] + "." + val[1];
+        if(inputPin.isConnected() && (comboBox.getSelectedIndex() != -1)) {
+
+            PinData<ImString> data = inputPin.getData();
+
+            String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
+            return val[0] + "." + val[1] + " = " + data.getValue().get() + ";";
+        }
+
+        return "";
     }
 
     @Override
