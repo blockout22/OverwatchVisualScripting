@@ -44,17 +44,16 @@ public class NodeCreateHudText extends Node{
             PinData<ImString> connectedData = connectedPin.getData();
             inputData.getValue().set(connectedData.getValue().get());
         }
-
-        outputData.getValue().set(inputData.getValue().get());
+        String location = comboBox.getSelectedValue();
+        String output = "Create HUD Text(All Players(All Teams), Null, " + inputData.getValue().get() + ", Null, " + location + ", -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
+        outputData.getValue().set(output);
     }
 
     @Override
     public String getOutput() {
-        PinData<ImString> var = input.getData();
+        PinData<ImString> output = outputPin.getData();
 
-        String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(All Players(All Teams), Null, " + var.getValue().get() + ", Null, " + location + ", -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
-        return output;
+        return output.getValue().get();
     }
 
     @Override

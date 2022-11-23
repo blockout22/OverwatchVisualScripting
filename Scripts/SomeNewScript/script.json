@@ -1,209 +1,203 @@
 {
   "nodeSaves": [
     {
-      "className": "ovs.graph.node.NodeIf",
-      "nodeName": "If",
-      "x": 274.0,
-      "y": 204.0,
-      "inputPins": [
-        {
-          "ID": 1015,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"A\")",
-          "connectedTo": 1021
-        },
-        {
-          "ID": 1016,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"B\")",
-          "connectedTo": 1023
-        },
-        {
-          "ID": 1017,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Custom String(\"New Info\");\nCustom String(\"More Text\");\n",
-          "connectedTo": 1027
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1018,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1019
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 408.0,
-      "y": 209.0,
+      "x": 744.0,
+      "y": 193.0,
       "inputPins": [
         {
-          "ID": 1019,
+          "ID": 1021,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Custom String(\"A\") \u003d\u003d Custom String(\"B\"));\n\t\t\t\nCustom String(\"New Info\");\nCustom String(\"More Tex",
-          "connectedTo": 1018
-        },
-        {
-          "ID": 1033,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Custom String(\"New Info\");\nCustom String(\"More Text\");\n",
-          "connectedTo": -1
+          "value": "While(Custom String(\"\") \u003d\u003d Custom String(\"\"));\n\t\t\tCustom String(\"sdfsdf\");\n\t\t\tCustom String(\"sdfdsf\");\n\t\tEnd;",
+          "connectedTo": 1025
         }
       ],
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -152.0,
-      "y": 128.0,
+      "className": "ovs.graph.node.WhileNode",
+      "nodeName": "While",
+      "x": 549.0,
+      "y": 204.0,
       "inputPins": [
         {
-          "ID": 1020,
-          "type": "ovs.graph.pin.PinString",
-          "value": "A",
-          "connectedTo": -1
+          "ID": 1022,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"\")",
+          "connectedTo": 1027
+        },
+        {
+          "ID": 1023,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"\")",
+          "connectedTo": 1029
+        },
+        {
+          "ID": 1024,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Custom String(\"sdfsdf\");\nCustom String(\"sdfdsf\");\n",
+          "connectedTo": 1033
         }
       ],
       "outputPins": [
         {
-          "ID": 1021,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1015
+          "ID": 1025,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1021
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
-      "x": -152.0,
-      "y": 256.0,
+      "x": 152.0,
+      "y": 144.0,
       "inputPins": [
         {
-          "ID": 1022,
+          "ID": 1026,
           "type": "ovs.graph.pin.PinString",
-          "value": "B",
+          "value": "",
           "connectedTo": -1
         }
       ],
       "outputPins": [
         {
-          "ID": 1023,
+          "ID": 1027,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1016
+          "connectedTo": 1022
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 160.0,
+      "y": 272.0,
+      "inputPins": [
+        {
+          "ID": 1028,
+          "type": "ovs.graph.pin.PinString",
+          "value": "",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1029,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1023
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 111.0,
+      "y": 425.0,
+      "inputPins": [
+        {
+          "ID": 1030,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"sdfsdf\")",
+          "connectedTo": 1038
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1031,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1032
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeActionList",
       "nodeName": "Action List",
-      "x": 104.0,
-      "y": 362.0,
+      "x": 347.0,
+      "y": 474.0,
       "inputPins": [
         {
-          "ID": 1026,
+          "ID": 1032,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1030
+          "connectedTo": 1031
         },
         {
-          "ID": 1053,
+          "ID": 1034,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1052
+          "connectedTo": 1036
         }
       ],
       "outputPins": [
         {
-          "ID": 1027,
+          "ID": 1033,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1017
+          "connectedTo": 1024
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": -145.0,
-      "y": 473.0,
+      "x": 120.0,
+      "y": 569.0,
       "inputPins": [
         {
-          "ID": 1029,
+          "ID": 1035,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"New Info\")",
-          "connectedTo": 1032
+          "value": "Custom String(\"sdfdsf\")",
+          "connectedTo": 1042
         }
       ],
       "outputPins": [
         {
-          "ID": 1030,
+          "ID": 1036,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1026
+          "connectedTo": 1034
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
-      "x": -384.0,
+      "x": -216.0,
+      "y": 448.0,
+      "inputPins": [
+        {
+          "ID": 1037,
+          "type": "ovs.graph.pin.PinString",
+          "value": "sdfsdf",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1038,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1030
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": -248.0,
       "y": 640.0,
       "inputPins": [
         {
-          "ID": 1031,
+          "ID": 1041,
           "type": "ovs.graph.pin.PinString",
-          "value": "New Info",
+          "value": "sdfdsf",
           "connectedTo": -1
         }
       ],
       "outputPins": [
         {
-          "ID": 1032,
+          "ID": 1042,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1029
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCreateHudText",
-      "nodeName": "Create Hud Text",
-      "x": -129.0,
-      "y": 697.0,
-      "inputPins": [
-        {
-          "ID": 1051,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"More Text\")",
-          "connectedTo": 1055
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1052,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1053
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -408.0,
-      "y": 848.0,
-      "inputPins": [
-        {
-          "ID": 1054,
-          "type": "ovs.graph.pin.PinString",
-          "value": "More Text",
-          "connectedTo": -1
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1055,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1051
+          "connectedTo": 1035
         }
       ]
     }
