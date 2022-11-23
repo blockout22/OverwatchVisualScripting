@@ -12,7 +12,7 @@ public class PinString extends Pin{
     {
         setData(data);
         setColor(0, 0.392156863f, 0.392156863f, 1);
-        data.setValue(new ImString());
+        data.setValue(new ImString(500));
     }
 
     @Override

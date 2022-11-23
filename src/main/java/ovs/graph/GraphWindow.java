@@ -82,11 +82,12 @@ public class GraphWindow {
         addNodeToList(NodeGetVariable.class);
         addNodeToList(NodeSetVariable.class);
         addNodeToList(NodeRule.class);
+        addNodeToList(NodeActionList.class);
         addNodeToList(NodeCreateHudText.class);
         addNodeToList(NodeWait.class);
         addNodeToList(NodeCustomString.class);
         addNodeToList(NodeIf.class);
-        addNodeToList(NodeEnd.class);
+//        addNodeToList(NodeEnd.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -279,6 +280,7 @@ public class GraphWindow {
                                     node.UI();
 
                                     int max = Math.max(node.outputPins.size(), node.inputPins.size());
+                                    ImGui.newLine();
                                     for (int i = 0; i < max; i++) {
                                         ImGui.newLine();
                                         if (node.inputPins.size() > i) {

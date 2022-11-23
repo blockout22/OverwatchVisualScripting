@@ -10,7 +10,7 @@ public class PinAction extends Pin{
     public PinAction(){
         setData(data);
         setColor(0, 1, 0, 1);
-        data.setValue(new ImString());
+        data.setValue(new ImString(500));
     }
 
     @Override
