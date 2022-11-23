@@ -87,6 +87,7 @@ public class GraphWindow {
         addNodeToList(NodeWait.class);
         addNodeToList(NodeCustomString.class);
         addNodeToList(NodeIf.class);
+        addNodeToList(NodeLoop.class);
 //        addNodeToList(NodeEnd.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {

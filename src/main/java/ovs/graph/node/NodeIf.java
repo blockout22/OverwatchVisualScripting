@@ -65,7 +65,7 @@ public class NodeIf extends Node{
 
             outputData.getValue().set("If(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
                     out +
-                    "\t\tEND;");
+                    "\t\tEnd;");
         }
     }
 
