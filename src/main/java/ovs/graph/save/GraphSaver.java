@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
@@ -17,7 +18,7 @@ public class GraphSaver {
     private transient GraphSave graphSave = new GraphSave();
     private static StringBuilder sb = new StringBuilder();
 
-    String dir = "Scripts";
+    String dir = Global.SCRIPTS_DIR;
 
     public void save(String fileName, Graph graph){
         validateDirExists(dir);

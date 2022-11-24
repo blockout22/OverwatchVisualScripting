@@ -1,14 +1,14 @@
 package ovs;
 
-import imgui.ImFontConfig;
-import imgui.ImFontGlyphRangesBuilder;
-import imgui.ImGui;
-import imgui.ImGuiIO;
+import imgui.*;
 import imgui.extension.imnodes.ImNodes;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiPopupFlags;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
 import ovs.graph.GraphWindow;
 
@@ -29,6 +29,10 @@ public class ImGuiWindow {
 
     private ArrayList<GraphWindow> graphWindows = new ArrayList<>();
     private ArrayList<GraphWindow> queueRemoveGraphWindow = new ArrayList<>();
+
+    private ImString inputFileName = new ImString();
+
+    private String lastMenuAction = null;
 
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
@@ -86,6 +90,66 @@ public class ImGuiWindow {
             }
             ImGui.end();
 
+            if(lastMenuAction == "New"){
+                ImGui.openPopup("new_file_popup");
+                lastMenuAction = null;
+            }
+
+            if(lastMenuAction == "Open"){
+                ImGui.openPopup("open_file_popup");
+                lastMenuAction = null;
+            }
+
+            if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize))
+            {
+                ImGui.text("Script Name");
+                if(ImGui.inputText("##", inputFileName)){
+
+                }
+
+                if(inputFileName.get().length() > 0){
+                    if(ImGui.button("Create")){
+                        GraphWindow window = new GraphWindow(this, glfwWindow, null);
+                        window.setFileName(inputFileName.get());
+                        graphWindows.add(window);
+                        ImGui.closeCurrentPopup();
+                    }
+                }else{
+                    ImGui.alignTextToFramePadding();
+                    ImGui.text("Create");
+                }
+
+                ImGui.sameLine();
+                if(ImGui.button("Close")){
+                    ImGui.closeCurrentPopup();
+                }
+                ImGui.endPopup();
+            }
+
+            if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize))
+            {
+                ImGui.text("Open Script");
+
+                File scripts = new File(Global.SCRIPTS_DIR);
+                for(File file : scripts.listFiles())
+                {
+                    if(ImGui.button(file.getName()))
+                    {
+                        GraphWindow window = new GraphWindow(this, glfwWindow, file.getName());
+                        graphWindows.add(window);
+                        ImGui.closeCurrentPopup();
+                    }
+                }
+
+                ImGui.separator();
+
+                if(ImGui.button("Close")){
+                    ImGui.closeCurrentPopup();
+                }
+
+                ImGui.endPopup();
+            }
+
             for(GraphWindow graphWindow : graphWindows){
                 graphWindow.show(menuBarHeight);
             }
@@ -110,11 +174,17 @@ public class ImGuiWindow {
         ImGui.beginMainMenuBar();
         {
             if(ImGui.beginMenu("File", true)){
-                if (ImGui.menuItem("New Graph")) {
-                    //lastMenuAction == "File";
-                    GraphWindow window = new GraphWindow(glfwWindow, null);
-                    window.setFileName("SomeNewScript");
-                    graphWindows.add(window);
+                if (ImGui.menuItem("New")) {
+                    lastMenuAction = "New";
+//                    GraphWindow window = new GraphWindow(glfwWindow, null);
+//                    window.setFileName("SomeNewScript");
+//                    graphWindows.add(window);
+                }
+
+                if(ImGui.menuItem("Open")){
+                    lastMenuAction = "Open";
+//                    GraphWindow window = new GraphWindow(glfwWindow, "SomeNewScript");
+//                    graphWindows.add(window);
                 }
                 ImGui.endMenu();
             }

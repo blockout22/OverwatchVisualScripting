@@ -10,10 +10,12 @@ import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiInputTextFlags;
+import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
+import ovs.ImGuiWindow;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
@@ -25,7 +27,9 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 public class GraphWindow {
-    private GlfwWindow window;
+    private ImGuiWindow imGuiWindow;
+    private GlfwWindow glfwWindow;
+    private final ImBoolean closable = new ImBoolean(true);
 
     private String id;
     private String fileName = "";
@@ -62,12 +66,14 @@ public class GraphWindow {
 
     private Node editingNodeTitle = null;
 
-    public GraphWindow(GlfwWindow window, String loadFile){
-        this.window = window;
+    public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
+        this.imGuiWindow = imGuiWindow;
+        this.glfwWindow = window;
         graphSaver = new GraphSaver();
         if(loadFile != null) {
             graph = graphSaver.load(loadFile);
             fileName = loadFile;
+            isLoading = true;
         }else {
             graph = new Graph();
         }
@@ -139,11 +145,19 @@ public class GraphWindow {
     public void show(float menuBarHeight){
         cursorPos = ImGui.getMousePos();
         graph.update();
-        ImGui.setNextWindowSize(window.getWidth(), window.getHeight() - menuBarHeight, ImGuiCond.Once);
+        ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight, ImGuiCond.Once);
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
 
-        if(ImGui.begin("Graph window")) {
+        if(ImGui.begin("Graph window", closable)) {
+
+            if(!closable.get())
+            {
+                //TODO request user to save before closing
+
+                imGuiWindow.removeGraphWindow(this);
+            }
+
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
 
