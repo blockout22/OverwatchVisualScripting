@@ -23,4 +23,11 @@ public class PinBoolean extends Pin{
         }
         return true;
     }
+
+    @Override
+    public void loadValue(String value) {
+        boolean val = Boolean.valueOf(value);
+        data.getValue().set(val);
+        bool.set(val);
+    }
 }

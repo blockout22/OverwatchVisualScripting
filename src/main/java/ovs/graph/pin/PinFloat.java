@@ -28,4 +28,13 @@ public class PinFloat extends Pin{
         ImGui.popItemWidth();
         return true;
     }
+
+    @Override
+    public void loadValue(String value) {
+        float val = Float.valueOf(value);
+
+        data.getValue().set(val);
+        floatData.set(val);
+        System.out.println(val);
+    }
 }
