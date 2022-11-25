@@ -17,7 +17,7 @@ public class PinBoolean extends Pin{
 
     @Override
     public boolean UI() {
-        if(ImGui.checkbox("##", bool))
+        if(ImGui.checkbox("##" + getData(), bool))
         {
             data.getValue().set(bool.get());
         }

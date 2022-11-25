@@ -22,12 +22,15 @@ public class NodeEventPlayer extends Node{
 
     @Override
     public void execute() {
-
+        PinData<ImString> data = outputPin.getData();
+        data.getValue().set("Event Player");
     }
 
     @Override
-    public String getOutput() {
-        return "Event Player";
+    public String getOutput()
+    {
+        PinData<ImString> data = outputPin.getData();
+        return data.getValue().get();
     }
 
     @Override

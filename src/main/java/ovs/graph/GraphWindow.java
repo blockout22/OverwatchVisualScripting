@@ -96,6 +96,9 @@ public class GraphWindow {
         addNodeToList(NodeLoop.class);
         addNodeToList(WhileNode.class);
         addNodeToList(NodeEventPlayer.class);
+        addNodeToList(NodeIsButtonDown.class);
+        addNodeToList(NodeBoolean.class);
+        addNodeToList(NodeKill.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
