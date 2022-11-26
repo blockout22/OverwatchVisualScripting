@@ -177,13 +177,13 @@ public class GraphWindow {
                 graphSaver.save(fileName, graph);
             }
 
-            ImGui.sameLine();
+//            ImGui.sameLine();
 
-            if(ImGui.button("Load"))
-            {
-                graph = graphSaver.load(fileName);
-                isLoading = true;
-            }
+//            if(ImGui.button("Load"))
+//            {
+//                graph = graphSaver.load(fileName);
+//                isLoading = true;
+//            }
 
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
@@ -619,6 +619,20 @@ public class GraphWindow {
             output.append("}\n");
             output.append("\n");
         }
+
+        output.append("rule(\"Credits\")\n");
+        output.append("{\n");
+        output.append("\tevent\n");
+        output.append("\t{\n");
+        output.append("\t\tOngoing - Global;\n");
+        output.append("\t}\n");
+        output.append("\n");
+        output.append("\tactions\n");
+        output.append("\t{\n");
+        output.append("\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Created using github.com/blockout22/OverwatchVisualScripting\"), Null, Right, -999, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n");
+        output.append("\t}\n");
+        output.append("}\n");
+        output.append("\n");
 
         for(Node node : graph.getNodes().values()){
             if(node instanceof NodeRule){

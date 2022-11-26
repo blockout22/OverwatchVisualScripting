@@ -1,0 +1,169 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 1032.0,
+      "y": 193.0,
+      "inputPins": [
+        {
+          "ID": 1027,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1097
+        },
+        {
+          "ID": 1098,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "If(Is Button Held(Event Player, Button(Crouch)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\tEnd;",
+          "connectedTo": 1031
+        },
+        {
+          "ID": 1099,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1095
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 744.0,
+      "y": 281.0,
+      "inputPins": [
+        {
+          "ID": 1028,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is Button Held(Event Player, Button(Crouch))",
+          "connectedTo": 1093
+        },
+        {
+          "ID": 1029,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 1035
+        },
+        {
+          "ID": 1030,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Kill(Event Player, Null);",
+          "connectedTo": 1064
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1031,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1098
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 551.0,
+      "y": 384.0,
+      "inputPins": [
+        {
+          "ID": 1034,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1035,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1029
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeKill",
+      "nodeName": "Kill",
+      "x": 572.0,
+      "y": 481.0,
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1064,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1030
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsButtonDown",
+      "nodeName": "Is Button Down",
+      "x": 408.0,
+      "y": 265.0,
+      "inputPins": [
+        {
+          "ID": 1092,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1094
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1093,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1028
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 244.0,
+      "y": 305.0,
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1094,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1092
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeLoop",
+      "nodeName": "Loop",
+      "x": 748.0,
+      "y": 513.0,
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1095,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1099
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeWait",
+      "nodeName": "Wait",
+      "x": 696.0,
+      "y": 160.0,
+      "inputPins": [
+        {
+          "ID": 1096,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.1",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1097,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1027
+        }
+      ]
+    }
+  ]
+}
