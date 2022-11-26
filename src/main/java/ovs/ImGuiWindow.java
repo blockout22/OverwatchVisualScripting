@@ -4,8 +4,6 @@ import imgui.*;
 import imgui.extension.imnodes.ImNodes;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiPopupFlags;
-import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImString;

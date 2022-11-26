@@ -71,7 +71,7 @@ public class GraphWindow {
         this.glfwWindow = window;
         graphSaver = new GraphSaver();
         if(loadFile != null) {
-            graph = graphSaver.load(loadFile);
+            graph = graphSaver.load(loadFile, settings);
             fileName = loadFile;
             isLoading = true;
         }else {
@@ -177,7 +177,7 @@ public class GraphWindow {
                 for(Node node : graph.getNodes().values()){
                     node.onSaved();
                 }
-                graphSaver.save(fileName, graph);
+                graphSaver.save(fileName, settings, graph);
             }
 
 //            ImGui.sameLine();

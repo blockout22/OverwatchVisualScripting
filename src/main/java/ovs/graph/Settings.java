@@ -60,4 +60,20 @@ public class Settings {
 
         return output;
     }
+
+    public void setModeName(String name){
+        modeName.set(name);
+    }
+
+    public void setDescription(String des){
+        description.set(des);
+    }
+
+    public String getModeName(){
+        return modeName.get();
+    }
+
+    public String getDescription(){
+        return description.get();
+    }
 }

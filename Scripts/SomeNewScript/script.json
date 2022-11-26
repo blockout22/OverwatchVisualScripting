@@ -1,4 +1,8 @@
 {
+  "saveSettings": {
+    "modeName": "New Mode Name",
+    "description": "Description of Game Mode"
+  },
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeCustomString",

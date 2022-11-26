@@ -6,6 +6,7 @@ import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import ovs.Global;
 import ovs.graph.Graph;
+import ovs.graph.Settings;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
 
@@ -20,7 +21,7 @@ public class GraphSaver {
 
     String dir = Global.SCRIPTS_DIR;
 
-    public void save(String fileName, Graph graph){
+    public void save(String fileName, Settings settings, Graph graph){
         validateDirExists(dir);
         validateDirExists(dir + File.separator + fileName);
 
@@ -35,6 +36,9 @@ public class GraphSaver {
         }
 
         graphSave.nodeSaves.clear();
+
+        graphSave.saveSettings.modeName = settings.getModeName();
+        graphSave.saveSettings.description = settings.getDescription();
 
 
         for(Node node : graph.getNodes().values()){
@@ -102,7 +106,7 @@ public class GraphSaver {
         }
     }
 
-    public Graph load(String fileName){
+    public Graph load(String fileName, Settings settings){
         try{
             File file = new File(dir + File.separator + fileName + File.separator + "script.json");
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -114,6 +118,10 @@ public class GraphSaver {
             br.close();
 
             Node[] loaded = new Node[gs.nodeSaves.size()];
+
+            //Load settings
+            settings.setModeName(gs.saveSettings.modeName);
+            settings.setDescription(gs.saveSettings.description);
 
             Graph graph = new Graph();
 
@@ -249,7 +257,14 @@ public class GraphSaver {
     }
 
     private static class GraphSave{
+        //Settings
+        private SaveSettings saveSettings = new SaveSettings();
         private ArrayList<NodeSave> nodeSaves = new ArrayList<>();
+    }
+
+    private static class SaveSettings{
+        private String modeName;
+        private String description;
     }
 
     private static class PinSave{
