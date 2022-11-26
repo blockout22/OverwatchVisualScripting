@@ -1,5 +1,46 @@
 {
+  "saveSettings": {
+    "modeName": "null",
+    "description": "null",
+    "maxT1Players": 0,
+    "maxT2Players": 0,
+    "maxFFAPlayers": 0,
+    "assaultMode": false,
+    "controlMode": true,
+    "escortMode": true,
+    "hybridMode": true,
+    "pushMode": true,
+    "bountyHunterMode": false,
+    "ctfMode": false,
+    "deathmatchMode": false,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false
+  },
   "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeWait",
+      "nodeName": "Wait",
+      "x": 696.0,
+      "y": 160.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1096,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.1",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1097,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1027
+        }
+      ]
+    },
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
@@ -37,7 +78,10 @@
       "nodeName": "If",
       "x": 744.0,
       "y": 281.0,
-      "extraData": [],
+      "extraData": [
+        "Type:If",
+        "Condition:\u003d\u003d"
+      ],
       "inputPins": [
         {
           "ID": 1028,
@@ -154,28 +198,6 @@
           "ID": 1095,
           "type": "ovs.graph.pin.PinAction",
           "connectedTo": 1099
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeWait",
-      "nodeName": "Wait",
-      "x": 696.0,
-      "y": 160.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1096,
-          "type": "ovs.graph.pin.PinFloat",
-          "value": "0.1",
-          "connectedTo": -1
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1097,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1027
         }
       ]
     }

@@ -9,6 +9,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeIf extends Node{
 
+    ComboBox ifTypeCombo = new ComboBox();
     ComboBox box = new ComboBox();
 
     PinVar leftPin = new PinVar();
@@ -22,6 +23,13 @@ public class NodeIf extends Node{
         super(graph);
 
         setName("If");
+
+        ifTypeCombo.addOption("If");
+        ifTypeCombo.addOption("Else If");
+        ifTypeCombo.addOption("Skip If");
+        ifTypeCombo.addOption("Loop If");
+
+        ifTypeCombo.select(0);
 
         box.addOption("<");
         box.addOption(">");
@@ -48,13 +56,17 @@ public class NodeIf extends Node{
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
+        getExtraSaveData().add("Type:" + ifTypeCombo.getSelectedValue());
         getExtraSaveData().add("Condition:" + box.getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
         for(String data : getExtraSaveData()){
-            if(data.startsWith("Condition:"))
+            if(data.startsWith("Type")){
+                ifTypeCombo.selectValue(data.split(":")[1]);
+            }
+            if(data.startsWith("Condition"))
             {
                 box.selectValue(data.split(":")[1]);
             }
@@ -63,10 +75,10 @@ public class NodeIf extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> dataLeft = leftPin.getData();
+        PinData<ImString> dataRight = rightPin.getData();
+        PinData<ImString> outputData = output.getData();
         if(leftPin.isConnected() && rightPin.isConnected() && ifActionPin.isConnected()){
-            PinData<ImString> dataLeft = leftPin.getData();
-            PinData<ImString> dataRight = rightPin.getData();
-            PinData<ImString> outputData = output.getData();
             PinData<ImString> ruleData = ifActionPin.getData();
 
             dataLeft.getValue().set(((ImString)leftPin.getConnectedPin().getData().getValue()).get());
@@ -79,9 +91,11 @@ public class NodeIf extends Node{
                 out += "\t\t\t" + lines[i] + "\n";
             }
 
-            outputData.getValue().set("If(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
+            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
                     out +
                     "\t\tEnd;");
+        }else{
+            //TODO clear pin data if not connected
         }
     }
 
@@ -93,6 +107,7 @@ public class NodeIf extends Node{
 
     @Override
     public void UI() {
+        ifTypeCombo.show();
         box.show();
     }
 }
