@@ -1,7 +1,22 @@
 {
   "saveSettings": {
     "modeName": "New Mode Name",
-    "description": "Description of Game Mode"
+    "description": "Description of Game Mode",
+    "maxT1Players": 0,
+    "maxT2Players": 0,
+    "maxFFAPlayers": 0,
+    "assaultMode": true,
+    "controlMode": true,
+    "escortMode": true,
+    "hybridMode": true,
+    "pushMode": true,
+    "bountyHunterMode": false,
+    "ctfMode": false,
+    "deathmatchMode": false,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false
   },
   "nodeSaves": [
     {

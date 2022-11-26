@@ -39,6 +39,18 @@ public class GraphSaver {
 
         graphSave.saveSettings.modeName = settings.getModeName();
         graphSave.saveSettings.description = settings.getDescription();
+        graphSave.saveSettings.assaultMode = settings.getAssaultOnOff();
+        graphSave.saveSettings.controlMode = settings.getControlOnOff();
+        graphSave.saveSettings.escortMode = settings.getEscortOnOff();
+        graphSave.saveSettings.hybridMode = settings.getHybridOnOff();
+        graphSave.saveSettings.pushMode = settings.getPushOnOff();
+        graphSave.saveSettings.bountyHunterMode = settings.getBountyHunterOnOff();
+        graphSave.saveSettings.ctfMode = settings.getCtfOnOff();
+        graphSave.saveSettings.deathmatchMode = settings.getDeathmatchOnOff();
+        graphSave.saveSettings.eliminationMode = settings.getEliminationOnOff();
+        graphSave.saveSettings.teamDeathmatchMode = settings.getTeamDeathmatchOnOff();
+        graphSave.saveSettings.practiceRangeMode = settings.getPracticeRangeOnOff();
+        graphSave.saveSettings.skirmishMode = settings.getSkirmishOnOff();
 
 
         for(Node node : graph.getNodes().values()){
@@ -122,6 +134,18 @@ public class GraphSaver {
             //Load settings
             settings.setModeName(gs.saveSettings.modeName);
             settings.setDescription(gs.saveSettings.description);
+            settings.setAssaultOnOff(gs.saveSettings.assaultMode);
+            settings.setControlOnOff(gs.saveSettings.controlMode);
+            settings.setEscortOnOff(gs.saveSettings.escortMode);
+            settings.setHybridOnOff(gs.saveSettings.hybridMode);
+            settings.setPushOnOff(gs.saveSettings.pushMode);
+            settings.setBountyHunterOnOff(gs.saveSettings.bountyHunterMode);
+            settings.setCtfOnOff(gs.saveSettings.ctfMode);
+            settings.setDeathmatchOnOff(gs.saveSettings.deathmatchMode);
+            settings.setEliminationOnOff(gs.saveSettings.eliminationMode);
+            settings.setTeamDeathmatchOnOff(gs.saveSettings.teamDeathmatchMode);
+            settings.setPracticeRangeOnOff(gs.saveSettings.practiceRangeMode);
+            settings.setSkirmishOnOff(gs.saveSettings.skirmishMode);
 
             Graph graph = new Graph();
 
@@ -152,8 +176,6 @@ public class GraphSaver {
                 }
 
                 loaded[i] = node;
-
-
             }
 
             for (int i = 0; i < loaded.length; i++) {
@@ -265,6 +287,23 @@ public class GraphSaver {
     private static class SaveSettings{
         private String modeName;
         private String description;
+
+        private int maxT1Players;
+        private int maxT2Players;
+        private int maxFFAPlayers;
+
+        private boolean assaultMode;
+        private boolean controlMode = true;
+        private boolean escortMode = true;
+        private boolean hybridMode = true;
+        private boolean pushMode = true;
+        private boolean bountyHunterMode;
+        private boolean ctfMode;
+        private boolean deathmatchMode;
+        private boolean eliminationMode;
+        private boolean teamDeathmatchMode;
+        private boolean practiceRangeMode;
+        private boolean skirmishMode;
     }
 
     private static class PinSave{
