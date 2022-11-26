@@ -46,6 +46,22 @@ public class NodeIf extends Node{
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Condition:" + box.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Condition:"))
+            {
+                box.selectValue(data.split(":")[1]);
+            }
+        }
+    }
+
+    @Override
     public void execute() {
         if(leftPin.isConnected() && rightPin.isConnected() && ifActionPin.isConnected()){
             PinData<ImString> dataLeft = leftPin.getData();

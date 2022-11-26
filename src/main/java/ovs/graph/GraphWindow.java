@@ -94,7 +94,7 @@ public class GraphWindow {
         addNodeToList(NodeCustomString.class);
         addNodeToList(NodeIf.class);
         addNodeToList(NodeLoop.class);
-        addNodeToList(WhileNode.class);
+        addNodeToList(NodeWhile.class);
         addNodeToList(NodeEventPlayer.class);
         addNodeToList(NodeIsButtonDown.class);
         addNodeToList(NodeBoolean.class);

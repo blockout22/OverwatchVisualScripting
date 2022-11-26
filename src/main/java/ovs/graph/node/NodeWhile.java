@@ -7,7 +7,7 @@ import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class WhileNode extends Node{
+public class NodeWhile extends Node{
 
     ComboBox box = new ComboBox();
 
@@ -17,7 +17,7 @@ public class WhileNode extends Node{
     PinAction actionPin = new PinAction();
 
     PinAction output = new PinAction();
-    public WhileNode(Graph graph) {
+    public NodeWhile(Graph graph) {
         super(graph);
         setName("While");
 
@@ -41,6 +41,22 @@ public class WhileNode extends Node{
 
         output.setNode(this);
         addCustomOutput(output);
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Condition:" + box.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Condition:"))
+            {
+                box.selectValue(data.split(":")[1]);
+            }
+        }
     }
 
     @Override

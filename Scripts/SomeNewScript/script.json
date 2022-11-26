@@ -1,6 +1,50 @@
 {
   "nodeSaves": [
     {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": -216.0,
+      "y": 448.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1037,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Top",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1038,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1030
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": -248.0,
+      "y": 640.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1041,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Right",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1042,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1035
+        }
+      ]
+    },
+    {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
       "x": 744.0,
@@ -14,18 +58,20 @@
         {
           "ID": 1021,
           "type": "ovs.graph.pin.PinAction",
-          "value": "While(Custom String(\"\") \u003d\u003d Custom String(\"\"));\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfsdf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfdsf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
+          "value": "While(Custom String(\"\") \u003e Custom String(\"\"));\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Top\"), Null, Top, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Right\"), Null, Right, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
           "connectedTo": 1025
         }
       ],
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.WhileNode",
+      "className": "ovs.graph.node.NodeWhile",
       "nodeName": "While",
       "x": 549.0,
       "y": 204.0,
-      "extraData": [],
+      "extraData": [
+        "Condition:\u003e"
+      ],
       "inputPins": [
         {
           "ID": 1022,
@@ -42,7 +88,7 @@
         {
           "ID": 1024,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(All Players(All Teams), Null, Custom String(\"sdfsdf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfdsf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "value": "Create HUD Text(All Players(All Teams), Null, Custom String(\"Top\"), Null, Top, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(All Players(All Teams), Null, Custom String(\"Right\"), Null, Right, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
           "connectedTo": 1033
         }
       ],
@@ -103,12 +149,14 @@
       "nodeName": "Create Hud Text",
       "x": 111.0,
       "y": 425.0,
-      "extraData": [],
+      "extraData": [
+        "Location:Top"
+      ],
       "inputPins": [
         {
           "ID": 1030,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"sdfsdf\")",
+          "value": "Custom String(\"Top\")",
           "connectedTo": 1038
         }
       ],
@@ -153,12 +201,14 @@
       "nodeName": "Create Hud Text",
       "x": 120.0,
       "y": 569.0,
-      "extraData": [],
+      "extraData": [
+        "Location:Right"
+      ],
       "inputPins": [
         {
           "ID": 1035,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"sdfdsf\")",
+          "value": "Custom String(\"Right\")",
           "connectedTo": 1042
         }
       ],
@@ -167,50 +217,6 @@
           "ID": 1036,
           "type": "ovs.graph.pin.PinAction",
           "connectedTo": 1034
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -216.0,
-      "y": 448.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1037,
-          "type": "ovs.graph.pin.PinString",
-          "value": "sdfsdf",
-          "connectedTo": -1
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1038,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1030
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -248.0,
-      "y": 640.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1041,
-          "type": "ovs.graph.pin.PinString",
-          "value": "sdfdsf",
-          "connectedTo": -1
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1042,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1035
         }
       ]
     }

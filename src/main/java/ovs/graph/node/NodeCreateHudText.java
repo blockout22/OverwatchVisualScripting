@@ -34,6 +34,22 @@ public class NodeCreateHudText extends Node{
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Location:" + comboBox.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Location:"))
+            {
+                comboBox.selectValue(data.split(":")[1]);
+            }
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = input.getData();
         PinData<ImString> outputData = outputPin.getData();
