@@ -5,11 +5,16 @@
       "nodeName": "Rule",
       "x": 744.0,
       "y": 193.0,
+      "extraData": [
+        "EventOnGoing:Player Earned Elimination",
+        "Team:All",
+        "Player:All"
+      ],
       "inputPins": [
         {
           "ID": 1021,
           "type": "ovs.graph.pin.PinAction",
-          "value": "While(Custom String(\"\") \u003d\u003d Custom String(\"\"));\n\t\t\tCustom String(\"sdfsdf\");\n\t\t\tCustom String(\"sdfdsf\");\n\t\tEnd;",
+          "value": "While(Custom String(\"\") \u003d\u003d Custom String(\"\"));\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfsdf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfdsf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
           "connectedTo": 1025
         }
       ],
@@ -20,6 +25,7 @@
       "nodeName": "While",
       "x": 549.0,
       "y": 204.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1022,
@@ -36,7 +42,7 @@
         {
           "ID": 1024,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Custom String(\"sdfsdf\");\nCustom String(\"sdfdsf\");\n",
+          "value": "Create HUD Text(All Players(All Teams), Null, Custom String(\"sdfsdf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(All Players(All Teams), Null, Custom String(\"sdfdsf\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
           "connectedTo": 1033
         }
       ],
@@ -53,6 +59,7 @@
       "nodeName": "Custom String",
       "x": 152.0,
       "y": 144.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1026,
@@ -74,6 +81,7 @@
       "nodeName": "Custom String",
       "x": 160.0,
       "y": 272.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1028,
@@ -95,6 +103,7 @@
       "nodeName": "Create Hud Text",
       "x": 111.0,
       "y": 425.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1030,
@@ -116,6 +125,7 @@
       "nodeName": "Action List",
       "x": 347.0,
       "y": 474.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1032,
@@ -143,6 +153,7 @@
       "nodeName": "Create Hud Text",
       "x": 120.0,
       "y": 569.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1035,
@@ -164,6 +175,7 @@
       "nodeName": "Custom String",
       "x": -216.0,
       "y": 448.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1037,
@@ -185,6 +197,7 @@
       "nodeName": "Custom String",
       "x": -248.0,
       "y": 640.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1041,

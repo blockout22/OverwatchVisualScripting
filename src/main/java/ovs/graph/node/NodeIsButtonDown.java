@@ -31,6 +31,21 @@ public class NodeIsButtonDown extends Node{
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Button:" + comboBox.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Button:")){
+                comboBox.selectValue(data.split(":")[1]);
+            }
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = input.getData();
         PinData<ImString> outputData = output.getData();

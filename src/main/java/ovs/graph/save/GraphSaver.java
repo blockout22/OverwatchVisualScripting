@@ -49,6 +49,10 @@ public class GraphSaver {
             save.x = pos.x;
             save.y = pos.y;
 
+            for(String extraData : node.getExtraSaveData()){
+                save.extraData.add(extraData);
+            }
+
             for(Pin inputs : node.inputPins){
                 PinSave pinSave = new PinSave();
                 pinSave.ID = inputs.getID();
@@ -135,12 +139,19 @@ public class GraphSaver {
                 node.posX = save.x;
                 node.posY = save.y;
 
+                for(String extraData : save.extraData){
+                    node.getExtraSaveData().add(extraData);
+                }
+
                 loaded[i] = node;
+
 
             }
 
             for (int i = 0; i < loaded.length; i++) {
                 Node node = loaded[i];
+
+
 
                 if(node != null){
                     NodeSave save = gs.nodeSaves.get(i);
@@ -207,6 +218,8 @@ public class GraphSaver {
                         }
                     }
                 }
+
+                node.onLoaded();
             }
 
             return graph;
@@ -252,6 +265,7 @@ public class GraphSaver {
         private String nodeName;
         private float x;
         private float y;
+        private ArrayList<String> extraData = new ArrayList<>();
         //save Pin array
         private ArrayList<PinSave> inputPins = new ArrayList<>();
         private ArrayList<PinSave> outputPins = new ArrayList<>();

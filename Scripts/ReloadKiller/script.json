@@ -5,6 +5,11 @@
       "nodeName": "Rule",
       "x": 1032.0,
       "y": 193.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Each Player",
+        "Team:All",
+        "Player:All"
+      ],
       "inputPins": [
         {
           "ID": 1027,
@@ -15,7 +20,7 @@
         {
           "ID": 1098,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Is Button Held(Event Player, Button(Crouch)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\tEnd;",
+          "value": "If(Is Button Held(Event Player, Button(Reload)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\tEnd;",
           "connectedTo": 1031
         },
         {
@@ -32,11 +37,12 @@
       "nodeName": "If",
       "x": 744.0,
       "y": 281.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1028,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Is Button Held(Event Player, Button(Crouch))",
+          "value": "Is Button Held(Event Player, Button(Reload))",
           "connectedTo": 1093
         },
         {
@@ -65,6 +71,7 @@
       "nodeName": "Boolean",
       "x": 551.0,
       "y": 384.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1034,
@@ -86,6 +93,7 @@
       "nodeName": "Kill",
       "x": 572.0,
       "y": 481.0,
+      "extraData": [],
       "inputPins": [],
       "outputPins": [
         {
@@ -100,6 +108,9 @@
       "nodeName": "Is Button Down",
       "x": 408.0,
       "y": 265.0,
+      "extraData": [
+        "Button:Reload"
+      ],
       "inputPins": [
         {
           "ID": 1092,
@@ -121,6 +132,7 @@
       "nodeName": "Event Player",
       "x": 244.0,
       "y": 305.0,
+      "extraData": [],
       "inputPins": [],
       "outputPins": [
         {
@@ -135,6 +147,7 @@
       "nodeName": "Loop",
       "x": 748.0,
       "y": 513.0,
+      "extraData": [],
       "inputPins": [],
       "outputPins": [
         {
@@ -149,6 +162,7 @@
       "nodeName": "Wait",
       "x": 696.0,
       "y": 160.0,
+      "extraData": [],
       "inputPins": [
         {
           "ID": 1096,

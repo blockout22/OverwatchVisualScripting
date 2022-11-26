@@ -14,6 +14,7 @@ public abstract class Node {
     public ArrayList<Pin> outputPins = new ArrayList<>();
     public ArrayList<Pin> inputPins = new ArrayList<>();
     public ArrayList<UiComponent> uiComponents = new ArrayList<>();
+    private ArrayList<String> extraSaveData = new ArrayList<>();
 
     private int ID;
     private String name = "";
@@ -30,6 +31,11 @@ public abstract class Node {
         this.self = this;
         this.graph = graph;
     }
+
+    public void onSaved(){
+    }
+
+    public void onLoaded(){};
 
     public void addCustomInput(Pin pin){
         int id = Graph.getNextAvailablePinID();
@@ -113,7 +119,9 @@ public abstract class Node {
         this.hasTitleBar = hasTitleBar;
     }
 
-
+    public ArrayList<String> getExtraSaveData() {
+        return extraSaveData;
+    }
 
     public abstract void execute();
     public abstract String getOutput();

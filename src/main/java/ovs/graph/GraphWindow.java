@@ -174,6 +174,9 @@ public class GraphWindow {
 
             if(ImGui.button("Save"))
             {
+                for(Node node : graph.getNodes().values()){
+                    node.onSaved();
+                }
                 graphSaver.save(fileName, graph);
             }
 

@@ -111,4 +111,14 @@ public class ComboBox extends UiComponent{
     public void addOnOpenedListener(OnOpenedListener onOpenedListener){
         this.onOpenedListeners.add(onOpenedListener);
     }
+
+    public void selectValue(String value) {
+        for (int i = 0; i < items.length; i++) {
+            if(items[i].equals(value))
+            {
+                select(i);
+                return;
+            }
+        }
+    }
 }

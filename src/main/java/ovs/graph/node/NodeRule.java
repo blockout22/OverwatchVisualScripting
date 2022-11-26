@@ -85,6 +85,29 @@ public class NodeRule extends Node{
         });
     }
 
+    public void onSaved()
+    {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("EventOnGoing:" + comboEventOnGoing.getSelectedValue());
+        getExtraSaveData().add("Team:" + comboTeam.getSelectedValue());
+        getExtraSaveData().add("Player:" + comboPlayers.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for (String data : getExtraSaveData()){
+            if(data.startsWith("EventOnGoing"))
+            {
+                comboEventOnGoing.selectValue(data.split(":")[1]);
+            }else if(data.startsWith("Team"))
+            {
+                comboTeam.selectValue(data.split(":")[1]);
+            }else if(data.startsWith("Player")){
+                comboPlayers.selectValue(data.split(":")[1]);
+            }
+        }
+    }
+
     @Override
     public void execute() {
         for (int i = 0; i < inputPins.size(); i++) {
