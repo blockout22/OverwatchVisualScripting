@@ -26,6 +26,8 @@ public class NodeIsButtonDown extends Node{
 
         output.setNode(this);
         addCustomOutput(output);
+
+        comboBox.select(0);
     }
 
     @Override

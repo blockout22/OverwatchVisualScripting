@@ -100,7 +100,7 @@ public class ImGuiWindow {
                 lastMenuAction = null;
             }
 
-            if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize))
+            if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
                 ImGui.text("Script Name");
                 if(ImGui.inputText("##", inputFileName)){
@@ -126,7 +126,7 @@ public class ImGuiWindow {
                 ImGui.endPopup();
             }
 
-            if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize))
+            if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
                 ImGui.text("Open Script");
 
