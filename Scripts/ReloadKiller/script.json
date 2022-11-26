@@ -1,10 +1,10 @@
 {
   "saveSettings": {
-    "modeName": "null",
-    "description": "null",
-    "maxT1Players": 0,
-    "maxT2Players": 0,
-    "maxFFAPlayers": 0,
+    "modeName": "Reload Killer",
+    "description": "Kills the player if they press the reload button",
+    "maxT1Players": 5,
+    "maxT2Players": 5,
+    "maxFFAPlayers": 2,
     "assaultMode": false,
     "controlMode": true,
     "escortMode": true,
@@ -18,6 +18,7 @@
     "practiceRangeMode": false,
     "skirmishMode": false
   },
+  "variables": [],
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeWait",

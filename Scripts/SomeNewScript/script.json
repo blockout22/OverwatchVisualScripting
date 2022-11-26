@@ -2,9 +2,9 @@
   "saveSettings": {
     "modeName": "New Mode Name",
     "description": "Description of Game Mode",
-    "maxT1Players": 0,
-    "maxT2Players": 0,
-    "maxFFAPlayers": 0,
+    "maxT1Players": 5,
+    "maxT2Players": 5,
+    "maxFFAPlayers": 2,
     "assaultMode": true,
     "controlMode": true,
     "escortMode": true,
@@ -18,7 +18,130 @@
     "practiceRangeMode": false,
     "skirmishMode": false
   },
+  "globalVariables": [
+    "0:GlobalVar"
+  ],
+  "playerVariables": [
+    "0:TargetVar",
+    "0:VarName",
+    "0:SecondVar"
+  ],
   "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 160.0,
+      "y": 272.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1028,
+          "type": "ovs.graph.pin.PinString",
+          "value": "",
+          "connectedTo": -1
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1029,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1023
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 111.0,
+      "y": 425.0,
+      "extraData": [
+        "Location:Top"
+      ],
+      "inputPins": [
+        {
+          "ID": 1030,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Top\")",
+          "connectedTo": 1038
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1031,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1032
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeActionList",
+      "nodeName": "Action List",
+      "x": 347.0,
+      "y": 474.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1032,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1031
+        },
+        {
+          "ID": 1034,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1036
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1033,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1024
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 120.0,
+      "y": 569.0,
+      "extraData": [
+        "Location:Right"
+      ],
+      "inputPins": [
+        {
+          "ID": 1035,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Right\")",
+          "connectedTo": 1042
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1036,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1034
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGetVariable",
+      "nodeName": "Get Variable",
+      "x": -127.0,
+      "y": 254.0,
+      "extraData": [
+        "Var:2"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1070,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": -1
+        }
+      ]
+    },
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
@@ -138,104 +261,6 @@
           "ID": 1027,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 1022
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": 160.0,
-      "y": 272.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1028,
-          "type": "ovs.graph.pin.PinString",
-          "value": "",
-          "connectedTo": -1
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1029,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1023
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCreateHudText",
-      "nodeName": "Create Hud Text",
-      "x": 111.0,
-      "y": 425.0,
-      "extraData": [
-        "Location:Top"
-      ],
-      "inputPins": [
-        {
-          "ID": 1030,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"Top\")",
-          "connectedTo": 1038
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1031,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1032
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeActionList",
-      "nodeName": "Action List",
-      "x": 347.0,
-      "y": 474.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1032,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": 1031
-        },
-        {
-          "ID": 1034,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": 1036
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1033,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1024
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCreateHudText",
-      "nodeName": "Create Hud Text",
-      "x": 120.0,
-      "y": 569.0,
-      "extraData": [
-        "Location:Right"
-      ],
-      "inputPins": [
-        {
-          "ID": 1035,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"Right\")",
-          "connectedTo": 1042
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1036,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1034
         }
       ]
     }

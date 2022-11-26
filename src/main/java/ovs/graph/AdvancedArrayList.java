@@ -22,6 +22,17 @@ public class AdvancedArrayList<E> {
         }
     }
 
+    public ArrayList<E> getList()
+    {
+        return list;
+    }
+
+    public void triggerOnChanged(){
+        for (int i = 0; i < changedListener.size(); i++) {
+            changedListener.get(i).onChanged();
+        }
+    }
+
     public void addListChangedListener(ListChangedListener listChangedListener){
         this.changedListener.add(listChangedListener);
     }

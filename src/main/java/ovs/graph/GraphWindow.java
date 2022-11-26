@@ -140,6 +140,9 @@ public class GraphWindow {
                 }
             }
         });
+
+        graph.playerVariables.triggerOnChanged();
+        graph.globalVariables.triggerOnChanged();
     }
 
     public void setFileName(String name){

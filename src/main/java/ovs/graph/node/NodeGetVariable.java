@@ -52,6 +52,31 @@ public class NodeGetVariable extends Node{
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        //TODO get variable class and save ID and type
+        getExtraSaveData().add("Var:" + comboBox.getSelectedIndex());
+    }
+
+    @Override
+    public void onLoaded() {
+        //Populate combox to allow selection of saved variables
+        comboBox.clear();
+        for (int i = 0; i < getGraph().globalVariables.size(); i++) {
+            comboBox.addOption("Global: " + getGraph().globalVariables.get(i).name);
+        }
+
+        for (int i = 0; i < getGraph().playerVariables.size(); i++) {
+            comboBox.addOption("Player: " + getGraph().playerVariables.get(i).name);
+        }
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Var")){
+                comboBox.select(Integer.valueOf(data.split(":")[1]));
+            }
+        }
+    }
+
+    @Override
     public String getOutput() {
         String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
         return val[0] + "." + val[1];

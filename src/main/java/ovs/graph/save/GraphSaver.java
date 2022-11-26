@@ -7,6 +7,7 @@ import imgui.extension.nodeditor.NodeEditor;
 import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.Settings;
+import ovs.graph.Variable;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
 
@@ -51,6 +52,14 @@ public class GraphSaver {
         graphSave.saveSettings.teamDeathmatchMode = settings.getTeamDeathmatchOnOff();
         graphSave.saveSettings.practiceRangeMode = settings.getPracticeRangeOnOff();
         graphSave.saveSettings.skirmishMode = settings.getSkirmishOnOff();
+
+        for(Variable var : graph.globalVariables.getList()){
+            graphSave.globalVariables.add(var.ID + ":" + var.name);
+        }
+
+        for(Variable var : graph.playerVariables.getList()){
+            graphSave.playerVariables.add(var.ID + ":" + var.name);
+        }
 
 
         for(Node node : graph.getNodes().values()){
@@ -133,6 +142,9 @@ public class GraphSaver {
 
             //Load settings
             settings.setModeName(gs.saveSettings.modeName);
+            settings.setMaxT1Players(gs.saveSettings.maxT1Players);
+            settings.setMaxT2Players(gs.saveSettings.maxT2Players);
+            settings.setMaxFFAPlayers(gs.saveSettings.maxFFAPlayers);
             settings.setDescription(gs.saveSettings.description);
             settings.setAssaultOnOff(gs.saveSettings.assaultMode);
             settings.setControlOnOff(gs.saveSettings.controlMode);
@@ -148,6 +160,24 @@ public class GraphSaver {
             settings.setSkirmishOnOff(gs.saveSettings.skirmishMode);
 
             Graph graph = new Graph();
+
+            for(String var : gs.globalVariables){
+                String[] split = var.split(":");
+                Variable variable = new Variable();
+                variable.type = Variable.Type.GLOBAL;
+                variable.ID = Integer.valueOf(split[0]);
+                variable.name = split[1];
+                graph.globalVariables.add(variable);
+            }
+
+            for(String var : gs.playerVariables){
+                String[] split = var.split(":");
+                Variable variable = new Variable();
+                variable.type = Variable.Type.PLAYER;
+                variable.ID = Integer.valueOf(split[0]);
+                variable.name = split[1];
+                graph.playerVariables.add(variable);
+            }
 
             for (int i = 0; i < gs.nodeSaves.size(); i++) {
                 NodeSave save = gs.nodeSaves.get(i);
@@ -281,16 +311,18 @@ public class GraphSaver {
     private static class GraphSave{
         //Settings
         private SaveSettings saveSettings = new SaveSettings();
+        private ArrayList<String> globalVariables = new ArrayList<>();
+        private ArrayList<String> playerVariables = new ArrayList<>();
         private ArrayList<NodeSave> nodeSaves = new ArrayList<>();
     }
 
     private static class SaveSettings{
-        private String modeName;
-        private String description;
+        private String modeName = "";
+        private String description = "";
 
-        private int maxT1Players;
-        private int maxT2Players;
-        private int maxFFAPlayers;
+        private int maxT1Players = 5;
+        private int maxT2Players = 5;
+        private int maxFFAPlayers = 2;
 
         private boolean assaultMode;
         private boolean controlMode = true;
