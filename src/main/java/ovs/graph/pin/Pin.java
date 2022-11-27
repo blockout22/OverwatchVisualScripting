@@ -23,6 +23,8 @@ public abstract class Pin {
     private PinType pinType;
     private PinData data;
 
+    private boolean canDelete = false;
+
     public Pin()
     {
 
@@ -126,5 +128,13 @@ public abstract class Pin {
         }
 
         return node.getGraph().findPinById(connectedTo);
+    }
+
+    public boolean isCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
     }
 }

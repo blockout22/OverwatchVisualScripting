@@ -435,24 +435,29 @@ public class GraphWindow {
                             }
                         }
                         NodeEditor.endDelete();
-
-
                         NodeEditor.suspend();
 
-                        //Handle in node popups
-                        Popup popup = PopupHandler.currentPopup;
-                        if(popup != null){
-                            ImGui.setNextWindowPos(cursorPos.x, cursorPos.y + 5, ImGuiCond.Appearing);
-                            if(ImGui.isPopupOpen(popup.id.toString())){
-                                if(ImGui.beginPopup(popup.id.toString())){
-                                    if(popup.show()){
-                                        PopupHandler.remove(popup);
+                        final long pinWithContextMenu = NodeEditor.getPinWithContextMenu();
+                        if (pinWithContextMenu != -1) {
+                            ImGui.openPopup("pin_menu" + id);
+                            ImGui.getStateStorage().setInt(ImGui.getID("node_pin_id"), (int) pinWithContextMenu);
+                        }
+
+                        if(ImGui.isPopupOpen("pin_menu" + id)){
+                            final int targetPin = ImGui.getStateStorage().getInt(ImGui.getID("node_pin_id"));
+                            Pin pin = graph.findPinById(targetPin);
+                            if(pin.isCanDelete()){
+                                if(ImGui.beginPopup("pin_menu" + id)){
+                                    if(ImGui.menuItem("Delete Pin")){
+                                        pin.getNode().removePinById(targetPin);
                                         ImGui.closeCurrentPopup();
                                     }
                                 }
                                 ImGui.endPopup();
                             }
                         }
+
+
 
                         if (NodeEditor.showBackgroundContextMenu()) {
                             ImGui.openPopup("context_menu" + id);
@@ -492,6 +497,21 @@ public class GraphWindow {
                                     }
                                 }
 
+                                ImGui.endPopup();
+                            }
+                        }
+
+                        //Handle in node popups
+                        Popup popup = PopupHandler.currentPopup;
+                        if(popup != null){
+                            ImGui.setNextWindowPos(cursorPos.x, cursorPos.y + 5, ImGuiCond.Appearing);
+                            if(ImGui.isPopupOpen(popup.id.toString())){
+                                if(ImGui.beginPopup(popup.id.toString())){
+                                    if(popup.show()){
+                                        PopupHandler.remove(popup);
+                                        ImGui.closeCurrentPopup();
+                                    }
+                                }
                                 ImGui.endPopup();
                             }
                         }

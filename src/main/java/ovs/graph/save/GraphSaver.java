@@ -83,6 +83,7 @@ public class GraphSaver {
                 pinSave.ID = inputs.getID();
                 pinSave.type = inputs.getClass().getName();
                 pinSave.connectedTo = inputs.connectedTo;
+                pinSave.canDelete = inputs.isCanDelete();
 
                 if(inputs.getData() != null){
                     if(inputs.getData().getValue() != null){
@@ -97,6 +98,7 @@ public class GraphSaver {
                 PinSave pinSave = new PinSave();
                 pinSave.ID = outputs.getID();
                 pinSave.type = outputs.getClass().getName();
+                pinSave.canDelete = outputs.isCanDelete();
 
                 pinSave.connectedTo = outputs.connectedTo;
 
@@ -232,6 +234,7 @@ public class GraphSaver {
 //                            int id = Graph.getNextAvailablePinID();
                             Pin pin = (Pin) classNode.getDeclaredConstructor().newInstance();
                             pin.setNode(node);
+                            pin.setCanDelete(save.inputPins.get(j).canDelete);
 
 //                            pin.setCanDelete(true);
                             node.inputPins.add(pin);
@@ -267,8 +270,9 @@ public class GraphSaver {
 
                             Pin pin = (Pin) classNode.getDeclaredConstructor().newInstance();
                             pin.setNode(node);
+                            pin.setCanDelete(save.outputPins.get(i).canDelete);
 
-//                            pin.setCanDelete(true);
+                            pin.setCanDelete(true);
                             node.outputPins.add(pin);
                         }
 
@@ -343,6 +347,7 @@ public class GraphSaver {
         private String type;
         private String value;
         private Integer connectedTo;
+        private boolean canDelete;
     }
 
 

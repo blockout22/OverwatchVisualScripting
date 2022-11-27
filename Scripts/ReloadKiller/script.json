@@ -18,7 +18,8 @@
     "practiceRangeMode": false,
     "skirmishMode": false
   },
-  "variables": [],
+  "globalVariables": [],
+  "playerVariables": [],
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeWait",
@@ -31,48 +32,18 @@
           "ID": 1096,
           "type": "ovs.graph.pin.PinFloat",
           "value": "0.1",
-          "connectedTo": -1
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1097,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1027
+          "connectedTo": 1127,
+          "canDelete": false
         }
       ]
-    },
-    {
-      "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Rule",
-      "x": 1032.0,
-      "y": 193.0,
-      "extraData": [
-        "EventOnGoing:Ongoing - Each Player",
-        "Team:All",
-        "Player:All"
-      ],
-      "inputPins": [
-        {
-          "ID": 1027,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": 1097
-        },
-        {
-          "ID": 1098,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "If(Is Button Held(Event Player, Button(Reload)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\tEnd;",
-          "connectedTo": 1031
-        },
-        {
-          "ID": 1099,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": 1095
-        }
-      ],
-      "outputPins": []
     },
     {
       "className": "ovs.graph.node.NodeIf",
@@ -88,26 +59,30 @@
           "ID": 1028,
           "type": "ovs.graph.pin.PinVar",
           "value": "Is Button Held(Event Player, Button(Reload))",
-          "connectedTo": 1093
+          "connectedTo": 1093,
+          "canDelete": false
         },
         {
           "ID": 1029,
           "type": "ovs.graph.pin.PinVar",
           "value": "True",
-          "connectedTo": 1035
+          "connectedTo": 1035,
+          "canDelete": false
         },
         {
           "ID": 1030,
           "type": "ovs.graph.pin.PinAction",
           "value": "Kill(Event Player, Null);",
-          "connectedTo": 1064
+          "connectedTo": 1064,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1031,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1098
+          "connectedTo": 1131,
+          "canDelete": false
         }
       ]
     },
@@ -122,14 +97,16 @@
           "ID": 1034,
           "type": "ovs.graph.pin.PinBoolean",
           "value": "true",
-          "connectedTo": -1
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1035,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1029
+          "connectedTo": 1029,
+          "canDelete": false
         }
       ]
     },
@@ -144,7 +121,8 @@
         {
           "ID": 1064,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1030
+          "connectedTo": 1030,
+          "canDelete": false
         }
       ]
     },
@@ -161,14 +139,16 @@
           "ID": 1092,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1094
+          "connectedTo": 1094,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1093,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1028
+          "connectedTo": 1028,
+          "canDelete": false
         }
       ]
     },
@@ -183,7 +163,8 @@
         {
           "ID": 1094,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1092
+          "connectedTo": 1092,
+          "canDelete": false
         }
       ]
     },
@@ -198,9 +179,45 @@
         {
           "ID": 1095,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1099
+          "connectedTo": 1132,
+          "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 984.0,
+      "y": 97.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 1127,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1097,
+          "canDelete": false
+        },
+        {
+          "ID": 1131,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "If(Is Button Held(Event Player, Button(Reload)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\tEnd;",
+          "connectedTo": 1031,
+          "canDelete": true
+        },
+        {
+          "ID": 1132,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 1095,
+          "canDelete": true
+        }
+      ],
+      "outputPins": []
     }
   ]
 }
