@@ -103,6 +103,7 @@ public class GraphWindow {
         addNodeToList(NodeWhile.class);
         addNodeToList(NodeRespawn.class);
         addNodeToList(NodeTeleport.class);
+        addNodeToList(NodeVector.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
