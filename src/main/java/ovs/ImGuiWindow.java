@@ -4,6 +4,7 @@ import imgui.*;
 import imgui.extension.imnodes.ImNodes;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiStyleVar;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImString;
@@ -98,6 +99,8 @@ public class ImGuiWindow {
                 lastMenuAction = null;
             }
 
+            tipsWindow();
+
             if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
                 ImGui.text("Script Name");
@@ -166,6 +169,16 @@ public class ImGuiWindow {
             ImGui.renderPlatformWindowsDefault();
             GLFW.glfwMakeContextCurrent(backupWindowPtr);
         }
+    }
+
+    private void tipsWindow() {
+        ImGui.setNextWindowSize(250, 250, ImGuiCond.Once);
+        if(ImGui.begin("Tips",   NoMove | NoTitleBar | NoResize)){
+            ImGui.textWrapped("You change the rule name by double clicking on the node title");
+            ImGui.separator();
+            ImGui.textWrapped("You can search for a node in the right click menu");
+        }
+        ImGui.end();
     }
 
     public void createMainMenuBar(){
