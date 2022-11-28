@@ -101,6 +101,8 @@ public class GraphWindow {
         addNodeToList(NodeRule.class);
         addNodeToList(NodeWait.class);
         addNodeToList(NodeWhile.class);
+        addNodeToList(NodeRespawn.class);
+        addNodeToList(NodeTeleport.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -158,7 +160,7 @@ public class GraphWindow {
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
 
-        if(ImGui.begin("Graph window", closable)) {
+        if(ImGui.begin(fileName + "##" + id, closable)) {
 
             if(!closable.get())
             {

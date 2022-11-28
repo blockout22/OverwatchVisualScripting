@@ -1,31 +1,30 @@
 package ovs.graph.node;
 
-import imgui.type.ImFloat;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinFloat;
+import ovs.graph.pin.PinVar;
 
-public class NodeWait extends Node{
+public class NodeTeleport extends Node{
 
-    PinFloat inputPin;
-    PinAction outputPin;
+    //who to teleport
+    PinVar inputPin = new PinVar();
+    //Where to teleport inputPin
+    PinVar inputPin2 = new PinVar();
+    PinAction outputPin = new PinAction();
 
-    PinData<ImFloat> data;
-
-    public NodeWait(Graph graph){
+    public NodeTeleport(Graph graph) {
         super(graph);
-        setName("Wait");
+        setName("Teleport");
 
-        inputPin = new PinFloat();
         inputPin.setNode(this);
         addCustomInput(inputPin);
 
-        data = inputPin.getData();
+        inputPin2.setNode(this);
+        addCustomInput(inputPin2);
 
-        outputPin = new PinAction();
         outputPin.setNode(this);
         addCustomOutput(outputPin);
     }
@@ -33,9 +32,11 @@ public class NodeWait extends Node{
     @Override
     public void execute() {
         PinData<ImString> inputData = inputPin.getData();
+        PinData<ImString> inputData2 = inputPin2.getData();
         PinData<ImString> outputData = outputPin.getData();
 
-        if(inputPin.isConnected()){
+        if(inputPin.isConnected())
+        {
             Pin connectedPin = inputPin.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
@@ -43,7 +44,16 @@ public class NodeWait extends Node{
             inputData.getValue().set(connectedData.getValue().get());
         }
 
-        outputData.getValue().set("Wait(" + data.getValue() + ", Ignore Condition);");
+        if(inputPin2.isConnected())
+        {
+            Pin connectedPin = inputPin2.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+
+            inputData2.getValue().set(connectedData.getValue().get());
+        }
+
+        outputData.getValue().set("Teleport(" + inputData.getValue().get() + ", " + inputData2.getValue().get() + ");");
     }
 
     @Override
