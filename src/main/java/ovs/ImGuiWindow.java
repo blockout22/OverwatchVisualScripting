@@ -85,7 +85,7 @@ public class ImGuiWindow {
             if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
                 ImGui.setCursorScreenPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
                 //fill screen widget here to enable snapping on viewport it's self
-                ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight, NoResize | NoScrollbar);
+                ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - 50, NoResize | NoScrollbar);
             }
             ImGui.end();
 
@@ -99,7 +99,7 @@ public class ImGuiWindow {
                 lastMenuAction = null;
             }
 
-            tipsWindow();
+//            tipsWindow();
 
             if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
@@ -173,7 +173,7 @@ public class ImGuiWindow {
 
     private void tipsWindow() {
         ImGui.setNextWindowSize(250, 250, ImGuiCond.Once);
-        if(ImGui.begin("Tips",   NoMove | NoTitleBar | NoResize)){
+        if(ImGui.begin("Tips",   NoBringToFrontOnFocus)){
             ImGui.textWrapped("You change the rule name by double clicking on the node title");
             ImGui.separator();
             ImGui.textWrapped("You can search for a node in the right click menu");
