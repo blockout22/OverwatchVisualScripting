@@ -10,7 +10,7 @@ import ovs.graph.pin.PinVar;
 public class NodeIf extends Node{
 
     ComboBox ifTypeCombo = new ComboBox();
-    ComboBox box = new ComboBox();
+    ComboBox conditionBox = new ComboBox();
 
     PinVar leftPin = new PinVar();
     PinVar rightPin = new PinVar();
@@ -31,14 +31,14 @@ public class NodeIf extends Node{
 
         ifTypeCombo.select(0);
 
-        box.addOption("<");
-        box.addOption(">");
-        box.addOption("<=");
-        box.addOption(">=");
-        box.addOption("!=");
-        box.addOption("==");
+        conditionBox.addOption("<");
+        conditionBox.addOption(">");
+        conditionBox.addOption("<=");
+        conditionBox.addOption(">=");
+        conditionBox.addOption("!=");
+        conditionBox.addOption("==");
 
-        box.select(5);
+        conditionBox.select(5);
 
         leftPin.setNode(this);
         addCustomInput(leftPin);
@@ -57,7 +57,7 @@ public class NodeIf extends Node{
     public void onSaved() {
         getExtraSaveData().clear();
         getExtraSaveData().add("Type:" + ifTypeCombo.getSelectedValue());
-        getExtraSaveData().add("Condition:" + box.getSelectedValue());
+        getExtraSaveData().add("Condition:" + conditionBox.getSelectedValue());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class NodeIf extends Node{
             }
             if(data.startsWith("Condition"))
             {
-                box.selectValue(data.split(":")[1]);
+                conditionBox.selectValue(data.split(":")[1]);
             }
         }
     }
@@ -78,6 +78,18 @@ public class NodeIf extends Node{
         PinData<ImString> dataLeft = leftPin.getData();
         PinData<ImString> dataRight = rightPin.getData();
         PinData<ImString> outputData = output.getData();
+
+        //TODO Else If isn't setup to work yet
+
+        //when Loop If is selected the If statement should do at the end
+        if(leftPin.isConnected() && rightPin.isConnected() && ifTypeCombo.getSelectedValue() == "Loop If"){
+            dataLeft.getValue().set(((ImString)leftPin.getConnectedPin().getData().getValue()).get());
+            dataRight.getValue().set(((ImString)rightPin.getConnectedPin().getData().getValue()).get());
+
+            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + dataLeft.getValue().get() + " " + conditionBox.getSelectedValue() + " " + dataRight.getValue().get() + ");");
+            return;
+        }
+
         if(leftPin.isConnected() && rightPin.isConnected() && ifActionPin.isConnected()){
             PinData<ImString> ruleData = ifActionPin.getData();
 
@@ -91,7 +103,7 @@ public class NodeIf extends Node{
                 out += "\t\t\t" + lines[i] + "\n";
             }
 
-            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
+            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + dataLeft.getValue().get() + " " + conditionBox.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
                     out +
                     "\t\tEnd;");
         }else{
@@ -108,6 +120,6 @@ public class NodeIf extends Node{
     @Override
     public void UI() {
         ifTypeCombo.show();
-        box.show();
+        conditionBox.show();
     }
 }
