@@ -25,6 +25,8 @@ import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GraphWindow {
     private ImGuiWindow imGuiWindow;
@@ -85,20 +87,20 @@ public class GraphWindow {
         context = new NodeEditorContext(config);
 
         //Add Nodes to list (this will also auto-populate context menu)
-        addNodeToList(NodeGetVariable.class);
-        addNodeToList(NodeSetVariable.class);
-        addNodeToList(NodeRule.class);
         addNodeToList(NodeActionList.class);
-        addNodeToList(NodeCreateHudText.class);
-        addNodeToList(NodeWait.class);
-        addNodeToList(NodeCustomString.class);
-        addNodeToList(NodeIf.class);
-        addNodeToList(NodeLoop.class);
-        addNodeToList(NodeWhile.class);
-        addNodeToList(NodeEventPlayer.class);
-        addNodeToList(NodeIsButtonDown.class);
         addNodeToList(NodeBoolean.class);
+        addNodeToList(NodeCreateHudText.class);
+        addNodeToList(NodeCustomString.class);
+        addNodeToList(NodeEventPlayer.class);
+        addNodeToList(NodeGetVariable.class);
+        addNodeToList(NodeIf.class);
+        addNodeToList(NodeIsButtonDown.class);
+        addNodeToList(NodeSetVariable.class);
         addNodeToList(NodeKill.class);
+        addNodeToList(NodeLoop.class);
+        addNodeToList(NodeRule.class);
+        addNodeToList(NodeWait.class);
+        addNodeToList(NodeWhile.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -403,6 +405,7 @@ public class GraphWindow {
                                 lastHoldingPinID = holdingPinID;
                                 holdingPinID = -1;
                                 curSelectedPinDataType = null;
+
 //                            System.out.println(LINKA.get() + " : " + LINKB.get());
 //                                setNextWindowPos(cursorPos.x, cursorPos.y, ImGuiCond.Always);
                                 ImGui.setNextWindowPos(cursorPos.x, cursorPos.y, ImGuiCond.Appearing);
@@ -456,8 +459,6 @@ public class GraphWindow {
                                 ImGui.endPopup();
                             }
                         }
-
-
 
                         if (NodeEditor.showBackgroundContextMenu()) {
                             ImGui.openPopup("context_menu" + id);
@@ -614,6 +615,12 @@ public class GraphWindow {
 
     public void addNodeToList(Class<? extends Node> node){
         nodeList.add(node);
+        Collections.sort(nodeList, new Comparator<Class<? extends Node>>() {
+            @Override
+            public int compare(Class<? extends Node> o1, Class<? extends Node> o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
     }
 
     private String compile(){

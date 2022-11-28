@@ -33,6 +33,7 @@ public class NodeActionList extends Node{
             public void onClicked() {
                 Pin pin = new PinAction();
                 pin.setNode(self);
+                pin.setCanDelete(true);
                 addCustomInput(pin);
             }
         });
