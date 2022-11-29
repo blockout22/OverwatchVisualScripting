@@ -33,7 +33,7 @@ public class GraphWindow {
     private GlfwWindow glfwWindow;
     private final ImBoolean closable = new ImBoolean(true);
 
-    private String id;
+    public String id;
     private String fileName = "";
 
     private NodeEditorContext context;
@@ -161,7 +161,7 @@ public class GraphWindow {
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
 
-        if(ImGui.begin(fileName + "##" + id, closable)) {
+        if(ImGui.begin(fileName, closable)) {
 
             if(!closable.get())
             {
@@ -682,5 +682,9 @@ public class GraphWindow {
 
     private String handleNode(Node node){
         return node.getOutput();
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

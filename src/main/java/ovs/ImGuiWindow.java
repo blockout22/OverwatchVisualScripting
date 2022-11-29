@@ -77,6 +77,7 @@ public class ImGuiWindow {
 
             createMainMenuBar();
             float menuBarHeight = 20f;
+            float taskbarHeight = 50f;
             ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight(), ImGuiCond.Always);
             ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY(), ImGuiCond.Always);
             ImGui.setNextWindowViewport(ImGui.getMainViewport().getID());
@@ -85,7 +86,7 @@ public class ImGuiWindow {
             if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
                 ImGui.setCursorScreenPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
                 //fill screen widget here to enable snapping on viewport it's self
-                ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - 50, NoResize | NoScrollbar);
+                ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, NoResize | NoScrollbar);
             }
             ImGui.end();
 
@@ -154,6 +155,20 @@ public class ImGuiWindow {
             for(GraphWindow graphWindow : graphWindows){
                 graphWindow.show(menuBarHeight);
             }
+
+            ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + glfwWindow.getHeight() - taskbarHeight, ImGuiCond.Always);
+            ImGui.setNextWindowSize(glfwWindow.getWidth(), taskbarHeight, ImGuiCond.Always);
+            ImGui.begin("Taskbar", NoBackground  | NoDocking | NoScrollbar | NoTitleBar);
+            {
+                for (GraphWindow graphWindow : graphWindows){
+                    if(ImGui.button(graphWindow.getFileName()))
+                    {
+                        ImGui.setWindowFocus(graphWindow.getFileName());
+                    }
+                    ImGui.sameLine();
+                }
+            }
+            ImGui.end();
 
             for (int i = 0; i < queueRemoveGraphWindow.size(); i++) {
                 graphWindows.remove(queueRemoveGraphWindow.get(i));
