@@ -320,6 +320,152 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 1144.0,
+      "y": 894.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 1241,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "If(Current Map \u003d\u003d Map(King\u0027s Row));\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Hello Map\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
+          "connectedTo": 1247,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 735.0,
+      "y": 1062.0,
+      "extraData": [
+        "Location:Left"
+      ],
+      "inputPins": [
+        {
+          "ID": 1242,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Hello Map\")",
+          "connectedTo": 1249,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1243,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1246,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 968.0,
+      "y": 914.0,
+      "extraData": [
+        "Type:If",
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1244,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Current Map",
+          "connectedTo": 1250,
+          "canDelete": false
+        },
+        {
+          "ID": 1245,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Map(King\u0027s Row)",
+          "connectedTo": 1251,
+          "canDelete": false
+        },
+        {
+          "ID": 1246,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create HUD Text(All Players(All Teams), Null, Custom String(\"Hello Map\"), Null, Left, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
+          "connectedTo": 1243,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1247,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1241,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 472.0,
+      "y": 1165.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1248,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Hello Map",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1249,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1242,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCurrentMap",
+      "nodeName": "Current Map",
+      "x": 651.0,
+      "y": 817.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1250,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1244,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeMap",
+      "nodeName": "Map",
+      "x": 577.0,
+      "y": 938.0,
+      "extraData": [
+        "Map:King\u0027s Row"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1251,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1245,
+          "canDelete": false
+        }
+      ]
     }
   ]
 }
