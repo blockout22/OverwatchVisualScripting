@@ -106,6 +106,7 @@ public class GraphWindow {
         addNodeToList(NodeVector.class);
         addNodeToList(NodeCurrentMap.class);
         addNodeToList(NodeMap.class);
+        addNodeToList(NodeHostPlayer.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

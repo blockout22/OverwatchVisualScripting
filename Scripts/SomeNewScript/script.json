@@ -19,9 +19,13 @@
     "skirmishMode": false
   },
   "globalVariables": [
+    "0:GlobalVar",
     "0:GlobalVar"
   ],
   "playerVariables": [
+    "0:TargetVar",
+    "1:VarName",
+    "2:SecondVar",
     "0:TargetVar",
     "1:VarName",
     "2:SecondVar"
@@ -30,22 +34,24 @@
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
-      "x": 160.0,
-      "y": 272.0,
+      "x": 208.0,
+      "y": 256.0,
       "extraData": [],
       "inputPins": [
         {
           "ID": 1028,
           "type": "ovs.graph.pin.PinString",
-          "value": "",
-          "connectedTo": -1
+          "value": "Blockout22",
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1029,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1023
+          "connectedTo": 1117,
+          "canDelete": false
         }
       ]
     },
@@ -62,14 +68,37 @@
           "ID": 1030,
           "type": "ovs.graph.pin.PinVar",
           "value": "Custom String(\"Top\")",
-          "connectedTo": 1038
+          "connectedTo": 1038,
+          "canDelete": false
+        },
+        {
+          "ID": 1003,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1004,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1005,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "5.0",
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1031,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1032
+          "connectedTo": 1032,
+          "canDelete": false
         }
       ]
     },
@@ -84,28 +113,31 @@
           "ID": 1032,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1031
+          "connectedTo": 1031,
+          "canDelete": false
         },
         {
           "ID": 1034,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1036
+          "connectedTo": 1036,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1033,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1024
+          "connectedTo": 1118,
+          "canDelete": false
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": 120.0,
-      "y": 569.0,
+      "x": 104.0,
+      "y": 617.0,
       "extraData": [
         "Location:Right"
       ],
@@ -114,31 +146,37 @@
           "ID": 1035,
           "type": "ovs.graph.pin.PinVar",
           "value": "Custom String(\"Right\")",
-          "connectedTo": 1042
+          "connectedTo": 1042,
+          "canDelete": false
+        },
+        {
+          "ID": 1010,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1011,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1012,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "5.0",
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1036,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1034
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeGetVariable",
-      "nodeName": "Get Variable",
-      "x": -127.0,
-      "y": 254.0,
-      "extraData": [
-        "Var:2"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 1070,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": -1
+          "connectedTo": 1034,
+          "canDelete": false
         }
       ]
     },
@@ -153,14 +191,16 @@
           "ID": 1037,
           "type": "ovs.graph.pin.PinString",
           "value": "Top",
-          "connectedTo": -1
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1038,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1030
+          "connectedTo": 1030,
+          "canDelete": false
         }
       ]
     },
@@ -175,14 +215,16 @@
           "ID": 1041,
           "type": "ovs.graph.pin.PinString",
           "value": "Right",
-          "connectedTo": -1
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
           "ID": 1042,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1035
+          "connectedTo": 1035,
+          "canDelete": false
         }
       ]
     },
@@ -200,67 +242,67 @@
         {
           "ID": 1021,
           "type": "ovs.graph.pin.PinAction",
-          "value": "While(Custom String(\"\") \u003e Custom String(\"\"));\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Top\"), Null, Top, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Right\"), Null, Right, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
-          "connectedTo": 1025
+          "value": "If(Host Player \u003d\u003d Custom String(\"Blockout22\"));\n\t\t\tCreate HUD Text(All Players(All Teams),Custom String(\"Top\"), Null, Null, Top, 5.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\tCreate HUD Text(All Players(All Teams),Custom String(\"Right\"), Null, Null, Right, 5.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
+          "connectedTo": 1119,
+          "canDelete": false
         }
       ],
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeWhile",
-      "nodeName": "While",
-      "x": 549.0,
-      "y": 204.0,
-      "extraData": [
-        "Condition:\u003e"
-      ],
-      "inputPins": [
-        {
-          "ID": 1022,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"\")",
-          "connectedTo": 1027
-        },
-        {
-          "ID": 1023,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"\")",
-          "connectedTo": 1029
-        },
-        {
-          "ID": 1024,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(All Players(All Teams), Null, Custom String(\"Top\"), Null, Top, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(All Players(All Teams), Null, Custom String(\"Right\"), Null, Right, -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
-          "connectedTo": 1033
-        }
-      ],
+      "className": "ovs.graph.node.NodeHostPlayer",
+      "nodeName": "Host Player",
+      "x": 235.0,
+      "y": 177.0,
+      "extraData": [],
+      "inputPins": [],
       "outputPins": [
         {
-          "ID": 1025,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1021
+          "ID": 1115,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1116,
+          "canDelete": false
         }
       ]
     },
     {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": 152.0,
-      "y": 144.0,
-      "extraData": [],
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 536.0,
+      "y": 117.0,
+      "extraData": [
+        "Type:If",
+        "Condition:\u003d\u003d"
+      ],
       "inputPins": [
         {
-          "ID": 1026,
-          "type": "ovs.graph.pin.PinString",
-          "value": "",
-          "connectedTo": -1
+          "ID": 1116,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Host Player",
+          "connectedTo": 1115,
+          "canDelete": false
+        },
+        {
+          "ID": 1117,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Blockout22\")",
+          "connectedTo": 1029,
+          "canDelete": false
+        },
+        {
+          "ID": 1118,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create HUD Text(All Players(All Teams),Custom String(\"Top\"), Null, Null, Top, 5.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(All Players(All Teams),Custom String(\"Right\"), Null, Null, Right, 5.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "connectedTo": 1033,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 1027,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1022
+          "ID": 1119,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1021,
+          "canDelete": false
         }
       ]
     }
