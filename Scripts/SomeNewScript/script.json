@@ -23,8 +23,8 @@
   ],
   "playerVariables": [
     "0:TargetVar",
-    "0:VarName",
-    "0:SecondVar"
+    "1:VarName",
+    "2:SecondVar"
   ],
   "nodeSaves": [
     {

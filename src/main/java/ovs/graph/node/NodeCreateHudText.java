@@ -1,16 +1,23 @@
 package ovs.graph.node;
 
+import imgui.type.ImFloat;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
+import ovs.graph.pin.PinFloat;
 import ovs.graph.pin.PinVar;
 
 public class NodeCreateHudText extends Node{
 
-    PinVar input = new PinVar();
+    PinVar inputVal1 = new PinVar();
+    PinVar inputVal2 = new PinVar();
+    PinVar inputVal3 = new PinVar();
+
+    PinFloat pinSortOrder = new PinFloat();
+
     PinAction outputPin = new PinAction();
 
     ComboBox comboBox = new ComboBox();
@@ -19,9 +26,17 @@ public class NodeCreateHudText extends Node{
         super(graph);
         setName("Create Hud Text");
 
+        inputVal1.setNode(this);
+        addCustomInput(inputVal1);
 
-        input.setNode(this);
-        addCustomInput(input);
+        inputVal2.setNode(this);
+        addCustomInput(inputVal2);
+
+        inputVal3.setNode(this);
+        addCustomInput(inputVal3);
+
+        pinSortOrder.setNode(this);
+        addCustomInput(pinSortOrder);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
@@ -51,17 +66,50 @@ public class NodeCreateHudText extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> inputData = input.getData();
+        PinData<ImString> inputData1 = inputVal1.getData();
+        PinData<ImString> inputData2 = inputVal2.getData();
+        PinData<ImString> inputData3 = inputVal3.getData();
+        PinData<ImFloat> sortOrderData = pinSortOrder.getData();
+
         PinData<ImString> outputData = outputPin.getData();
 
-        if(input.isConnected()){
-            Pin connectedPin = input.getConnectedPin();
+        if(inputVal1.isConnected()){
+            Pin connectedPin = inputVal1.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
-            inputData.getValue().set(connectedData.getValue().get());
+            inputData1.getValue().set(connectedData.getValue().get());
+        }else{
+            inputData1.getValue().set("Null");
         }
+
+        if(inputVal2.isConnected()){
+            Pin connectedPin = inputVal2.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            inputData2.getValue().set(connectedData.getValue().get());
+        }else{
+            inputData2.getValue().set("Null");
+        }
+
+        if(inputVal3.isConnected()){
+            Pin connectedPin = inputVal3.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            inputData3.getValue().set(connectedData.getValue().get());
+        }else{
+            inputData3.getValue().set("Null");
+        }
+
+        if(pinSortOrder.isConnected()){
+            Pin connectedPin = pinSortOrder.getConnectedPin();
+
+            PinData<ImFloat> connectedData = connectedPin.getData();
+            sortOrderData.getValue().set(connectedData.getValue().get());
+        }
+
+
         String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(All Players(All Teams), Null, " + inputData.getValue().get() + ", Null, " + location + ", -50, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
+        String output = "Create HUD Text(All Players(All Teams)," + inputData1.getValue().get() + ", " + inputData2.getValue().get() + ", " + inputData3.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
         outputData.getValue().set(output);
     }
 
