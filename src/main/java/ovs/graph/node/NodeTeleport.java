@@ -20,9 +20,11 @@ public class NodeTeleport extends Node{
         setName("Teleport");
 
         inputPin.setNode(this);
+        inputPin.setName("Player");
         addCustomInput(inputPin);
 
         inputPin2.setNode(this);
+        inputPin2.setName("Position");
         addCustomInput(inputPin2);
 
         outputPin.setNode(this);
