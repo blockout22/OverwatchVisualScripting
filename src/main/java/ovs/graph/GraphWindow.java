@@ -112,6 +112,7 @@ public class GraphWindow {
         addNodeToList(NodeButton.class);
         addNodeToList(NodeFloat.class);
         addNodeToList(NodeDistanceBetween.class);
+        addNodeToList(NodeSetMoveSpeed.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
