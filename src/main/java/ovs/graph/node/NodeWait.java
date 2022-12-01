@@ -4,11 +4,14 @@ import imgui.type.ImFloat;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinFloat;
 
 public class NodeWait extends Node{
+
+    ComboBox waitBehavior = new ComboBox();
 
     PinFloat inputPin;
     PinAction outputPin;
@@ -19,6 +22,12 @@ public class NodeWait extends Node{
         super(graph);
         setName("Wait");
 
+        waitBehavior.addOption("Ignore Condition");
+        waitBehavior.addOption("Abort When False");
+        waitBehavior.addOption("Restart When True");
+
+        waitBehavior.select(0);
+
         inputPin = new PinFloat();
         inputPin.setNode(this);
         addCustomInput(inputPin);
@@ -28,6 +37,21 @@ public class NodeWait extends Node{
         outputPin = new PinAction();
         outputPin.setNode(this);
         addCustomOutput(outputPin);
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("WaitBehavior:" + waitBehavior.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("WaitBehavior")){
+                waitBehavior.selectValue(data.split(":")[1]);
+            }
+        }
     }
 
     @Override
@@ -54,6 +78,6 @@ public class NodeWait extends Node{
 
     @Override
     public void UI() {
-
+        waitBehavior.show();
     }
 }
