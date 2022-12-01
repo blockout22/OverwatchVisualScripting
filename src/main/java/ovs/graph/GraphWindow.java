@@ -110,6 +110,7 @@ public class GraphWindow {
         addNodeToList(NodeSetMaxHealth.class);
         addNodeToList(NodeSetMatchTime.class);
         addNodeToList(NodeButton.class);
+        addNodeToList(NodeFloat.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
