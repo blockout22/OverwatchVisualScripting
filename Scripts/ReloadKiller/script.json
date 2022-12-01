@@ -325,21 +325,21 @@
       "y": 281.0,
       "extraData": [
         "Type:If",
-        "Condition:\u003d\u003d"
+        "Condition:\u003c\u003d"
       ],
       "inputPins": [
         {
           "ID": 1028,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Is Button Held(Event Player, Button(Reload))",
-          "connectedTo": 1093,
+          "value": "Distance Between(Event Player, Vector(-219.758, 1.549, -30.806))",
+          "connectedTo": 1305,
           "canDelete": false
         },
         {
           "ID": 1029,
           "type": "ovs.graph.pin.PinVar",
-          "value": "True",
-          "connectedTo": 1035,
+          "value": "5.0",
+          "connectedTo": 1308,
           "canDelete": false
         },
         {
@@ -362,8 +362,8 @@
     {
       "className": "ovs.graph.node.NodeBoolean",
       "nodeName": "Boolean",
-      "x": 551.0,
-      "y": 384.0,
+      "x": 599.0,
+      "y": 560.0,
       "extraData": [],
       "inputPins": [
         {
@@ -378,7 +378,7 @@
         {
           "ID": 1035,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1029,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -420,7 +420,7 @@
         {
           "ID": 1093,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1028,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -478,7 +478,7 @@
         {
           "ID": 1131,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Is Button Held(Event Player, Button(Reload)) \u003d\u003d True);\n\t\t\tKill(Event Player, Null);\n\t\t\tWait(2.0, Ignore Condition);\n\t\t\tRespawn(Event Player);\n\t\tEnd;",
+          "value": "If(Distance Between(Event Player, Vector(-219.758, 1.549, -30.806)) \u003c\u003d 5.0);\n\t\t\tKill(Event Player, Null);\n\t\t\tWait(2.0, Ignore Condition);\n\t\t\tRespawn(Event Player);\n\t\tEnd;",
           "connectedTo": 1031,
           "canDelete": true
         },
@@ -491,6 +491,101 @@
         }
       ],
       "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeDistanceBetween",
+      "nodeName": "Distance Between",
+      "x": 392.0,
+      "y": 128.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1303,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1309,
+          "canDelete": false
+        },
+        {
+          "ID": 1304,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Vector(-219.758, 1.549, -30.806)",
+          "connectedTo": 1311,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1305,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1028,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": 336.0,
+      "y": 432.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1307,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "5.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1308,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1029,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 84.0,
+      "y": 65.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1309,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1303,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeVector",
+      "nodeName": "Vector",
+      "x": 56.0,
+      "y": 128.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1310,
+          "type": "ovs.graph.pin.PinVector",
+          "value": "ImVec4{x\u003d-219.758, y\u003d1.549, z\u003d-30.806, w\u003d0.0}",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1311,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1304,
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

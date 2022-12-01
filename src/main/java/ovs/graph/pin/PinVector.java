@@ -26,4 +26,19 @@ public class PinVector extends Pin{
         ImGui.popItemWidth();
         return false;
     }
+
+    @Override
+    public void loadValue(String value) {
+        String[] s = value.substring(7, value.length() - 1).replace(" ", "").split(",");
+
+        float x = Float.valueOf(s[0].substring(2));
+        float y = Float.valueOf(s[1].substring(2));;
+        float z = Float.valueOf(s[2].substring(2));;
+        float w = Float.valueOf(s[3].substring(2));;
+
+        data.getValue().set(x, y, z, w);
+        vec3Float[0] = x;
+        vec3Float[1] = y;
+        vec3Float[2] = z;
+    }
 }

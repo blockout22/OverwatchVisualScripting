@@ -35,6 +35,5 @@ public class PinFloat extends Pin{
 
         data.getValue().set(val);
         floatData.set(val);
-        System.out.println(val);
     }
 }
