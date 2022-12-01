@@ -41,9 +41,11 @@ public class NodeIf extends Node{
         conditionBox.select(5);
 
         leftPin.setNode(this);
+        leftPin.setName("Left Condition");
         addCustomInput(leftPin);
 
         rightPin.setNode(this);
+        rightPin.setName("Right Condition");
         addCustomInput(rightPin);
 
         ifActionPin.setNode(this);

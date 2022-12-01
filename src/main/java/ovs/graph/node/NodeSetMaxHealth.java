@@ -21,6 +21,7 @@ public class NodeSetMaxHealth extends Node{
         setName("Set Max Health");
 
         input.setNode(this);
+        input.setName("Player");
         addCustomInput(input);
 
         inputHealth.setNode(this);

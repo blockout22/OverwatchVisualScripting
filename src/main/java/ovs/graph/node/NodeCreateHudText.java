@@ -27,12 +27,15 @@ public class NodeCreateHudText extends Node{
         setName("Create Hud Text");
 
         inputVal1.setNode(this);
+        inputVal1.setName("Header");
         addCustomInput(inputVal1);
 
         inputVal2.setNode(this);
+        inputVal2.setName("Subheader");
         addCustomInput(inputVal2);
 
         inputVal3.setNode(this);
+        inputVal3.setName("Text");
         addCustomInput(inputVal3);
 
         pinSortOrder.setNode(this);
