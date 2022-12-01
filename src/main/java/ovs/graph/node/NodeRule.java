@@ -38,7 +38,14 @@ public class NodeRule extends Node{
         comboEventOnGoing.addOption("Player Dealt Final Blow");
         comboEventOnGoing.addOption("Player Took Damage");
         comboEventOnGoing.addOption("Player Dealt Damage");
+        comboEventOnGoing.addOption("Player Dealt Healing");
+        comboEventOnGoing.addOption("Player Dealt Knockback");
+        comboEventOnGoing.addOption("Player Received Healing");
+        comboEventOnGoing.addOption("Player Received Knockback");
+        comboEventOnGoing.addOption("Player Joined Match");
+        comboEventOnGoing.addOption("Player Left Match");
         comboEventOnGoing.addOption("Player Died");
+        comboEventOnGoing.addOption("Subroutine");
 
         comboTeam.addOption("All");
         comboTeam.addOption("Team 1");
