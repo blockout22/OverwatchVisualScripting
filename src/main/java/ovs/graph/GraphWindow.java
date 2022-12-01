@@ -107,6 +107,7 @@ public class GraphWindow {
         addNodeToList(NodeCurrentMap.class);
         addNodeToList(NodeMap.class);
         addNodeToList(NodeHostPlayer.class);
+        addNodeToList(NodeSetMaxHealth.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
