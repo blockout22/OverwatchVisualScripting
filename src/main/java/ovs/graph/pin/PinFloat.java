@@ -13,7 +13,7 @@ public class PinFloat extends Pin{
     public PinFloat(){
         setData(data);
         setColor(1, 0.5f, 1, 1);
-        data.setValue(new ImFloat(5));
+        data.setValue(new ImFloat(0));
 
         floatData.set(data.getValue().get());
     }
