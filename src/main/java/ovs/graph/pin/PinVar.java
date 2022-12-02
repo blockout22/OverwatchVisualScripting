@@ -7,6 +7,8 @@ public class PinVar extends Pin{
 
     private PinData<ImString> data = new PinData<>();
 
+    //TODO Pin Var can accept my types therefore I should add a custom option to toggle between all data types String, Boolean, Float etc... and display UI element based on type
+    //e.g. scaling a player is a float however it's probably best to use a player variable
     public PinVar(){
         setData(data);
         setColor(1, 0, 0, 1);

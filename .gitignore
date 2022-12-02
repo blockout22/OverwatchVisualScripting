@@ -27,3 +27,4 @@ replay_pid*
 .idea/misc.xml
 .idea/vcs.xml
 .idea/uiDesigner.xml
+target/
