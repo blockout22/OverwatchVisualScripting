@@ -13,6 +13,7 @@ import ovs.graph.GraphWindow;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -66,7 +67,12 @@ public class ImGuiWindow {
         try{
             return Files.readAllBytes(Paths.get(new File(name).toURI()));
         }catch (IOException e){
-            throw new RuntimeException(e);
+            try {
+                InputStream stream = getClass().getResourceAsStream("/" + name);
+                return stream.readAllBytes();
+            }catch (IOException e1) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -128,18 +134,17 @@ public class ImGuiWindow {
                 ImGui.endPopup();
             }
 
-            if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
-            {
+            if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings)) {
                 ImGui.text("Open Script");
 
                 File scripts = new File(Global.SCRIPTS_DIR);
-                for(File file : scripts.listFiles())
-                {
-                    if(ImGui.button(file.getName()))
-                    {
-                        GraphWindow window = new GraphWindow(this, glfwWindow, file.getName());
-                        graphWindows.add(window);
-                        ImGui.closeCurrentPopup();
+                if (scripts.exists()) {
+                    for (File file : scripts.listFiles()) {
+                        if (ImGui.button(file.getName())) {
+                            GraphWindow window = new GraphWindow(this, glfwWindow, file.getName());
+                            graphWindows.add(window);
+                            ImGui.closeCurrentPopup();
+                        }
                     }
                 }
 

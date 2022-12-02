@@ -28,3 +28,6 @@ replay_pid*
 .idea/vcs.xml
 .idea/uiDesigner.xml
 target/
+META-INF/MANIFEST.MF
+Build/
+.idea/artifacts/OverwatchVisualScripting_jar.xml

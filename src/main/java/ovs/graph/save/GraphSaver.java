@@ -199,8 +199,9 @@ public class GraphSaver {
                 }
 
                 if(classNode == null){
-                    System.out.println("Class was null, couldn't load");
-                    return null;
+                    System.out.println("Class was null, couldn't load: " + save.className);
+//                    return null;
+                    continue;
                 }
 
                 Node node = (Node) classNode.getDeclaredConstructor(Graph.class).newInstance(graph);
@@ -218,8 +219,6 @@ public class GraphSaver {
 
             for (int i = 0; i < loaded.length; i++) {
                 Node node = loaded[i];
-
-
 
                 if(node != null){
                     NodeSave save = gs.nodeSaves.get(i);
@@ -253,11 +252,6 @@ public class GraphSaver {
                         if(node.inputPins.get(j).getData() != null){
                             node.inputPins.get(j).loadValue(save.inputPins.get(j).value);
                         }
-
-                        //check and set the pin ID which this Pin is connected to
-                        if(save.inputPins.get(j).connectedTo != -1){
-                            node.inputPins.get(j).connectedTo = save.inputPins.get(j).connectedTo;
-                        }
                     }
 
                     //load output pins
@@ -283,13 +277,45 @@ public class GraphSaver {
                         }
 
                         node.outputPins.get(j).setID(save.outputPins.get(j).ID);
+
+                    }
+                    node.onLoaded();
+
+                    // Load and setup pin connections
+                    for (int j = 0; j < save.inputPins.size(); j++)
+                    {
+                        //check and set the pin ID which this Pin is connected to
+                        int ID = save.inputPins.get(j).connectedTo;
+                        node.inputPins.get(j).connectedTo = ID;
+
+//                        System.out.println(node.inputPins.get(j).connectedTo);
+//                        System.out.println(node.inputPins.get(j).isConnected());
+//                        System.out.println(node.inputPins.get(j).getConnectedPin());
+//
+//                        if(node.inputPins.get(j).getConnectedPin() == null){
+//                            node.inputPins.get(j).connectedTo = -1;
+//                        }
+                    }
+
+                    for (int j = 0; j < save.outputPins.size(); j++)
+                    {
                         if(save.outputPins.get(j).connectedTo != -1){
-                            node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
+//                            if(node.outputPins.get(j).getNode().getGraph().findPinById(save.outputPins.get(j).connectedTo) != null)
+                            {
+                                node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
+//                                System.out.println(node.outputPins.get(j).connectedTo);
+//                                System.out.println(node.outputPins.get(j).isConnected());
+//                                System.out.println(node.outputPins.get(j).getConnectedPin());
+//
+//                                if(node.outputPins.get(j).getConnectedPin() == null){
+//                                    node.outputPins.get(j).connectedTo = -1;
+//                                }
+                            }
                         }
                     }
+
                 }
 
-                node.onLoaded();
             }
 
             return graph;

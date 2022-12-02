@@ -122,7 +122,7 @@ public abstract class Pin {
     }
 
     public boolean isConnected(){
-        return connectedTo != -1;
+        return connectedTo != -1;// && node.getGraph().findPinById(connectedTo) != null;
     }
 
     public Pin getConnectedPin(){
