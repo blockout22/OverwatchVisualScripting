@@ -1,6 +1,5 @@
 package ovs.graph.node;
 
-import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;

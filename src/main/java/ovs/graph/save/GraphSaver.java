@@ -37,6 +37,8 @@ public class GraphSaver {
         }
 
         graphSave.nodeSaves.clear();
+        graphSave.globalVariables.clear();
+        graphSave.playerVariables.clear();
 
         graphSave.saveSettings.modeName = settings.getModeName();
         graphSave.saveSettings.description = settings.getDescription();
