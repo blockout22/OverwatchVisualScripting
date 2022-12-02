@@ -126,6 +126,7 @@ public class Settings {
             if(!practiceRangeOnOff.get()) {
                 output += "\t\tMax Team 2 Players: " + maxT2Players[0] + "\n";
             }
+            output += "\t\tMax FFA Players: " + maxFFAPlayers[0] + "\n";
             output += "\t}\n";
         }
 

@@ -40,6 +40,10 @@ public class GraphSaver {
 
         graphSave.saveSettings.modeName = settings.getModeName();
         graphSave.saveSettings.description = settings.getDescription();
+        graphSave.saveSettings.maxT1Players = settings.getMaxT1Players();
+        graphSave.saveSettings.maxT2Players = settings.getMaxT2Players();
+        graphSave.saveSettings.maxFFAPlayers = settings.getMaxFFAPlayers();
+
         graphSave.saveSettings.assaultMode = settings.getAssaultOnOff();
         graphSave.saveSettings.controlMode = settings.getControlOnOff();
         graphSave.saveSettings.escortMode = settings.getEscortOnOff();
@@ -144,10 +148,10 @@ public class GraphSaver {
 
             //Load settings
             settings.setModeName(gs.saveSettings.modeName);
+            settings.setDescription(gs.saveSettings.description);
             settings.setMaxT1Players(gs.saveSettings.maxT1Players);
             settings.setMaxT2Players(gs.saveSettings.maxT2Players);
             settings.setMaxFFAPlayers(gs.saveSettings.maxFFAPlayers);
-            settings.setDescription(gs.saveSettings.description);
             settings.setAssaultOnOff(gs.saveSettings.assaultMode);
             settings.setControlOnOff(gs.saveSettings.controlMode);
             settings.setEscortOnOff(gs.saveSettings.escortMode);
