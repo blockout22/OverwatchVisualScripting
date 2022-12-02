@@ -35,10 +35,38 @@ public class NodeSetVariable extends Node{
                 }
 
                 for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-                    comboBox.addOption("Player: " + getGraph().playerVariables.get(i).name);
+                    comboBox.addOption("Event Player: " + getGraph().playerVariables.get(i).name);
                 }
             }
         });
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        //TODO get variable class and save ID and type
+        getExtraSaveData().add("Var:" + comboBox.getSelectedIndex());
+    }
+
+    @Override
+    public void onLoaded() {
+        comboBox.clear();
+        for (int i = 0; i < getGraph().globalVariables.size(); i++) {
+            comboBox.addOption("Global: " + getGraph().globalVariables.get(i).name);
+        }
+
+        for (int i = 0; i < getGraph().playerVariables.size(); i++) {
+            comboBox.addOption("Event Player: " + getGraph().playerVariables.get(i).name);
+        }
+
+        for(String data : getExtraSaveData()){
+            if (data.startsWith("Var")) {
+                int index = Integer.valueOf(data.split(":")[1]);
+                if(index > -1){
+                    comboBox.select(index);
+                }
+            }
+        }
     }
 
     @Override
@@ -55,8 +83,8 @@ public class NodeSetVariable extends Node{
 
         if (outputPin.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
             PinData<ImString> data = outputPin.getData();
-            String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
-            data.getValue().set(val[0] + "." + val[1]);
+            String[] val = comboBox.getSelectedValue().split(":");
+            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
         }
     }
 
@@ -66,8 +94,8 @@ public class NodeSetVariable extends Node{
 
             PinData<ImString> data = inputPin.getData();
 
-            String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
-            return val[0] + "." + val[1] + " = " + data.getValue().get() + ";";
+            String[] val = comboBox.getSelectedValue().split(":");
+            return val[0] + "." + val[1].replace(" ", "") + " = " + data.getValue().get() + ";";
         }
 
         return "";

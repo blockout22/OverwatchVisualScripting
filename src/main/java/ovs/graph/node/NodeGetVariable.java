@@ -71,7 +71,10 @@ public class NodeGetVariable extends Node{
         }
         for(String data : getExtraSaveData()){
             if(data.startsWith("Var")){
-                comboBox.select(Integer.valueOf(data.split(":")[1]));
+                int index = Integer.valueOf(data.split(":")[1]);
+                if(index > -1) {
+                    comboBox.select(index);
+                }
             }
         }
     }
