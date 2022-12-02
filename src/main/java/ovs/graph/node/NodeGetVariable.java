@@ -30,7 +30,7 @@ public class NodeGetVariable extends Node{
                 }
 
                 for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-                    comboBox.addOption("Player: " + getGraph().playerVariables.get(i).name);
+                    comboBox.addOption("Event Player: " + getGraph().playerVariables.get(i).name);
                 }
 
                 //lastVariableCount = getGraph().globalVariables.size() + getGraph().playerVariables.size();
@@ -46,8 +46,8 @@ public class NodeGetVariable extends Node{
 //        }
         if (outputPin.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
             PinData<ImString> data = outputPin.getData();
-            String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
-            data.getValue().set(val[0] + "." + val[1]);
+            String[] val = comboBox.getSelectedValue().split(":");
+            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
         }
     }
 
@@ -67,7 +67,7 @@ public class NodeGetVariable extends Node{
         }
 
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            comboBox.addOption("Player: " + getGraph().playerVariables.get(i).name);
+            comboBox.addOption("Event Player: " + getGraph().playerVariables.get(i).name);
         }
         for(String data : getExtraSaveData()){
             if(data.startsWith("Var")){
@@ -78,8 +78,8 @@ public class NodeGetVariable extends Node{
 
     @Override
     public String getOutput() {
-        String[] val = comboBox.getSelectedValue().replace(" ", "").split(":");
-        return val[0] + "." + val[1];
+        String[] val = comboBox.getSelectedValue().split(":");
+        return val[0] + "." + val[1].replace(" ", "");
     }
 
     @Override
