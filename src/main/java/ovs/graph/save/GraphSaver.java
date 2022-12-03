@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
+import imgui.type.ImBoolean;
 import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.Settings;
@@ -39,6 +40,7 @@ public class GraphSaver {
         graphSave.nodeSaves.clear();
         graphSave.globalVariables.clear();
         graphSave.playerVariables.clear();
+        graphSave.saveSettings.dmSettings.boolInfo.clear();
 
         graphSave.saveSettings.modeName = settings.getModeName();
         graphSave.saveSettings.description = settings.getDescription();
@@ -58,6 +60,20 @@ public class GraphSaver {
         graphSave.saveSettings.teamDeathmatchMode = settings.getTeamDeathmatchOnOff();
         graphSave.saveSettings.practiceRangeMode = settings.getPracticeRangeOnOff();
         graphSave.saveSettings.skirmishMode = settings.getSkirmishOnOff();
+
+        //TODO save other game mode settings
+        //DeathMatch Options
+        graphSave.saveSettings.dmSettings.GameLenthDM = settings.getGameTimeDM();
+        graphSave.saveSettings.dmSettings.scoreToWinDM = settings.getScoreToWinDM();
+        graphSave.saveSettings.dmSettings.initRespawnDM = settings.getInitRespawnOnOffDM();
+        for (int i = 0; i < settings.dmMapBools.size(); i++) {
+            Settings.BoolInfoWithName info = settings.dmMapBools.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.dmSettings.boolInfo.add(saveInfo);
+        }
+
 
         for(Variable var : graph.globalVariables.getList()){
             graphSave.globalVariables.add(var.ID + ":" + var.name);
@@ -166,6 +182,24 @@ public class GraphSaver {
             settings.setTeamDeathmatchOnOff(gs.saveSettings.teamDeathmatchMode);
             settings.setPracticeRangeOnOff(gs.saveSettings.practiceRangeMode);
             settings.setSkirmishOnOff(gs.saveSettings.skirmishMode);
+
+
+            //DeathMatch Options
+            settings.setGameTimeDM(gs.saveSettings.dmSettings.GameLenthDM);
+            settings.setScoreToWinDM(gs.saveSettings.dmSettings.scoreToWinDM);
+            settings.setInitRespawnOnOffDM(gs.saveSettings.dmSettings.initRespawnDM);
+            for (int i = 0; i < gs.saveSettings.dmSettings.boolInfo.size(); i++) {
+                BoolInfo info = gs.saveSettings.dmSettings.boolInfo.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.dmMapBools.size(); j++) {
+                    Settings.BoolInfoWithName dmInfo = settings.dmMapBools.get(j);
+                    if(info.name.equals(dmInfo.name)){
+                        dmInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
 
             Graph graph = new Graph();
 
@@ -372,6 +406,21 @@ public class GraphSaver {
         private boolean teamDeathmatchMode;
         private boolean practiceRangeMode;
         private boolean skirmishMode;
+
+        private DeatchMatchSettings dmSettings = new DeatchMatchSettings();
+    }
+
+    private static class DeatchMatchSettings{
+        //Deathmatch Options
+        private int GameLenthDM = 10;
+        private int scoreToWinDM = 20;
+        private boolean initRespawnDM = true;
+        private ArrayList<BoolInfo> boolInfo = new ArrayList<>();
+    }
+
+    private static class BoolInfo{
+        String name;
+        boolean value;
     }
 
     private static class PinSave{

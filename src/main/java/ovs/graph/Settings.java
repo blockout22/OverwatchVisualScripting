@@ -2,7 +2,10 @@ package ovs.graph;
 
 import imgui.ImGui;
 import imgui.type.ImBoolean;
+import imgui.type.ImInt;
 import imgui.type.ImString;
+
+import java.util.ArrayList;
 
 public class Settings {
 
@@ -34,6 +37,64 @@ public class Settings {
     private ImBoolean practiceRangeOnOff = new ImBoolean(false);
     private ImBoolean skirmishOnOff = new ImBoolean(false);
 
+    //DeathMatch settings
+    private int[] gameTimeDM = new int[] {10};
+    private int[] scoreToWinDM = new int[] {20};
+    private ImBoolean initRespawnOnOffDM = new ImBoolean(true);
+    //Maps Toggle
+    public ArrayList<BoolInfoWithName> dmMapBools = new ArrayList<>();
+
+    public Settings(){
+        dmMapBools.add(new BoolInfoWithName("Black Forest", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Black Forest Winter", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Blizzard World", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Blizzard World Winter", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Castillo", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Château", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Château Guillard", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Château Guillard Halloween", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Dorado", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Ecopoint: Antarctica", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Eichenwalde", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Eichenwalde Halloween", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Hanamura", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Hanamura Winter", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Havana", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Hollywood", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Horizon Lunar Colony", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Ilios Lighthouse", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Ilios Ruins", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Ilois Well", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Kanezaka", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("King's Row", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("King's Row Winter", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Control Center", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Control Center Lunar New Year", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Garden", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Garden Lunar New Year", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Night Market", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Lijiang Night Market Lunar New Year", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Malevento", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Necropolis", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Nepal Sanctum", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Nepal Shrine", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Nepal Village", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Oasis City Center", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Oasis Gardens", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Oasis University", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Paris", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Petra", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Route 66", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Temple Of Anubis", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Volskaya Industries", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Chamber", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Expanse", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Expanse Night", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Green Screen", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
+        dmMapBools.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
+    }
+
     public void show()
     {
         ImGui.text("Settings");
@@ -62,46 +123,73 @@ public class Settings {
         ImGui.sameLine();
         ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
 
-        ImGui.separator();
         ImGui.text("Modes");
-        ImGui.text("Assault");
-        ImGui.sameLine();
+        ImGui.separator();
         ImGui.checkbox("##Assault", assaultOnOff);
-        ImGui.text("Control");
         ImGui.sameLine();
+        ImGui.text("Assault");
         ImGui.checkbox("##Control", controlOnOff);
-        ImGui.text("Escort");
         ImGui.sameLine();
+        ImGui.text("Control");
         ImGui.checkbox("##Escort", escortOnOff);
-        ImGui.text("Hybrid");
         ImGui.sameLine();
+        ImGui.text("Escort");
         ImGui.checkbox("##Hybrid", hybridOnOff);
-        ImGui.text("Push");
         ImGui.sameLine();
+        ImGui.text("Hybrid");
         ImGui.checkbox("##Push", pushOnOff);
-        ImGui.text("Bouty Hunter");
         ImGui.sameLine();
+        ImGui.text("Push");
         ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
-        ImGui.text("CTF");
         ImGui.sameLine();
+        ImGui.text("Bouty Hunter");
         ImGui.checkbox("##CTF", ctfOnOff);
+        ImGui.sameLine();
+        ImGui.text("CTF");
+        ImGui.checkbox("##DeathMatch", deathmatchOnOff);
+        ImGui.sameLine();
         ImGui.text("DeathMatch");
         ImGui.sameLine();
-        ImGui.checkbox("##DeathMatch", deathmatchOnOff);
-        ImGui.text("Elimination");
-        ImGui.sameLine();
+        if(ImGui.button("Deathmatch Options")){
+            ImGui.openPopup("Deathmatch_options");
+        }
         ImGui.checkbox("##Elimination", eliminationOnOff);
-        ImGui.text("Team DeathMatch");
         ImGui.sameLine();
+        ImGui.text("Elimination");
         ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
-        ImGui.text("Practice Range");
         ImGui.sameLine();
+        ImGui.text("Team DeathMatch");
         ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
-        ImGui.text("Skirmish");
         ImGui.sameLine();
+        ImGui.text("Practice Range");
         ImGui.checkbox("##Skirmish", skirmishOnOff);
+        ImGui.sameLine();
+        ImGui.text("Skirmish");
 
         ImGui.popItemWidth();
+
+
+        if(ImGui.isPopupOpen("Deathmatch_options")){
+            if(ImGui.beginPopup("Deathmatch_options")){
+                ImGui.text("Game Time");
+                ImGui.sameLine();
+                ImGui.sliderInt("##time", gameTimeDM, 5, 15);
+                ImGui.text("Score To Win");
+                ImGui.sameLine();
+                ImGui.sliderInt("##scoreToWin", scoreToWinDM, 1, 5000);
+                ImGui.checkbox("##initRespawn", initRespawnOnOffDM);
+                ImGui.sameLine();
+                ImGui.text("Self Initialize Respawn");
+                ImGui.separator();
+                //Deathmatch maps
+                for(BoolInfoWithName biwn : dmMapBools) {
+                    ImGui.checkbox("##" + biwn.name, biwn.bool);
+                    ImGui.sameLine();
+                    ImGui.text(biwn.name);
+                }
+                ImGui.endPopup();
+            }
+        }
     }
 
     public String getOutput() {
@@ -165,6 +253,42 @@ public class Settings {
 
             if(deathmatchOnOff.get()){
                 output += "\t\tDeathmatch\n";
+                output += "\t\t{\n";
+
+                output += "\t\t\tGame Length In Minutes: " + gameTimeDM[0] + "\n";
+                output += "\t\t\tScore To Win: " + scoreToWinDM[0] + "\n";
+                output += "\t\t\tSelf Initiated Respawn: " + (initRespawnOnOffDM.get() ? "On" : "Off") + "\n";
+
+                int[] res = getDeathmatchMaps();
+
+                if(!(res[0] == 0 || res[1] == 0)){
+                    output += "\n";
+                    if(res[0] >= res[1]){
+                        //Disabled Maps
+                        output += "\t\t\tdisabled maps\n";
+                        output += "\t\t\t{\n";
+                        for (int i = 0; i < dmMapBools.size(); i++) {
+                            BoolInfoWithName info = dmMapBools.get(i);
+                            if(!info.bool.get()){
+                                output += "\t\t\t\t" + info.name + " 0\n";
+                            }
+                        }
+                    }else if(res[1] > res[0])
+                    {
+                        //Enabled Maps
+                        output += "\t\t\tenabled maps\n";
+                        output += "\t\t\t{\n";
+                        for (int i = 0; i < dmMapBools.size(); i++) {
+                            BoolInfoWithName info = dmMapBools.get(i);
+                            if(info.bool.get()){
+                                output += "\t\t\t\t" + info.name + " 0\n";
+                            }
+                        }
+                    }
+
+                    output += "\t\t\t}\n";
+                }
+                output += "\t\t}\n";
             }
 
             if(eliminationOnOff.get()) {
@@ -190,6 +314,23 @@ public class Settings {
         output += "}\n";
 
         return output;
+    }
+
+    /**
+     *gets the amount of enabled and disabled maps on deatchmatch mode and return [number of maps on, number of maps off]
+     */
+    private int[] getDeathmatchMaps(){
+        int[] res = new int[2];
+        for (int i = 0; i < dmMapBools.size(); i++) {
+            BoolInfoWithName info = dmMapBools.get(i);
+            System.out.println(info.bool.get());
+            if(info.bool.get()){
+                res[0] = res[0] + 1;
+            }else{
+                res[1] = res[1] + 1;
+            }
+        }
+        return res;
     }
 
     public void setModeName(String name){
@@ -326,5 +467,39 @@ public class Settings {
 
     public void setSkirmishOnOff(boolean skirmishOnOff) {
         this.skirmishOnOff.set(skirmishOnOff);
+    }
+
+    public int getGameTimeDM() {
+        return gameTimeDM[0];
+    }
+
+    public void setGameTimeDM(int gameTimeDM) {
+        this.gameTimeDM[0] = gameTimeDM;
+    }
+
+    public int getScoreToWinDM() {
+        return scoreToWinDM[0];
+    }
+
+    public void setScoreToWinDM(int scoreToWinDM) {
+        this.scoreToWinDM[0] = scoreToWinDM;
+    }
+
+    public boolean getInitRespawnOnOffDM() {
+        return initRespawnOnOffDM.get();
+    }
+
+    public void setInitRespawnOnOffDM(boolean initRespawnOnOffDM) {
+        this.initRespawnOnOffDM.set(initRespawnOnOffDM);
+    }
+
+    public static class BoolInfoWithName{
+        public String name;
+        public ImBoolean bool;
+
+        public BoolInfoWithName(String name, ImBoolean bool){
+            this.name = name;
+            this.bool = bool;
+        }
     }
 }
