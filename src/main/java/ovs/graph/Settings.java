@@ -323,7 +323,6 @@ public class Settings {
         int[] res = new int[2];
         for (int i = 0; i < dmMapBools.size(); i++) {
             BoolInfoWithName info = dmMapBools.get(i);
-            System.out.println(info.bool.get());
             if(info.bool.get()){
                 res[0] = res[0] + 1;
             }else{

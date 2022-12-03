@@ -115,6 +115,7 @@ public class GraphWindow {
         addNodeToList(NodeSetMoveSpeed.class);
         addNodeToList(NodeStartScalingPlayer.class);
         addNodeToList(NodeAdd.class);
+        addNodeToList(NodeRestart.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -198,14 +199,6 @@ public class GraphWindow {
                 }
                 graphSaver.save(fileName, settings, graph);
             }
-
-//            ImGui.sameLine();
-
-//            if(ImGui.button("Load"))
-//            {
-//                graph = graphSaver.load(fileName);
-//                isLoading = true;
-//            }
 
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
