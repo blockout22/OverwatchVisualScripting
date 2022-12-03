@@ -68,6 +68,9 @@ public class GraphWindow {
 
     private Node editingNodeTitle = null;
 
+    private float canvasXPos = 0;
+    private float canvasYPos = 0;
+
     public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
         this.imGuiWindow = imGuiWindow;
         this.glfwWindow = window;
@@ -476,7 +479,8 @@ public class GraphWindow {
                         if(ImGui.isPopupOpen("context_menu" + id))
                         {
                             if(ImGui.beginPopup("context_menu" + id)){
-
+                                canvasXPos = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
+                                canvasYPos = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
                                 if(nodeInstanceCache.isEmpty())
                                 {
                                     for (Class<? extends Node> node : nodeList) {
@@ -556,11 +560,11 @@ public class GraphWindow {
                 graph.addNode(newInstance);
                 //newInstance.init();
                 //nodeQPos.put(newInstance.getID(), new ImVec2());
-                float x = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
-                float y = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
-                newInstance.posX = x;
-                newInstance.posY = y;
-                NodeEditor.setNodePosition(newInstance.getID(), x, y);
+//                float x = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
+//                float y = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
+                newInstance.posX = canvasXPos;
+                newInstance.posY = canvasYPos;
+                NodeEditor.setNodePosition(newInstance.getID(), canvasXPos, canvasYPos);
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
