@@ -116,6 +116,7 @@ public class GraphWindow {
         addNodeToList(NodeStartScalingPlayer.class);
         addNodeToList(NodeAdd.class);
         addNodeToList(NodeRestart.class);
+        addNodeToList(NodeHero.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
