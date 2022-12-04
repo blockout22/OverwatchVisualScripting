@@ -171,10 +171,10 @@ public class GraphWindow {
         this.fileName = name;
     }
 
-    public void show(float menuBarHeight){
+    public void show(float menuBarHeight, float taskbarHeight){
         cursorPos = ImGui.getMousePos();
         graph.update();
-        ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight, ImGuiCond.Once);
+        ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, ImGuiCond.Once);
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
 

@@ -2,6 +2,7 @@ package ovs;
 
 import imgui.*;
 import imgui.extension.imnodes.ImNodes;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.gl3.ImGuiImplGl3;
@@ -159,15 +160,16 @@ public class ImGuiWindow {
             }
 
             for(GraphWindow graphWindow : graphWindows){
-                graphWindow.show(menuBarHeight);
+                graphWindow.show(menuBarHeight, taskbarHeight);
             }
 
             ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + glfwWindow.getHeight() - taskbarHeight, ImGuiCond.Always);
             ImGui.setNextWindowSize(glfwWindow.getWidth(), taskbarHeight, ImGuiCond.Always);
-            ImGui.begin("Taskbar", NoBackground  | NoDocking | NoScrollbar | NoTitleBar);
+            ImGui.pushStyleColor(ImGuiCol.WindowBg, 25, 25, 25, 255);
+            ImGui.begin("Taskbar",  NoDocking | NoScrollbar | NoTitleBar | NoResize);
             {
                 for (GraphWindow graphWindow : graphWindows){
-                    if(ImGui.button(graphWindow.getFileName()))
+                    if(ImGui.button(graphWindow.getFileName(), 0, taskbarHeight - 15))
                     {
                         ImGui.setWindowFocus(graphWindow.getFileName());
                     }
@@ -175,6 +177,7 @@ public class ImGuiWindow {
                 }
             }
             ImGui.end();
+            ImGui.popStyleColor();
 
             for (int i = 0; i < queueRemoveGraphWindow.size(); i++) {
                 graphWindows.remove(queueRemoveGraphWindow.get(i));
