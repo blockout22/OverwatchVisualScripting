@@ -23,6 +23,9 @@ import ovs.graph.node.*;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,6 +124,7 @@ public class GraphWindow {
         addNodeToList(NodeRestart.class);
         addNodeToList(NodeHero.class);
         addNodeToList(NodeCustomColor.class);
+        addNodeToList(NodeSetGravity.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -193,6 +197,8 @@ public class GraphWindow {
             if(ImGui.button("Compile")){
                 String compiledText = compile();
                 EDITOR.setText(compiledText);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(new StringSelection(compiledText), null);
             }
 
             ImGui.sameLine();

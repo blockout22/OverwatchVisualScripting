@@ -1,6 +1,8 @@
 package ovs.graph.node;
 
+import imgui.type.ImString;
 import ovs.graph.Graph;
+import ovs.graph.PinData;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.pin.Pin;
 
@@ -84,6 +86,27 @@ public abstract class Node {
         }
 
         return found;
+    }
+
+    //I seem to be writing this a lot so I will try using these functions instead
+    protected void handlePinStringConnection(Pin pin, PinData<ImString> pinData){
+        if(pin.isConnected()){
+            Pin connectedPin = pin.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            pinData.getValue().set(connectedData.getValue().get());
+        }
+    }
+
+    protected void handlePinStringConnection(Pin pin, PinData<ImString> pinData, String defaultValue){
+        if(pin.isConnected()){
+            Pin connectedPin = pin.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            pinData.getValue().set(connectedData.getValue().get());
+        }else{
+            pinData.getValue().set(defaultValue);
+        }
     }
 
     public void addUiComponent(UiComponent uiComponent){
