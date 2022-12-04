@@ -87,6 +87,8 @@ public class ImGuiWindow {
             ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY(), ImGuiCond.Always);
             ImGui.setNextWindowViewport(ImGui.getMainViewport().getID());
 
+//            ImGui.showDemoWindow();
+
 
             if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
                 ImGui.setCursorScreenPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
