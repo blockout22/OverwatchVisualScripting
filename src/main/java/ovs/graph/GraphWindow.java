@@ -120,6 +120,7 @@ public class GraphWindow {
         addNodeToList(NodeAdd.class);
         addNodeToList(NodeRestart.class);
         addNodeToList(NodeHero.class);
+        addNodeToList(NodeCustomColor.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -374,6 +375,7 @@ public class GraphWindow {
                                             if (ImGui.isItemClicked() && holdingPinID == -1) {
                                                 lastActivePin = outPin.getID();
                                             }
+                                            ImGui.sameLine();
                                         }
                                     }
                                 }
