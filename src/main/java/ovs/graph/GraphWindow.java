@@ -126,6 +126,7 @@ public class GraphWindow {
         addNodeToList(NodeCustomColor.class);
         addNodeToList(NodeSetGravity.class);
         addNodeToList(NodeRandomReal.class);
+        addNodeToList(NodeSetSlowMotion.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
