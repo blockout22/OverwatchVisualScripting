@@ -241,8 +241,8 @@
         {
           "ID": 1081,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Set Gravity(Event Player, Random Real(25.0, 250.0));",
-          "connectedTo": 1168,
+          "value": "Set Move Speed(Event Player, 0.0);",
+          "connectedTo": 1344,
           "canDelete": true
         },
         {
@@ -284,8 +284,8 @@
     {
       "className": "ovs.graph.node.NodeLoop",
       "nodeName": "Loop",
-      "x": 544.0,
-      "y": 353.0,
+      "x": 892.0,
+      "y": 337.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -363,7 +363,7 @@
         {
           "ID": 1168,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1081,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -443,6 +443,77 @@
           "ID": 1258,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 1255,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetMoveSpeed",
+      "nodeName": "Set Move Speed",
+      "x": 438.0,
+      "y": 400.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1342,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1345,
+          "canDelete": false
+        },
+        {
+          "ID": 1343,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0.0",
+          "connectedTo": 1347,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1344,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1081,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 212.0,
+      "y": 417.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1345,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1342,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": 112.0,
+      "y": 544.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1346,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1347,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1343,
           "canDelete": false
         }
       ]

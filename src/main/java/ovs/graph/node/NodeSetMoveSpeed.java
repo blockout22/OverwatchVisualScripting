@@ -12,7 +12,7 @@ import ovs.graph.pin.PinVar;
 public class NodeSetMoveSpeed extends Node{
 
     PinVar pinPlayer = new PinVar();
-    PinFloat pinMoveSpeed = new PinFloat();
+    PinVar pinMoveSpeed = new PinVar();
 
     PinAction output = new PinAction();
 
@@ -35,24 +35,11 @@ public class NodeSetMoveSpeed extends Node{
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImFloat> speedData = pinMoveSpeed.getData();
+        PinData<ImString> speedData = pinMoveSpeed.getData();
         PinData<ImString> outputData = output.getData();
 
-        if(pinPlayer.isConnected()){
-            Pin connectedPin = pinPlayer.getConnectedPin();
-
-            PinData<ImString> connectedData = connectedPin.getData();
-            playerData.getValue().set(connectedData.getValue().get());
-        }else{
-            playerData.getValue().set("Null");
-        }
-
-        if(pinMoveSpeed.isConnected()){
-            Pin connectedPin = pinMoveSpeed.getConnectedPin();
-
-            PinData<ImFloat> connectedData = connectedPin.getData();
-            speedData.getValue().set(connectedData.getValue().get());
-        }
+        handlePinStringConnection(pinPlayer, playerData, "Null");
+        handlePinStringConnection(pinMoveSpeed, speedData, "100");
 
         outputData.getValue().set("Set Move Speed(" + playerData.getValue().get() + ", " + speedData.getValue().get() + ");");
     }
