@@ -1,5 +1,6 @@
 package ovs.graph.node;
 
+import imgui.ImGui;
 import imgui.type.ImFloat;
 import imgui.type.ImString;
 import ovs.graph.Graph;
@@ -13,9 +14,13 @@ import ovs.graph.pin.PinVar;
 public class NodeCreateHudText extends Node{
 
     PinVar inputVisibleTo = new PinVar();
-    PinVar inputText1 = new PinVar();
-    PinVar inputText2 = new PinVar();
-    PinVar inputText3 = new PinVar();
+    PinVar inputHeader = new PinVar();
+    PinVar inputSubHeader = new PinVar();
+    PinVar inputText = new PinVar();
+
+    PinVar pinHeaderColor = new PinVar();
+    PinVar pinSubHeaderColor = new PinVar();
+    PinVar pinTextColor = new PinVar();
 
     PinFloat pinSortOrder = new PinFloat();
 
@@ -31,20 +36,33 @@ public class NodeCreateHudText extends Node{
         inputVisibleTo.setName("Visible To");
         addCustomInput(inputVisibleTo);
 
-        inputText1.setNode(this);
-        inputText1.setName("Header");
-        addCustomInput(inputText1);
+        inputHeader.setNode(this);
+        inputHeader.setName("Header");
+        addCustomInput(inputHeader);
 
-        inputText2.setNode(this);
-        inputText2.setName("Subheader");
-        addCustomInput(inputText2);
+        inputSubHeader.setNode(this);
+        inputSubHeader.setName("Subheader");
+        addCustomInput(inputSubHeader);
 
-        inputText3.setNode(this);
-        inputText3.setName("Text");
-        addCustomInput(inputText3);
+        inputText.setNode(this);
+        inputText.setName("Text");
+        addCustomInput(inputText);
 
         pinSortOrder.setNode(this);
+        pinSortOrder.setName("Sort Order");
         addCustomInput(pinSortOrder);
+
+        pinHeaderColor.setNode(this);
+        pinHeaderColor.setName("Header Color");
+        addCustomInput(pinHeaderColor);
+
+        pinSubHeaderColor.setNode(this);
+        pinSubHeaderColor.setName("Subheader Color");
+        addCustomInput(pinSubHeaderColor);
+
+        pinTextColor.setNode(this);
+        pinTextColor.setName("Text Color");
+        addCustomInput(pinTextColor);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
@@ -75,9 +93,12 @@ public class NodeCreateHudText extends Node{
     @Override
     public void execute() {
         PinData<ImString> inputVisibleData = inputVisibleTo.getData();
-        PinData<ImString> inputData1 = inputText1.getData();
-        PinData<ImString> inputData2 = inputText2.getData();
-        PinData<ImString> inputData3 = inputText3.getData();
+        PinData<ImString> headerData = inputHeader.getData();
+        PinData<ImString> subHeaderData = inputSubHeader.getData();
+        PinData<ImString> textData = inputText.getData();
+        PinData<ImString> headerColorData = pinHeaderColor.getData();
+        PinData<ImString> subHeaderColorData = pinSubHeaderColor.getData();
+        PinData<ImString> textColorData = pinTextColor.getData();
         PinData<ImFloat> sortOrderData = pinSortOrder.getData();
 
         PinData<ImString> outputData = outputPin.getData();
@@ -91,31 +112,58 @@ public class NodeCreateHudText extends Node{
             inputVisibleData.getValue().set("Null");
         }
 
-        if(inputText1.isConnected()){
-            Pin connectedPin = inputText1.getConnectedPin();
+        if(inputHeader.isConnected()){
+            Pin connectedPin = inputHeader.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
-            inputData1.getValue().set(connectedData.getValue().get());
+            headerData.getValue().set(connectedData.getValue().get());
         }else{
-            inputData1.getValue().set("Null");
+            headerData.getValue().set("Null");
         }
 
-        if(inputText2.isConnected()){
-            Pin connectedPin = inputText2.getConnectedPin();
+        if(inputSubHeader.isConnected()){
+            Pin connectedPin = inputSubHeader.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
-            inputData2.getValue().set(connectedData.getValue().get());
+            subHeaderData.getValue().set(connectedData.getValue().get());
         }else{
-            inputData2.getValue().set("Null");
+            subHeaderData.getValue().set("Null");
         }
 
-        if(inputText3.isConnected()){
-            Pin connectedPin = inputText3.getConnectedPin();
+        if(inputText.isConnected()){
+            Pin connectedPin = inputText.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
-            inputData3.getValue().set(connectedData.getValue().get());
+            textData.getValue().set(connectedData.getValue().get());
         }else{
-            inputData3.getValue().set("Null");
+            textData.getValue().set("Null");
+        }
+
+        if(pinHeaderColor.isConnected()){
+            Pin connectedPin = pinHeaderColor.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            headerColorData.getValue().set(connectedData.getValue().get());
+        }else{
+            headerColorData.getValue().set("Color(White)");
+        }
+
+        if(pinSubHeaderColor.isConnected()){
+            Pin connectedPin = pinSubHeaderColor.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            subHeaderColorData.getValue().set(connectedData.getValue().get());
+        }else{
+            subHeaderColorData.getValue().set("Color(White)");
+        }
+
+        if(pinTextColor.isConnected()){
+            Pin connectedPin = pinTextColor.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedPin.getData();
+            textColorData.getValue().set(connectedData.getValue().get());
+        }else{
+            textColorData.getValue().set("Color(White)");
         }
 
         if(pinSortOrder.isConnected()){
@@ -127,7 +175,7 @@ public class NodeCreateHudText extends Node{
 
 
         String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(" + inputVisibleData.getValue().get() + "," + inputData1.getValue().get() + ", " + inputData2.getValue().get() + ", " + inputData3.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
+        String output = "Create HUD Text(" + inputVisibleData.getValue().get() + "," + headerData.getValue().get() + ", " + subHeaderData.getValue().get() + ", " + textData.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", " + headerColorData.getValue().get()+ ", " + subHeaderColorData.getValue().get() + ", " +textColorData.getValue().get() + ", Visible To and String, Default Visibility);";
         outputData.getValue().set(output);
     }
 
