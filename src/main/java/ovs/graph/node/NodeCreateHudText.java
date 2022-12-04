@@ -12,9 +12,10 @@ import ovs.graph.pin.PinVar;
 
 public class NodeCreateHudText extends Node{
 
-    PinVar inputVal1 = new PinVar();
-    PinVar inputVal2 = new PinVar();
-    PinVar inputVal3 = new PinVar();
+    PinVar inputVisibleTo = new PinVar();
+    PinVar inputText1 = new PinVar();
+    PinVar inputText2 = new PinVar();
+    PinVar inputText3 = new PinVar();
 
     PinFloat pinSortOrder = new PinFloat();
 
@@ -26,17 +27,21 @@ public class NodeCreateHudText extends Node{
         super(graph);
         setName("Create Hud Text");
 
-        inputVal1.setNode(this);
-        inputVal1.setName("Header");
-        addCustomInput(inputVal1);
+        inputVisibleTo.setNode(this);
+        inputVisibleTo.setName("Visible To");
+        addCustomInput(inputVisibleTo);
 
-        inputVal2.setNode(this);
-        inputVal2.setName("Subheader");
-        addCustomInput(inputVal2);
+        inputText1.setNode(this);
+        inputText1.setName("Header");
+        addCustomInput(inputText1);
 
-        inputVal3.setNode(this);
-        inputVal3.setName("Text");
-        addCustomInput(inputVal3);
+        inputText2.setNode(this);
+        inputText2.setName("Subheader");
+        addCustomInput(inputText2);
+
+        inputText3.setNode(this);
+        inputText3.setName("Text");
+        addCustomInput(inputText3);
 
         pinSortOrder.setNode(this);
         addCustomInput(pinSortOrder);
@@ -69,15 +74,25 @@ public class NodeCreateHudText extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> inputData1 = inputVal1.getData();
-        PinData<ImString> inputData2 = inputVal2.getData();
-        PinData<ImString> inputData3 = inputVal3.getData();
+        PinData<ImString> inputVisibleData = inputVisibleTo.getData();
+        PinData<ImString> inputData1 = inputText1.getData();
+        PinData<ImString> inputData2 = inputText2.getData();
+        PinData<ImString> inputData3 = inputText3.getData();
         PinData<ImFloat> sortOrderData = pinSortOrder.getData();
 
         PinData<ImString> outputData = outputPin.getData();
 
-        if(inputVal1.isConnected()){
-            Pin connectedPin = inputVal1.getConnectedPin();
+        if(inputVisibleTo.isConnected()){
+            Pin connectedTo = inputVisibleTo.getConnectedPin();
+
+            PinData<ImString> connectedData = connectedTo.getData();
+            inputVisibleData.getValue().set(connectedData.getValue().get());
+        }else{
+            inputVisibleData.getValue().set("Null");
+        }
+
+        if(inputText1.isConnected()){
+            Pin connectedPin = inputText1.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
             inputData1.getValue().set(connectedData.getValue().get());
@@ -85,8 +100,8 @@ public class NodeCreateHudText extends Node{
             inputData1.getValue().set("Null");
         }
 
-        if(inputVal2.isConnected()){
-            Pin connectedPin = inputVal2.getConnectedPin();
+        if(inputText2.isConnected()){
+            Pin connectedPin = inputText2.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
             inputData2.getValue().set(connectedData.getValue().get());
@@ -94,8 +109,8 @@ public class NodeCreateHudText extends Node{
             inputData2.getValue().set("Null");
         }
 
-        if(inputVal3.isConnected()){
-            Pin connectedPin = inputVal3.getConnectedPin();
+        if(inputText3.isConnected()){
+            Pin connectedPin = inputText3.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
             inputData3.getValue().set(connectedData.getValue().get());
@@ -112,7 +127,7 @@ public class NodeCreateHudText extends Node{
 
 
         String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(All Players(All Teams)," + inputData1.getValue().get() + ", " + inputData2.getValue().get() + ", " + inputData3.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
+        String output = "Create HUD Text(" + inputVisibleData.getValue().get() + "," + inputData1.getValue().get() + ", " + inputData2.getValue().get() + ", " + inputData3.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", Color(White), Color(White), Color(White), Visible To and String, Default Visibility);";
         outputData.getValue().set(output);
     }
 
