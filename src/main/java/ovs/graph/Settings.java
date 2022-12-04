@@ -169,6 +169,7 @@ public class Settings {
         ImGui.popItemWidth();
 
 
+        //Deatch Match options popup
         if(ImGui.isPopupOpen("Deathmatch_options")){
             if(ImGui.beginPopup("Deathmatch_options")){
                 ImGui.text("Game Time");
@@ -180,6 +181,20 @@ public class Settings {
                 ImGui.checkbox("##initRespawn", initRespawnOnOffDM);
                 ImGui.sameLine();
                 ImGui.text("Self Initialize Respawn");
+
+                if(ImGui.button("All")) {
+                    for (int i = 0; i < dmMapBools.size(); i++) {
+                        BoolInfoWithName bool = dmMapBools.get(i);
+                        bool.bool.set(true);
+                    }
+                }
+                ImGui.sameLine();
+                if(ImGui.button("None")){
+                    for (int i = 0; i < dmMapBools.size(); i++) {
+                        BoolInfoWithName bool = dmMapBools.get(i);
+                        bool.bool.set(false);
+                    }
+                }
                 ImGui.separator();
                 //Deathmatch maps
                 for(BoolInfoWithName biwn : dmMapBools) {

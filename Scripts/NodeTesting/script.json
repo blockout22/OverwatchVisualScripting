@@ -1,0 +1,223 @@
+{
+  "saveSettings": {
+    "modeName": "Testing Functions",
+    "description": "",
+    "maxT1Players": 5,
+    "maxT2Players": 5,
+    "maxFFAPlayers": 0,
+    "assaultMode": false,
+    "controlMode": false,
+    "escortMode": false,
+    "hybridMode": false,
+    "pushMode": false,
+    "bountyHunterMode": false,
+    "ctfMode": false,
+    "deathmatchMode": false,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false,
+    "dmSettings": {
+      "GameLenthDM": 10,
+      "scoreToWinDM": 20,
+      "initRespawnDM": true,
+      "boolInfo": [
+        {
+          "name": "Black Forest",
+          "value": false
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": false
+        },
+        {
+          "name": "Blizzard World",
+          "value": false
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": false
+        },
+        {
+          "name": "Castillo",
+          "value": false
+        },
+        {
+          "name": "Château",
+          "value": false
+        },
+        {
+          "name": "Château Guillard",
+          "value": false
+        },
+        {
+          "name": "Château Guillard Halloween",
+          "value": false
+        },
+        {
+          "name": "Dorado",
+          "value": false
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": false
+        },
+        {
+          "name": "Eichenwalde",
+          "value": false
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": false
+        },
+        {
+          "name": "Hanamura",
+          "value": false
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": false
+        },
+        {
+          "name": "Havana",
+          "value": false
+        },
+        {
+          "name": "Hollywood",
+          "value": false
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": false
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": false
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": false
+        },
+        {
+          "name": "Ilois Well",
+          "value": false
+        },
+        {
+          "name": "Kanezaka",
+          "value": false
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": false
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": false
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": false
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": false
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": false
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": false
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": false
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": false
+        },
+        {
+          "name": "Malevento",
+          "value": false
+        },
+        {
+          "name": "Necropolis",
+          "value": false
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": false
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": false
+        },
+        {
+          "name": "Nepal Village",
+          "value": false
+        },
+        {
+          "name": "Oasis City Center",
+          "value": false
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": false
+        },
+        {
+          "name": "Oasis University",
+          "value": false
+        },
+        {
+          "name": "Paris",
+          "value": false
+        },
+        {
+          "name": "Petra",
+          "value": false
+        },
+        {
+          "name": "Route 66",
+          "value": false
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": false
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": false
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": false
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": false
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": false
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": false
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": false
+        }
+      ]
+    }
+  },
+  "globalVariables": [],
+  "playerVariables": [],
+  "nodeSaves": []
+}

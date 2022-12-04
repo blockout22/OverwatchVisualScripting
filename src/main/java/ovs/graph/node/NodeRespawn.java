@@ -17,6 +17,7 @@ public class NodeRespawn extends Node{
         setName("Respawn");
 
         input.setNode(this);
+        input.setName("Player");
         addCustomInput(input);
 
         output.setNode(this);
