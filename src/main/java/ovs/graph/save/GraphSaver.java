@@ -75,12 +75,19 @@ public class GraphSaver {
         }
 
 
-        for(Variable var : graph.globalVariables.getList()){
-            graphSave.globalVariables.add(var.ID + ":" + var.name);
+//        for(Variable var : graph.globalVariables.getList()){
+        for (int i = 0; i < graph.globalVariables.size(); i++){
+//            graphSave.globalVariables.add(var.ID + ":" + var.name);
+            Variable var = graph.globalVariables.get(i);
+//            graphSave.globalVariables.add(var.ID + ":" + var.name);
+            graphSave.globalVariables.add(i + ":" + var.name);
         }
 
-        for(Variable var : graph.playerVariables.getList()){
-            graphSave.playerVariables.add(var.ID + ":" + var.name);
+//        for(Variable var : graph.playerVariables.getList()){
+        for (int i = 0; i < graph.playerVariables.size(); i++){
+            Variable var = graph.playerVariables.get(i);
+//            graphSave.playerVariables.add(var.ID + ":" + var.name);
+            graphSave.playerVariables.add(i + ":" + var.name);
         }
 
 
@@ -207,7 +214,7 @@ public class GraphSaver {
                 String[] split = var.split(":");
                 Variable variable = new Variable();
                 variable.type = Variable.Type.GLOBAL;
-                variable.ID = Integer.valueOf(split[0]);
+//                variable.ID = Integer.valueOf(split[0]);
                 variable.name = split[1];
                 graph.globalVariables.add(variable);
             }
@@ -216,7 +223,7 @@ public class GraphSaver {
                 String[] split = var.split(":");
                 Variable variable = new Variable();
                 variable.type = Variable.Type.PLAYER;
-                variable.ID = Integer.valueOf(split[0]);
+//                variable.ID = Integer.valueOf(split[0]);
                 variable.name = split[1];
                 graph.playerVariables.add(variable);
             }

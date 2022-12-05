@@ -2,6 +2,7 @@ package ovs.graph.UI;
 
 import imgui.ImGui;
 import imgui.ImGuiTextFilter;
+import imgui.flag.ImGuiInputTextFlags;
 import imgui.type.ImString;
 import ovs.graph.UI.Listeners.ChangeListener;
 
@@ -23,7 +24,7 @@ public class TextField extends UiComponent{
 
     @Override
     public void show() {
-        if(ImGui.inputText("##" + uniqueID, string)){
+        if(ImGui.inputText("##" + uniqueID, string, ImGuiInputTextFlags.CharsNoBlank)){
 
         }
 

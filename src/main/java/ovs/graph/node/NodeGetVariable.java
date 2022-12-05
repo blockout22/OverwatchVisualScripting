@@ -24,6 +24,7 @@ public class NodeGetVariable extends Node{
         comboBox.addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
+                String lastSelectedValue = comboBox.getSelectedValue();
                 comboBox.clear();
                 for (int i = 0; i < getGraph().globalVariables.size(); i++) {
                     comboBox.addOption("Global: " + getGraph().globalVariables.get(i).name);
@@ -32,6 +33,8 @@ public class NodeGetVariable extends Node{
                 for (int i = 0; i < getGraph().playerVariables.size(); i++) {
                     comboBox.addOption("Event Player: " + getGraph().playerVariables.get(i).name);
                 }
+
+                comboBox.selectValue(lastSelectedValue);
 
                 //lastVariableCount = getGraph().globalVariables.size() + getGraph().playerVariables.size();
             }

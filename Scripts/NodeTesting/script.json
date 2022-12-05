@@ -217,7 +217,11 @@
       ]
     }
   },
-  "globalVariables": [],
+  "globalVariables": [
+    "0:VarName",
+    "1:MyNewName",
+    "2:VarVar"
+  ],
   "playerVariables": [],
   "nodeSaves": [
     {

@@ -22,6 +22,13 @@ public class AdvancedArrayList<E> {
         }
     }
 
+    public void remove(int index){
+        list.remove(index);
+        for (int i = 0; i < changedListener.size(); i++) {
+            changedListener.get(i).onChanged();
+        }
+    }
+
     public ArrayList<E> getList()
     {
         return list;

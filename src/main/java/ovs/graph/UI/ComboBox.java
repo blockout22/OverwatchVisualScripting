@@ -5,12 +5,9 @@ import ovs.graph.Popup;
 import ovs.graph.PopupHandler;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.OnOpenedListener;
-import ovs.graph.node.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class ComboBox extends UiComponent{
 
@@ -124,6 +121,8 @@ public class ComboBox extends UiComponent{
                 return;
             }
         }
+
+        currentSelectedIndex = -1;
     }
 
     public void sort() {

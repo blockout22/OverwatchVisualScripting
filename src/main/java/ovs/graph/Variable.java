@@ -8,6 +8,6 @@ public class Variable {
     }
 
     public Type type;
-    public int ID;
+//    public int ID;
     public String name;
 }

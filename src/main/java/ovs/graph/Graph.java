@@ -31,7 +31,7 @@ public class Graph {
     public void addGlobalVariable(String name){
         Variable var = new Variable();
         var.type = Variable.Type.GLOBAL;
-        var.ID = globalVariables.size();
+//        var.ID = globalVariables.size();
         var.name = name;
         globalVariables.add(var);
     }
@@ -39,7 +39,7 @@ public class Graph {
     public void addPlayerVariable(String name){
         Variable var = new Variable();
         var.type = Variable.Type.PLAYER;
-        var.ID = playerVariables.size();
+//        var.ID = playerVariables.size();
         var.name = name;
         playerVariables.add(var);
     }

@@ -138,6 +138,7 @@ public class GraphWindow {
                     tf.addChangedListener(new ChangeListener() {
                         @Override
                         public void onChanged(String oldValue, String newValue) {
+                            System.out.println(oldValue);
                             if(newValue.contains(" ")){
                                 System.out.println("Error: Variables won't accept spaces" );
                             }
@@ -197,7 +198,7 @@ public class GraphWindow {
             NodeEditor.getStyle().setNodeRounding(2.0f);
 
             if(ImGui.button("Compile")){
-                String compiledText = compile();
+                String compiledText = Compiler.compile(graph, settings);
                 EDITOR.setText(compiledText);
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(new StringSelection(compiledText), null);
@@ -251,6 +252,8 @@ public class GraphWindow {
                                 }
 
                                 ImGui.separator();
+
+                                //Variables
                                 ImGui.text("Variables");
                                 if (ImGui.button("Add Global Variable")) {
                                     graph.addGlobalVariable("VarName");
@@ -268,6 +271,10 @@ public class GraphWindow {
                                     ImGui.text(i + ":");
                                     ImGui.sameLine();
                                     tfGlobalVars.get(i).show();
+                                    ImGui.sameLine();
+                                    if(ImGui.button("X##globalVars" + i)){
+                                        graph.globalVariables.remove(i);
+                                    }
                                 }
 
                                 ImGui.text("Player Variable");
@@ -276,6 +283,10 @@ public class GraphWindow {
                                     ImGui.text(i + ":");
                                     ImGui.sameLine();
                                     tfPlayerVars.get(i).show();
+                                    ImGui.sameLine();
+                                    if(ImGui.button("X##playerVars" + i)){
+                                        graph.playerVariables.remove(i);
+                                    }
                                 }
 
                                 ImGui.popItemWidth();
@@ -643,64 +654,6 @@ public class GraphWindow {
                 return o1.getName().compareToIgnoreCase(o2.getName());
             }
         });
-    }
-
-    private String compile(){
-        StringBuilder output = new StringBuilder();
-
-        output.append(settings.getOutput());
-        output.append("\n");
-
-        if (graph.globalVariables.size() > 0 || graph.playerVariables.size() > 0){
-            output.append("variables\n");
-            output.append("{\n");
-            if(graph.globalVariables.size() > 0){
-                output.append("\tglobal:\n");
-
-                for (int i = 0; i < graph.globalVariables.size(); i++) {
-                    output.append("\t\t" + graph.globalVariables.get(i).ID + ": " + graph.globalVariables.get(i).name + "\n");
-                }
-
-                output.append("\n");
-            }
-            if(graph.playerVariables.size() > 0){
-                output.append("\tplayer:\n");
-
-                for (int i = 0; i < graph.playerVariables.size(); i++) {
-                    output.append("\t\t" + graph.playerVariables.get(i).ID + ": " + graph.playerVariables.get(i).name + "\n");
-                }
-
-            }
-            output.append("}\n");
-            output.append("\n");
-        }
-
-        output.append("rule(\"Credits\")\n");
-        output.append("{\n");
-        output.append("\tevent\n");
-        output.append("\t{\n");
-        output.append("\t\tOngoing - Global;\n");
-        output.append("\t}\n");
-        output.append("\n");
-        output.append("\tactions\n");
-        output.append("\t{\n");
-        output.append("\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Created using github.com/blockout22/OverwatchVisualScripting\"), Null, Right, -999, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n");
-        output.append("\t}\n");
-        output.append("}\n");
-        output.append("\n");
-
-        for(Node node : graph.getNodes().values()){
-            if(node instanceof NodeRule){
-                output.append(handleNode(node));
-                output.append("\n\n");
-            }
-        }
-
-        return output.toString();
-    }
-
-    private String handleNode(Node node){
-        return node.getOutput();
     }
 
     public String getFileName() {
