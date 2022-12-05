@@ -2,6 +2,7 @@ package ovs.graph.node;
 
 import imgui.ImGui;
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.Button;
@@ -64,6 +65,10 @@ public class NodeRule extends Node{
         comboPlayers.addOption("Slot 9");
         comboPlayers.addOption("Slot 10");
         comboPlayers.addOption("Slot 11");
+
+        for (int i = 0; i < Global.heroes.size(); i++) {
+            comboPlayers.addOption(Global.heroes.get(i));
+        }
 
         comboEventOnGoing.addChangeListener(new ChangeListener() {
             @Override
