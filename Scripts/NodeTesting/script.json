@@ -245,8 +245,8 @@
         {
           "ID": 1081,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Set Slow Motion(Random Real(25.0, 250.0));",
-          "connectedTo": 1434,
+          "value": "Set Ability Resource(Event Player, Button(Primary Fire), Random Real(0.0, 250.0));",
+          "connectedTo": 1527,
           "canDelete": true
         },
         {
@@ -541,7 +541,158 @@
         {
           "ID": 1434,
           "type": "ovs.graph.pin.PinAction",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetAbilityResource",
+      "nodeName": "Set Ability Resource",
+      "x": 409.0,
+      "y": 556.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1524,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1528,
+          "canDelete": false
+        },
+        {
+          "ID": 1525,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Button(Primary Fire)",
+          "connectedTo": 1529,
+          "canDelete": false
+        },
+        {
+          "ID": 1526,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Random Real(0.0, 250.0)",
+          "connectedTo": 1532,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1527,
+          "type": "ovs.graph.pin.PinAction",
           "connectedTo": 1081,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 258.0,
+      "y": 542.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1528,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1524,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeButton",
+      "nodeName": "Button",
+      "x": 46.0,
+      "y": 570.0,
+      "extraData": [
+        "Button:Primary Fire"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1529,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1525,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRandomReal",
+      "nodeName": "Random Real",
+      "x": 216.0,
+      "y": 685.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1530,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0.0",
+          "connectedTo": 1534,
+          "canDelete": false
+        },
+        {
+          "ID": 1531,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "250.0",
+          "connectedTo": 1536,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1532,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1526,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": -48.0,
+      "y": 688.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1533,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1534,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1530,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": -40.0,
+      "y": 784.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1535,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "250.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1536,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1531,
           "canDelete": false
         }
       ]

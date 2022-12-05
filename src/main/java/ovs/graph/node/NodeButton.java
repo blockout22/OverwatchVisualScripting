@@ -21,6 +21,7 @@ public class NodeButton extends Node{
         buttons.addOption("Interact");
         buttons.addOption("Jump");
         buttons.addOption("Melee");
+        buttons.addOption("Primary Fire");
         buttons.addOption("Reload");
         buttons.addOption("Secondary Fire");
         buttons.addOption("Ultimate");
