@@ -95,7 +95,9 @@ public class GraphWindow {
         //Add Nodes to list (this will also auto-populate context menu)
         addNodeToList(NodeActionList.class);
         addNodeToList(NodeBoolean.class);
+        addNodeToList(NodeButton.class);
         addNodeToList(NodeCreateHudText.class);
+        addNodeToList(NodeCurrentMap.class);
         addNodeToList(NodeCustomString.class);
         addNodeToList(NodeEventPlayer.class);
         addNodeToList(NodeGetVariable.class);
@@ -110,17 +112,14 @@ public class GraphWindow {
         addNodeToList(NodeRespawn.class);
         addNodeToList(NodeTeleport.class);
         addNodeToList(NodeVector.class);
-        addNodeToList(NodeCurrentMap.class);
         addNodeToList(NodeMap.class);
         addNodeToList(NodeHostPlayer.class);
         addNodeToList(NodeSetMaxHealth.class);
         addNodeToList(NodeSetMatchTime.class);
-        addNodeToList(NodeButton.class);
         addNodeToList(NodeFloat.class);
         addNodeToList(NodeDistanceBetween.class);
         addNodeToList(NodeSetMoveSpeed.class);
         addNodeToList(NodeStartScalingPlayer.class);
-        addNodeToList(NodeAdd.class);
         addNodeToList(NodeRestart.class);
         addNodeToList(NodeHero.class);
         addNodeToList(NodeCustomColor.class);
@@ -136,6 +135,7 @@ public class GraphWindow {
         addNodeToList(NodeKnockbackReceived.class);
         addNodeToList(NodeSetProjectileGravity.class);
         addNodeToList(NodeSetProjectileSpeed.class);
+        addNodeToList(NodeAddition.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
