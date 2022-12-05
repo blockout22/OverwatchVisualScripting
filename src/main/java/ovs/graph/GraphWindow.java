@@ -128,6 +128,14 @@ public class GraphWindow {
         addNodeToList(NodeRandomReal.class);
         addNodeToList(NodeSetSlowMotion.class);
         addNodeToList(NodeSetAbilityResource.class);
+        addNodeToList(NodeSetHealingDealt.class);
+        addNodeToList(NodeSetDamageDealt.class);
+        addNodeToList(NodeSetDamageReceived.class);
+        addNodeToList(NodeSetHealingReceived.class);
+        addNodeToList(NodeKnockbackDealt.class);
+        addNodeToList(NodeKnockbackReceived.class);
+        addNodeToList(NodeSetProjectileGravity.class);
+        addNodeToList(NodeSetProjectileSpeed.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

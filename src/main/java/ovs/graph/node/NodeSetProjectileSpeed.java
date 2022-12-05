@@ -1,30 +1,29 @@
 package ovs.graph.node;
 
-import imgui.type.ImFloat;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetMoveSpeed extends Node{
+public class NodeSetProjectileSpeed extends Node{
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinMoveSpeed = new PinVar();
+    PinVar pinPerc = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeSetMoveSpeed(Graph graph) {
+    public NodeSetProjectileSpeed(Graph graph) {
         super(graph);
-        setName("Set Move Speed");
+        setName("Set Projectile Speed");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
 
-        pinMoveSpeed.setNode(this);
-        pinMoveSpeed.setName("Move Speed");
-        addCustomInput(pinMoveSpeed);
+        pinPerc.setNode(this);
+        pinPerc.setName("Percentage");
+        addCustomInput(pinPerc);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -33,13 +32,14 @@ public class NodeSetMoveSpeed extends Node{
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> speedData = pinMoveSpeed.getData();
+        PinData<ImString> percData = pinPerc.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData, "Null");
-        handlePinStringConnection(pinMoveSpeed, speedData, "100");
+        handlePinStringConnection(pinPerc, percData, "100");
 
-        outputData.getValue().set("Set Move Speed(" + playerData.getValue().get() + ", " + speedData.getValue().get() + ");");
+        outputData.getValue().set("Set Projectile Speed(" + playerData.getValue().get() + ", " + percData.getValue().get() + ");");
+
     }
 
     @Override
