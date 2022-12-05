@@ -2,8 +2,13 @@ package ovs;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 public class GlfwWindow {
 
@@ -44,6 +49,40 @@ public class GlfwWindow {
     public void update(){
         GLFW.glfwSwapBuffers(windowID);
         GLFW.glfwPollEvents();
+    }
+
+    /**
+     * Doesn't work
+     * @param image
+     */
+    private void setIcon(String image){
+        try {
+            ByteBuffer byteBuffer = loadImage(image);
+
+            if(byteBuffer != null) {
+
+                GLFWImage.Buffer images = GLFWImage.create(1);
+                GLFWImage icon = GLFWImage.create().set(128, 128, byteBuffer);
+                images.put(icon);
+                GLFW.glfwSetWindowIcon(windowID, images);
+                return;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ByteBuffer loadImage(String image) throws IOException {
+        InputStream stream = getClass().getResourceAsStream("/" + image);
+        if(stream == null){
+            return null;
+        }
+        byte[] bytesArray = stream.readAllBytes();
+        ByteBuffer buffer = ByteBuffer.wrap(bytesArray);
+        buffer.flip();
+
+        return buffer;
     }
 
     public static int getWidth(){
