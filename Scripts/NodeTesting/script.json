@@ -891,6 +891,37 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeActionList",
+      "nodeName": "Action List",
+      "x": 999.0,
+      "y": 488.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1905,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1907,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1906,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

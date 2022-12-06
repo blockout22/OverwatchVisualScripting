@@ -283,6 +283,7 @@ public class GraphSaver {
                             pin.setCanDelete(save.inputPins.get(j).canDelete);
 
 //                            pin.setCanDelete(true);
+                            pin.setPinType(Pin.PinType.Input);
                             node.inputPins.add(pin);
                         }
 
@@ -314,6 +315,7 @@ public class GraphSaver {
                             pin.setCanDelete(save.outputPins.get(i).canDelete);
 
                             pin.setCanDelete(true);
+                            pin.setPinType(Pin.PinType.Output);
                             node.outputPins.add(pin);
                         }
 

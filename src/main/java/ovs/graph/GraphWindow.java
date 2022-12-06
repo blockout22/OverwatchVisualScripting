@@ -503,6 +503,7 @@ public class GraphWindow {
 
                         if (NodeEditor.showBackgroundContextMenu()) {
                             ImGui.openPopup("context_menu" + id);
+                            lastHoldingPinID = -1;
                             justOpenedContextMenu = true;
                         }
 
@@ -584,22 +585,77 @@ public class GraphWindow {
                 return;
             }
         }
-        if (ImGui.menuItem(instance.getName() + "##" + instance.getID())) {
-            try {
-                Node newInstance = instance.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
-                graph.addNode(newInstance);
-                //newInstance.init();
-                //nodeQPos.put(newInstance.getID(), new ImVec2());
+        boolean canCreate = true;
+        //TODO filter out pins that can't connect to each other
+        Pin lastPin = graph.findPinById((int)lastHoldingPinID);
+
+        if(lastPin != null){
+            canCreate = false;
+            if(lastPin.getPinType() == Pin.PinType.Input){
+                for (int i = 0; i < instance.outputPins.size(); i++) {
+                    Pin outPin = instance.outputPins.get(i);
+
+                    if(lastPin.getClass() == outPin.getClass()){
+                        canCreate = true;
+                        break;
+                    }
+                }
+            }else if(lastPin.getPinType() == Pin.PinType.Output){
+                for (int i = 0; i < instance.inputPins.size(); i++) {
+                    Pin inPin = instance.inputPins.get(i);
+
+                    if(lastPin.getClass() == inPin.getClass()){
+                        canCreate = true;
+                        break;
+                    }
+                }
+            }
+//            boolean foundValidPin = false;
+//
+//            for (int i = 0; i < instance.inputPins.size(); i++) {
+//                if(!(lastPin.getClass() == instance.inputPins.get(i).getClass()) || !(lastPin.getPinType() != instance.inputPins.get(i).getPinType())){
+//
+//                }else{
+//                    canCreate = true;
+//                    break;
+//                }
+//            }
+//
+//            if(!foundValidPin)
+//            {
+//                for (int i = 0; i < instance.outputPins.size(); i++) {
+//                    if(!(lastPin.getClass() == instance.outputPins.get(i).getClass()) || !(lastPin.getPinType() != instance.outputPins.get(i).getPinType())){
+//
+//                    }else{
+//                        canCreate = true;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            canCreate = foundValidPin;
+        }
+
+
+        if(canCreate) {
+            if (ImGui.menuItem(instance.getName() + "##" + instance.getID())) {
+                try {
+                    Node newInstance = instance.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
+                    graph.addNode(newInstance);
+                    //newInstance.init();
+                    //nodeQPos.put(newInstance.getID(), new ImVec2());
 //                float x = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
 //                float y = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
-                newInstance.posX = canvasXPos;
-                newInstance.posY = canvasYPos;
-                NodeEditor.setNodePosition(newInstance.getID(), canvasXPos, canvasYPos);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return;
+                    newInstance.posX = canvasXPos;
+                    newInstance.posY = canvasYPos;
+                    NodeEditor.setNodePosition(newInstance.getID(), canvasXPos, canvasYPos);
+                    autoConnectLink(newInstance);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+                ImGui.closeCurrentPopup();
             }
-            ImGui.closeCurrentPopup();
         }
     }
 
@@ -641,6 +697,43 @@ public class GraphWindow {
                     }
                 }
             }
+        }
+    }
+
+    private void autoConnectLink(Node newInstance){
+        //check if context menu opened by dragging a pin
+        if(lastHoldingPinID != -1){
+            Pin pin = graph.findPinById((int)lastActivePin);
+            System.out.println(pin.getPinType());
+            switch (pin.getPinType()){
+                case Input:
+                    for (int i = 0; i < newInstance.outputPins.size(); i++) {
+                        Pin instancePin = newInstance.outputPins.get(i);
+//                        if(instancePin.getDataType() == pin.getDataType())
+                        if(instancePin.getClass() == pin.getClass())
+                        {
+                            //if a successful connection is made then return/break
+                            if(pin.connect(instancePin)){
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case Output:
+                    for (int i = 0; i < newInstance.inputPins.size(); i++) {
+                        Pin instancePin = newInstance.inputPins.get(i);
+//                        if(instancePin.getDataType() == pin.getDataType())
+                        if(instancePin.getClass() == pin.getClass())
+                        {
+                            //if a successful connection is made then return/break
+                            if(pin.connect(instancePin)){
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+            lastHoldingPinID = -1;
         }
     }
 
