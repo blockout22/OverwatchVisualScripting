@@ -893,32 +893,114 @@
       ]
     },
     {
-      "className": "ovs.graph.node.NodeActionList",
-      "nodeName": "Action List",
-      "x": 999.0,
-      "y": 488.0,
+      "className": "ovs.graph.node.NodeCreateEffect",
+      "nodeName": "Create Effect",
+      "x": 618.0,
+      "y": 494.0,
       "extraData": [],
       "inputPins": [
         {
-          "ID": 1905,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
+          "ID": 2027,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Sphere",
           "connectedTo": -1,
           "canDelete": false
         },
         {
-          "ID": 1907,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
+          "ID": 2028,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
           "connectedTo": -1,
-          "canDelete": true
+          "canDelete": false
+        },
+        {
+          "ID": 2029,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Host Player",
+          "connectedTo": 2037,
+          "canDelete": false
+        },
+        {
+          "ID": 2030,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "25.0",
+          "connectedTo": 2034,
+          "canDelete": false
+        },
+        {
+          "ID": 2031,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Visible To Position and Radius",
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 1906,
+          "ID": 2032,
           "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2035,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": 272.0,
+      "y": 656.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2033,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "25.0",
           "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2034,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2030,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 904.0,
+      "y": 433.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 2035,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create Effect (All Players(All Teams), Sphere, Color(White), Host Player, 25.0, Visible To Position and Radius);",
+          "connectedTo": 2032,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeHostPlayer",
+      "nodeName": "Host Player",
+      "x": 411.0,
+      "y": 513.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2037,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2029,
           "canDelete": false
         }
       ]
