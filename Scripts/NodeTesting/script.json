@@ -901,8 +901,8 @@
       "inputPins": [
         {
           "ID": 2027,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Sphere",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Ring",
           "connectedTo": -1,
           "canDelete": false
         },
@@ -971,8 +971,8 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 904.0,
-      "y": 433.0,
+      "x": 1016.0,
+      "y": 401.0,
       "extraData": [
         "EventOnGoing:Ongoing - Global",
         "Team:All",
@@ -982,7 +982,7 @@
         {
           "ID": 2035,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Effect (All Players(All Teams), Sphere, Color(White), Host Player, 25.0, Visible To Position and Radius);",
+          "value": "Create Effect (All Players(All Teams), Ring, Color(White), Host Player, 25.0, Visible To Position and Radius);",
           "connectedTo": 2032,
           "canDelete": false
         }
