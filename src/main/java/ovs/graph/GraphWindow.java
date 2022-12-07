@@ -487,6 +487,7 @@ public class GraphWindow {
                         NodeEditor.endDelete();
                         NodeEditor.suspend();
 
+                        //Context Menu
                         final long pinWithContextMenu = NodeEditor.getPinWithContextMenu();
                         if (pinWithContextMenu != -1) {
                             ImGui.openPopup("pin_menu" + id);
@@ -505,6 +506,42 @@ public class GraphWindow {
                                 }
                                 ImGui.endPopup();
                             }
+                        }
+
+                        final long nodeWithContextMenu = NodeEditor.getNodeWithContextMenu();
+                        if(nodeWithContextMenu != -1){
+                            ImGui.openPopup("node_menu" + id);
+                            ImGui.getStateStorage().setInt(ImGui.getID("node_id"), (int)nodeWithContextMenu);
+                        }
+
+                        if(ImGui.isPopupOpen("node_menu" + id))
+                        {
+                            final int targetNode = ImGui.getStateStorage().getInt(ImGui.getID("node_id"));
+
+                            if(ImGui.beginPopup("node_menu" + id)){
+                                //TODO Duplicate all info attatched to this node
+                                if(ImGui.menuItem("Duplicate Node " + graph.getNodes().get(targetNode).getName()))
+                                {
+                                    Node newInstance = null;
+                                    try{
+                                        Node target = graph.getNodes().get(targetNode);
+                                        newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
+                                        graph.addNode(newInstance);
+                                        NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY()));
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    ImGui.closeCurrentPopup();
+                                }
+
+                                ImGui.separator();
+
+                                if(ImGui.menuItem("Delete " + graph.getNodes().get(targetNode).getName())){
+                                    NodeEditor.deleteNode(targetNode);
+                                    ImGui.closeCurrentPopup();
+                                }
+                            }
+                            ImGui.endPopup();
                         }
 
                         if (NodeEditor.showBackgroundContextMenu()) {

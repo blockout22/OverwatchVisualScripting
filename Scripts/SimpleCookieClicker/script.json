@@ -2,9 +2,9 @@
   "saveSettings": {
     "modeName": "Simple Cookie Clicker",
     "description": "A Simple Cookie Clicker created using Overwatch Visual Scripting: github.com/blockout22/OverwatchVisualScripting",
-    "maxT1Players": 0,
-    "maxT2Players": 0,
-    "maxFFAPlayers": 12,
+    "maxT1Players": 6,
+    "maxT2Players": 6,
+    "maxFFAPlayers": 0,
     "assaultMode": false,
     "controlMode": false,
     "escortMode": false,
@@ -12,10 +12,10 @@
     "pushMode": false,
     "bountyHunterMode": false,
     "ctfMode": false,
-    "deathmatchMode": true,
+    "deathmatchMode": false,
     "eliminationMode": false,
     "teamDeathmatchMode": false,
-    "practiceRangeMode": false,
+    "practiceRangeMode": true,
     "skirmishMode": false,
     "dmSettings": {
       "GameLenthDM": 10,
@@ -375,34 +375,10 @@
       ]
     },
     {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": 360.0,
-      "y": -656.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1695,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d0.0, y\u003d0.0, z\u003d0.0, w\u003d0.0}",
-          "connectedTo": -1,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1696,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1406,
-          "canDelete": false
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Player Joined",
-      "x": 952.0,
-      "y": 99.0,
+      "x": 632.0,
+      "y": -43.0,
       "extraData": [
         "EventOnGoing:Player Joined Match",
         "Team:All",
@@ -631,105 +607,6 @@
       ]
     },
     {
-      "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Global - Create ",
-      "x": 1016.0,
-      "y": -591.0,
-      "extraData": [
-        "EventOnGoing:Ongoing - Global",
-        "Team:All",
-        "Player:All"
-      ],
-      "inputPins": [
-        {
-          "ID": 1399,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Global.BotSpawn",
-          "connectedTo": 1407,
-          "canDelete": false
-        },
-        {
-          "ID": 1405,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Create Dummy Bot(Hero(Ana), All Teams, 0, Vector(0, 0, 0), Vector(0, 0, 0));",
-          "connectedTo": 1404,
-          "canDelete": true
-        }
-      ],
-      "outputPins": []
-    },
-    {
-      "className": "ovs.graph.node.NodeCreateDummyBot",
-      "nodeName": "Create Dummy Bot",
-      "x": 744.0,
-      "y": -496.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1400,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Hero(Ana)",
-          "connectedTo": -1,
-          "canDelete": false
-        },
-        {
-          "ID": 1401,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "All Teams",
-          "connectedTo": -1,
-          "canDelete": false
-        },
-        {
-          "ID": 1402,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "0",
-          "connectedTo": -1,
-          "canDelete": false
-        },
-        {
-          "ID": 1403,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(0, 0, 0)",
-          "connectedTo": -1,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1404,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1405,
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": 620.0,
-      "y": -680.0,
-      "extraData": [
-        "Var:Global.BotSpawn"
-      ],
-      "inputPins": [
-        {
-          "ID": 1406,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(0.0, 0.0, 0.0)",
-          "connectedTo": 1696,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1407,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1399,
-          "canDelete": false
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
       "x": 1634.0,
@@ -803,6 +680,27 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 1592.0,
+      "y": -13.0,
+      "extraData": [
+        "EventOnGoing:Player Dealt Damage",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 1962,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
     }
   ]
 }
