@@ -8,9 +8,7 @@ import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
-import imgui.flag.ImGuiCond;
-import imgui.flag.ImGuiInputTextFlags;
-import imgui.flag.ImGuiWindowFlags;
+import imgui.flag.*;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
@@ -60,6 +58,7 @@ public class GraphWindow {
 
     private boolean justOpenedContextMenu = false;
     private boolean isLoading = false;
+    private boolean outputInFocus = false;
 
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
@@ -218,12 +217,12 @@ public class GraphWindow {
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
 
-            if(ImGui.button("Compile")){
-                String compiledText = Compiler.compile(graph, settings);
-                EDITOR.setText(compiledText);
-                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                clipboard.setContents(new StringSelection(compiledText), null);
-            }
+//            if(ImGui.button("Compile")){
+//                String compiledText = Compiler.compile(graph, settings);
+//                EDITOR.setText(compiledText);
+//                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//                clipboard.setContents(new StringSelection(compiledText), null);
+//            }
 
             ImGui.sameLine();
 
@@ -238,6 +237,10 @@ public class GraphWindow {
 
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
+                    if(outputInFocus){
+                        outputInFocus = false;
+//                        hasCompiled = false;
+                    }
                     {
                         {
                             ImGui.beginGroup();
@@ -677,6 +680,14 @@ public class GraphWindow {
                 if(ImGui.beginTabItem("Output")){
                     EDITOR.render("TextOutput");
                     ImGui.endTabItem();
+
+                    if(!outputInFocus){
+                        outputInFocus = true;
+                        String compiledText = Compiler.compile(graph, settings);
+                        EDITOR.setText(compiledText);
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(new StringSelection(compiledText), null);
+                    }
                 }
             }
             ImGui.endTabBar();
