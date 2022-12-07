@@ -684,8 +684,8 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 1592.0,
-      "y": -13.0,
+      "x": 1800.0,
+      "y": -173.0,
       "extraData": [
         "EventOnGoing:Player Dealt Damage",
         "Team:All",
@@ -695,12 +695,105 @@
         {
           "ID": 1962,
           "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connectedTo": -1,
+          "value": "Event Player.Money",
+          "connectedTo": 2100,
           "canDelete": false
         }
       ],
       "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeGetVariable",
+      "nodeName": "Get Variable",
+      "x": 1148.0,
+      "y": -70.0,
+      "extraData": [
+        "Var:Event Player.Money"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2095,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2096,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAddition",
+      "nodeName": "Addition",
+      "x": 1416.0,
+      "y": -85.0,
+      "extraData": [
+        "Addition:+"
+      ],
+      "inputPins": [
+        {
+          "ID": 2096,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.Money",
+          "connectedTo": 2095,
+          "canDelete": false
+        },
+        {
+          "ID": 2097,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Damage",
+          "connectedTo": 2233,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2098,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2099,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetVariable",
+      "nodeName": "Set Variable",
+      "x": 1532.0,
+      "y": -87.0,
+      "extraData": [
+        "Var:Event Player.Money"
+      ],
+      "inputPins": [
+        {
+          "ID": 2099,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.Money + Event Damage",
+          "connectedTo": 2098,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2100,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1962,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventDamage",
+      "nodeName": "Event Damage",
+      "x": 1172.0,
+      "y": 17.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2233,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2097,
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

@@ -142,6 +142,7 @@ public class GraphWindow {
         addNodeToList(NodeBigMessage.class);
         addNodeToList(NodeCreateDummyBot.class);
         addNodeToList(NodePositionOf.class);
+        addNodeToList(NodeEventDamage.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
