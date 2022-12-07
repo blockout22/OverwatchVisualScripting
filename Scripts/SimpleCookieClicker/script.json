@@ -238,14 +238,14 @@
         {
           "ID": 1124,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Event Player.Money",
+          "value": "Global.BotSpawn",
           "connectedTo": 1141,
           "canDelete": false
         },
         {
           "ID": 1269,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Null, Null, Custom String(\"Money: {0}\", Event Player.Money), Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
+          "value": "Create HUD Text(Event Player,Null, Null, Custom String(\"Money: {0}\", Global.BotSpawn), Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
           "connectedTo": 1133,
           "canDelete": true
         }
@@ -285,7 +285,7 @@
         {
           "ID": 1128,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"Money: {0}\", Event Player.Money)",
+          "value": "Custom String(\"Money: {0}\", Global.BotSpawn)",
           "connectedTo": 1139,
           "canDelete": false
         },
@@ -360,7 +360,7 @@
         {
           "ID": 1136,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Event Player.Money",
+          "value": "Global.BotSpawn",
           "connectedTo": 1140,
           "canDelete": false
         },
@@ -470,14 +470,14 @@
         {
           "ID": 1399,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Dummy Bot(Hero(Ana), All Teams, 0, Vector(0, 0, 0), Vector(0, 0, 0));",
+          "value": "",
           "connectedTo": -1,
           "canDelete": false
         },
         {
           "ID": 1405,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Dummy Bot(Hero(Ana), All Teams, 0, Vector(0, 0, 0), Vector(0, 0, 0));",
+          "value": "",
           "connectedTo": -1,
           "canDelete": true
         }
@@ -558,7 +558,7 @@
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": 1717.0,
+      "x": 1634.0,
       "y": -421.0,
       "extraData": [
         "Location:Left"
@@ -567,8 +567,8 @@
         {
           "ID": 1408,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Null",
-          "connectedTo": -1,
+          "value": "Event Player",
+          "connectedTo": 1563,
           "canDelete": false
         },
         {
@@ -581,8 +581,8 @@
         {
           "ID": 1410,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Null",
-          "connectedTo": -1,
+          "value": "Position Of (Event Player)",
+          "connectedTo": 1556,
           "canDelete": false
         },
         {
@@ -644,7 +644,7 @@
         {
           "ID": 1417,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Event Player \u003d\u003d Host Player);\n\t\t\tCreate HUD Text(Null,Null, Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
+          "value": "If(Event Player \u003d\u003d Host Player);\n\t\t\tCreate HUD Text(Event Player,Null, Position Of (Event Player), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tEnd;",
           "connectedTo": 1421,
           "canDelete": false
         }
@@ -678,7 +678,7 @@
         {
           "ID": 1420,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Null,Null, Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
+          "value": "Create HUD Text(Event Player,Null, Position Of (Event Player), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
           "connectedTo": 1416,
           "canDelete": false
         }
@@ -695,8 +695,8 @@
     {
       "className": "ovs.graph.node.NodeEventPlayer",
       "nodeName": "Event Player",
-      "x": 1825.0,
-      "y": -593.0,
+      "x": 1652.0,
+      "y": -703.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -711,8 +711,8 @@
     {
       "className": "ovs.graph.node.NodeHostPlayer",
       "nodeName": "Host Player",
-      "x": 1832.0,
-      "y": -513.0,
+      "x": 1659.0,
+      "y": -623.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -720,6 +720,62 @@
           "ID": 1423,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 1419,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodePositionOf",
+      "nodeName": "Position Of",
+      "x": 1448.0,
+      "y": -320.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1555,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1557,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1556,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1410,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1300.0,
+      "y": -302.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1557,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1555,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1460.0,
+      "y": -399.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1563,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1408,
           "canDelete": false
         }
       ]
