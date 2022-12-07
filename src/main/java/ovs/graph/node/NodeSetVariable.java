@@ -15,15 +15,18 @@ public class NodeSetVariable extends Node{
     PinVar inputPin = new PinVar();
     private ComboBox comboBox = new ComboBox();
 
+    //TODO allow users to select a specific players variable
     public NodeSetVariable(Graph graph) {
         super(graph);
         setName("Set Variable");
 
+        inputPin.setNode(this);
+        inputPin.setName("Value");
+        addCustomInput(inputPin);
+
         outputPin.setNode(this);
         addCustomOutput(outputPin);
 
-        inputPin.setNode(this);
-        addCustomInput(inputPin);
 
         comboBox.addOnOpenedListener(new OnOpenedListener() {
             @Override

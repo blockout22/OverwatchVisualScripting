@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Settings {
 
-    private ImString modeName = new ImString();
-    private ImString description = new ImString();
+    private ImString modeName = new ImString(500);
+    private ImString description = new ImString(500);
 
     private int[] maxT1Players = {
             5

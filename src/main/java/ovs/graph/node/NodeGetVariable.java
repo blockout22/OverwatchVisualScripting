@@ -13,7 +13,7 @@ public class NodeGetVariable extends Node{
     private ComboBox comboBox = new ComboBox();
 
     //private int lastVariableCount = 0;
-
+    //TODO allow users to select a specific players variable
     public NodeGetVariable(Graph graph) {
         super(graph);
         setName("Get Variable");

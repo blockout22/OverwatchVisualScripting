@@ -140,6 +140,7 @@ public class GraphWindow {
         addNodeToList(NodeEmptyArray.class);
         addNodeToList(NodeSmallMessage.class);
         addNodeToList(NodeBigMessage.class);
+        addNodeToList(NodeCreateDummyBot.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -535,6 +536,7 @@ public class GraphWindow {
                                     }
                                 }else{
                                     if(justOpenedContextMenu){
+                                        nodeSearch.set("");
                                         ImGui.setKeyboardFocusHere(0);
                                         justOpenedContextMenu = false;
                                     }
