@@ -728,42 +728,17 @@ public class GraphWindow {
                     }
                 }
             }
-//            boolean foundValidPin = false;
-//
-//            for (int i = 0; i < instance.inputPins.size(); i++) {
-//                if(!(lastPin.getClass() == instance.inputPins.get(i).getClass()) || !(lastPin.getPinType() != instance.inputPins.get(i).getPinType())){
-//
-//                }else{
-//                    canCreate = true;
-//                    break;
-//                }
-//            }
-//
-//            if(!foundValidPin)
-//            {
-//                for (int i = 0; i < instance.outputPins.size(); i++) {
-//                    if(!(lastPin.getClass() == instance.outputPins.get(i).getClass()) || !(lastPin.getPinType() != instance.outputPins.get(i).getPinType())){
-//
-//                    }else{
-//                        canCreate = true;
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            canCreate = foundValidPin;
         }
 
 
         if(canCreate) {
             if (ImGui.menuItem(instance.getName() + "##" + instance.getID())) {
+
+            }
+            if(ImGui.isItemHovered() && ImGui.isItemClicked()){
                 try {
                     Node newInstance = instance.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                     graph.addNode(newInstance);
-                    //newInstance.init();
-                    //nodeQPos.put(newInstance.getID(), new ImVec2());
-//                float x = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
-//                float y = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
                     newInstance.posX = canvasXPos;
                     newInstance.posY = canvasYPos;
                     NodeEditor.setNodePosition(newInstance.getID(), canvasXPos, canvasYPos);
