@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
@@ -19,41 +20,9 @@ public class NodeHero extends Node{
         output.setNode(this);
         addCustomOutput(output);
 
-        heroes.addOption("Ana");
-        heroes.addOption("Ashe");
-        heroes.addOption("Baptiste");
-        heroes.addOption("Bastion");
-        heroes.addOption("Brigitte");
-        heroes.addOption("Doomfist");
-        heroes.addOption("D.Va");
-        heroes.addOption("Echo");
-        heroes.addOption("Genji");
-        heroes.addOption("Wrecking Ball");
-        heroes.addOption("Hanzo");
-        heroes.addOption("Junker Queen");
-        heroes.addOption("Junkrat");
-        heroes.addOption("Kiriko");
-        heroes.addOption("Lúcio");
-        heroes.addOption("Cassidy");
-        heroes.addOption("Mei");
-        heroes.addOption("Mercy");
-        heroes.addOption("Moira");
-        heroes.addOption("Orisa");
-        heroes.addOption("Pharah");
-        heroes.addOption("Reaper");
-        heroes.addOption("Reinhardt");
-        heroes.addOption("Roadhog");
-        heroes.addOption("Sigma");
-        heroes.addOption("Sojourn");
-        heroes.addOption("Soldier: 76");
-        heroes.addOption("Sombra");
-        heroes.addOption("Symmetra");
-        heroes.addOption("Torbjörn");
-        heroes.addOption("Tracer");
-        heroes.addOption("Windowmaker");
-        heroes.addOption("Winston");
-        heroes.addOption("Zarya");
-        heroes.addOption("Zenyatta");
+        for (int i = 0; i < Global.heroes.size(); i++) {
+            heroes.addOption(Global.heroes.get(i));
+        }
 
         heroes.select(9);
     }

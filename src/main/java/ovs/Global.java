@@ -30,6 +30,7 @@ public class Global {
         heroes.add("Moira");
         heroes.add("Orisa");
         heroes.add("Pharah");
+        heroes.add("Ramattra");
         heroes.add("Reaper");
         heroes.add("Reinhardt");
         heroes.add("Roadhog");
