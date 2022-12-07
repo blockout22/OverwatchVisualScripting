@@ -10,11 +10,13 @@ import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiInputTextFlags;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.GlfwWindow;
+import ovs.Global;
 import ovs.ImGuiWindow;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
@@ -81,6 +83,7 @@ public class GraphWindow {
         if(loadFile != null) {
             graph = graphSaver.load(loadFile, settings);
             fileName = loadFile;
+            id = fileName;
             isLoading = true;
         }else {
             graph = new Graph();
@@ -541,8 +544,34 @@ public class GraphWindow {
                                     NodeEditor.deleteNode(targetNode);
                                     ImGui.closeCurrentPopup();
                                 }
+
+                                if(ImGui.menuItem("Preview Source")){
+                                    Global.setStorage("preview_source", targetNode);
+                                    Global.setStorage("preview_open_request", 1);
+//                                    ImGui.closeCurrentPopup();
+                                }
+                                ImGui.endPopup();
                             }
-                            ImGui.endPopup();
+                        }
+
+                        if((int)Global.getStorage("preview_open_request") == 1){
+                            ImGui.openPopup("PreviewSource" + id);
+                            Global.setStorage("preview_open_request", 0);
+                        }
+
+                        if(ImGui.isPopupOpen("PreviewSource" + id))
+                        {
+                            if(ImGui.beginPopupModal("PreviewSource" + id, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar))
+                            {
+                                int targetID = (int)Global.getStorage("preview_source");
+                                ImGui.text(graph.getNodes().get(targetID).getOutput());
+
+                                ImGui.separator();
+                                if(ImGui.button("Close")){
+                                    ImGui.closeCurrentPopup();
+                                }
+                                ImGui.endPopup();
+                            }
                         }
 
                         if (NodeEditor.showBackgroundContextMenu()) {

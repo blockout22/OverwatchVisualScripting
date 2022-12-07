@@ -1,12 +1,16 @@
 package ovs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Global {
 
     public static String SCRIPTS_DIR = "Scripts";
 
     public static ArrayList<String> heroes = new ArrayList<>();
+
+    private static Map<String, Object> storage = new HashMap<>();
 
     static {
         heroes.add("Ana");
@@ -45,5 +49,17 @@ public class Global {
         heroes.add("Winston");
         heroes.add("Zarya");
         heroes.add("Zenyatta");
+    }
+
+    public static void setStorage(String key, Object obj){
+        storage.put(key, obj);
+    }
+
+    public static Object getStorage(String key){
+        Object value = storage.get(key);
+        if(value == null){
+            return 0;
+        }
+        return storage.get(key);
     }
 }
