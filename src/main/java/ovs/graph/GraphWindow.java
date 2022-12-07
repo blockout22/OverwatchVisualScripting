@@ -137,6 +137,7 @@ public class GraphWindow {
         addNodeToList(NodeSetProjectileSpeed.class);
         addNodeToList(NodeAddition.class);
         addNodeToList(NodeCreateEffect.class);
+        addNodeToList(NodeEmptyArray.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

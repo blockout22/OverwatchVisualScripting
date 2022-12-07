@@ -637,6 +637,27 @@
           "value": "0.0",
           "connectedTo": -1,
           "canDelete": false
+        },
+        {
+          "ID": 1031,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1032,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1033,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
         }
       ],
       "outputPins": [
@@ -844,6 +865,27 @@
           "ID": 1047,
           "type": "ovs.graph.pin.PinFloat",
           "value": "0.0",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1051,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1052,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1053,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
           "connectedTo": -1,
           "canDelete": false
         }
