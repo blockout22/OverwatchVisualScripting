@@ -269,7 +269,7 @@ public class GraphWindow {
 
                                     ImGui.pushItemWidth(400);
                                     ImGui.listBox("##Rules", ruleListSelected, items);
-                                    if(ImGui.isMouseDoubleClicked(0)){
+                                    if(ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0)){
 
                                         int id = ruleNodes.get(ruleListSelected.get()).getID();
                                         NodeEditor.selectNode(id, false);
