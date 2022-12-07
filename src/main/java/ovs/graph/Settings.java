@@ -108,8 +108,9 @@ public class Settings {
         ImGui.sameLine();
         ImGui.inputText("##Description", description);
 
+        ImGui.newLine();
         //Lobby Settings
-        ImGui.separator();
+        ImGui.text("---------------------------------------------------------");
         ImGui.text("Lobby Settings");
         ImGui.text("Max Team 1 Players");
         ImGui.sameLine();
@@ -123,8 +124,9 @@ public class Settings {
         ImGui.sameLine();
         ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
 
+        ImGui.newLine();
         ImGui.text("Modes");
-        ImGui.separator();
+        ImGui.text("---------------------------------------------------------");
         ImGui.checkbox("##Assault", assaultOnOff);
         ImGui.sameLine();
         ImGui.text("Assault");

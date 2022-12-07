@@ -7,6 +7,7 @@ import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImInt;
 import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
 import ovs.graph.GraphWindow;

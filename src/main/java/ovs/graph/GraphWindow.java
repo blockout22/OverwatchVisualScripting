@@ -73,6 +73,8 @@ public class GraphWindow {
 
     private Node editingNodeTitle = null;
 
+    private ImInt ruleListSelected = new ImInt();
+
     private float canvasXPos = 0;
     private float canvasYPos = 0;
 
@@ -233,6 +235,7 @@ public class GraphWindow {
                 graphSaver.save(fileName, settings, graph);
             }
 
+
             if(ImGui.beginTabBar("TabBar")) {
                 if(ImGui.beginTabItem("Graph")) {
                     {
@@ -245,13 +248,12 @@ public class GraphWindow {
 
                                 //List of Rules on graph
                                 {
-                                    ImGui.separator();
+                                    ImGui.newLine();
+                                    ImGui.text("---------------------------------------------------------");
                                     ImGui.text("Rules");
 
-                                    ImInt currentItem = new ImInt();
-
                                     //TODO STOP CREATING NEW EVERY FRAME!!!!
-                                    ArrayList<NodeRule> ruleNodes = new ArrayList<>();
+                                    ArrayList<Node> ruleNodes = new ArrayList<>();
 
                                     for (Node node : graph.getNodes().values()) {
                                         if (node instanceof NodeRule) {
@@ -266,11 +268,18 @@ public class GraphWindow {
 
 
                                     ImGui.pushItemWidth(400);
-                                    ImGui.listBox("##Rules", currentItem, items);
+                                    ImGui.listBox("##Rules", ruleListSelected, items);
+                                    if(ImGui.isMouseDoubleClicked(0)){
+
+                                        int id = ruleNodes.get(ruleListSelected.get()).getID();
+                                        NodeEditor.selectNode(id, false);
+                                        NodeEditor.navigateToSelection(false, 0.5f);
+                                    }
                                     ImGui.popItemWidth();
                                 }
 
-                                ImGui.separator();
+                                ImGui.newLine();
+                                ImGui.text("---------------------------------------------------------");
 
                                 //Variables
                                 ImGui.text("Variables");
@@ -541,8 +550,6 @@ public class GraphWindow {
                                     ImGui.closeCurrentPopup();
                                 }
 
-                                ImGui.separator();
-
                                 if(ImGui.menuItem("Delete " + graph.getNodes().get(targetNode).getName())){
                                     NodeEditor.deleteNode(targetNode);
                                     ImGui.closeCurrentPopup();
@@ -588,6 +595,7 @@ public class GraphWindow {
                             if(ImGui.beginPopup("context_menu" + id)){
                                 canvasXPos = NodeEditor.toCanvasX(ImGui.getCursorScreenPosX());
                                 canvasYPos = NodeEditor.toCanvasY(ImGui.getCursorScreenPosY());
+
                                 if(nodeInstanceCache.isEmpty())
                                 {
                                     for (Class<? extends Node> node : nodeList) {
