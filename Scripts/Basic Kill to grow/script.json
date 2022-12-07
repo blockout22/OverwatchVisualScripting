@@ -284,7 +284,7 @@
       "x": 476.0,
       "y": -22.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [],
       "outputPins": [
@@ -302,7 +302,7 @@
       "x": 587.0,
       "y": 297.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [
         {
@@ -424,7 +424,7 @@
       "x": 211.0,
       "y": 214.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [],
       "outputPins": [
@@ -442,7 +442,7 @@
       "x": 175.0,
       "y": 314.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [],
       "outputPins": [
@@ -550,7 +550,7 @@
       "x": 444.0,
       "y": -423.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [
         {
@@ -675,7 +675,7 @@
       "x": 139.0,
       "y": -118.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [],
       "outputPins": [
@@ -750,7 +750,7 @@
       "x": 508.0,
       "y": 474.0,
       "extraData": [
-        "Var:1"
+        "Var:Event Player.Scale"
       ],
       "inputPins": [],
       "outputPins": [
@@ -827,8 +827,8 @@
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": 256.0,
-      "y": 601.0,
+      "x": 226.0,
+      "y": 599.0,
       "extraData": [
         "Location:Top"
       ],
@@ -947,8 +947,8 @@
     {
       "className": "ovs.graph.node.NodeWait",
       "nodeName": "Wait",
-      "x": 256.0,
-      "y": 793.0,
+      "x": 160.0,
+      "y": 841.0,
       "extraData": [
         "WaitBehavior:Ignore Condition"
       ],
@@ -973,8 +973,8 @@
     {
       "className": "ovs.graph.node.NodeRestart",
       "nodeName": "Restart",
-      "x": 391.0,
-      "y": 913.0,
+      "x": 263.0,
+      "y": 961.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [

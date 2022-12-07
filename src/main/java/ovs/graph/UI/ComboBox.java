@@ -39,6 +39,10 @@ public class ComboBox extends UiComponent{
     };
 
     public void select(int index){
+        if(index < 0){
+            currentSelectedIndex = -1;
+            return;
+        }
         String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
         currentSelectedIndex = index;
         String newValue = items[currentSelectedIndex];
