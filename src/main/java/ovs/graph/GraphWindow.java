@@ -550,6 +550,8 @@ public class GraphWindow {
                                     ImGui.closeCurrentPopup();
                                 }
 
+                                ImGui.separator();
+
                                 if(ImGui.menuItem("Delete " + graph.getNodes().get(targetNode).getName())){
                                     NodeEditor.deleteNode(targetNode);
                                     ImGui.closeCurrentPopup();
@@ -559,6 +561,26 @@ public class GraphWindow {
                                     Global.setStorage("preview_source", targetNode);
                                     Global.setStorage("preview_open_request", 1);
 //                                    ImGui.closeCurrentPopup();
+                                }
+                                ImGui.endPopup();
+                            }
+                        }
+
+                        final long linkWithContextMenu = NodeEditor.getLinkWithContextMenu();
+                        if(linkWithContextMenu != -1){
+                            ImGui.openPopup("link_menu" + id);
+                            ImGui.getStateStorage().setInt(ImGui.getID("link_id"), (int)linkWithContextMenu);
+                        }
+
+                        if(ImGui.isPopupOpen("link_menu" + id)){
+                            final int targetLink = ImGui.getStateStorage().getInt(ImGui.getID("link_id"));
+                            if(ImGui.beginPopup("link_menu" + id)){
+                                if(ImGui.menuItem("Delete Link")){
+                                    if(NodeEditor.deleteLink(targetLink))
+                                    {
+
+                                    }
+                                    ImGui.closeCurrentPopup();
                                 }
                                 ImGui.endPopup();
                             }
