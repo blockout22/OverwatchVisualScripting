@@ -469,7 +469,7 @@ public class GraphWindow {
                         NodeEditor.endCreate();
 
                         if (NodeEditor.beginDelete()) {
-                            int size = 10;
+                            int size = 50;
                             long[] list = new long[size];
                             NodeEditor.getSelectedNodes(list, size);
                             ImLong link1 = new ImLong();
@@ -483,9 +483,12 @@ public class GraphWindow {
                                 pin2.connectedTo = -1;
                             }
 
-                            ImLong nodeID = new ImLong();
-                            if (NodeEditor.queryDeletedNode(nodeID)) {
-                                graph.removeNode((int) nodeID.get());
+                            for (int i = 0; i < list.length; i++) {
+                                ImLong nodeID = new ImLong();
+                                if (NodeEditor.queryDeletedNode(nodeID)) {
+                                    graph.removeNode((int) nodeID.get());
+                                }
+
                             }
                         }
                         NodeEditor.endDelete();
