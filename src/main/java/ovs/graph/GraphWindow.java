@@ -138,6 +138,7 @@ public class GraphWindow {
         addNodeToList(NodeAddition.class);
         addNodeToList(NodeCreateEffect.class);
         addNodeToList(NodeEmptyArray.class);
+        addNodeToList(NodeSmallMessage.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

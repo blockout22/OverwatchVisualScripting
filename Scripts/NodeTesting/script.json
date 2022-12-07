@@ -227,8 +227,8 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 920.0,
-      "y": 87.0,
+      "x": 1144.0,
+      "y": 55.0,
       "extraData": [
         "EventOnGoing:Player Joined Match",
         "Team:All",
@@ -239,21 +239,21 @@
           "ID": 1077,
           "type": "ovs.graph.pin.PinAction",
           "value": "Wait(10.0, Ignore Condition);",
-          "connectedTo": 1079,
+          "connectedTo": -1,
           "canDelete": false
         },
         {
           "ID": 1081,
           "type": "ovs.graph.pin.PinAction",
           "value": "Set Slow Motion(0.0 + 1.0 - 2.0 / 3.0);",
-          "connectedTo": 1434,
+          "connectedTo": -1,
           "canDelete": true
         },
         {
           "ID": 1082,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1080,
+          "connectedTo": -1,
           "canDelete": true
         }
       ],
@@ -280,7 +280,7 @@
         {
           "ID": 1079,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1077,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -296,7 +296,7 @@
         {
           "ID": 1080,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1082,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -541,7 +541,7 @@
         {
           "ID": 1434,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1081,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -939,7 +939,7 @@
         {
           "ID": 2032,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 2035,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
@@ -971,10 +971,10 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 1016.0,
-      "y": 401.0,
+      "x": 1224.0,
+      "y": 433.0,
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Ongoing - Each Player",
         "Team:All",
         "Player:All"
       ],
@@ -982,9 +982,23 @@
         {
           "ID": 2035,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Effect (All Players(All Teams), Ring, Color(White), Host Player, 25.0, Visible To Position and Radius);",
-          "connectedTo": 2032,
+          "value": "Wait(5.0, Ignore Condition);",
+          "connectedTo": 2166,
           "canDelete": false
+        },
+        {
+          "ID": 2161,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Small Message(Event Player, Custom String(\"Hello {0}\", Event Player));",
+          "connectedTo": 2164,
+          "canDelete": true
+        },
+        {
+          "ID": 2162,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 2160,
+          "canDelete": true
         }
       ],
       "outputPins": []
@@ -1001,6 +1015,133 @@
           "ID": 2037,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 2029,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeLoop",
+      "nodeName": "Loop",
+      "x": 1212.0,
+      "y": 817.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2160,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2162,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSmallMessage",
+      "nodeName": "Small Message",
+      "x": 957.0,
+      "y": 624.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2163,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Hello {0}\", Event Player)",
+          "connectedTo": 2171,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2164,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2161,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeWait",
+      "nodeName": "Wait",
+      "x": 872.0,
+      "y": 393.0,
+      "extraData": [
+        "WaitBehavior:Ignore Condition"
+      ],
+      "inputPins": [
+        {
+          "ID": 2165,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "5.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2166,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2035,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 696.0,
+      "y": 695.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2167,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Hello {0}",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 2168,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 2172,
+          "canDelete": false
+        },
+        {
+          "ID": 2169,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 2170,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2171,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2163,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 468.0,
+      "y": 801.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2172,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2168,
           "canDelete": false
         }
       ]
