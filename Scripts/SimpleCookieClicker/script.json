@@ -17,11 +17,53 @@
     "teamDeathmatchMode": false,
     "practiceRangeMode": true,
     "skirmishMode": false,
+    "extensionToggle": [
+      {
+        "name": "Beam Sounds",
+        "value": false
+      },
+      {
+        "name": "Beam Effects",
+        "value": true
+      },
+      {
+        "name": "Buff and Debuff Sounds",
+        "value": true
+      },
+      {
+        "name": "Buff Status Effects",
+        "value": true
+      },
+      {
+        "name": "Debuff Status Effects",
+        "value": true
+      },
+      {
+        "name": "Energy Explosion Effects",
+        "value": false
+      },
+      {
+        "name": "Play More Effects",
+        "value": true
+      },
+      {
+        "name": "Spawn More Dummy Bots",
+        "value": false
+      },
+      {
+        "name": "Explosion Sounds",
+        "value": false
+      },
+      {
+        "name": "Kinetic Explosion Effects",
+        "value": false
+      }
+    ],
     "dmSettings": {
       "GameLenthDM": 10,
       "scoreToWinDM": 20,
       "initRespawnDM": true,
-      "boolInfo": [
+      "dmMapToggle": [
         {
           "name": "Black Forest",
           "value": false
@@ -321,7 +363,7 @@
         {
           "ID": 2522,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Effect (All Players(All Teams), Sphere, Custom Color(0.0, 255.0, 0.0, 1.0), Global.Sphere, 5.0, Visible To Position and Radius);",
+          "value": "Create Effect (All Players(All Teams), Mei Frozen Effect, Custom Color(0.0, 255.0, 0.0, 1.0), Global.Sphere, 5.0, Visible To Position and Radius);",
           "connectedTo": 2504,
           "canDelete": true
         }
@@ -331,14 +373,14 @@
     {
       "className": "ovs.graph.node.NodeCreateEffect",
       "nodeName": "Create Effect",
-      "x": 2186.0,
+      "x": 2056.0,
       "y": 190.0,
       "extraData": [],
       "inputPins": [
         {
           "ID": 2499,
           "type": "ovs.graph.pin.PinCombo",
-          "value": "Sphere",
+          "value": "Mei Frozen Effect",
           "connectedTo": -1,
           "canDelete": false
         },

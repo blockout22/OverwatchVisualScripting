@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
-import imgui.type.ImBoolean;
 import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.Settings;
@@ -40,7 +39,8 @@ public class GraphSaver {
         graphSave.nodeSaves.clear();
         graphSave.globalVariables.clear();
         graphSave.playerVariables.clear();
-        graphSave.saveSettings.dmSettings.boolInfo.clear();
+        graphSave.saveSettings.extensionToggle.clear();
+        graphSave.saveSettings.dmSettings.dmMapToggle.clear();
 
         graphSave.saveSettings.modeName = settings.getModeName();
         graphSave.saveSettings.description = settings.getDescription();
@@ -61,6 +61,14 @@ public class GraphSaver {
         graphSave.saveSettings.practiceRangeMode = settings.getPracticeRangeOnOff();
         graphSave.saveSettings.skirmishMode = settings.getSkirmishOnOff();
 
+        for (int i = 0; i < settings.extensionBools.size(); i++) {
+            Settings.BoolInfoWithName info = settings.extensionBools.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.extensionToggle.add(saveInfo);
+        }
+
         //TODO save other game mode settings
         //DeathMatch Options
         graphSave.saveSettings.dmSettings.GameLenthDM = settings.getGameTimeDM();
@@ -71,7 +79,7 @@ public class GraphSaver {
             BoolInfo saveInfo = new BoolInfo();
             saveInfo.name = info.name;
             saveInfo.value = info.bool.get();
-            graphSave.saveSettings.dmSettings.boolInfo.add(saveInfo);
+            graphSave.saveSettings.dmSettings.dmMapToggle.add(saveInfo);
         }
 
 
@@ -190,13 +198,25 @@ public class GraphSaver {
             settings.setPracticeRangeOnOff(gs.saveSettings.practiceRangeMode);
             settings.setSkirmishOnOff(gs.saveSettings.skirmishMode);
 
+            for (int i = 0; i < gs.saveSettings.extensionToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.extensionToggle.get(i);
+
+                for (int j = 0; j < settings.extensionBools.size(); j++) {
+                    Settings.BoolInfoWithName extInfo = settings.extensionBools.get(j);
+                    if(info.name.equals(extInfo.name)){
+                        extInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
 
             //DeathMatch Options
             settings.setGameTimeDM(gs.saveSettings.dmSettings.GameLenthDM);
             settings.setScoreToWinDM(gs.saveSettings.dmSettings.scoreToWinDM);
             settings.setInitRespawnOnOffDM(gs.saveSettings.dmSettings.initRespawnDM);
-            for (int i = 0; i < gs.saveSettings.dmSettings.boolInfo.size(); i++) {
-                BoolInfo info = gs.saveSettings.dmSettings.boolInfo.get(i);
+            for (int i = 0; i < gs.saveSettings.dmSettings.dmMapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.dmSettings.dmMapToggle.get(i);
 
                 //find name and change value;
                 for (int j = 0; j < settings.dmMapBools.size(); j++) {
@@ -416,6 +436,8 @@ public class GraphSaver {
         private boolean practiceRangeMode;
         private boolean skirmishMode;
 
+        private ArrayList<BoolInfo> extensionToggle = new ArrayList<>();
+
         private DeatchMatchSettings dmSettings = new DeatchMatchSettings();
     }
 
@@ -424,7 +446,7 @@ public class GraphSaver {
         private int GameLenthDM = 10;
         private int scoreToWinDM = 20;
         private boolean initRespawnDM = true;
-        private ArrayList<BoolInfo> boolInfo = new ArrayList<>();
+        private ArrayList<BoolInfo> dmMapToggle = new ArrayList<>();
     }
 
     private static class BoolInfo{

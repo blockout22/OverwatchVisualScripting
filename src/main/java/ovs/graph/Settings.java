@@ -43,6 +43,7 @@ public class Settings {
     private ImBoolean initRespawnOnOffDM = new ImBoolean(true);
     //Maps Toggle
     public ArrayList<BoolInfoWithName> dmMapBools = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> extensionBools = new ArrayList<>();
 
     public Settings(){
         dmMapBools.add(new BoolInfoWithName("Black Forest", new ImBoolean(true)));
@@ -93,6 +94,17 @@ public class Settings {
         dmMapBools.add(new BoolInfoWithName("Workshop Green Screen", new ImBoolean(true)));
         dmMapBools.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
         dmMapBools.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
+
+        extensionBools.add(new BoolInfoWithName("Beam Sounds", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Beam Effects", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Buff and Debuff Sounds", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Buff Status Effects", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Debuff Status Effects", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Energy Explosion Effects", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Play More Effects", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Spawn More Dummy Bots", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Explosion Sounds", new ImBoolean(false)));
+        extensionBools.add(new BoolInfoWithName("Kinetic Explosion Effects", new ImBoolean(false)));
     }
 
     public void show()
@@ -110,8 +122,11 @@ public class Settings {
 
         ImGui.newLine();
         //Lobby Settings
-        ImGui.text("---------------------------------------------------------");
         ImGui.text("Lobby Settings");
+        ImGui.text("---------------------------------------------------------");
+        if(ImGui.button("Extension Options")){
+            ImGui.openPopup("Extension_options");
+        }
         ImGui.text("Max Team 1 Players");
         ImGui.sameLine();
         ImGui.sliderInt("##Max Team 1 Players", maxT1Players, 0, 12);
@@ -203,6 +218,18 @@ public class Settings {
                     ImGui.checkbox("##" + biwn.name, biwn.bool);
                     ImGui.sameLine();
                     ImGui.text(biwn.name);
+                }
+                ImGui.endPopup();
+            }
+        }
+
+        if(ImGui.isPopupOpen("Extension_options")){
+            if(ImGui.beginPopup("Extension_options")){
+                for (int i = 0; i < extensionBools.size(); i++) {
+                    BoolInfoWithName bool = extensionBools.get(i);
+                    ImGui.checkbox("##" + bool.name, bool.bool);
+                    ImGui.sameLine();
+                    ImGui.text(bool.name);
                 }
                 ImGui.endPopup();
             }
@@ -328,6 +355,25 @@ public class Settings {
             output += "\t}\n";
         }
 
+        {
+            if(anyExtensionsOn()) {
+                output += "\n";
+                output += "\textensions\n";
+                output += "\t{\n";
+
+                for (int i = 0; i < extensionBools.size(); i++) {
+                    BoolInfoWithName ext = extensionBools.get(i);
+
+                    if(ext.bool.get()){
+                        output += "\t\t" + ext.name + "\n";
+                    }
+                }
+
+                output += "\t}\n";
+            }
+
+        }
+
         output += "}\n";
 
         return output;
@@ -347,6 +393,18 @@ public class Settings {
             }
         }
         return res;
+    }
+
+    private boolean anyExtensionsOn(){
+        boolean areOn = false;
+        for (int i = 0; i < extensionBools.size(); i++) {
+            if(extensionBools.get(i).bool.get()){
+                areOn = true;
+                break;
+            }
+        }
+
+        return areOn;
     }
 
     public void setModeName(String name){
