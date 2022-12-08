@@ -287,7 +287,7 @@
         {
           "ID": 1810,
           "type": "ovs.graph.pin.PinAction",
-          "value": "\t\tEvent Player.Scale \u003d 0.1;\n\t\tCreate HUD Text(Event Player,Null, Custom String(\"Scale: {0}/{1}\", Event Player.Scale, Global.TargetScale), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tStart Scaling Player(Event Player, Event Player.Scale, false);\n",
+          "value": "Event Player.Scale \u003d 0.1;\nCreate HUD Text(Event Player,Null, Custom String(\"Scale: {0}/{1}\", Event Player.Scale, Global.TargetScale), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nStart Scaling Player(Event Player, Event Player.Scale, false);\n",
           "connectedTo": 1812,
           "canDelete": false
         }
@@ -896,7 +896,7 @@
         {
           "ID": 1507,
           "type": "ovs.graph.pin.PinAction",
-          "value": "\t\tCreate HUD Text(Event Player,Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\tWait(10.0, Ignore Condition);\n\t\tRestart Match;\n",
+          "value": "Create HUD Text(Event Player,Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nWait(10.0, Ignore Condition);\nRestart Match;\n",
           "connectedTo": 1513,
           "canDelete": false
         }
@@ -1221,7 +1221,7 @@
         {
           "ID": 1804,
           "type": "ovs.graph.pin.PinAction",
-          "value": "\t\tStart Scaling Player(Event Player, Event Player.Scale, true);\n\t\tEvent Player.Scale \u003d Event Player.Scale + 0.1;\n\t\tIf(Event Player.Scale \u003e\u003d Global.TargetScale);\n\t\t\t\t\tCreate HUD Text(Event Player,Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\t\t\t\t\tWait(10.0, Ignore Condition);\n\t\t\t\t\tRestart Match;\n\t\tEnd;\n",
+          "value": "Start Scaling Player(Event Player, Event Player.Scale, true);\nEvent Player.Scale \u003d Event Player.Scale + 0.1;\nIf(Event Player.Scale \u003e\u003d Global.TargetScale);\nCreate HUD Text(Event Player,Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nWait(10.0, Ignore Condition);\nRestart Match;\nEnd;\n",
           "connectedTo": 1806,
           "canDelete": false
         }
@@ -1262,6 +1262,117 @@
           "ID": 1806,
           "type": "ovs.graph.pin.PinAction",
           "connectedTo": 1804,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "My Renamed Rule",
+      "x": 2504.0,
+      "y": -92.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 2180,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": 2183,
+          "canDelete": false
+        },
+        {
+          "ID": 2181,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": 2185,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeConditionList",
+      "nodeName": "Condition List",
+      "x": 2312.0,
+      "y": -87.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2182,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 2189,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        },
+        {
+          "ID": 2190,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2183,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 2180,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeActionList",
+      "nodeName": "Action List",
+      "x": 2328.0,
+      "y": 45.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2184,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 2186,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        },
+        {
+          "ID": 2187,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        },
+        {
+          "ID": 2188,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": true
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2185,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2181,
           "canDelete": false
         }
       ]

@@ -150,6 +150,7 @@ public class GraphWindow {
         addNodeToList(NodeCondition.class);
         addNodeToList(NodeConditionList.class);
         addNodeToList(NodeLastCreateEntity.class);
+        addNodeToList(NodeLastTextId.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
