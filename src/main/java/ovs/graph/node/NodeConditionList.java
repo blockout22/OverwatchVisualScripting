@@ -6,19 +6,19 @@ import ovs.graph.PinData;
 import ovs.graph.UI.Button;
 import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.pin.Pin;
-import ovs.graph.pin.PinAction;
+import ovs.graph.pin.PinCondition;
 
-public class NodeActionList extends Node{
+public class NodeConditionList extends Node{
 
-    private PinAction inputPin = new PinAction();
+    PinCondition inputPin = new PinCondition();
 
-    private PinAction outputPin = new PinAction();
+    PinCondition outputPin = new PinCondition();
 
     Button button = new Button("Add Input");
 
-    public NodeActionList(Graph graph) {
+    public NodeConditionList(Graph graph) {
         super(graph);
-        setName("Action List");
+        setName("Condition List");
 
         inputPin.setNode(this);
         addCustomInput(inputPin);
@@ -31,7 +31,7 @@ public class NodeActionList extends Node{
         button.addLeftClickListener(new LeftClickListener() {
             @Override
             public void onClicked() {
-                Pin pin = new PinAction();
+                Pin pin = new PinCondition();
                 pin.setNode(self);
                 pin.setCanDelete(true);
                 addCustomInput(pin);
@@ -59,7 +59,6 @@ public class NodeActionList extends Node{
         }
 
         outputData.getValue().set(output);
-
     }
 
     @Override

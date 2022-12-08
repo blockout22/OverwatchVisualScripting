@@ -5,16 +5,16 @@ import imgui.type.ImString;
 import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.UI.Button;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
-import ovs.graph.UI.Listeners.LeftClickListener;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
+import ovs.graph.pin.PinCondition;
 
 public class NodeRule extends Node{
 
-    private PinAction inputPin;
+    private PinCondition conditionPin = new PinCondition();
+    private PinAction actionPin = new PinAction();
 
     ComboBox comboEventOnGoing = new ComboBox();
     ComboBox comboTeam = new ComboBox();
@@ -22,16 +22,16 @@ public class NodeRule extends Node{
 
     boolean isGlobal = false;
 
-    Button button = new Button("Add Input");
-
     public NodeRule(Graph graph) {
         super(graph);
         setName("Rule");
         canEditTitle = true;
 
-        inputPin = new PinAction();
-        inputPin.setNode(this);
-        addCustomInput(inputPin);
+        conditionPin.setNode(this);
+        addCustomInput(conditionPin);
+
+        actionPin.setNode(this);
+        addCustomInput(actionPin);
 
         comboEventOnGoing.addOption("Ongoing - Global");
         comboEventOnGoing.addOption("Ongoing - Each Player");
@@ -84,18 +84,6 @@ public class NodeRule extends Node{
         comboEventOnGoing.select(0);
         comboTeam.select(0);
         comboPlayers.select(0);
-
-        addUiComponent(button);
-
-        button.addLeftClickListener(new LeftClickListener() {
-            @Override
-            public void onClicked() {
-                Pin pin = new PinAction();
-                pin.setNode(self);
-                pin.setCanDelete(true);
-                addCustomInput(pin);
-            }
-        });
     }
 
     public void onSaved()
@@ -123,18 +111,24 @@ public class NodeRule extends Node{
 
     @Override
     public void execute() {
-        for (int i = 0; i < inputPins.size(); i++) {
-            Pin pin = inputPins.get(i);
+//        for (int i = 0; i < inputPins.size(); i++) {
+//            Pin pin = inputPins.get(i);
+//
+//            PinData<ImString> data = pin.getData();
+//
+//            if(pin.isConnected()){
+//                Pin connectedPin = pin.getConnectedPin();
+//
+//                PinData<ImString> connectedData = connectedPin.getData();
+//                data.getValue().set(connectedData.getValue().get());
+//            }
+//        }
 
-            PinData<ImString> data = pin.getData();
+        PinData<ImString> conditionData = conditionPin.getData();
+        PinData<ImString> actionData = actionPin.getData();
 
-            if(pin.isConnected()){
-                Pin connectedPin = pin.getConnectedPin();
-
-                PinData<ImString> connectedData = connectedPin.getData();
-                data.getValue().set(connectedData.getValue().get());
-            }
-        }
+        handlePinStringConnection(conditionPin, conditionData);
+        handlePinStringConnection(actionPin, actionData);
     }
 
     @Override
@@ -159,26 +153,54 @@ public class NodeRule extends Node{
 
         //CONDITIONS
 
+        if(conditionPin.isConnected()){
+            out += "\tconditions\n";
+            out += "\t{\n";
+
+            PinData<ImString> conditionData = conditionPin.getData();
+            Pin connectedPin = conditionPin.getConnectedPin();
+            boolean handleTabs = true;
+            if(connectedPin.getNode() instanceof NodeConditionList){
+                handleTabs = false;
+            }
+
+            out += (handleTabs ? "\t\t" : "") + conditionData.getValue().get() + "\n";
+
+            out += "\t}\n";
+            out += "\n";
+        }
+
         //ACTIONS
         out+= "\tactions\n";
         {
             out += "\t{\n";
             //TODO make array
-            for (int i = 0; i < inputPins.size(); i++) {
-                Pin pin = inputPins.get(i);
-                PinData<ImString> data = pin.getData();
+            PinData<ImString> actionData = actionPin.getData();
+            if(actionPin.isConnected()){
 
-                String tempOut = ""; // data.getValue().get() + "\n";
-
-                if(pin.isConnected())
-                {
-                    tempOut = "";
-                    Pin connectedPin = pin.getConnectedPin();
-                    tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
+                Pin connectedPin = actionPin.getConnectedPin();
+                boolean handleTabs = true;
+                if(connectedPin.getNode() instanceof NodeActionList){
+                    handleTabs = false;
                 }
 
-                out += tempOut;
+                out += (handleTabs ? "\t\t" : "") + actionData.getValue().get() + "\n";
             }
+//            for (int i = 0; i < inputPins.size(); i++) {
+//                Pin pin = inputPins.get(i);
+//                PinData<ImString> data = pin.getData();
+//
+//                String tempOut = ""; // data.getValue().get() + "\n";
+//
+//                if(pin.isConnected())
+//                {
+//                    tempOut = "";
+//                    Pin connectedPin = pin.getConnectedPin();
+//                    tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
+//                }
+//
+//                out += tempOut;
+//            }
 
             out += "\t}\n";
         }

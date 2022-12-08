@@ -4,6 +4,7 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.pin.PinVar;
 
 public class NodeMap extends Node{
@@ -99,8 +100,14 @@ public class NodeMap extends Node{
 
         selectedMap.sort();
 
-
         selectedMap.select(0);
+
+        selectedMap.addChangeListener(new ChangeListener() {
+            @Override
+            public void onChanged(String oldValue, String newValue) {
+                width = -1;
+            }
+        });
 
         output.setNode(this);
         addCustomOutput(output);
