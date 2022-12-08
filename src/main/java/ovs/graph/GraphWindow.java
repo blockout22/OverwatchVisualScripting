@@ -151,6 +151,7 @@ public class GraphWindow {
         addNodeToList(NodeConditionList.class);
         addNodeToList(NodeLastCreateEntity.class);
         addNodeToList(NodeLastTextId.class);
+        addNodeToList(NodeStartForcingPlayerToBeHero.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
