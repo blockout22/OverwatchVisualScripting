@@ -685,7 +685,7 @@ public class GraphWindow {
                     if(!outputInFocus){
                         outputInFocus = true;
                         String compiledText = Compiler.compile(graph, settings);
-                        EDITOR.setText(compiledText);
+                        EDITOR.setText(Textformatter.prettyPrint(compiledText));
                         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                         clipboard.setContents(new StringSelection(compiledText), null);
                     }

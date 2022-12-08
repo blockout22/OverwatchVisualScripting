@@ -135,27 +135,27 @@ public class NodeRule extends Node{
     public String getOutput() {
         String out = "";
         out += "rule(\"" + getName() + "\")\n";
-        out += "{\n\t";
+        out += "{\n";
 
         //EVENT
         out += "event\n";
-        out += "\t{\n";
-        out += "\t\t" + comboEventOnGoing.getSelectedValue() + ";\n";
+        out += "{\n";
+        out += "" + comboEventOnGoing.getSelectedValue() + ";\n";
 
         if(!isGlobal){
-            out += "\t\t" + comboTeam.getSelectedValue() + ";\n";
-            out += "\t\t" + comboPlayers.getSelectedValue() + ";\n";
+            out += "" + comboTeam.getSelectedValue() + ";\n";
+            out += "" + comboPlayers.getSelectedValue() + ";\n";
         }
 
-        out += "\t}\n";
+        out += "}\n";
 
         out += "\n";
 
         //CONDITIONS
 
         if(conditionPin.isConnected()){
-            out += "\tconditions\n";
-            out += "\t{\n";
+            out += "conditions\n";
+            out += "{\n";
 
             PinData<ImString> conditionData = conditionPin.getData();
             Pin connectedPin = conditionPin.getConnectedPin();
@@ -164,16 +164,16 @@ public class NodeRule extends Node{
                 handleTabs = false;
             }
 
-            out += (handleTabs ? "\t\t" : "") + conditionData.getValue().get() + "\n";
+            out += (handleTabs ? "" : "") + conditionData.getValue().get() + "\n";
 
-            out += "\t}\n";
+            out += "}\n";
             out += "\n";
         }
 
         //ACTIONS
-        out+= "\tactions\n";
+        out+= "actions\n";
         {
-            out += "\t{\n";
+            out += "{\n";
             //TODO make array
             PinData<ImString> actionData = actionPin.getData();
             if(actionPin.isConnected()){
@@ -184,7 +184,7 @@ public class NodeRule extends Node{
                     handleTabs = false;
                 }
 
-                out += (handleTabs ? "\t\t" : "") + actionData.getValue().get() + "\n";
+                out += (handleTabs ? "" : "") + actionData.getValue().get() + "\n";
             }
 //            for (int i = 0; i < inputPins.size(); i++) {
 //                Pin pin = inputPins.get(i);
@@ -202,7 +202,7 @@ public class NodeRule extends Node{
 //                out += tempOut;
 //            }
 
-            out += "\t}\n";
+            out += "}\n";
         }
 
 //        for(int i = 0; i < inputPins.size(); i++){

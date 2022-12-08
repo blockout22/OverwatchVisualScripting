@@ -53,7 +53,7 @@ public class NodeConditionList extends Node{
 
                 PinData<ImString> connectedData = connectedPin.getData();
 
-                output += "\t\t" + connectedData.getValue().get() + (connectedData.getValue().get().endsWith(";") ? "" : ";");
+                output += "" + connectedData.getValue().get() + (connectedData.getValue().get().endsWith(";") ? "" : ";");
                 output += "\n";
             }
         }

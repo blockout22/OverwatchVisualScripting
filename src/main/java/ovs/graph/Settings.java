@@ -242,66 +242,66 @@ public class Settings {
         output += "{\n";
 
         {
-            output += "\tmain\n";
-            output += "\t{\n";
-            output += "\t\tMode Name: \"" + modeName.get() + "\"\n";
-            output += "\t\tDescription: \"" + description.get() + "\"\n";
-            output += "\t}\n";
+            output += "main\n";
+            output += "{\n";
+            output += "Mode Name: \"" + modeName.get() + "\"\n";
+            output += "Description: \"" + description.get() + "\"\n";
+            output += "}\n";
         }
 
         {
             output += "\n";
-            output += "\tlobby\n";
-            output += "\t{\n";
-            output += "\t\tMax Team 1 Players: " + maxT1Players[0] + "\n";
+            output += "lobby\n";
+            output += "{\n";
+            output += "Max Team 1 Players: " + maxT1Players[0] + "\n";
             //Can't set Team 2 player limit when using practise range
             if(!practiceRangeOnOff.get()) {
-                output += "\t\tMax Team 2 Players: " + maxT2Players[0] + "\n";
+                output += "Max Team 2 Players: " + maxT2Players[0] + "\n";
             }
-            output += "\t\tMax FFA Players: " + maxFFAPlayers[0] + "\n";
-            output += "\t}\n";
+            output += "Max FFA Players: " + maxFFAPlayers[0] + "\n";
+            output += "}\n";
         }
 
         {
             output += "\n";
-            output += "\tmodes\n";
-            output += "\t{\n";
+            output += "modes\n";
+            output += "{\n";
 
             if(assaultOnOff.get()){
-                output += "\t\tAssault\n";
+                output += "Assault\n";
             }
 
             if(controlOnOff.get()){
-                output += "\t\tControl\n";
+                output += "Control\n";
             }
 
             if(escortOnOff.get()){
-                output += "\t\tEscort\n";
+                output += "Escort\n";
             }
 
             if(hybridOnOff.get()){
-                output += "\t\tHybrid\n";
+                output += "Hybrid\n";
             }
 
             if(pushOnOff.get()){
-                output += "\t\tPush\n";
+                output += "Push\n";
             }
 
             if(bountyHunterOnOff.get()){
-                output += "\t\tBounty Hunter\n";
+                output += "Bounty Hunter\n";
             }
 
             if(ctfOnOff.get()){
-                output += "\t\tCapture the Flag\n";
+                output += "Capture the Flag\n";
             }
 
             if(deathmatchOnOff.get()){
-                output += "\t\tDeathmatch\n";
-                output += "\t\t{\n";
+                output += "Deathmatch\n";
+                output += "{\n";
 
-                output += "\t\t\tGame Length In Minutes: " + gameTimeDM[0] + "\n";
-                output += "\t\t\tScore To Win: " + scoreToWinDM[0] + "\n";
-                output += "\t\t\tSelf Initiated Respawn: " + (initRespawnOnOffDM.get() ? "On" : "Off") + "\n";
+                output += "Game Length In Minutes: " + gameTimeDM[0] + "\n";
+                output += "Score To Win: " + scoreToWinDM[0] + "\n";
+                output += "Self Initiated Respawn: " + (initRespawnOnOffDM.get() ? "On" : "Off") + "\n";
 
                 int[] res = getDeathmatchMaps();
 
@@ -309,67 +309,67 @@ public class Settings {
                     output += "\n";
                     if(res[0] >= res[1]){
                         //Disabled Maps
-                        output += "\t\t\tdisabled maps\n";
-                        output += "\t\t\t{\n";
+                        output += "disabled maps\n";
+                        output += "{\n";
                         for (int i = 0; i < dmMapBools.size(); i++) {
                             BoolInfoWithName info = dmMapBools.get(i);
                             if(!info.bool.get()){
-                                output += "\t\t\t\t" + info.name + " 0\n";
+                                output += "" + info.name + " 0\n";
                             }
                         }
                     }else if(res[1] > res[0])
                     {
                         //Enabled Maps
-                        output += "\t\t\tenabled maps\n";
-                        output += "\t\t\t{\n";
+                        output += "enabled maps\n";
+                        output += "{\n";
                         for (int i = 0; i < dmMapBools.size(); i++) {
                             BoolInfoWithName info = dmMapBools.get(i);
                             if(info.bool.get()){
-                                output += "\t\t\t\t" + info.name + " 0\n";
+                                output += "" + info.name + " 0\n";
                             }
                         }
                     }
 
-                    output += "\t\t\t}\n";
+                    output += "}\n";
                 }
-                output += "\t\t}\n";
+                output += "}\n";
             }
 
             if(eliminationOnOff.get()) {
-                output += "\t\tElimination\n";
+                output += "Elimination\n";
             }
 
             if(teamDeathmatchOnOff.get()){
-                output += "\t\tTeam Deathmatch\n";
+                output += "Team Deathmatch\n";
             }
 
             if(practiceRangeOnOff.get()){
-                output += "\t\tPractice Range\n";
+                output += "Practice Range\n";
             }
 
             if(skirmishOnOff.get()){
-                output += "\t\tSkirmish\n";
+                output += "Skirmish\n";
             }
 
 
-            output += "\t}\n";
+            output += "}\n";
         }
 
         {
             if(anyExtensionsOn()) {
                 output += "\n";
-                output += "\textensions\n";
-                output += "\t{\n";
+                output += "extensions\n";
+                output += "{\n";
 
                 for (int i = 0; i < extensionBools.size(); i++) {
                     BoolInfoWithName ext = extensionBools.get(i);
 
                     if(ext.bool.get()){
-                        output += "\t\t" + ext.name + "\n";
+                        output += "" + ext.name + "\n";
                     }
                 }
 
-                output += "\t}\n";
+                output += "}\n";
             }
 
         }

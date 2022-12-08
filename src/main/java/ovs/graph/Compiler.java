@@ -15,21 +15,21 @@ public class Compiler {
             output.append("variables\n");
             output.append("{\n");
             if(graph.globalVariables.size() > 0){
-                output.append("\tglobal:\n");
+                output.append("global:\n");
 
                 for (int i = 0; i < graph.globalVariables.size(); i++) {
 //                    output.append("\t\t" + graph.globalVariables.get(i).ID + ": " + graph.globalVariables.get(i).name + "\n");
-                    output.append("\t\t" + i + ": " + graph.globalVariables.get(i).name + "\n");
+                    output.append(i + ": " + graph.globalVariables.get(i).name + "\n");
                 }
 
                 output.append("\n");
             }
             if(graph.playerVariables.size() > 0){
-                output.append("\tplayer:\n");
+                output.append("player:\n");
 
                 for (int i = 0; i < graph.playerVariables.size(); i++) {
 //                    output.append("\t\t" + graph.playerVariables.get(i).ID + ": " + graph.playerVariables.get(i).name + "\n");
-                    output.append("\t\t" + i + ": " + graph.playerVariables.get(i).name + "\n");
+                    output.append(i + ": " + graph.playerVariables.get(i).name + "\n");
                 }
 
             }
@@ -39,15 +39,15 @@ public class Compiler {
 
         output.append("rule(\"Credits\")\n");
         output.append("{\n");
-        output.append("\tevent\n");
-        output.append("\t{\n");
-        output.append("\t\tOngoing - Global;\n");
-        output.append("\t}\n");
+        output.append("event\n");
+        output.append("{\n");
+        output.append("Ongoing - Global;\n");
+        output.append("}\n");
         output.append("\n");
-        output.append("\tactions\n");
-        output.append("\t{\n");
-        output.append("\t\tCreate HUD Text(All Players(All Teams), Null, Custom String(\"Created using github.com/blockout22/OverwatchVisualScripting\"), Null, Right, -999, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n");
-        output.append("\t}\n");
+        output.append("actions\n");
+        output.append("{\n");
+        output.append("Create HUD Text(All Players(All Teams), Null, Custom String(\"Created using github.com/blockout22/OverwatchVisualScripting\"), Null, Right, -999, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n");
+        output.append("}\n");
         output.append("}\n");
         output.append("\n");
 

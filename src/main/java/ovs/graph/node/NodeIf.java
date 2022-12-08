@@ -111,12 +111,12 @@ public class NodeIf extends Node{
             String out = "";
             String[] lines = ifActionData.getValue().get().split("\n");
             for (int i = 0; i < lines.length; i++) {
-                out += "\t\t\t" + lines[i] + "\n";
+                out += "" + lines[i] + "\n";
             }
 
             outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ");\n" +
                     out +
-                    "\t\tEnd;");
+                    "End;");
         }else{
             //TODO clear pin data if not connected
         }

@@ -74,13 +74,13 @@ public class NodeWhile extends Node{
             String out = "";
             String[] lines = actionData.getValue().get().split("\n");
             for (int i = 0; i < lines.length; i++) {
-                out += "\t\t\t" + lines[i] + "\n";
+                out += "" + lines[i] + "\n";
             }
 
 
             outputData.getValue().set("While(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
                     out +
-                    "\t\tEnd;");
+                    "End;");
         }
     }
 
