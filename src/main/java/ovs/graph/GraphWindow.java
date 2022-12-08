@@ -149,6 +149,7 @@ public class GraphWindow {
         addNodeToList(NodeEventDamage.class);
         addNodeToList(NodeCondition.class);
         addNodeToList(NodeConditionList.class);
+        addNodeToList(NodeLastCreateEntity.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
