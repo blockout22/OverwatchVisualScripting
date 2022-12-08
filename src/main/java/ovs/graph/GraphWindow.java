@@ -158,7 +158,6 @@ public class GraphWindow {
                     tf.addChangedListener(new ChangeListener() {
                         @Override
                         public void onChanged(String oldValue, String newValue) {
-                            System.out.println(oldValue);
                             if(newValue.contains(" ")){
                                 System.out.println("Error: Variables won't accept spaces" );
                             }
@@ -797,7 +796,7 @@ public class GraphWindow {
         //check if context menu opened by dragging a pin
         if(lastHoldingPinID != -1){
             Pin pin = graph.findPinById((int)lastActivePin);
-            System.out.println(pin.getPinType());
+//            System.out.println(pin.getPinType());
             switch (pin.getPinType()){
                 case Input:
                     for (int i = 0; i < newInstance.outputPins.size(); i++) {

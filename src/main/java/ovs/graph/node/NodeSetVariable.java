@@ -11,7 +11,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeSetVariable extends Node{
 
-    PinAction outputPin = new PinAction();
+    PinAction output = new PinAction();
     PinVar inputPin = new PinVar();
     private ComboBox comboBox = new ComboBox();
 
@@ -24,8 +24,8 @@ public class NodeSetVariable extends Node{
         inputPin.setName("Value");
         addCustomInput(inputPin);
 
-        outputPin.setNode(this);
-        addCustomOutput(outputPin);
+        output.setNode(this);
+        addCustomOutput(output);
 
 
         comboBox.addOnOpenedListener(new OnOpenedListener() {
@@ -82,36 +82,41 @@ public class NodeSetVariable extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> inputData = inputPin.getData();
+        PinData<ImString> outputData = output.getData();
 
         if(inputPin.isConnected()){
             Pin connectedPin = inputPin.getConnectedPin();
 
             PinData<ImString> connectedData = connectedPin.getData();
-            PinData<ImString> inputData = inputPin.getData();
+
 
             inputData.getValue().set(connectedData.getValue().get());
         }
 
-        if (outputPin.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
-            PinData<ImString> data = outputPin.getData();
+        if (output.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
+//            PinData<ImString> data = outputPin.getData();
 //            String[] val = comboBox.getSelectedValue().split(":");
 //            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
-            data.getValue().set(comboBox.getSelectedValue());
+            outputData.getValue().set(comboBox.getSelectedValue() + " = " + inputData.getValue().get() + ";");
         }
+
+
     }
 
     @Override
     public String getOutput() {
-        if(inputPin.isConnected() && (comboBox.getSelectedIndex() != -1)) {
+        PinData<ImString> outputData = output.getData();
+//        if(inputPin.isConnected() && (comboBox.getSelectedIndex() != -1)) {
+//
+//            PinData<ImString> data = inputPin.getData();
+//
+////            String[] val = comboBox.getSelectedValue().split(":");
+////            return val[0] + "." + val[1].replace(" ", "") + " = " + data.getValue().get() + ";";
+//            return data.getValue().get();
+//        }
 
-            PinData<ImString> data = inputPin.getData();
-
-//            String[] val = comboBox.getSelectedValue().split(":");
-//            return val[0] + "." + val[1].replace(" ", "") + " = " + data.getValue().get() + ";";
-            return comboBox.getSelectedValue() + " = " + data.getValue().get() + ";";
-        }
-
-        return "";
+        return outputData.getValue().get();
     }
 
     @Override

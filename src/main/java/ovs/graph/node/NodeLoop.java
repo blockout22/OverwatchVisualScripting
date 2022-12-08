@@ -1,6 +1,8 @@
 package ovs.graph.node;
 
+import imgui.type.ImString;
 import ovs.graph.Graph;
+import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 
 public class NodeLoop extends Node{
@@ -17,12 +19,15 @@ public class NodeLoop extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> outputData = output.getData();
 
+        outputData.getValue().set("Loop;");
     }
 
     @Override
     public String getOutput() {
-        return "Loop;";
+        PinData<ImString> outputData = output.getData();
+        return outputData.getValue().get();
     }
 
     @Override
