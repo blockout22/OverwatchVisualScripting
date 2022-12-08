@@ -58,7 +58,7 @@ public class NodeGetVariable extends Node{
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        System.out.println(comboBox.getSelectedValue());
+//        System.out.println(comboBox.getSelectedValue());
         getExtraSaveData().add("Var:" + comboBox.getSelectedValue());
     }
 

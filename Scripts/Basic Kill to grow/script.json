@@ -238,7 +238,7 @@
         },
         {
           "name": "Workshop Expanse",
-          "value": true
+          "value": false
         },
         {
           "name": "Workshop Expanse Night",
@@ -250,7 +250,7 @@
         },
         {
           "name": "Workshop Island",
-          "value": false
+          "value": true
         },
         {
           "name": "Workshop Island Night",
@@ -1272,7 +1272,7 @@
       "x": 2504.0,
       "y": -92.0,
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Player Died",
         "Team:All",
         "Player:All"
       ],
@@ -1287,7 +1287,7 @@
         {
           "ID": 2181,
           "type": "ovs.graph.pin.PinAction",
-          "value": "",
+          "value": "Set Ability 2 Enabled(Event Player, False;\n",
           "connectedTo": 2185,
           "canDelete": false
         }
@@ -1343,7 +1343,7 @@
           "ID": 2184,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": -1,
+          "connectedTo": 2339,
           "canDelete": false
         },
         {
@@ -1373,6 +1373,77 @@
           "ID": 2185,
           "type": "ovs.graph.pin.PinAction",
           "connectedTo": 2181,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetAbility2Enabled",
+      "nodeName": "Set Ability 2 Enabled",
+      "x": 2040.0,
+      "y": 0.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2337,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 2342,
+          "canDelete": false
+        },
+        {
+          "ID": 2338,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "False",
+          "connectedTo": 2341,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2339,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2184,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1880.0,
+      "y": 64.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2340,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "false",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2341,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2338,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1860.0,
+      "y": -31.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2342,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2337,
           "canDelete": false
         }
       ]
