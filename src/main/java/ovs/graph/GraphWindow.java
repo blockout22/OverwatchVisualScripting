@@ -155,6 +155,7 @@ public class GraphWindow {
         addNodeToList(NodeSetAbility2Enabled.class);
         addNodeToList(NodeIsUsingAbility2.class);
         addNodeToList(NodeCancelPrimaryAction.class);
+        addNodeToList(NodePressButton.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
