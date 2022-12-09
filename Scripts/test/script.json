@@ -266,9 +266,9 @@
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
       "x": 696.0,
-      "y": 184.0,
+      "y": 140.0,
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Ongoing - Each Player",
         "Team:All",
         "Player:All"
       ],
@@ -283,7 +283,7 @@
         {
           "ID": 1155,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0));\nCreate Effect (All Players(All Teams), Orb, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);\nEnd;",
+          "value": "If(Event Damage \u003d\u003d True \u0026\u0026 Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0));\nCreate Effect (All Players(All Teams), Orb, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);\nEnd;",
           "connectedTo": 1157,
           "canDelete": false
         }
@@ -302,7 +302,7 @@
         {
           "ID": 1156,
           "type": "ovs.graph.pin.PinIf",
-          "value": "Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0)",
+          "value": "Event Damage \u003d\u003d True \u0026\u0026 Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0)",
           "connectedTo": 1019,
           "canDelete": false
         },
@@ -385,8 +385,8 @@
         {
           "ID": 1017,
           "type": "ovs.graph.pin.PinIf",
-          "value": "Current Map \u003d\u003d Map(Ayutthaya)",
-          "connectedTo": 1488,
+          "value": "Event Damage \u003d\u003d True \u0026\u0026 Current Map \u003d\u003d Map(Ayutthaya)",
+          "connectedTo": 1996,
           "canDelete": false
         },
         {
@@ -409,8 +409,8 @@
     {
       "className": "ovs.graph.node.NodeIfCondition",
       "nodeName": "If Condition",
-      "x": 53.0,
-      "y": 215.0,
+      "x": -232.0,
+      "y": 214.0,
       "extraData": [
         "Condition:\u003d\u003d"
       ],
@@ -434,7 +434,7 @@
         {
           "ID": 1488,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1017,
+          "connectedTo": 1995,
           "canDelete": false
         }
       ]
@@ -475,8 +475,8 @@
     {
       "className": "ovs.graph.node.NodeCurrentMap",
       "nodeName": "Current Map",
-      "x": -101.0,
-      "y": 177.0,
+      "x": -386.0,
+      "y": 176.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -491,8 +491,8 @@
     {
       "className": "ovs.graph.node.NodeMap",
       "nodeName": "Map",
-      "x": -95.0,
-      "y": 250.0,
+      "x": -380.0,
+      "y": 249.0,
       "extraData": [
         "Map:Ayutthaya"
       ],
@@ -566,6 +566,141 @@
           "ID": 1659,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 1655,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeOr",
+      "nodeName": "Or",
+      "x": 150.0,
+      "y": 82.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1821,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Event Damage \u003d\u003d True",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1822,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Map \u003d\u003d Map(Ayutthaya)",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1823,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCondition",
+      "nodeName": "If Condition",
+      "x": -152.0,
+      "y": 23.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1824,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Damage",
+          "connectedTo": 1827,
+          "canDelete": false
+        },
+        {
+          "ID": 1825,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 1829,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1826,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 1994,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventDamage",
+      "nodeName": "Event Damage",
+      "x": -332.0,
+      "y": -47.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1827,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1824,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": -312.0,
+      "y": 64.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1828,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1829,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1825,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAnd",
+      "nodeName": "And",
+      "x": 179.0,
+      "y": 240.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1994,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Event Damage \u003d\u003d True",
+          "connectedTo": 1826,
+          "canDelete": false
+        },
+        {
+          "ID": 1995,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Map \u003d\u003d Map(Ayutthaya)",
+          "connectedTo": 1488,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1996,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 1017,
           "canDelete": false
         }
       ]

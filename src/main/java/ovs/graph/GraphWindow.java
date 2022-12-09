@@ -161,6 +161,7 @@ public class GraphWindow {
         addNodeToList(NodeIsAssemblingHeroes.class);
         addNodeToList(NodeIfCondition.class);
         addNodeToList(NodeOr.class);
+        addNodeToList(NodeAnd.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

@@ -5,16 +5,16 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinIf;
 
-public class NodeOr extends Node{
+public class NodeAnd extends Node{
 
     PinIf leftPin = new PinIf();
     PinIf rightPin = new PinIf();
 
     PinIf output = new PinIf();
 
-    public NodeOr(Graph graph) {
+    public NodeAnd(Graph graph) {
         super(graph);
-        setName("Or");
+        setName("And");
 
         leftPin.setNode(this);
         addCustomInput(leftPin);
@@ -35,7 +35,7 @@ public class NodeOr extends Node{
         handlePinStringConnection(leftPin, leftData);
         handlePinStringConnection(rightPin, rightData);
 
-        outputData.getValue().set(leftData.getValue().get() + " || " + rightData.getValue().get());
+        outputData.getValue().set(leftData.getValue().get() + " && " + rightData.getValue().get());
     }
 
     @Override
