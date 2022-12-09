@@ -154,6 +154,7 @@ public class GraphWindow {
         addNodeToList(NodeStartForcingPlayerToBeHero.class);
         addNodeToList(NodeSetAbility2Enabled.class);
         addNodeToList(NodeIsUsingAbility2.class);
+        addNodeToList(NodeCancelPrimaryAction.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -689,8 +690,8 @@ public class GraphWindow {
 
                     if(!outputInFocus){
                         outputInFocus = true;
-                        String compiledText = Compiler.compile(graph, settings);
-                        EDITOR.setText(Textformatter.prettyPrint(compiledText));
+                        String compiledText = Textformatter.prettyPrint(Compiler.compile(graph, settings));
+                        EDITOR.setText(compiledText);
                         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                         clipboard.setContents(new StringSelection(compiledText), null);
                     }
