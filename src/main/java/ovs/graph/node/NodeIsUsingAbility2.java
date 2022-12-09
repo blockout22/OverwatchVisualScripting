@@ -3,27 +3,21 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetAbility2Enabled extends Node{
+public class NodeIsUsingAbility2 extends Node{
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinBool = new PinVar();
 
-    PinAction output = new PinAction();
+    PinVar output = new PinVar();
 
-    public NodeSetAbility2Enabled(Graph graph) {
+    public NodeIsUsingAbility2(Graph graph) {
         super(graph);
-        setName("Set Ability 2 Enabled");
+        setName("Is Using Ability 2");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
-
-        pinBool.setNode(this);
-        pinBool.setName("True/False");
-        addCustomInput(pinBool);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -32,14 +26,11 @@ public class NodeSetAbility2Enabled extends Node{
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> boolData = pinBool.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(pinBool, boolData, "True");
 
-        outputData.getValue().set("Set Ability 2 Enabled(" + playerData.getValue().get() + ", " + boolData.getValue().get() + ");");
-
+        outputData.getValue().set("Is Using Ability 2(" + playerData.getValue().get() + ")");
     }
 
     @Override

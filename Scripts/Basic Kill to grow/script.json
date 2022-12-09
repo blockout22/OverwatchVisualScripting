@@ -1280,14 +1280,14 @@
         {
           "ID": 2180,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "",
+          "value": "Is Using Ability 2(Event Player) \u003d\u003d True;\n",
           "connectedTo": 2183,
           "canDelete": false
         },
         {
           "ID": 2181,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Set Ability 2 Enabled(Event Player, False;\n",
+          "value": "Set Ability 2 Enabled(Event Player, False);\nWait(0.2, Ignore Condition);\nSet Ability 2 Enabled(Event Player, True);\n",
           "connectedTo": 2185,
           "canDelete": false
         }
@@ -1305,7 +1305,7 @@
           "ID": 2182,
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
-          "connectedTo": -1,
+          "connectedTo": 2493,
           "canDelete": false
         },
         {
@@ -1350,14 +1350,14 @@
           "ID": 2186,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": -1,
+          "connectedTo": 2650,
           "canDelete": true
         },
         {
           "ID": 2187,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": -1,
+          "connectedTo": 2653,
           "canDelete": true
         },
         {
@@ -1411,8 +1411,8 @@
     {
       "className": "ovs.graph.node.NodeBoolean",
       "nodeName": "Boolean",
-      "x": 1880.0,
-      "y": 64.0,
+      "x": 1895.0,
+      "y": 32.0,
       "extraData": [],
       "inputPins": [
         {
@@ -1444,6 +1444,200 @@
           "ID": 2342,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 2337,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCondition",
+      "nodeName": "Condition",
+      "x": 2088.0,
+      "y": -247.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 2491,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is Using Ability 2(Event Player)",
+          "connectedTo": 2648,
+          "canDelete": false
+        },
+        {
+          "ID": 2492,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 2495,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2493,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 2182,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1944.0,
+      "y": -144.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2494,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2495,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2492,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1700.0,
+      "y": -223.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2498,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2647,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsUsingAbility2",
+      "nodeName": "Is Using Ability 2",
+      "x": 1866.0,
+      "y": -240.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2647,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 2498,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2648,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2491,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeWait",
+      "nodeName": "Wait",
+      "x": 2008.0,
+      "y": 105.0,
+      "extraData": [
+        "WaitBehavior:Ignore Condition"
+      ],
+      "inputPins": [
+        {
+          "ID": 2649,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.2",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2650,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2186,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetAbility2Enabled",
+      "nodeName": "Set Ability 2 Enabled",
+      "x": 2024.0,
+      "y": 221.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2651,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 2654,
+          "canDelete": false
+        },
+        {
+          "ID": 2652,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 2656,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2653,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2187,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1860.0,
+      "y": 225.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2654,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2651,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1896.0,
+      "y": 288.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2655,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2656,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 2652,
           "canDelete": false
         }
       ]
