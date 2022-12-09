@@ -55,7 +55,7 @@ public class NodeLoop extends Node{
     public void execute() {
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Loop;");
+        outputData.getValue().set(type.getSelectedValue() + ";");
     }
 
     @Override

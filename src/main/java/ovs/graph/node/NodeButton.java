@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
@@ -15,16 +16,9 @@ public class NodeButton extends Node{
         super(graph);
         setName("Button");
 
-        buttons.addOption("Ability 1");
-        buttons.addOption("Ability 2");
-        buttons.addOption("Crouch");
-        buttons.addOption("Interact");
-        buttons.addOption("Jump");
-        buttons.addOption("Melee");
-        buttons.addOption("Primary Fire");
-        buttons.addOption("Reload");
-        buttons.addOption("Secondary Fire");
-        buttons.addOption("Ultimate");
+        for (int i = 0; i < Global.buttons.size(); i++) {
+            buttons.addOption(Global.buttons.get(i));
+        }
 
         buttons.select(0);
 

@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
@@ -18,8 +19,9 @@ public class NodeIsButtonDown extends Node{
         super(graph);
         setName("Is Button Down");
 
-        comboBox.addOption("Crouch");
-        comboBox.addOption("Reload");
+        for (int i = 0; i < Global.buttons.size(); i++) {
+            comboBox.addOption(Global.buttons.get(i));
+        }
 
         input.setNode(this);
         addCustomInput(input);

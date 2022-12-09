@@ -9,6 +9,7 @@ public class Global {
     public static String SCRIPTS_DIR = "Scripts";
 
     public static ArrayList<String> heroes = new ArrayList<>();
+    public static ArrayList<String> buttons = new ArrayList<>();
 
     private static Map<String, Object> storage = new HashMap<>();
 
@@ -49,6 +50,17 @@ public class Global {
         heroes.add("Winston");
         heroes.add("Zarya");
         heroes.add("Zenyatta");
+
+        buttons.add("Ability 1");
+        buttons.add("Ability 2");
+        buttons.add("Crouch");
+        buttons.add("Interact");
+        buttons.add("Jump");
+        buttons.add("Melee");
+        buttons.add("Primary Fire");
+        buttons.add("Reload");
+        buttons.add("Secondary Fire");
+        buttons.add("Ultimate");
     }
 
     public static void setStorage(String key, Object obj){

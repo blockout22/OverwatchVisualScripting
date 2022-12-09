@@ -1280,14 +1280,14 @@
         {
           "ID": 2180,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "Is Button Held(, Button(Crouch)) \u003d\u003d True;\n",
+          "value": "Is Using Ability 2(Event Player) \u003d\u003d True;\n",
           "connectedTo": 2183,
           "canDelete": false
         },
         {
           "ID": 2181,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Wait(0.016, Ignore Condition);\nPress Button(Event Player, Button(Ability 2));\nCancel Primary Action(Event Player);\nLoop;\n",
+          "value": "Wait(0.016, Ignore Condition);\nPress Button(Event Player, Button(Ability 2));\nCancel Primary Action(Event Player);\nLoop If Condition Is True;\n",
           "connectedTo": 2185,
           "canDelete": false
         }
@@ -1375,8 +1375,8 @@
         {
           "ID": 2491,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Is Button Held(, Button(Crouch))",
-          "connectedTo": 3234,
+          "value": "Is Using Ability 2(Event Player)",
+          "connectedTo": 2648,
           "canDelete": false
         },
         {
@@ -1423,8 +1423,8 @@
     {
       "className": "ovs.graph.node.NodeEventPlayer",
       "nodeName": "Event Player",
-      "x": 1620.0,
-      "y": -97.0,
+      "x": 1604.0,
+      "y": -111.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1439,8 +1439,8 @@
     {
       "className": "ovs.graph.node.NodeIsUsingAbility2",
       "nodeName": "Is Using Ability 2",
-      "x": 1786.0,
-      "y": -114.0,
+      "x": 1752.0,
+      "y": -128.0,
       "extraData": [],
       "inputPins": [
         {
@@ -1455,7 +1455,7 @@
         {
           "ID": 2648,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": -1,
+          "connectedTo": 2491,
           "canDelete": false
         }
       ]
@@ -1612,16 +1612,16 @@
     {
       "className": "ovs.graph.node.NodeIsButtonDown",
       "nodeName": "Is Button Down",
-      "x": 1828.0,
-      "y": -256.0,
+      "x": 1784.0,
+      "y": -295.0,
       "extraData": [
-        "Button:Crouch"
+        "Button:Ability 2"
       ],
       "inputPins": [
         {
           "ID": 3233,
           "type": "ovs.graph.pin.PinVar",
-          "value": "",
+          "value": "Event Player",
           "connectedTo": -1,
           "canDelete": false
         }
@@ -1630,7 +1630,7 @@
         {
           "ID": 3234,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 2491,
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
