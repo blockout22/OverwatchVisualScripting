@@ -156,6 +156,9 @@ public class GraphWindow {
         addNodeToList(NodeIsUsingAbility2.class);
         addNodeToList(NodeCancelPrimaryAction.class);
         addNodeToList(NodePressButton.class);
+        addNodeToList(NodeIsGameInProgress.class);
+        addNodeToList(NodeIsInSetup.class);
+        addNodeToList(NodeIsAssemblingHeroes.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

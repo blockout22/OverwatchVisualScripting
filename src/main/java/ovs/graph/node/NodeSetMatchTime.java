@@ -36,7 +36,7 @@ public class NodeSetMatchTime extends Node{
             timeData.getValue().set(connectedData.getValue().get());
         }
 
-        outputData.getValue().set("Set Match Time(" + timeData.getValue().get() + ")");
+        outputData.getValue().set("Set Match Time(" + timeData.getValue().get() + ");");
     }
 
     @Override

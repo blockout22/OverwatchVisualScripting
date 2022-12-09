@@ -6,13 +6,13 @@
     "maxT2Players": 2,
     "maxFFAPlayers": 9,
     "assaultMode": false,
-    "controlMode": false,
+    "controlMode": true,
     "escortMode": false,
     "hybridMode": false,
     "pushMode": false,
     "bountyHunterMode": false,
     "ctfMode": false,
-    "deathmatchMode": true,
+    "deathmatchMode": false,
     "eliminationMode": false,
     "teamDeathmatchMode": false,
     "practiceRangeMode": false,
@@ -1621,7 +1621,7 @@
         {
           "ID": 3233,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Event Player",
+          "value": "",
           "connectedTo": -1,
           "canDelete": false
         }
@@ -1631,6 +1631,256 @@
           "ID": 3234,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": -1,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "In Setup",
+      "x": 1688.0,
+      "y": 794.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 3391,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "Is In Setup \u003d\u003d True;",
+          "connectedTo": 3400,
+          "canDelete": false
+        },
+        {
+          "ID": 3392,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Set Match Time(0.0);",
+          "connectedTo": 3408,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Assembling Heroes",
+      "x": 1640.0,
+      "y": 1144.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 3393,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "Is Assembling Heroes \u003d\u003d True;",
+          "connectedTo": 3397,
+          "canDelete": false
+        },
+        {
+          "ID": 3394,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Set Match Time(0.0);",
+          "connectedTo": 3410,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeCondition",
+      "nodeName": "Condition",
+      "x": 1400.0,
+      "y": 1129.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 3395,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is Assembling Heroes",
+          "connectedTo": 3401,
+          "canDelete": false
+        },
+        {
+          "ID": 3396,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 3403,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3397,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 3393,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCondition",
+      "nodeName": "Condition",
+      "x": 1429.0,
+      "y": 806.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 3398,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is In Setup",
+          "connectedTo": 3406,
+          "canDelete": false
+        },
+        {
+          "ID": 3399,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 3405,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3400,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 3391,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsAssemblingHeroes",
+      "nodeName": "Is Assembling Heroes",
+      "x": 1116.0,
+      "y": 1121.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3401,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 3395,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1196.0,
+      "y": 1291.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3402,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3403,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 3396,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1271.0,
+      "y": 880.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3404,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3405,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 3399,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsInSetup",
+      "nodeName": "Is In Setup",
+      "x": 1243.0,
+      "y": 801.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3406,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 3398,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetMatchTime",
+      "nodeName": "Set Match Time",
+      "x": 1424.0,
+      "y": 928.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3407,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3408,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 3392,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetMatchTime",
+      "nodeName": "Set Match Time",
+      "x": 1360.0,
+      "y": 1264.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3409,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3410,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 3394,
           "canDelete": false
         }
       ]
