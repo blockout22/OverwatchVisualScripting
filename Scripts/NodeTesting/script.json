@@ -534,7 +534,9 @@
       "nodeName": "Loop",
       "x": 1212.0,
       "y": 817.0,
-      "extraData": [],
+      "extraData": [
+        "LoopType:Loop"
+      ],
       "inputPins": [],
       "outputPins": [
         {
@@ -773,47 +775,6 @@
       ]
     },
     {
-      "className": "ovs.graph.node.NodeIf",
-      "nodeName": "If",
-      "x": 1685.0,
-      "y": 287.0,
-      "extraData": [
-        "Type:If",
-        "Condition:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 2907,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Event Damage",
-          "connectedTo": 2911,
-          "canDelete": false
-        },
-        {
-          "ID": 2908,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Event Damage",
-          "connectedTo": 2912,
-          "canDelete": false
-        },
-        {
-          "ID": 2909,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Global.MyNewName \u003d 0.0;",
-          "connectedTo": 3050,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2910,
-          "type": "ovs.graph.pin.PinAction",
-          "connectedTo": -1,
-          "canDelete": false
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeEventDamage",
       "nodeName": "Event Damage",
       "x": 1444.0,
@@ -824,7 +785,7 @@
         {
           "ID": 2911,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 2907,
+          "connectedTo": 4652,
           "canDelete": false
         }
       ]
@@ -840,7 +801,7 @@
         {
           "ID": 2912,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 2908,
+          "connectedTo": 4653,
           "canDelete": false
         }
       ]
@@ -874,7 +835,9 @@
       "nodeName": "Loop",
       "x": 1500.0,
       "y": 481.0,
-      "extraData": [],
+      "extraData": [
+        "LoopType:Loop"
+      ],
       "inputPins": [],
       "outputPins": [
         {
@@ -1370,7 +1333,7 @@
         {
           "ID": 3050,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 2909,
+          "connectedTo": 4656,
           "canDelete": false
         }
       ]
@@ -1680,14 +1643,14 @@
         {
           "ID": 3630,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "\t\tCurrent Map \u003d\u003d Map(Workshop Expanse);\n\t\tDistance Between(Event Player, Vector(50.0, 2.0, 50.0)) \u003c 2.2;\n",
+          "value": "Current Map \u003d\u003d Map(Workshop Expanse);\nDistance Between(Event Player, Vector(50.0, 2.0, 50.0)) \u003c 2.2;\n",
           "connectedTo": 3482,
           "canDelete": false
         },
         {
           "ID": 3631,
           "type": "ovs.graph.pin.PinAction",
-          "value": "\t\tCreate HUD Text(Event Player,Custom String(\"This is the correct map\"), Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "value": "Create HUD Text(Event Player,Custom String(\"This is the correct map\"), Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
           "connectedTo": 3633,
           "canDelete": false
         }
@@ -2061,6 +2024,72 @@
           "ID": 3942,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 3485,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCondition",
+      "nodeName": "If Condition",
+      "x": 1656.0,
+      "y": 278.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 4652,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Damage",
+          "connectedTo": 2911,
+          "canDelete": false
+        },
+        {
+          "ID": 4653,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Damage",
+          "connectedTo": 2912,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4654,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 4655,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 1880.0,
+      "y": 278.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 4655,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Event Damage \u003d\u003d Event Damage",
+          "connectedTo": 4654,
+          "canDelete": false
+        },
+        {
+          "ID": 4656,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Global.MyNewName \u003d 0.0;",
+          "connectedTo": 3050,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4657,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": -1,
           "canDelete": false
         }
       ]
