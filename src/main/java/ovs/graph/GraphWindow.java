@@ -159,6 +159,8 @@ public class GraphWindow {
         addNodeToList(NodeIsGameInProgress.class);
         addNodeToList(NodeIsInSetup.class);
         addNodeToList(NodeIsAssemblingHeroes.class);
+        addNodeToList(NodeIfCondition.class);
+        addNodeToList(NodeOr.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -607,7 +609,8 @@ public class GraphWindow {
 
                         if(ImGui.isPopupOpen("PreviewSource" + id))
                         {
-                            if(ImGui.beginPopupModal("PreviewSource" + id, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar))
+//                            ImGui.setNextWindowPos(glfwWindow.getWidth() * 0.5f, glfwWindow.getHeight() * 0.5f, ImGuiCond.Always);
+                            if(ImGui.beginPopupModal("PreviewSource" + id, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoSavedSettings))
                             {
                                 int targetID = (int)Global.getStorage("preview_source");
                                 ImGui.text(graph.getNodes().get(targetID).getOutput());

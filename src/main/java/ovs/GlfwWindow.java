@@ -85,11 +85,11 @@ public class GlfwWindow {
         return buffer;
     }
 
-    public static int getWidth(){
+    public int getWidth(){
         return curWidth;
     }
 
-    public static int getHeight(){
+    public int getHeight(){
         return curHeight;
     }
 

@@ -1,0 +1,574 @@
+{
+  "saveSettings": {
+    "modeName": "",
+    "description": "",
+    "maxT1Players": 5,
+    "maxT2Players": 5,
+    "maxFFAPlayers": 0,
+    "assaultMode": false,
+    "controlMode": true,
+    "escortMode": true,
+    "hybridMode": true,
+    "pushMode": true,
+    "bountyHunterMode": false,
+    "ctfMode": false,
+    "deathmatchMode": false,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false,
+    "extensionToggle": [
+      {
+        "name": "Beam Sounds",
+        "value": false
+      },
+      {
+        "name": "Beam Effects",
+        "value": false
+      },
+      {
+        "name": "Buff and Debuff Sounds",
+        "value": false
+      },
+      {
+        "name": "Buff Status Effects",
+        "value": false
+      },
+      {
+        "name": "Debuff Status Effects",
+        "value": false
+      },
+      {
+        "name": "Energy Explosion Effects",
+        "value": false
+      },
+      {
+        "name": "Play More Effects",
+        "value": false
+      },
+      {
+        "name": "Spawn More Dummy Bots",
+        "value": false
+      },
+      {
+        "name": "Explosion Sounds",
+        "value": false
+      },
+      {
+        "name": "Kinetic Explosion Effects",
+        "value": false
+      }
+    ],
+    "dmSettings": {
+      "GameLenthDM": 10,
+      "scoreToWinDM": 20,
+      "initRespawnDM": true,
+      "dmMapToggle": [
+        {
+          "name": "Black Forest",
+          "value": true
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": true
+        },
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": true
+        },
+        {
+          "name": "Castillo",
+          "value": true
+        },
+        {
+          "name": "Château",
+          "value": true
+        },
+        {
+          "name": "Château Guillard",
+          "value": true
+        },
+        {
+          "name": "Château Guillard Halloween",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": true
+        },
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Hollywood",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilois Well",
+          "value": true
+        },
+        {
+          "name": "Kanezaka",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Malevento",
+          "value": true
+        },
+        {
+          "name": "Necropolis",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Petra",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    }
+  },
+  "globalVariables": [],
+  "playerVariables": [],
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 696.0,
+      "y": 184.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All"
+      ],
+      "inputPins": [
+        {
+          "ID": 1154,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1155,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "If(Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0));\nCreate Effect (All Players(All Teams), Orb, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);\nEnd;",
+          "connectedTo": 1157,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 506.0,
+      "y": 215.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 1156,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0)",
+          "connectedTo": 1019,
+          "canDelete": false
+        },
+        {
+          "ID": 1003,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create Effect (All Players(All Teams), Orb, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);",
+          "connectedTo": 1324,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1157,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1155,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateEffect",
+      "nodeName": "Create Effect",
+      "x": 280.0,
+      "y": 352.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1319,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Orb",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1320,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1321,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Vector(0, 0, 0)",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1322,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "5",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 1323,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Visible To Position and Radius",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1324,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 1003,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeOr",
+      "nodeName": "Or",
+      "x": 280.0,
+      "y": 240.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1017,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Map \u003d\u003d Map(Ayutthaya)",
+          "connectedTo": 1488,
+          "canDelete": false
+        },
+        {
+          "ID": 1018,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0)",
+          "connectedTo": 1491,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1019,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 1156,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCondition",
+      "nodeName": "If Condition",
+      "x": 53.0,
+      "y": 215.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1486,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Current Map",
+          "connectedTo": 1653,
+          "canDelete": false
+        },
+        {
+          "ID": 1487,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Map(Ayutthaya)",
+          "connectedTo": 1654,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1488,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 1017,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCondition",
+      "nodeName": "If Condition",
+      "x": 56.0,
+      "y": 343.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1489,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Position Of(Event Player)",
+          "connectedTo": 1656,
+          "canDelete": false
+        },
+        {
+          "ID": 1490,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Vector(0.0, 0.0, 0.0)",
+          "connectedTo": 1658,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1491,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 1018,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCurrentMap",
+      "nodeName": "Current Map",
+      "x": -101.0,
+      "y": 177.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1653,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1486,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeMap",
+      "nodeName": "Map",
+      "x": -95.0,
+      "y": 250.0,
+      "extraData": [
+        "Map:Ayutthaya"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1654,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1487,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodePositionOf",
+      "nodeName": "Position Of",
+      "x": -104.0,
+      "y": 366.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1655,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connectedTo": 1659,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1656,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1489,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeVector",
+      "nodeName": "Vector",
+      "x": -200.0,
+      "y": 446.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1657,
+          "type": "ovs.graph.pin.PinVector",
+          "value": "ImVec4{x\u003d0.0, y\u003d0.0, z\u003d0.0, w\u003d0.0}",
+          "connectedTo": -1,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1658,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1490,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": -252.0,
+      "y": 385.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1659,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1655,
+          "canDelete": false
+        }
+      ]
+    }
+  ]
+}

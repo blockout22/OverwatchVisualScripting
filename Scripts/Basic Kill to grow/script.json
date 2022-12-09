@@ -1287,7 +1287,7 @@
         {
           "ID": 2181,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Wait(0.016, Ignore Condition);\nPress Button(Event Player, Button(Ability 2));\nCancel Primary Action(Event Player);\nLoop If Condition Is True;\n",
+          "value": "Wait(0.1, Ignore Condition);\nPress Button(Event Player, Button(Ability 2));\nCancel Primary Action(Event Player);\nLoop If Condition Is True;\n",
           "connectedTo": 2185,
           "canDelete": false
         }
@@ -1472,7 +1472,7 @@
         {
           "ID": 2649,
           "type": "ovs.graph.pin.PinFloat",
-          "value": "0.016",
+          "value": "0.1",
           "connectedTo": -1,
           "canDelete": false
         }
