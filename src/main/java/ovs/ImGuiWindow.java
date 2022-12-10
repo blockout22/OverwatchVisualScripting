@@ -35,6 +35,8 @@ public class ImGuiWindow {
 
     private String lastMenuAction = null;
 
+    private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
+
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
         ImNodes.createContext();
@@ -100,6 +102,14 @@ public class ImGuiWindow {
             ImGui.end();
 
             if(lastMenuAction == "New"){
+
+                inputFileName.set("");
+                File file = new File(Global.SCRIPTS_DIR);
+                alreadyExistingScripts.clear();
+                for(File script : file.listFiles())
+                {
+                    alreadyExistingScripts.add(script.getName());
+                }
                 ImGui.openPopup("new_file_popup");
                 lastMenuAction = null;
             }
@@ -115,10 +125,18 @@ public class ImGuiWindow {
             {
                 ImGui.text("Script Name");
                 if(ImGui.inputText("##", inputFileName)){
-
                 }
 
-                if(inputFileName.get().length() > 0){
+                boolean alreadyExists = false;
+
+                for(String script : alreadyExistingScripts){
+                    if(inputFileName.get().equals(script)){
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+
+                if(inputFileName.get().length() > 0 && !alreadyExists){
                     if(ImGui.button("Create")){
                         GraphWindow window = new GraphWindow(this, glfwWindow, null);
                         window.setFileName(inputFileName.get());
@@ -139,18 +157,35 @@ public class ImGuiWindow {
 
             if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings)) {
                 ImGui.text("Open Script");
+                ImGui.separator();
+                ImGui.dummy(5, 5);
 
                 File scripts = new File(Global.SCRIPTS_DIR);
                 if (scripts.exists()) {
                     for (File file : scripts.listFiles()) {
-                        if (ImGui.button(file.getName())) {
-                            GraphWindow window = new GraphWindow(this, glfwWindow, file.getName());
-                            graphWindows.add(window);
-                            ImGui.closeCurrentPopup();
+                        boolean alreadyOpen = false;
+
+                        for (GraphWindow window : graphWindows){
+                            if(window.getFileName().equals(file.getName())){
+                                alreadyOpen = true;
+                                break;
+                            }
+                        }
+
+                        if(alreadyOpen){
+                            ImGui.alignTextToFramePadding();
+                            ImGui.text(file.getName());
+                        }else {
+                            if (ImGui.button(file.getName())) {
+                                GraphWindow window = new GraphWindow(this, glfwWindow, file.getName());
+                                graphWindows.add(window);
+                                ImGui.closeCurrentPopup();
+                            }
                         }
                     }
                 }
 
+                ImGui.dummy(5, 5);
                 ImGui.separator();
 
                 if(ImGui.button("Close")){
