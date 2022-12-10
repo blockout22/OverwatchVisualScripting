@@ -51,10 +51,13 @@ public class NodeConditionList extends Node{
             if(pin.isConnected()){
                 Pin connectedPin = pin.getConnectedPin();
 
-                PinData<ImString> connectedData = connectedPin.getData();
+                if(connectedPin != null) {
 
-                output += "" + connectedData.getValue().get() + (connectedData.getValue().get().endsWith(";") ? "" : ";");
-                output += "\n";
+                    PinData<ImString> connectedData = connectedPin.getData();
+
+                    output += "" + connectedData.getValue().get() + (connectedData.getValue().get().endsWith(";") ? "" : ";");
+                    output += "\n";
+                }
             }
         }
 

@@ -4,21 +4,21 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.PinCondition;
+import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
-public class NodeCondition extends Node{
+public class NodeIfCompare extends Node{
 
     ComboBox conditionBox = new ComboBox();
 
-    PinVar pinLeft = new PinVar();
-    PinVar pinRight = new PinVar();
+    PinVar leftPin = new PinVar();
+    PinVar rightPin = new PinVar();
 
-    PinCondition output = new PinCondition();
+    PinIf output = new PinIf();
 
-    public NodeCondition(Graph graph) {
+    public NodeIfCompare(Graph graph) {
         super(graph);
-        setName("Condition");
+        setName("If Compare");
 
         conditionBox.addOption("<");
         conditionBox.addOption(">");
@@ -28,31 +28,30 @@ public class NodeCondition extends Node{
         conditionBox.addOption("==");
 
         conditionBox.select(5);
+        addUiComponent(conditionBox);
 
-        pinLeft.setNode(this);
-        pinLeft.setName("Left Condition");
-        addCustomInput(pinLeft);
+        leftPin.setNode(this);
+        leftPin.setName("Left Condition");
+        addCustomInput(leftPin);
 
-        pinRight.setNode(this);
-        pinRight.setName("Right Condition");
-        addCustomInput(pinRight);
+        rightPin.setNode(this);
+        rightPin.setName("Right Condition");
+        addCustomInput(rightPin);
 
         output.setNode(this);
         addCustomOutput(output);
-
-        addUiComponent(conditionBox);
     }
 
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Condition:" + conditionBox.getSelectedValue());
+        getExtraSaveData().add("Compare:" + conditionBox.getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
         for(String data : getExtraSaveData()){
-            if(data.startsWith("Condition"))
+            if(data.startsWith("Compare"))
             {
                 conditionBox.selectValue(data.split(":")[1]);
             }
@@ -61,15 +60,14 @@ public class NodeCondition extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> leftData = pinLeft.getData();
-        PinData<ImString> rightData = pinRight.getData();
+        PinData<ImString> leftData = leftPin.getData();
+        PinData<ImString> rightData = rightPin.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(pinLeft, leftData);
-        handlePinStringConnection(pinRight, rightData);
+        handlePinStringConnection(leftPin, leftData);
+        handlePinStringConnection(rightPin, rightData, "True");
 
-        outputData.getValue().set(leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ";");
-
+        outputData.getValue().set(leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get());
     }
 
     @Override
@@ -80,6 +78,5 @@ public class NodeCondition extends Node{
 
     @Override
     public void UI() {
-
     }
 }

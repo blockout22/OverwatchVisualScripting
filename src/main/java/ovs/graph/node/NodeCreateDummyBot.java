@@ -37,7 +37,8 @@ public class NodeCreateDummyBot extends Node{
         addCustomInput(pinPosition);
 
         pinFacing.setNode(this);
-        pinPosition.setName("Facing");
+        pinFacing.setName("Facing");
+        addCustomInput(pinFacing);
 
         output.setNode(this);
         addCustomOutput(output);

@@ -4,21 +4,23 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinCondition;
 import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
-public class NodeIfCondition extends Node{
+//TODO possibly remove this as it may not be needed anymore
+public class NodeConditionCompare extends Node{
 
     ComboBox conditionBox = new ComboBox();
 
-    PinVar leftPin = new PinVar();
-    PinVar rightPin = new PinVar();
+    PinVar pinLeft = new PinVar();
+    PinVar pinRight = new PinVar();
 
     PinIf output = new PinIf();
 
-    public NodeIfCondition(Graph graph) {
+    public NodeConditionCompare(Graph graph) {
         super(graph);
-        setName("If Condition");
+        setName("Condition Compare");
 
         conditionBox.addOption("<");
         conditionBox.addOption(">");
@@ -28,18 +30,19 @@ public class NodeIfCondition extends Node{
         conditionBox.addOption("==");
 
         conditionBox.select(5);
-        addUiComponent(conditionBox);
 
-        leftPin.setNode(this);
-        leftPin.setName("Left Condition");
-        addCustomInput(leftPin);
+        pinLeft.setNode(this);
+        pinLeft.setName("Left Condition");
+        addCustomInput(pinLeft);
 
-        rightPin.setNode(this);
-        rightPin.setName("Right Condition");
-        addCustomInput(rightPin);
+        pinRight.setNode(this);
+        pinRight.setName("Right Condition");
+        addCustomInput(pinRight);
 
         output.setNode(this);
         addCustomOutput(output);
+
+        addUiComponent(conditionBox);
     }
 
     @Override
@@ -60,14 +63,15 @@ public class NodeIfCondition extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> leftData = leftPin.getData();
-        PinData<ImString> rightData = rightPin.getData();
+        PinData<ImString> leftData = pinLeft.getData();
+        PinData<ImString> rightData = pinRight.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(leftPin, leftData);
-        handlePinStringConnection(rightPin, rightData, "True");
+        handlePinStringConnection(pinLeft, leftData);
+        handlePinStringConnection(pinRight, rightData);
 
         outputData.getValue().set(leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get());
+
     }
 
     @Override
@@ -78,5 +82,6 @@ public class NodeIfCondition extends Node{
 
     @Override
     public void UI() {
+
     }
 }

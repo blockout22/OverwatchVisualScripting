@@ -151,7 +151,7 @@ public class GraphWindow {
         addNodeToList(NodeCreateDummyBot.class);
         addNodeToList(NodePositionOf.class);
         addNodeToList(NodeEventDamage.class);
-        addNodeToList(NodeCondition.class);
+//        addNodeToList(NodeConditionCompare.class);
         addNodeToList(NodeConditionList.class);
         addNodeToList(NodeLastCreateEntity.class);
         addNodeToList(NodeLastTextId.class);
@@ -163,7 +163,7 @@ public class GraphWindow {
         addNodeToList(NodeIsGameInProgress.class);
         addNodeToList(NodeIsInSetup.class);
         addNodeToList(NodeIsAssemblingHeroes.class);
-        addNodeToList(NodeIfCondition.class);
+        addNodeToList(NodeIfCompare.class);
         addNodeToList(NodeOr.class);
         addNodeToList(NodeAnd.class);
         addNodeToList(NodeAbort.class);
@@ -172,6 +172,7 @@ public class GraphWindow {
         addNodeToList(NodeAbortIfConditionIsTrue.class);
         addNodeToList(NodeAllowButton.class);
         addNodeToList(NodeSubroutine.class);
+        addNodeToList(NodeToCondition.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -850,12 +851,16 @@ public class GraphWindow {
                 //disconnect old connections
                 if(sourcePin.connectedTo != -1){
                     Pin oldPin = graph.findPinById(sourcePin.connectedTo);
-                    oldPin.connectedTo = -1;
+                    if(oldPin != null) {
+                        oldPin.connectedTo = -1;
+                    }
                 }
 
                 if(targetPin.connectedTo != -1){
                     Pin oldPin = graph.findPinById(targetPin.connectedTo);
-                    oldPin.connectedTo = -1;
+                    if(oldPin != null) {
+                        oldPin.connectedTo = -1;
+                    }
                 }
 
                 //create a new link connection

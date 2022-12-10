@@ -93,8 +93,10 @@ public abstract class Node {
         if(pin.isConnected()){
             Pin connectedPin = pin.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
-            pinData.getValue().set(connectedData.getValue().get());
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
+                pinData.getValue().set(connectedData.getValue().get());
+            }
         }
     }
 
@@ -102,8 +104,10 @@ public abstract class Node {
         if(pin.isConnected()){
             Pin connectedPin = pin.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
-            pinData.getValue().set(connectedData.getValue().get());
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
+                pinData.getValue().set(connectedData.getValue().get());
+            }
         }else{
             pinData.getValue().set(defaultValue);
         }
