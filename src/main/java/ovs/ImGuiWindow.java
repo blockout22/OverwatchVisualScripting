@@ -35,6 +35,8 @@ public class ImGuiWindow {
 
     private String lastMenuAction = null;
 
+    private ImVec2 textSize = new ImVec2();
+
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
 
     public ImGuiWindow(GlfwWindow glfwWindow){
@@ -123,6 +125,9 @@ public class ImGuiWindow {
 
             if(ImGui.beginPopupModal("new_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
+                float width = ImGui.getWindowSize().x;
+                ImGui.calcTextSize(textSize, "Script Name");
+                ImGui.setCursorPosX((width - textSize.x) * 0.5f);
                 ImGui.text("Script Name");
                 if(ImGui.inputText("##", inputFileName)){
                 }
@@ -156,6 +161,9 @@ public class ImGuiWindow {
             }
 
             if(ImGui.beginPopupModal("open_file_popup", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings)) {
+                float width = ImGui.getWindowSize().x;
+                ImGui.calcTextSize(textSize, "Open Script");
+                ImGui.setCursorPosX((width - textSize.x) * 0.5f);
                 ImGui.text("Open Script");
                 ImGui.separator();
                 ImGui.dummy(5, 5);
@@ -188,7 +196,7 @@ public class ImGuiWindow {
                 ImGui.dummy(5, 5);
                 ImGui.separator();
 
-                if(ImGui.button("Close")){
+                if(ImGui.button("Close", -1, 0)){
                     ImGui.closeCurrentPopup();
                 }
 
