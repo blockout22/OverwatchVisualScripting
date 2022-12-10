@@ -9,6 +9,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeCreateEffect extends Node{
 
+    PinVar pinPlayer = new PinVar();
     PinCombo pinType = new PinCombo();
     PinVar pinColor = new PinVar();
     PinVar pinPosition = new PinVar();
@@ -20,6 +21,10 @@ public class NodeCreateEffect extends Node{
     public NodeCreateEffect(Graph graph) {
         super(graph);
         setName("Create Effect");
+
+        pinPlayer.setNode(this);
+        pinPlayer.setName("Visible To");
+        addCustomInput(pinPlayer);
 
         pinType.setNode(this);
         pinType.setName("Type");
@@ -49,6 +54,7 @@ public class NodeCreateEffect extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> playerData = pinPlayer.getData();
         PinData<ImString> typeData = pinType.getData();
         PinData<ImString> colorData = pinColor.getData();
         PinData<ImString> positionData = pinPosition.getData();
@@ -56,15 +62,14 @@ public class NodeCreateEffect extends Node{
         PinData<ImString> reevaluationData = pinReevaluation.getData();
         PinData<ImString> outputData = output.getData();
 
+        handlePinStringConnection(pinPlayer, playerData);
         handlePinStringConnection(pinType, typeData);
         handlePinStringConnection(pinColor, colorData, "Color(White)");
         handlePinStringConnection(pinPosition, positionData, "Vector(0, 0, 0)");
         handlePinStringConnection(pinRadius, radiusData, "5");
         handlePinStringConnection(pinReevaluation, reevaluationData, "Visible To Position and Radius");
 
-        String who = "All Players(All Teams)";
-
-        outputData.getValue().set("Create Effect (" + who + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ", " + reevaluationData.getValue().get() + ");");
+        outputData.getValue().set("Create Effect (" + playerData.getValue().get() + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ", " + reevaluationData.getValue().get() + ");");
     }
 
     @Override

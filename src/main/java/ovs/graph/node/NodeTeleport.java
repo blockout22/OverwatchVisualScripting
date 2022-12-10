@@ -10,22 +10,22 @@ import ovs.graph.pin.PinVar;
 public class NodeTeleport extends Node{
 
     //who to teleport
-    PinVar inputPin = new PinVar();
+    PinVar pinPlayer = new PinVar();
     //Where to teleport inputPin
-    PinVar inputPin2 = new PinVar();
+    PinVar pinPosition = new PinVar();
     PinAction outputPin = new PinAction();
 
     public NodeTeleport(Graph graph) {
         super(graph);
         setName("Teleport");
 
-        inputPin.setNode(this);
-        inputPin.setName("Player");
-        addCustomInput(inputPin);
+        pinPlayer.setNode(this);
+        pinPlayer.setName("Player");
+        addCustomInput(pinPlayer);
 
-        inputPin2.setNode(this);
-        inputPin2.setName("Position");
-        addCustomInput(inputPin2);
+        pinPosition.setNode(this);
+        pinPosition.setName("Position");
+        addCustomInput(pinPosition);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
@@ -33,29 +33,14 @@ public class NodeTeleport extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> inputData = inputPin.getData();
-        PinData<ImString> inputData2 = inputPin2.getData();
+        PinData<ImString> playerData = pinPlayer.getData();
+        PinData<ImString> positionData = pinPosition.getData();
         PinData<ImString> outputData = outputPin.getData();
 
-        if(inputPin.isConnected())
-        {
-            Pin connectedPin = inputPin.getConnectedPin();
+        handlePinStringConnection(pinPlayer, playerData);
+        handlePinStringConnection(pinPosition, positionData);
 
-            PinData<ImString> connectedData = connectedPin.getData();
-
-            inputData.getValue().set(connectedData.getValue().get());
-        }
-
-        if(inputPin2.isConnected())
-        {
-            Pin connectedPin = inputPin2.getConnectedPin();
-
-            PinData<ImString> connectedData = connectedPin.getData();
-
-            inputData2.getValue().set(connectedData.getValue().get());
-        }
-
-        outputData.getValue().set("Teleport(" + inputData.getValue().get() + ", " + inputData2.getValue().get() + ");");
+        outputData.getValue().set("Teleport(" + playerData.getValue().get() + ", " + positionData.getValue().get() + ");");
     }
 
     @Override

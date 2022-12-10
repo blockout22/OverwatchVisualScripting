@@ -8,6 +8,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeBigMessage extends Node{
 
+    PinVar pinPlayer = new PinVar();
     PinVar pinHeader = new PinVar();
     PinAction output = new PinAction();
 
@@ -15,8 +16,12 @@ public class NodeBigMessage extends Node{
         super(graph);
         setName("Big Message");
 
+        pinPlayer.setNode(this);
+        pinPlayer.setName("Visible To");
+        addCustomInput(pinPlayer);
+
         pinHeader.setNode(this);
-        pinHeader.setName("Data");
+        pinHeader.setName("Header");
         addCustomInput(pinHeader);
 
         output.setNode(this);
@@ -26,14 +31,14 @@ public class NodeBigMessage extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> playerData = pinPlayer.getData();
         PinData<ImString> headerData = pinHeader.getData();
         PinData<ImString> outputData = output.getData();
 
+        handlePinStringConnection(pinPlayer, playerData);
         handlePinStringConnection(pinHeader, headerData, "Custom String(\"\", Null, Null, Null)");
 
-        //TODO have a pin to allow selecting who sees the message;
-        String who = "Event Player";
-        outputData.getValue().set("Big Message(" + who + ", " + headerData.getValue().get() + ");");
+        outputData.getValue().set("Big Message(" + playerData.getValue().get() + ", " + headerData.getValue().get() + ");");
     }
 
     @Override
