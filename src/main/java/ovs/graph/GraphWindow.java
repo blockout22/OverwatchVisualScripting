@@ -59,6 +59,8 @@ public class GraphWindow {
     private boolean justOpenedContextMenu = false;
     private boolean isLoading = false;
     private boolean outputInFocus = false;
+    private boolean contextMenuAutoSize = true;
+    private boolean contextMenuOpen = false;
 
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
@@ -76,6 +78,7 @@ public class GraphWindow {
 
     private float canvasXPos = 0;
     private float canvasYPos = 0;
+    private float contextMenuSize = 250;
 
     public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
         this.imGuiWindow = imGuiWindow;
@@ -166,6 +169,7 @@ public class GraphWindow {
         addNodeToList(NodeAbortIf.class);
         addNodeToList(NodeAbortIfConditionIsFalse.class);
         addNodeToList(NodeAbortIfConditionIsTrue.class);
+        addNodeToList(NodeAllowButton.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -653,26 +657,42 @@ public class GraphWindow {
                                             e.printStackTrace();
                                         }
 
-                                        if(instance != null) {
-                                            createContextMenuItem(instance, 0);
-                                        }
+//                                        if(instance != null) {
+//                                            createContextMenuItem(instance, 0);
+//                                        }
                                     }
-                                }else{
-                                    if(justOpenedContextMenu){
+                                }else {
+                                    if (justOpenedContextMenu) {
                                         nodeSearch.set("");
                                         ImGui.setKeyboardFocusHere(0);
                                         justOpenedContextMenu = false;
                                     }
 
                                     ImGui.inputTextWithHint("##", "Search Node", nodeSearch);
-                                    ImGui.beginChild("ScrollArea", 250, 500);
+                                    ImGui.setNextWindowSize(250, 0, ImGuiCond.Once);
+                                    ImGui.beginChild("ScrollArea", 250, (contextMenuAutoSize ? 500 : contextMenuSize));
                                     for (Node instance : nodeInstanceCache) {
                                         createContextMenuItem(instance, 0);
+                                    }
+
+                                    float avail = ImGui.getContentRegionAvailY();
+                                    if (!contextMenuOpen && avail != -1)
+                                    {
+                                        if (avail <= 0) {
+                                            contextMenuAutoSize = true;
+                                        } else {
+                                            contextMenuAutoSize = false;
+                                            contextMenuSize = 500 - avail;
+                                        }
+                                        contextMenuOpen = true;
                                     }
                                     ImGui.endChild();
                                 }
                                 ImGui.endPopup();
                             }
+                        }else{
+                            contextMenuOpen = false;
+                            contextMenuAutoSize = true;
                         }
 
                         //Handle in node popups
