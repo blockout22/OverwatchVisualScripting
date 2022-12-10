@@ -4,14 +4,20 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
+import ovs.graph.pin.PinIf;
 
-public class NodeAbort extends Node{
+public class NodeAbortIf extends Node{
+
+    PinIf inputPin = new PinIf();
 
     PinAction output = new PinAction();
 
-    public NodeAbort(Graph graph) {
+    public NodeAbortIf(Graph graph) {
         super(graph);
-        setName("Abort");
+        setName("Abort If");
+
+        inputPin.setNode(this);
+        addCustomInput(inputPin);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -19,9 +25,12 @@ public class NodeAbort extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> inputData = inputPin.getData();
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Abort;");
+        handlePinStringConnection(inputPin, inputData);
+
+        outputData.getValue().set("Abort If(" + inputData.getValue().get() + ");");
     }
 
     @Override

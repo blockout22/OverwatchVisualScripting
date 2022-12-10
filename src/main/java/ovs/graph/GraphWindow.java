@@ -163,6 +163,7 @@ public class GraphWindow {
         addNodeToList(NodeOr.class);
         addNodeToList(NodeAnd.class);
         addNodeToList(NodeAbort.class);
+        addNodeToList(NodeAbortIf.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
