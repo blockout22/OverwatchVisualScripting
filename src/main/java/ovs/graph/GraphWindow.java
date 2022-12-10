@@ -164,6 +164,8 @@ public class GraphWindow {
         addNodeToList(NodeAnd.class);
         addNodeToList(NodeAbort.class);
         addNodeToList(NodeAbortIf.class);
+        addNodeToList(NodeAbortIfConditionIsFalse.class);
+        addNodeToList(NodeAbortIfConditionIsTrue.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -663,11 +665,12 @@ public class GraphWindow {
                                     }
 
                                     ImGui.inputTextWithHint("##", "Search Node", nodeSearch);
-                                    for(Node instance : nodeInstanceCache){
+                                    ImGui.beginChild("ScrollArea", 250, 500);
+                                    for (Node instance : nodeInstanceCache) {
                                         createContextMenuItem(instance, 0);
                                     }
+                                    ImGui.endChild();
                                 }
-
                                 ImGui.endPopup();
                             }
                         }
