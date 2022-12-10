@@ -13,6 +13,7 @@ public class Graph {
     private ArrayList<Integer> queuedForRemoval = new ArrayList<>();
     public final AdvancedArrayList<Variable> globalVariables = new AdvancedArrayList<>();
     public final AdvancedArrayList<Variable> playerVariables = new AdvancedArrayList<>();
+    public final AdvancedArrayList<String> subroutines = new AdvancedArrayList<>();
 
     private static int nextNodeID = 1;
     private static int nextPinID = 1000;
@@ -42,6 +43,10 @@ public class Graph {
 //        var.ID = playerVariables.size();
         var.name = name;
         playerVariables.add(var);
+    }
+
+    public void addSubroutine(String name){
+        subroutines.add(name);
     }
 
     public Map<Integer, Node> getNodes()

@@ -66,6 +66,7 @@ public class GraphWindow {
     private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
     private final ArrayList<TextField> tfGlobalVars = new ArrayList<>();
     private final ArrayList<TextField> tfPlayerVars = new ArrayList<>();
+    private final ArrayList<TextField> tfSubroutines = new ArrayList<>();
 
 
     private ImString nodeSearch = new ImString();
@@ -170,6 +171,7 @@ public class GraphWindow {
         addNodeToList(NodeAbortIfConditionIsFalse.class);
         addNodeToList(NodeAbortIfConditionIsTrue.class);
         addNodeToList(NodeAllowButton.class);
+        addNodeToList(NodeSubroutine.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -212,8 +214,28 @@ public class GraphWindow {
             }
         });
 
+        graph.subroutines.addListChangedListener(new ListChangedListener() {
+            @Override
+            public void onChanged() {
+                tfSubroutines.clear();
+                for (int i = 0; i < graph.subroutines.size(); i++) {
+                    TextField tf = new TextField();
+                    int j = i;
+                    tf.addChangedListener(new ChangeListener() {
+                        @Override
+                        public void onChanged(String oldValue, String newValue) {
+                            graph.subroutines.set(j, newValue);
+                        }
+                    });
+                    tf.setText(graph.subroutines.get(i));
+                    tfSubroutines.add(tf);
+                }
+            }
+        });
+
         graph.playerVariables.triggerOnChanged();
         graph.globalVariables.triggerOnChanged();
+        graph.subroutines.triggerOnChanged();
     }
 
     public void setFileName(String name){
@@ -309,13 +331,13 @@ public class GraphWindow {
                                 //Variables
                                 ImGui.text("Variables");
                                 if (ImGui.button("Add Global Variable")) {
-                                    graph.addGlobalVariable("VarName");
+                                    graph.addGlobalVariable("VarName" + graph.globalVariables.size());
                                 }
 
                                 ImGui.sameLine();
 
                                 if (ImGui.button("Add Player Variable")) {
-                                    graph.addPlayerVariable("varName");
+                                    graph.addPlayerVariable("varName" + graph.playerVariables.size());
                                 }
 
                                 ImGui.pushItemWidth(250);
@@ -339,6 +361,21 @@ public class GraphWindow {
                                     ImGui.sameLine();
                                     if(ImGui.button("X##playerVars" + i)){
                                         graph.playerVariables.remove(i);
+                                    }
+                                }
+
+                                if(ImGui.button("Add Subroutine")){
+                                    graph.addSubroutine("newSub" + graph.subroutines.size());
+                                }
+
+                                ImGui.text("Subroutines");
+                                for (int i = 0; i < tfSubroutines.size(); i++) {
+                                    ImGui.text(i + ":");
+                                    ImGui.sameLine();
+                                    tfSubroutines.get(i).show();
+                                    ImGui.sameLine();
+                                    if(ImGui.button("X##Subroutines" + i)){
+                                        graph.subroutines.remove(i);
                                     }
                                 }
 

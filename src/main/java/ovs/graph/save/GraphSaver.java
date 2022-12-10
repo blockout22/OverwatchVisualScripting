@@ -39,6 +39,7 @@ public class GraphSaver {
         graphSave.nodeSaves.clear();
         graphSave.globalVariables.clear();
         graphSave.playerVariables.clear();
+        graphSave.subroutines.clear();
         graphSave.saveSettings.extensionToggle.clear();
         graphSave.saveSettings.dmSettings.dmMapToggle.clear();
 
@@ -96,6 +97,10 @@ public class GraphSaver {
             Variable var = graph.playerVariables.get(i);
 //            graphSave.playerVariables.add(var.ID + ":" + var.name);
             graphSave.playerVariables.add(i + ":" + var.name);
+        }
+
+        for (int i = 0; i < graph.subroutines.size(); i++) {
+            graphSave.subroutines.add(i + ":" + graph.subroutines.get(i));
         }
 
 
@@ -246,6 +251,11 @@ public class GraphSaver {
 //                variable.ID = Integer.valueOf(split[0]);
                 variable.name = split[1];
                 graph.playerVariables.add(variable);
+            }
+
+            for (String sub : gs.subroutines){
+                String[] split = sub.split(":");
+                graph.subroutines.add(split[1]);
             }
 
             for (int i = 0; i < gs.nodeSaves.size(); i++) {
@@ -412,6 +422,7 @@ public class GraphSaver {
         private SaveSettings saveSettings = new SaveSettings();
         private ArrayList<String> globalVariables = new ArrayList<>();
         private ArrayList<String> playerVariables = new ArrayList<>();
+        private ArrayList<String> subroutines = new ArrayList<>();
         private ArrayList<NodeSave> nodeSaves = new ArrayList<>();
     }
 

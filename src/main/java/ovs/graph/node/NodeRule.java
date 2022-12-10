@@ -4,9 +4,11 @@ import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.Global;
 import ovs.graph.Graph;
+import ovs.graph.ListChangedListener;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.UI.Listeners.OnOpenedListener;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinCondition;
@@ -19,8 +21,12 @@ public class NodeRule extends Node{
     ComboBox comboEventOnGoing = new ComboBox();
     ComboBox comboTeam = new ComboBox();
     ComboBox comboPlayers = new ComboBox();
+    ComboBox comboSub = new ComboBox();
 
     boolean isGlobal = false;
+    boolean isSub = false;
+
+    String error = "";
 
     public NodeRule(Graph graph) {
         super(graph);
@@ -66,6 +72,21 @@ public class NodeRule extends Node{
         comboPlayers.addOption("Slot 10");
         comboPlayers.addOption("Slot 11");
 
+        comboSub.addOnOpenedListener(new OnOpenedListener() {
+            @Override
+            public void onOpen() {
+                String lastSelectedValue = comboSub.getSelectedValue();
+                comboSub.clear();
+
+                for (int i = 0; i < graph.subroutines.size(); i++) {
+                    comboSub.addOption(graph.subroutines.get(i));
+                }
+
+                comboSub.selectValue(lastSelectedValue);
+                width = -1;
+            }
+        });
+
         for (int i = 0; i < Global.heroes.size(); i++) {
             comboPlayers.addOption(Global.heroes.get(i));
         }
@@ -74,9 +95,14 @@ public class NodeRule extends Node{
             @Override
             public void onChanged(String oldValue, String newValue) {
                 if(newValue == "Ongoing - Global"){
+                    isSub = false;
                     isGlobal = true;
+                }else if(newValue == "Subroutine"){
+                    isSub = true;
+                    isGlobal = false;
                 }else{
                     isGlobal = false;
+                    isSub = false;
                 }
             }
         });
@@ -92,10 +118,17 @@ public class NodeRule extends Node{
         getExtraSaveData().add("EventOnGoing:" + comboEventOnGoing.getSelectedValue());
         getExtraSaveData().add("Team:" + comboTeam.getSelectedValue());
         getExtraSaveData().add("Player:" + comboPlayers.getSelectedValue());
+        getExtraSaveData().add("Sub:" + comboSub.getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
+        comboSub.clear();
+
+        for (int i = 0; i < getGraph().subroutines.size(); i++) {
+            comboSub.addOption(getGraph().subroutines.get(i));
+        }
+
         for (String data : getExtraSaveData()){
             if(data.startsWith("EventOnGoing"))
             {
@@ -105,12 +138,19 @@ public class NodeRule extends Node{
                 comboTeam.selectValue(data.split(":")[1]);
             }else if(data.startsWith("Player")){
                 comboPlayers.selectValue(data.split(":")[1]);
+            }else if(data.startsWith("Sub")){
+                try{
+                    comboSub.selectValue(data.split(":")[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    comboSub.select(-1);
+                }
             }
         }
     }
 
     @Override
     public void execute() {
+        error = "";
 //        for (int i = 0; i < inputPins.size(); i++) {
 //            Pin pin = inputPins.get(i);
 //
@@ -129,6 +169,36 @@ public class NodeRule extends Node{
 
         handlePinStringConnection(conditionPin, conditionData);
         handlePinStringConnection(actionPin, actionData);
+
+        if(isGlobal) {
+            Pin connectedPin = actionPin.getConnectedPin();
+            if(connectedPin != null) {
+                checkError(connectedPin);
+            }
+        }
+
+        if(isSub){
+            if(comboSub.getSelectedIndex() == -1){
+                error = "Error: no selected subroutine";
+            }
+        }
+    }
+
+    private void checkError(Pin pin){
+        if(pin.getNode() instanceof NodeEventPlayer)
+        {
+            error = "Error: Event player value is not allowed inside a rule with an '" + comboEventOnGoing.getSelectedValue() + "' event";
+            return;
+        }
+
+        for (int i = 0; i < pin.getNode().inputPins.size(); i++) {
+            Pin newPin = pin.getNode().inputPins.get(i);
+
+            if(newPin.isConnected()){
+                Pin connectedPin = newPin.getConnectedPin();
+                checkError(connectedPin);
+            }
+        }
     }
 
     @Override
@@ -142,9 +212,15 @@ public class NodeRule extends Node{
         out += "{\n";
         out += "" + comboEventOnGoing.getSelectedValue() + ";\n";
 
-        if(!isGlobal){
+        if(!isGlobal && !isSub){
             out += "" + comboTeam.getSelectedValue() + ";\n";
             out += "" + comboPlayers.getSelectedValue() + ";\n";
+        }
+
+        if(isSub){
+            if(comboSub.getSelectedIndex() != -1) {
+                out += comboSub.getSelectedValue() + ";\n";
+            }
         }
 
         out += "}\n";
@@ -227,11 +303,16 @@ public class NodeRule extends Node{
     @Override
     public void UI() {
         ImGui.text("Event");
+        ImGui.textWrapped(error);
         comboEventOnGoing.show();
 
-        if(!isGlobal){
+        if(!isGlobal && !isSub){
             comboTeam.show();
             comboPlayers.show();
+        }
+
+        if(isSub){
+            comboSub.show();
         }
     }
 }

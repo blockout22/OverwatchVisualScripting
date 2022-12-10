@@ -107,6 +107,10 @@ public class ComboBox extends UiComponent{
         }
     }
 
+    public String[] getOptions(){
+        return items;
+    }
+
     public void clear(){
         items = new String[0];
     }

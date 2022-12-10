@@ -51,4 +51,8 @@ public class AdvancedArrayList<E> {
     public E get(int index){
         return list.get(index);
     }
+
+    public void set(int index, E value){
+        list.set(index, value);
+    }
 }

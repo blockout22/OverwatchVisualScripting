@@ -37,6 +37,18 @@ public class Compiler {
             output.append("\n");
         }
 
+        if(graph.subroutines.size() > 0){
+            output.append("subroutines\n");
+            output.append("{\n");
+
+            for (int i = 0; i < graph.subroutines.size(); i++) {
+                output.append(i + ": " + graph.subroutines.get(i) + "\n");
+            }
+
+            output.append("}\n");
+            output.append("\n");
+        }
+
         output.append("rule(\"Credits\")\n");
         output.append("{\n");
         output.append("event\n");

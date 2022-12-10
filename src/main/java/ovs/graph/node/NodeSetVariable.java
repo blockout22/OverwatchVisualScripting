@@ -4,6 +4,7 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.OnOpenedListener;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
@@ -27,7 +28,6 @@ public class NodeSetVariable extends Node{
         output.setNode(this);
         addCustomOutput(output);
 
-
         comboBox.addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
@@ -43,6 +43,14 @@ public class NodeSetVariable extends Node{
                 }
 
                 comboBox.selectValue(lastSelectedValue);
+                width = -1;
+            }
+        });
+
+        comboBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void onChanged(String oldValue, String newValue) {
+                width = -1;
             }
         });
     }

@@ -261,6 +261,9 @@
   },
   "globalVariables": [],
   "playerVariables": [],
+  "subroutines": [
+    "0:newSub0"
+  ],
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeRule",
@@ -270,7 +273,8 @@
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
-        "Player:All"
+        "Player:All",
+        "Sub:"
       ],
       "inputPins": [
         {
@@ -283,7 +287,7 @@
         {
           "ID": 1155,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Event Damage \u003d\u003d True \u0026\u0026 Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0));\nCreate Effect (, , Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);\nEnd;",
+          "value": "If(Event Damage \u003d\u003d True \u0026\u0026 Current Map \u003d\u003d Map(Ayutthaya) || Position Of(Event Player) \u003d\u003d Vector(0.0, 0.0, 0.0));\nCreate Effect (Event Player, Bad Aura, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);\nEnd;",
           "connectedTo": 1157,
           "canDelete": false
         }
@@ -309,7 +313,7 @@
         {
           "ID": 1003,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create Effect (, , Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);",
+          "value": "Create Effect (Event Player, Bad Aura, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);",
           "connectedTo": 1324,
           "canDelete": false
         }
@@ -326,21 +330,21 @@
     {
       "className": "ovs.graph.node.NodeCreateEffect",
       "nodeName": "Create Effect",
-      "x": 280.0,
-      "y": 352.0,
+      "x": 248.0,
+      "y": 544.0,
       "extraData": [],
       "inputPins": [
         {
           "ID": 1319,
           "type": "ovs.graph.pin.PinVar",
-          "value": "",
-          "connectedTo": -1,
+          "value": "Event Player",
+          "connectedTo": 2550,
           "canDelete": false
         },
         {
           "ID": 1320,
           "type": "ovs.graph.pin.PinCombo",
-          "value": "",
+          "value": "Bad Aura",
           "connectedTo": -1,
           "canDelete": false
         },
@@ -718,9 +722,10 @@
       "x": 1749.0,
       "y": 423.0,
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Subroutine",
         "Team:All",
-        "Player:All"
+        "Player:All",
+        "Sub:newSub0"
       ],
       "inputPins": [
         {
@@ -1013,6 +1018,69 @@
           "ID": 2374,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 2192,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 36.0,
+      "y": 561.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2550,
+          "type": "ovs.graph.pin.PinVar",
+          "connectedTo": 1319,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 1976.0,
+      "y": 249.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All",
+        "Sub:"
+      ],
+      "inputPins": [
+        {
+          "ID": 2551,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connectedTo": -1,
+          "canDelete": false
+        },
+        {
+          "ID": 2552,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Call Subroutine(newSub0);",
+          "connectedTo": 2729,
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeSubroutine",
+      "nodeName": "Subroutine",
+      "x": 1628.0,
+      "y": 266.0,
+      "extraData": [
+        "Sub:newSub0"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2729,
+          "type": "ovs.graph.pin.PinAction",
+          "connectedTo": 2552,
           "canDelete": false
         }
       ]
