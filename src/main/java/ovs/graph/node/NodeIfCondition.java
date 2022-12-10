@@ -65,7 +65,7 @@ public class NodeIfCondition extends Node{
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(leftPin, leftData);
-        handlePinStringConnection(rightPin, rightData);
+        handlePinStringConnection(rightPin, rightData, "True");
 
         outputData.getValue().set(leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get());
     }
