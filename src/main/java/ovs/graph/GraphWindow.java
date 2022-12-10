@@ -162,6 +162,7 @@ public class GraphWindow {
         addNodeToList(NodeIfCondition.class);
         addNodeToList(NodeOr.class);
         addNodeToList(NodeAnd.class);
+        addNodeToList(NodeAbort.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
