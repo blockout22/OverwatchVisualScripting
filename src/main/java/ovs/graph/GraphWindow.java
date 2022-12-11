@@ -174,6 +174,8 @@ public class GraphWindow {
         addNodeToList(NodeSubroutine.class);
         addNodeToList(NodeToCondition.class);
         addNodeToList(NodeAllPlayers.class);
+        addNodeToList(NodeStartFocingPlayerPosition.class);
+        addNodeToList(NodeTeam.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

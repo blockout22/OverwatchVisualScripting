@@ -8,7 +8,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeAllPlayers extends Node{
 
-    ComboBox comboBoxTeam = new ComboBox();
+    PinVar pinTeam = new PinVar();
 
     PinVar output = new PinVar();
 
@@ -16,38 +16,22 @@ public class NodeAllPlayers extends Node{
         super(graph);
         setName("All Players");
 
-
-        comboBoxTeam.addOption("All Teams");
-        comboBoxTeam.addOption("Team 1");
-        comboBoxTeam.addOption("Team 2");
-
-        comboBoxTeam.select(0);
+        pinTeam.setNode(this);
+        pinTeam.setName("Team");
+        addCustomInput(pinTeam);
 
         output.setNode(this);
         addCustomOutput(output);
     }
 
     @Override
-    public void onSaved() {
-        getExtraSaveData().clear();
-        getExtraSaveData().add("Team:" + comboBoxTeam.getSelectedValue());
-    }
-
-    @Override
-    public void onLoaded() {
-        for(String data : getExtraSaveData()){
-            if(data.startsWith("Team"))
-            {
-                comboBoxTeam.selectValue(data.split(":")[1]);
-            }
-        }
-    }
-
-    @Override
     public void execute() {
+        PinData<ImString> teamData = pinTeam.getData();
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("All Players(" + comboBoxTeam.getSelectedValue() + ")");
+        handlePinStringConnection(pinTeam, teamData);
+
+        outputData.getValue().set("All Players(" + teamData.getValue().get() + ")");
     }
 
     @Override
@@ -58,6 +42,6 @@ public class NodeAllPlayers extends Node{
 
     @Override
     public void UI() {
-        comboBoxTeam.show();
+
     }
 }
