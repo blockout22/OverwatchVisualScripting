@@ -1,6 +1,7 @@
 package ovs.graph.UI;
 
 import imgui.ImGui;
+import imgui.type.ImString;
 import ovs.graph.Popup;
 import ovs.graph.PopupHandler;
 import ovs.graph.UI.Listeners.ChangeListener;
@@ -13,7 +14,12 @@ public class ComboBox extends UiComponent{
 
     private ArrayList<ChangeListener> changeListeners = new ArrayList<>();
     private ArrayList<OnOpenedListener> onOpenedListeners = new ArrayList<OnOpenedListener>();
+
+    private boolean justOpened = false;
     private boolean requestPopup = false;
+    private boolean isSearchable = false;
+
+    private ImString itemSearch = new ImString();
 
     private int currentSelectedIndex = -1;
     private String[] items = {
@@ -22,7 +28,22 @@ public class ComboBox extends UiComponent{
     Popup popup = new Popup() {
         @Override
         public boolean show() {
+
+            if(isSearchable){
+                if(justOpened){
+                    ImGui.setKeyboardFocusHere(0);
+                    justOpened = false;
+                }
+
+                ImGui.inputTextWithHint("##", "Search Item", itemSearch);
+            }
+
             for (int i = 0; i < items.length; i++) {
+                if(itemSearch.get().toLowerCase().length() > 0){
+                    if(!items[i].toLowerCase().contains(itemSearch.get())){
+                        continue;
+                    }
+                }
                 if(ImGui.menuItem(items[i])){
                     String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
                     currentSelectedIndex = i;
@@ -81,7 +102,9 @@ public class ComboBox extends UiComponent{
     @Override
     public void show() {
         if(requestPopup){
+            itemSearch.set("");
             PopupHandler.open(popup);
+            justOpened = true;
             for (int i = 0; i < onOpenedListeners.size(); i++) {
                 onOpenedListeners.get(i).onOpen();
             }
@@ -131,6 +154,10 @@ public class ComboBox extends UiComponent{
         }
 
         currentSelectedIndex = -1;
+    }
+
+    public void setSearchable(boolean searchable){
+        this.isSearchable = searchable;
     }
 
     public void sort() {

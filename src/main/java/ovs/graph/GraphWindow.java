@@ -173,6 +173,7 @@ public class GraphWindow {
         addNodeToList(NodeAllowButton.class);
         addNodeToList(NodeSubroutine.class);
         addNodeToList(NodeToCondition.class);
+        addNodeToList(NodeAllPlayers.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

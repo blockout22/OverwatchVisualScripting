@@ -268,7 +268,7 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Create Dummy Bot",
-      "x": 1000.0,
+      "x": 1304.0,
       "y": 139.0,
       "extraData": [
         "EventOnGoing:Player Joined Match",
@@ -281,7 +281,7 @@
           "ID": 1176,
           "type": "ovs.graph.pin.PinCondition",
           "value": "Host Player \u003d\u003d True;",
-          "connectedTo": 1196,
+          "connectedTo": 6039,
           "canDelete": false
         },
         {
@@ -295,39 +295,6 @@
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeCondition",
-      "nodeName": "Condition",
-      "x": 741.0,
-      "y": 57.0,
-      "extraData": [
-        "Condition:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 1194,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Host Player",
-          "connectedTo": 1197,
-          "canDelete": false
-        },
-        {
-          "ID": 1195,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "True",
-          "connectedTo": 1199,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1196,
-          "type": "ovs.graph.pin.PinCondition",
-          "connectedTo": 1176,
-          "canDelete": false
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeHostPlayer",
       "nodeName": "Host Player",
       "x": 568.0,
@@ -338,7 +305,7 @@
         {
           "ID": 1197,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1194,
+          "connectedTo": 6040,
           "canDelete": false
         }
       ]
@@ -362,7 +329,7 @@
         {
           "ID": 1199,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1195,
+          "connectedTo": 6041,
           "canDelete": false
         }
       ]
@@ -462,8 +429,8 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 1112.0,
-      "y": 713.0,
+      "x": 1432.0,
+      "y": 665.0,
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -475,7 +442,7 @@
           "ID": 1385,
           "type": "ovs.graph.pin.PinCondition",
           "value": "Is Button Held(Event Player, Button(Interact)) \u003d\u003d True;",
-          "connectedTo": 1389,
+          "connectedTo": 6220,
           "canDelete": false
         },
         {
@@ -487,39 +454,6 @@
         }
       ],
       "outputPins": []
-    },
-    {
-      "className": "ovs.graph.node.NodeCondition",
-      "nodeName": "Condition",
-      "x": 901.0,
-      "y": 585.0,
-      "extraData": [
-        "Condition:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 1387,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Is Button Held(Event Player, Button(Interact))",
-          "connectedTo": 1391,
-          "canDelete": false
-        },
-        {
-          "ID": 1388,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "True",
-          "connectedTo": 1395,
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1389,
-          "type": "ovs.graph.pin.PinCondition",
-          "connectedTo": 1385,
-          "canDelete": false
-        }
-      ]
     },
     {
       "className": "ovs.graph.node.NodeIsButtonDown",
@@ -542,7 +476,7 @@
         {
           "ID": 1391,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1387,
+          "connectedTo": 6221,
           "canDelete": false
         }
       ]
@@ -582,7 +516,7 @@
         {
           "ID": 1395,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1388,
+          "connectedTo": 6222,
           "canDelete": false
         }
       ]
@@ -844,6 +778,120 @@
           "ID": 1436,
           "type": "ovs.graph.pin.PinVar",
           "connectedTo": 1429,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeToCondition",
+      "nodeName": "To Condition",
+      "x": 1076.0,
+      "y": 112.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 6038,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Host Player \u003d\u003d True",
+          "connectedTo": 6042,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 6039,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 1176,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCompare",
+      "nodeName": "If Compare",
+      "x": 840.0,
+      "y": 57.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 6040,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Host Player",
+          "connectedTo": 1197,
+          "canDelete": false
+        },
+        {
+          "ID": 6041,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 1199,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 6042,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 6038,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeToCondition",
+      "nodeName": "To Condition",
+      "x": 1224.0,
+      "y": 624.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 6219,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Is Button Held(Event Player, Button(Interact)) \u003d\u003d True",
+          "connectedTo": 6223,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 6220,
+          "type": "ovs.graph.pin.PinCondition",
+          "connectedTo": 1385,
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCompare",
+      "nodeName": "If Compare",
+      "x": 1000.0,
+      "y": 601.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 6221,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is Button Held(Event Player, Button(Interact))",
+          "connectedTo": 1391,
+          "canDelete": false
+        },
+        {
+          "ID": 6222,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connectedTo": 1395,
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 6223,
+          "type": "ovs.graph.pin.PinIf",
+          "connectedTo": 6219,
           "canDelete": false
         }
       ]

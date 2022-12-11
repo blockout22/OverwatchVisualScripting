@@ -24,6 +24,8 @@ public class PinCombo extends Pin{
                 getNode().width = -1;
             }
         });
+
+        comboBox.setSearchable(true);
     }
 
     public void sort(){
