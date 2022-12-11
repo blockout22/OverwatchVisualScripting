@@ -176,6 +176,7 @@ public class GraphWindow {
         addNodeToList(NodeAllPlayers.class);
         addNodeToList(NodeStartFocingPlayerPosition.class);
         addNodeToList(NodeTeam.class);
+        addNodeToList(NodeAppendToArray.class);
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -291,6 +292,7 @@ public class GraphWindow {
                     }
                     {
                         {
+                            ImGui.beginChild("SettingChild", 400, 0);
                             ImGui.beginGroup();
                             {
                                 ImGui.dummy(400, 0);
@@ -298,10 +300,12 @@ public class GraphWindow {
                                 settings.show();
 
                                 //List of Rules on graph
+//                                ImGui.newLine();
+                                ImGui.separator();
+                                if(ImGui.collapsingHeader("Rules"))
                                 {
-                                    ImGui.newLine();
-                                    ImGui.text("---------------------------------------------------------");
-                                    ImGui.text("Rules");
+//                                    ImGui.separator();
+//                                    ImGui.text("Rules");
 
                                     //TODO STOP CREATING NEW EVERY FRAME!!!!
                                     ArrayList<Node> ruleNodes = new ArrayList<>();
@@ -329,64 +333,70 @@ public class GraphWindow {
                                     ImGui.popItemWidth();
                                 }
 
-                                ImGui.newLine();
-                                ImGui.text("---------------------------------------------------------");
+//                                ImGui.newLine();
+                                ImGui.separator();
 
                                 //Variables
-                                ImGui.text("Variables");
-                                if (ImGui.button("Add Global Variable")) {
-                                    graph.addGlobalVariable("VarName" + graph.globalVariables.size());
-                                }
+                                if(ImGui.collapsingHeader("Variables")) {
+//                                    ImGui.text("Variables");
+                                    if (ImGui.button("Add Global Variable")) {
+                                        graph.addGlobalVariable("VarName" + graph.globalVariables.size());
+                                    }
 
-                                ImGui.sameLine();
-
-                                if (ImGui.button("Add Player Variable")) {
-                                    graph.addPlayerVariable("varName" + graph.playerVariables.size());
-                                }
-
-                                ImGui.pushItemWidth(250);
-                                ImGui.text("Global Variable");
-                                for (int i = 0; i < tfGlobalVars.size(); i++) {
-                                    ImGui.text(i + ":");
                                     ImGui.sameLine();
-                                    tfGlobalVars.get(i).show();
-                                    ImGui.sameLine();
-                                    if(ImGui.button("X##globalVars" + i)){
-                                        graph.globalVariables.remove(i);
+
+                                    if (ImGui.button("Add Player Variable")) {
+                                        graph.addPlayerVariable("varName" + graph.playerVariables.size());
+                                    }
+
+//                                    ImGui.pushItemWidth(250);
+                                    ImGui.text("Global Variable");
+                                    for (int i = 0; i < tfGlobalVars.size(); i++) {
+                                        ImGui.text(i + ":");
+                                        ImGui.sameLine();
+                                        tfGlobalVars.get(i).show();
+                                        ImGui.sameLine();
+                                        if (ImGui.button("X##globalVars" + i)) {
+                                            graph.globalVariables.remove(i);
+                                        }
+                                    }
+
+                                    ImGui.text("Player Variable");
+
+                                    for (int i = 0; i < tfPlayerVars.size(); i++) {
+                                        ImGui.text(i + ":");
+                                        ImGui.sameLine();
+                                        tfPlayerVars.get(i).show();
+                                        ImGui.sameLine();
+                                        if (ImGui.button("X##playerVars" + i)) {
+                                            graph.playerVariables.remove(i);
+                                        }
                                     }
                                 }
 
-                                ImGui.text("Player Variable");
+                                ImGui.separator();
+                                if(ImGui.collapsingHeader("Subroutines")) {
+                                    if (ImGui.button("Add Subroutine")) {
+                                        graph.addSubroutine("newSub" + graph.subroutines.size());
+                                    }
 
-                                for (int i = 0; i < tfPlayerVars.size(); i++) {
-                                    ImGui.text(i + ":");
-                                    ImGui.sameLine();
-                                    tfPlayerVars.get(i).show();
-                                    ImGui.sameLine();
-                                    if(ImGui.button("X##playerVars" + i)){
-                                        graph.playerVariables.remove(i);
+//                                    ImGui.text("Subroutines");
+                                    for (int i = 0; i < tfSubroutines.size(); i++) {
+                                        ImGui.text(i + ":");
+                                        ImGui.sameLine();
+                                        tfSubroutines.get(i).show();
+                                        ImGui.sameLine();
+                                        if (ImGui.button("X##Subroutines" + i)) {
+                                            graph.subroutines.remove(i);
+                                        }
                                     }
                                 }
 
-                                if(ImGui.button("Add Subroutine")){
-                                    graph.addSubroutine("newSub" + graph.subroutines.size());
-                                }
-
-                                ImGui.text("Subroutines");
-                                for (int i = 0; i < tfSubroutines.size(); i++) {
-                                    ImGui.text(i + ":");
-                                    ImGui.sameLine();
-                                    tfSubroutines.get(i).show();
-                                    ImGui.sameLine();
-                                    if(ImGui.button("X##Subroutines" + i)){
-                                        graph.subroutines.remove(i);
-                                    }
-                                }
-
-                                ImGui.popItemWidth();
+//                                ImGui.popItemWidth();
 
                             }
                             ImGui.endGroup();
+                            ImGui.endChild();
                         }
 
                         ImGui.sameLine();

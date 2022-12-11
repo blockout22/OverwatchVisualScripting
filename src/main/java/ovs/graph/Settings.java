@@ -1,6 +1,7 @@
 package ovs.graph;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImString;
@@ -193,112 +194,114 @@ public class Settings {
         ImGui.sameLine();
         ImGui.inputText("##Description", description);
 
-        ImGui.newLine();
+        ImGui.separator();
         //Lobby Settings
-        ImGui.text("Lobby Settings");
-        ImGui.text("---------------------------------------------------------");
-        if(ImGui.button("Extension Options")){
-            ImGui.openPopup("Extension_options");
-        }
-        ImGui.text("Max Team 1 Players");
-        ImGui.sameLine();
-        ImGui.sliderInt("##Max Team 1 Players", maxT1Players, 0, 12);
+        if(ImGui.collapsingHeader("Lobby Settings", ImGuiTreeNodeFlags.DefaultOpen)) {
+            if (ImGui.button("Extension Options")) {
+                ImGui.openPopup("Extension_options");
+            }
+            ImGui.text("Max Team 1 Players");
+            ImGui.sameLine();
+            ImGui.sliderInt("##Max Team 1 Players", maxT1Players, 0, 12);
 
-        ImGui.text("Max Team 2 Players");
-        ImGui.sameLine();
-        ImGui.sliderInt("##Max Team 2 Players", maxT2Players, 0, 12);
+            ImGui.text("Max Team 2 Players");
+            ImGui.sameLine();
+            ImGui.sliderInt("##Max Team 2 Players", maxT2Players, 0, 12);
 
-        ImGui.text("Max FFA Players");
-        ImGui.sameLine();
-        ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
+            ImGui.text("Max FFA Players");
+            ImGui.sameLine();
+            ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
+        }
 
-        ImGui.newLine();
-        ImGui.text("Modes");
-        ImGui.text("---------------------------------------------------------");
-        ImGui.checkbox("##Assault", assaultOnOff);
-        ImGui.sameLine();
-        ImGui.text("Assault");
-        ImGui.sameLine();
-        if(ImGui.button("Assault Options")){
-            ImGui.openPopup("Assault_options");
-        }
-        ImGui.checkbox("##Control", controlOnOff);
-        ImGui.sameLine();
-        ImGui.text("Control");
-        ImGui.sameLine();
-        if(ImGui.button("Control Options")){
-            ImGui.openPopup("Control_options");
-        }
-        ImGui.checkbox("##Escort", escortOnOff);
-        ImGui.sameLine();
-        ImGui.text("Escort");
-        ImGui.sameLine();
-        if(ImGui.button("Escort Options")){
-            ImGui.openPopup("Escort_options");
-        }
-        ImGui.checkbox("##Hybrid", hybridOnOff);
-        ImGui.sameLine();
-        ImGui.text("Hybrid");
-        ImGui.sameLine();
-        if(ImGui.button("Hybrid Options")){
-            ImGui.openPopup("Hybrid_options");
-        }
-        ImGui.checkbox("##Push", pushOnOff);
-        ImGui.sameLine();
-        ImGui.text("Push");
-        ImGui.sameLine();
-        if(ImGui.button("Push Options")){
-            ImGui.openPopup("Push_options");
-        }
-        ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
-        ImGui.sameLine();
-        ImGui.text("Bouty Hunter");
+        ImGui.separator();
+
+//        ImGui.newLine();
+        if(ImGui.collapsingHeader("Modes", ImGuiTreeNodeFlags.DefaultOpen)) {
+            ImGui.checkbox("##Assault", assaultOnOff);
+            ImGui.sameLine();
+            ImGui.text("Assault");
+            ImGui.sameLine();
+            if (ImGui.button("Assault Options")) {
+                ImGui.openPopup("Assault_options");
+            }
+            ImGui.checkbox("##Control", controlOnOff);
+            ImGui.sameLine();
+            ImGui.text("Control");
+            ImGui.sameLine();
+            if (ImGui.button("Control Options")) {
+                ImGui.openPopup("Control_options");
+            }
+            ImGui.checkbox("##Escort", escortOnOff);
+            ImGui.sameLine();
+            ImGui.text("Escort");
+            ImGui.sameLine();
+            if (ImGui.button("Escort Options")) {
+                ImGui.openPopup("Escort_options");
+            }
+            ImGui.checkbox("##Hybrid", hybridOnOff);
+            ImGui.sameLine();
+            ImGui.text("Hybrid");
+            ImGui.sameLine();
+            if (ImGui.button("Hybrid Options")) {
+                ImGui.openPopup("Hybrid_options");
+            }
+            ImGui.checkbox("##Push", pushOnOff);
+            ImGui.sameLine();
+            ImGui.text("Push");
+            ImGui.sameLine();
+            if (ImGui.button("Push Options")) {
+                ImGui.openPopup("Push_options");
+            }
+            ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
+            ImGui.sameLine();
+            ImGui.text("Bouty Hunter");
 //        ImGui.sameLine();
 //        if(ImGui.button("Bounty Hunter Options")){
 //            ImGui.openPopup("Bountyhunter_options");
 //        }
-        ImGui.checkbox("##CTF", ctfOnOff);
-        ImGui.sameLine();
-        ImGui.text("CTF");
+            ImGui.checkbox("##CTF", ctfOnOff);
+            ImGui.sameLine();
+            ImGui.text("CTF");
 //        ImGui.sameLine();
 //        if(ImGui.button("CTF Options")){
 //            ImGui.openPopup("Ctf_options");
 //        }
-        ImGui.checkbox("##DeathMatch", deathmatchOnOff);
-        ImGui.sameLine();
-        ImGui.text("DeathMatch");
-        ImGui.sameLine();
-        if(ImGui.button("Deathmatch Options")){
-            ImGui.openPopup("Deathmatch_options");
-        }
-        ImGui.checkbox("##Elimination", eliminationOnOff);
-        ImGui.sameLine();
-        ImGui.text("Elimination");
+            ImGui.checkbox("##DeathMatch", deathmatchOnOff);
+            ImGui.sameLine();
+            ImGui.text("DeathMatch");
+            ImGui.sameLine();
+            if (ImGui.button("Deathmatch Options")) {
+                ImGui.openPopup("Deathmatch_options");
+            }
+            ImGui.checkbox("##Elimination", eliminationOnOff);
+            ImGui.sameLine();
+            ImGui.text("Elimination");
 //        ImGui.sameLine();
 //        if(ImGui.button("Elimination Options")){
 //            ImGui.openPopup("Elimination_options");
 //        }
-        ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
-        ImGui.sameLine();
-        ImGui.text("Team DeathMatch");
+            ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
+            ImGui.sameLine();
+            ImGui.text("Team DeathMatch");
 //        ImGui.sameLine();
 //        if(ImGui.button("Team DeathMatch Options")){
 //            ImGui.openPopup("Teamdeathmatch_options");
 //        }
-        ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
-        ImGui.sameLine();
-        ImGui.text("Practice Range");
+            ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
+            ImGui.sameLine();
+            ImGui.text("Practice Range");
 //        ImGui.sameLine();
 //        if(ImGui.button("Practice Range Options")){
 //            ImGui.openPopup("Practicerange_options");
 //        }
-        ImGui.checkbox("##Skirmish", skirmishOnOff);
-        ImGui.sameLine();
-        ImGui.text("Skirmish");
-        ImGui.sameLine();
+            ImGui.checkbox("##Skirmish", skirmishOnOff);
+            ImGui.sameLine();
+            ImGui.text("Skirmish");
+//            ImGui.sameLine();
 //        if(ImGui.button("Skirmish Options")){
 //            ImGui.openPopup("Skirmish_options");
 //        }
+        }
 
         ImGui.popItemWidth();
 
