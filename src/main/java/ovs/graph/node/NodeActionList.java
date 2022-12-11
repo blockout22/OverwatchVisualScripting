@@ -53,7 +53,7 @@ public class NodeActionList extends Node{
 
                 PinData<ImString> connectedData = connectedPin.getData();
 
-                output += "" + connectedData.getValue().get() + (connectedData.getValue().get().endsWith(";") ? "" : ";");
+                output += "" + connectedData.getValue().get();// + (connectedData.getValue().get().endsWith(";") ? "" : ";");
                 output += "\n";
             }
         }

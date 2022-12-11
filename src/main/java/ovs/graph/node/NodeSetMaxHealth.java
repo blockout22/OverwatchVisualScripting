@@ -12,7 +12,7 @@ import ovs.graph.pin.PinVar;
 public class NodeSetMaxHealth extends Node{
 
     PinVar input = new PinVar();
-    PinFloat inputHealth = new PinFloat();
+    PinVar inputHealth = new PinVar();
 
     PinAction output = new PinAction();
 
@@ -34,7 +34,7 @@ public class NodeSetMaxHealth extends Node{
     @Override
     public void execute() {
         PinData<ImString> inputData = input.getData();
-        PinData<ImFloat> inputHealthData = inputHealth.getData();
+        PinData<ImString> inputHealthData = inputHealth.getData();
         PinData<ImString> outputData = output.getData();
 
         if(input.isConnected()){
@@ -49,7 +49,7 @@ public class NodeSetMaxHealth extends Node{
         if(inputHealth.isConnected()){
             Pin connectedPin = inputHealth.getConnectedPin();
 
-            PinData<ImFloat> connectedData = connectedPin.getData();
+            PinData<ImString> connectedData = connectedPin.getData();
             inputHealthData.getValue().set(connectedData.getValue().get());
         }
 
