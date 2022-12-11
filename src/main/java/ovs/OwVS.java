@@ -13,6 +13,7 @@ public class OwVS {
 
         while(!window.isCloseRequested())
         {
+            TaskSchedule.update();
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
             imGuiWindow.update();
             window.update();

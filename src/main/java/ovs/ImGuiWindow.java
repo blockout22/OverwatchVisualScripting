@@ -38,6 +38,7 @@ public class ImGuiWindow {
     private ImVec2 textSize = new ImVec2();
 
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
+    private ImFont font;
 
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
@@ -60,7 +61,11 @@ public class ImGuiWindow {
         fontConfig.setMergeMode(true);
 
         final short[] glyphRanges = rangesBuilder.buildRanges();
-        io.getFonts().addFontFromMemoryTTF(loadFromResources("OpenSans-Regular.ttf"), 14, fontConfig, glyphRanges);
+        font = io.getFonts().addFontFromMemoryTTF(loadFromResources("OpenSans-Regular.ttf"), 72, fontConfig, glyphRanges);
+
+        //this no work???
+        io.getFonts().build();
+        io.setFontDefault(font);
 
         fontConfig.destroy();
 
@@ -84,6 +89,7 @@ public class ImGuiWindow {
     public void update(){
         imGuiGLFW.newFrame();
         ImGui.newFrame();
+        ImGui.pushFont(font);
         {
 
             createMainMenuBar();
@@ -228,6 +234,7 @@ public class ImGuiWindow {
             }
         }
 
+        ImGui.popFont();
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 

@@ -16,6 +16,7 @@ import imgui.type.ImString;
 import ovs.GlfwWindow;
 import ovs.Global;
 import ovs.ImGuiWindow;
+import ovs.TaskSchedule;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
@@ -56,6 +57,7 @@ public class GraphWindow {
     private long lastHoldingPinID = -1;
     private long lastActivePin = -1;
 
+    private boolean showSavedText = false;
     private boolean justOpenedContextMenu = false;
     private boolean isLoading = false;
     private boolean outputInFocus = false;
@@ -280,7 +282,23 @@ public class GraphWindow {
                 for(Node node : graph.getNodes().values()){
                     node.onSaved();
                 }
-                graphSaver.save(fileName, settings, graph);
+                boolean success = graphSaver.save(fileName, settings, graph);
+
+                if(success){
+                    showSavedText = true;
+                    TaskSchedule.addTask(new Task() {
+                        @Override
+                        public void onFinished() {
+                            System.out.println("Finished");
+                            showSavedText = false;
+                        }
+                    }, 5000);
+                }
+            }
+
+            if(showSavedText){
+                ImGui.sameLine();
+                ImGui.text("Saved!");
             }
 
 

@@ -22,7 +22,7 @@ public class GraphSaver {
 
     String dir = Global.SCRIPTS_DIR;
 
-    public void save(String fileName, Settings settings, Graph graph){
+    public boolean save(String fileName, Settings settings, Graph graph){
         validateDirExists(dir);
         validateDirExists(dir + File.separator + fileName);
 
@@ -32,7 +32,7 @@ public class GraphSaver {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                return;
+                return false;
             }
         }
 
@@ -224,9 +224,10 @@ public class GraphSaver {
             pw.write(output);
             pw.flush();
             pw.close();
+            return true;
         }catch (FileNotFoundException e){
             e.printStackTrace();
-            return;
+            return false;
         }
     }
 
