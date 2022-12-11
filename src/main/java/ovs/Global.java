@@ -1,5 +1,8 @@
 package ovs;
 
+import imgui.ImGui;
+import imgui.ImVec2;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +10,8 @@ import java.util.Map;
 public class Global {
 
     public static String SCRIPTS_DIR = "Scripts";
+
+    private static ImVec2 textSize = new ImVec2();
 
     public static ArrayList<String> heroes = new ArrayList<>();
     public static ArrayList<String> buttons = new ArrayList<>();
@@ -74,4 +79,17 @@ public class Global {
         }
         return storage.get(key);
     }
+
+    //TODO add a function to allow elements to align to the right side of the screen
+//    public static void alignRight(String text){
+//        ImGui.nextColumn();
+//        ImGui.calcTextSize(textSize, text);
+//        float posX = ImGui.getCursorPosX() - textSize.x - ImGui.getScrollX() - 2 * ImGui.getStyle().getItemSpacingX();
+//        posX = posX * 0.5f;
+////        float posX = (ImGui.getWindowSizeX() - textSize.x) * 0.5f;
+//        if(posX > ImGui.getCursorPosX())
+//        {
+//            ImGui.setCursorPosX(posX);
+//        }
+//    }
 }

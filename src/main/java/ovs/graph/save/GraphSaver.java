@@ -41,26 +41,31 @@ public class GraphSaver {
         graphSave.playerVariables.clear();
         graphSave.subroutines.clear();
         graphSave.saveSettings.extensionToggle.clear();
-        graphSave.saveSettings.dmSettings.dmMapToggle.clear();
+        graphSave.saveSettings.assaultSettings.MapToggle.clear();
+        graphSave.saveSettings.controlSettings.MapToggle.clear();
+        graphSave.saveSettings.escortSettings.MapToggle.clear();
+        graphSave.saveSettings.hybridSettings.MapToggle.clear();
+        graphSave.saveSettings.pushSettings.MapToggle.clear();
+        graphSave.saveSettings.dmSettings.MapToggle.clear();
 
-        graphSave.saveSettings.modeName = settings.getModeName();
-        graphSave.saveSettings.description = settings.getDescription();
-        graphSave.saveSettings.maxT1Players = settings.getMaxT1Players();
-        graphSave.saveSettings.maxT2Players = settings.getMaxT2Players();
-        graphSave.saveSettings.maxFFAPlayers = settings.getMaxFFAPlayers();
+        graphSave.saveSettings.modeName = settings.modeName.get();
+        graphSave.saveSettings.description = settings.description.get();
+        graphSave.saveSettings.maxT1Players = settings.maxT1Players[0];
+        graphSave.saveSettings.maxT2Players = settings.maxT2Players[0];
+        graphSave.saveSettings.maxFFAPlayers = settings.maxFFAPlayers[0];
 
-        graphSave.saveSettings.assaultMode = settings.getAssaultOnOff();
-        graphSave.saveSettings.controlMode = settings.getControlOnOff();
-        graphSave.saveSettings.escortMode = settings.getEscortOnOff();
-        graphSave.saveSettings.hybridMode = settings.getHybridOnOff();
-        graphSave.saveSettings.pushMode = settings.getPushOnOff();
-        graphSave.saveSettings.bountyHunterMode = settings.getBountyHunterOnOff();
-        graphSave.saveSettings.ctfMode = settings.getCtfOnOff();
-        graphSave.saveSettings.deathmatchMode = settings.getDeathmatchOnOff();
-        graphSave.saveSettings.eliminationMode = settings.getEliminationOnOff();
-        graphSave.saveSettings.teamDeathmatchMode = settings.getTeamDeathmatchOnOff();
-        graphSave.saveSettings.practiceRangeMode = settings.getPracticeRangeOnOff();
-        graphSave.saveSettings.skirmishMode = settings.getSkirmishOnOff();
+        graphSave.saveSettings.assaultMode = settings.assaultOnOff.get();
+        graphSave.saveSettings.controlMode = settings.controlOnOff.get();
+        graphSave.saveSettings.escortMode = settings.escortOnOff.get();
+        graphSave.saveSettings.hybridMode = settings.hybridOnOff.get();
+        graphSave.saveSettings.pushMode = settings.pushOnOff.get();
+        graphSave.saveSettings.bountyHunterMode = settings.bountyHunterOnOff.get();
+        graphSave.saveSettings.ctfMode = settings.ctfOnOff.get();
+        graphSave.saveSettings.deathmatchMode = settings.deathmatchOnOff.get();
+        graphSave.saveSettings.eliminationMode = settings.eliminationOnOff.get();
+        graphSave.saveSettings.teamDeathmatchMode = settings.teamDeathmatchOnOff.get();
+        graphSave.saveSettings.practiceRangeMode = settings.practiceRangeOnOff.get();
+        graphSave.saveSettings.skirmishMode = settings.skirmishOnOff.get();
 
         for (int i = 0; i < settings.extensionBools.size(); i++) {
             Settings.BoolInfoWithName info = settings.extensionBools.get(i);
@@ -71,16 +76,77 @@ public class GraphSaver {
         }
 
         //TODO save other game mode settings
-        //DeathMatch Options
-        graphSave.saveSettings.dmSettings.GameLenthDM = settings.getGameTimeDM();
-        graphSave.saveSettings.dmSettings.scoreToWinDM = settings.getScoreToWinDM();
-        graphSave.saveSettings.dmSettings.initRespawnDM = settings.getInitRespawnOnOffDM();
-        for (int i = 0; i < settings.dmMapBools.size(); i++) {
-            Settings.BoolInfoWithName info = settings.dmMapBools.get(i);
+
+        //Assault Options
+        graphSave.saveSettings.assaultSettings.speedModifier = settings.assaultSpeedModifier[0];
+        graphSave.saveSettings.assaultSettings.compRules = settings.assaultCompRulesOnOff.get();
+        for (int i = 0; i < settings.assaultMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.assaultMap.get(i);
             BoolInfo saveInfo = new BoolInfo();
             saveInfo.name = info.name;
             saveInfo.value = info.bool.get();
-            graphSave.saveSettings.dmSettings.dmMapToggle.add(saveInfo);
+            graphSave.saveSettings.assaultSettings.MapToggle.add(saveInfo);
+        }
+
+        //Control Options
+        graphSave.saveSettings.controlSettings.speedModifier = settings.controlSpeedModifier[0];
+        graphSave.saveSettings.controlSettings.compRules = settings.controlCompetitiveRules.get();
+        graphSave.saveSettings.controlSettings.validPoints = settings.controlValidControlPointsSelection.get();
+        graphSave.saveSettings.controlSettings.scoreToWin = settings.controlScoreToWin[0];
+        graphSave.saveSettings.controlSettings.scoringSpeedModifier = settings.controlSpeedModifier[0];
+        for (int i = 0; i < settings.controlMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.controlMap.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.controlSettings.MapToggle.add(saveInfo);
+        }
+
+        //Escort Options
+        graphSave.saveSettings.escortSettings.compRules = settings.escortCompRulesOnOff.get();
+        graphSave.saveSettings.escortSettings.speedModifier = settings.escortSpeedModifier[0];
+        for (int i = 0; i < settings.escortMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.escortMap.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.escortSettings.MapToggle.add(saveInfo);
+        }
+
+        //Hybrid Options
+        graphSave.saveSettings.hybridSettings.speedModifier = settings.hybridSpeedModifier[0];
+        graphSave.saveSettings.hybridSettings.compRules = settings.hybridCompRulesOnOff.get();
+        graphSave.saveSettings.hybridSettings.payloadSpeedModifier = settings.hybridPayloadSpeedModifier[0];
+        for (int i = 0; i < settings.hybridMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.hybridMap.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.hybridSettings.MapToggle.add(saveInfo);
+        }
+
+        //Push Options
+        graphSave.saveSettings.pushSettings.compRules = settings.pushCompRulesOnOff.get();
+        graphSave.saveSettings.pushSettings.pushSpeedModifier = settings.pushPushSpeedModifier[0];
+        graphSave.saveSettings.pushSettings.walkSpeedModifier = settings.pushWalkSpeedModifier[0];
+        for (int i = 0; i < settings.pushMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.pushMap.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.pushSettings.MapToggle.add(saveInfo);
+        }
+
+        //DeathMatch Options
+        graphSave.saveSettings.dmSettings.GameLenthDM = settings.gameTimeDM[0];
+        graphSave.saveSettings.dmSettings.scoreToWinDM = settings.scoreToWinDM[0];
+        graphSave.saveSettings.dmSettings.initRespawnDM = settings.initRespawnOnOffDM.get();
+        for (int i = 0; i < settings.dmMap.size(); i++) {
+            Settings.BoolInfoWithName info = settings.dmMap.get(i);
+            BoolInfo saveInfo = new BoolInfo();
+            saveInfo.name = info.name;
+            saveInfo.value = info.bool.get();
+            graphSave.saveSettings.dmSettings.MapToggle.add(saveInfo);
         }
 
 
@@ -185,23 +251,23 @@ public class GraphSaver {
             Node[] loaded = new Node[gs.nodeSaves.size()];
 
             //Load settings
-            settings.setModeName(gs.saveSettings.modeName);
-            settings.setDescription(gs.saveSettings.description);
-            settings.setMaxT1Players(gs.saveSettings.maxT1Players);
-            settings.setMaxT2Players(gs.saveSettings.maxT2Players);
-            settings.setMaxFFAPlayers(gs.saveSettings.maxFFAPlayers);
-            settings.setAssaultOnOff(gs.saveSettings.assaultMode);
-            settings.setControlOnOff(gs.saveSettings.controlMode);
-            settings.setEscortOnOff(gs.saveSettings.escortMode);
-            settings.setHybridOnOff(gs.saveSettings.hybridMode);
-            settings.setPushOnOff(gs.saveSettings.pushMode);
-            settings.setBountyHunterOnOff(gs.saveSettings.bountyHunterMode);
-            settings.setCtfOnOff(gs.saveSettings.ctfMode);
-            settings.setDeathmatchOnOff(gs.saveSettings.deathmatchMode);
-            settings.setEliminationOnOff(gs.saveSettings.eliminationMode);
-            settings.setTeamDeathmatchOnOff(gs.saveSettings.teamDeathmatchMode);
-            settings.setPracticeRangeOnOff(gs.saveSettings.practiceRangeMode);
-            settings.setSkirmishOnOff(gs.saveSettings.skirmishMode);
+            settings.modeName.set(gs.saveSettings.modeName);
+            settings.description.set(gs.saveSettings.description);
+            settings.maxT1Players[0] = (gs.saveSettings.maxT1Players);
+            settings.maxT2Players[0] = (gs.saveSettings.maxT2Players);
+            settings.maxFFAPlayers[0] = (gs.saveSettings.maxFFAPlayers);
+            settings.assaultOnOff.set(gs.saveSettings.assaultMode);
+            settings.controlOnOff.set(gs.saveSettings.controlMode);
+            settings.escortOnOff.set(gs.saveSettings.escortMode);
+            settings.hybridOnOff.set(gs.saveSettings.hybridMode);
+            settings.pushOnOff.set(gs.saveSettings.pushMode);
+            settings.bountyHunterOnOff.set(gs.saveSettings.bountyHunterMode);
+            settings.ctfOnOff.set(gs.saveSettings.ctfMode);
+            settings.deathmatchOnOff.set(gs.saveSettings.deathmatchMode);
+            settings.eliminationOnOff.set(gs.saveSettings.eliminationMode);
+            settings.teamDeathmatchOnOff.set(gs.saveSettings.teamDeathmatchMode);
+            settings.practiceRangeOnOff.set(gs.saveSettings.practiceRangeMode);
+            settings.skirmishOnOff.set(gs.saveSettings.skirmishMode);
 
             for (int i = 0; i < gs.saveSettings.extensionToggle.size(); i++) {
                 BoolInfo info = gs.saveSettings.extensionToggle.get(i);
@@ -215,17 +281,101 @@ public class GraphSaver {
                 }
             }
 
-
-            //DeathMatch Options
-            settings.setGameTimeDM(gs.saveSettings.dmSettings.GameLenthDM);
-            settings.setScoreToWinDM(gs.saveSettings.dmSettings.scoreToWinDM);
-            settings.setInitRespawnOnOffDM(gs.saveSettings.dmSettings.initRespawnDM);
-            for (int i = 0; i < gs.saveSettings.dmSettings.dmMapToggle.size(); i++) {
-                BoolInfo info = gs.saveSettings.dmSettings.dmMapToggle.get(i);
+            //Assault Options
+            settings.assaultSpeedModifier[0] = gs.saveSettings.assaultSettings.speedModifier;
+            settings.assaultCompRulesOnOff.set(gs.saveSettings.assaultSettings.compRules);
+            for (int i = 0; i < gs.saveSettings.assaultSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.assaultSettings.MapToggle.get(i);
 
                 //find name and change value;
-                for (int j = 0; j < settings.dmMapBools.size(); j++) {
-                    Settings.BoolInfoWithName dmInfo = settings.dmMapBools.get(j);
+                for (int j = 0; j < settings.assaultMap.size(); j++) {
+                    Settings.BoolInfoWithName mapInfo = settings.assaultMap.get(j);
+                    if(info.name.equals(mapInfo.name)){
+                        mapInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
+            //Control Options
+            settings.controlSpeedModifier[0] = gs.saveSettings.controlSettings.speedModifier;
+            settings.controlCompetitiveRules.set(gs.saveSettings.controlSettings.compRules);
+            settings.controlValidControlPointsSelection.set(gs.saveSettings.controlSettings.validPoints);
+            settings.controlScoreToWin[0] = gs.saveSettings.controlSettings.scoreToWin;
+            settings.controlScoringSpeedModifier[0] = gs.saveSettings.controlSettings.scoringSpeedModifier;
+            for (int i = 0; i < gs.saveSettings.controlSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.controlSettings.MapToggle.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.controlMap.size(); j++) {
+                    Settings.BoolInfoWithName mapInfo = settings.controlMap.get(j);
+                    if(info.name.equals(mapInfo.name)){
+                        mapInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
+            //Escort Options
+            settings.escortCompRulesOnOff.set(gs.saveSettings.escortSettings.compRules);
+            settings.escortSpeedModifier[0] = gs.saveSettings.escortSettings.speedModifier;
+            for (int i = 0; i < gs.saveSettings.escortSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.escortSettings.MapToggle.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.escortMap.size(); j++) {
+                    Settings.BoolInfoWithName mapInfo = settings.escortMap.get(j);
+                    if(info.name.equals(mapInfo.name)){
+                        mapInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
+            //Hybrid Options
+            settings.hybridSpeedModifier[0] = gs.saveSettings.hybridSettings.speedModifier;
+            settings.hybridCompRulesOnOff.set(gs.saveSettings.hybridSettings.compRules);
+            settings.hybridPayloadSpeedModifier[0] = gs.saveSettings.hybridSettings.payloadSpeedModifier;
+            for (int i = 0; i < gs.saveSettings.hybridSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.hybridSettings.MapToggle.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.hybridMap.size(); j++) {
+                    Settings.BoolInfoWithName mapInfo = settings.hybridMap.get(j);
+                    if(info.name.equals(mapInfo.name)){
+                        mapInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
+            //Push Options
+            settings.pushCompRulesOnOff.set(gs.saveSettings.pushSettings.compRules);
+            settings.pushPushSpeedModifier[0] = gs.saveSettings.pushSettings.pushSpeedModifier;
+            settings.pushWalkSpeedModifier[0] = gs.saveSettings.pushSettings.walkSpeedModifier;
+            for (int i = 0; i < gs.saveSettings.pushSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.pushSettings.MapToggle.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.pushMap.size(); j++) {
+                    Settings.BoolInfoWithName mapInfo = settings.pushMap.get(j);
+                    if(info.name.equals(mapInfo.name)){
+                        mapInfo.bool.set(info.value);
+                        break;
+                    }
+                }
+            }
+
+            //DeathMatch Options
+            settings.gameTimeDM[0] = (gs.saveSettings.dmSettings.GameLenthDM);
+            settings.scoreToWinDM[0] = (gs.saveSettings.dmSettings.scoreToWinDM);
+            settings.initRespawnOnOffDM.set(gs.saveSettings.dmSettings.initRespawnDM);
+            for (int i = 0; i < gs.saveSettings.dmSettings.MapToggle.size(); i++) {
+                BoolInfo info = gs.saveSettings.dmSettings.MapToggle.get(i);
+
+                //find name and change value;
+                for (int j = 0; j < settings.dmMap.size(); j++) {
+                    Settings.BoolInfoWithName dmInfo = settings.dmMap.get(j);
                     if(info.name.equals(dmInfo.name)){
                         dmInfo.bool.set(info.value);
                         break;
@@ -449,7 +599,47 @@ public class GraphSaver {
 
         private ArrayList<BoolInfo> extensionToggle = new ArrayList<>();
 
+        private AssaultSettings assaultSettings = new AssaultSettings();
+        private ControlSettings controlSettings = new ControlSettings();
+        private EscortSettings escortSettings = new EscortSettings();
+        private HybridSettings hybridSettings = new HybridSettings();
+        private PushSettings pushSettings = new PushSettings();
         private DeatchMatchSettings dmSettings = new DeatchMatchSettings();
+    }
+
+    private static class AssaultSettings{
+        private int speedModifier = 100;
+        private boolean compRules = false;
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
+    }
+
+    private static class ControlSettings{
+        private int speedModifier = 100;
+        private boolean compRules = false;
+        private int validPoints = 0;
+        private int scoreToWin = 2;
+        private int scoringSpeedModifier = 100;
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
+    }
+
+    private static class EscortSettings{
+        private boolean compRules = false;
+        private int speedModifier = 100;
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
+    }
+
+    private static class HybridSettings{
+        private int speedModifier = 100;
+        private boolean compRules = false;
+        private int payloadSpeedModifier = 100;
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
+    }
+
+    private static class PushSettings{
+        private boolean compRules = false;
+        private int pushSpeedModifier = 100;
+        private int walkSpeedModifier = 100;
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
     }
 
     private static class DeatchMatchSettings{
@@ -457,7 +647,7 @@ public class GraphSaver {
         private int GameLenthDM = 10;
         private int scoreToWinDM = 20;
         private boolean initRespawnDM = true;
-        private ArrayList<BoolInfo> dmMapToggle = new ArrayList<>();
+        private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
     }
 
     private static class BoolInfo{

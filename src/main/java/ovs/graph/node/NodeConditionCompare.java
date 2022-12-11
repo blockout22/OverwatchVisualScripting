@@ -4,7 +4,6 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.PinCondition;
 import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
