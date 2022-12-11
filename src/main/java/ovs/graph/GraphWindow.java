@@ -572,7 +572,7 @@ public class GraphWindow {
                         NodeEditor.endCreate();
 
                         if (NodeEditor.beginDelete()) {
-                            int size = 50;
+                            int size = NodeEditor.getSelectedObjectCount();
                             long[] list = new long[size];
                             NodeEditor.getSelectedNodes(list, size);
                             ImLong link1 = new ImLong();
@@ -638,6 +638,19 @@ public class GraphWindow {
                                         newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                                         graph.addNode(newInstance);
                                         NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY()));
+
+                                        int defaultTotal = newInstance.inputPins.size();
+                                        for (int i = 0; i < target.inputPins.size(); i++) {
+                                            if(i > defaultTotal - 1){
+                                                Pin newPin = target.inputPins.get(i).getClass().getDeclaredConstructor().newInstance();
+                                                newPin.setNode(newInstance);
+                                                newPin.setName(target.inputPins.get(i).getName());
+                                                newPin.setCanDelete(true);
+                                                newInstance.addCustomInput(newPin);
+                                            }
+                                        }
+
+                                        newInstance.copy(target);
                                     }catch (Exception e){
                                         e.printStackTrace();
                                     }

@@ -25,6 +25,16 @@ public class NodeVector extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeVector){
+            PinData<ImVec4> nodeData = ((NodeVector) node).inputPin.getData();
+            PinData<ImVec4> data = inputPin.getData();
+
+            data.getValue().set(nodeData.getValue().x, nodeData.getValue().y, nodeData.getValue().y, nodeData.getValue().w);
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImVec4> inputData = inputPin.getData();
         PinData<ImString> outputData = outputPin.getData();

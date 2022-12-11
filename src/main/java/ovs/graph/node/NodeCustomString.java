@@ -39,6 +39,16 @@ public class NodeCustomString extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCustomString){
+            PinData<ImString> data = ((NodeCustomString)node).input.getData();
+
+            PinData<ImString> inputData = input.getData();
+            inputData.getValue().set(data.getValue().get());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = input.getData();
         PinData<ImString> input0Data = pinInput0.getData();
@@ -74,8 +84,6 @@ public class NodeCustomString extends Node{
 
             toOutput += ", " + input2Data.getValue().get();
         }
-
-
 
         outputData.getValue().set(toOutput + ")");
     }

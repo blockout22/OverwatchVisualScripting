@@ -91,6 +91,18 @@ public class NodeCreateHudText extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCreateHudText){
+            PinData<ImFloat> sortValue = ((NodeCreateHudText)node).pinSortOrder.getData();
+
+            PinData<ImFloat> sort = pinSortOrder.getData();
+
+            sort.getValue().set(sortValue.getValue().get());
+        }
+    }
+
+
+    @Override
     public void execute() {
         PinData<ImString> inputVisibleData = inputVisibleTo.getData();
         PinData<ImString> headerData = inputHeader.getData();

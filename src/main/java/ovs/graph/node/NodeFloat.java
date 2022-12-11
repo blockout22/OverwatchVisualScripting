@@ -25,6 +25,16 @@ public class NodeFloat extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeFloat){
+            PinData<ImFloat> nodeData = ((NodeFloat) node).input.getData();
+            PinData<ImFloat> data = input.getData();
+
+            data.getValue().set(nodeData.getValue().get());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImFloat> inputData = input.getData();
         PinData<ImString> outputData = output.getData();

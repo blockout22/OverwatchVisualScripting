@@ -8,22 +8,18 @@ public class PinFloat extends Pin{
 
     private PinData<ImFloat> data = new PinData<>();
 
-    ImFloat floatData = new ImFloat();
-
     public PinFloat(){
         setData(data);
         setColor(1, 0.5f, 1, 1);
         data.setValue(new ImFloat(0));
-
-        floatData.set(data.getValue().get());
     }
 
     @Override
     public boolean UI() {
         ImGui.pushItemWidth(150);
-        if(ImGui.inputFloat("##Slider" + getID(), floatData, 0.1f))
+        if(ImGui.inputFloat("##Slider" + getID(), data.getValue(), 0.1f))
         {
-            data.getValue().set(floatData.get());
+            data.getValue().set(data.getValue().get());
         }
         ImGui.popItemWidth();
         return true;
@@ -34,6 +30,5 @@ public class PinFloat extends Pin{
         float val = Float.valueOf(value);
 
         data.getValue().set(val);
-        floatData.set(val);
     }
 }

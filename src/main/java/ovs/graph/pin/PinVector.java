@@ -19,6 +19,9 @@ public class PinVector extends Pin{
 
     @Override
     public boolean UI() {
+        vec3Float[0] = data.getValue().x;
+        vec3Float[1] = data.getValue().y;
+        vec3Float[2] = data.getValue().z;
         ImGui.pushItemWidth(150);
         if(ImGui.inputFloat3("##f3Slider" + getID(), vec3Float)){
             data.setValue(new ImVec4(vec3Float[0], vec3Float[1], vec3Float[2], 0));

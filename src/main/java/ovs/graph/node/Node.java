@@ -150,6 +150,12 @@ public abstract class Node {
         return extraSaveData;
     }
 
+    /**
+     * used to handle the copying of pin data to new node e.g. when you duplicate a node
+     * @param node
+     */
+    public void copy(Node node){}
+
     public abstract void execute();
     public abstract String getOutput();
     public abstract void UI();

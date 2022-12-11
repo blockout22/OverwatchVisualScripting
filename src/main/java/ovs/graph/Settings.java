@@ -1,6 +1,7 @@
 package ovs.graph;
 
 import imgui.ImGui;
+import imgui.extension.nodeditor.NodeEditor;
 import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;

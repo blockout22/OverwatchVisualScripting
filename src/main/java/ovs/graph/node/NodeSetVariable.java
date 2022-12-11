@@ -32,15 +32,7 @@ public class NodeSetVariable extends Node{
             @Override
             public void onOpen() {
                 String lastSelectedValue = comboBox.getSelectedValue();
-                comboBox.clear();
-
-                for (int i = 0; i < getGraph().globalVariables.size(); i++) {
-                    comboBox.addOption("Global." + getGraph().globalVariables.get(i).name);
-                }
-
-                for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-                    comboBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
-                }
+                populateCombobox();
 
                 comboBox.selectValue(lastSelectedValue);
                 width = -1;
@@ -56,14 +48,21 @@ public class NodeSetVariable extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        populateCombobox();
+        if(node instanceof NodeSetVariable){
+            comboBox.selectValue(((NodeSetVariable) node).comboBox.getSelectedValue());
+        }
+    }
+
+    @Override
     public void onSaved() {
         getExtraSaveData().clear();
         //TODO get variable class and save ID and type
         getExtraSaveData().add("Var:" + comboBox.getSelectedValue());
     }
 
-    @Override
-    public void onLoaded() {
+    private void populateCombobox(){
         comboBox.clear();
         for (int i = 0; i < getGraph().globalVariables.size(); i++) {
             comboBox.addOption("Global." + getGraph().globalVariables.get(i).name);
@@ -72,7 +71,11 @@ public class NodeSetVariable extends Node{
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
             comboBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
         }
+    }
 
+    @Override
+    public void onLoaded() {
+        populateCombobox();
         for(String data : getExtraSaveData()){
             if (data.startsWith("Var")) {
 //                int index = Integer.valueOf(data.split(":")[1]);
