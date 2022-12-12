@@ -6,7 +6,6 @@ import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
-import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
 import imgui.flag.*;
 import imgui.type.ImBoolean;
@@ -27,6 +26,7 @@ import ovs.graph.save.GraphSaver;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,82 +103,15 @@ public class GraphWindow {
         context = new NodeEditorContext(config);
 
         //Add Nodes to list (this will also auto-populate context menu)
-        addNodeToList(NodeActionList.class);
-        addNodeToList(NodeBoolean.class);
-        addNodeToList(NodeButton.class);
-        addNodeToList(NodeCreateHudText.class);
-        addNodeToList(NodeCurrentMap.class);
-        addNodeToList(NodeCustomString.class);
-        addNodeToList(NodeEventPlayer.class);
-        addNodeToList(NodeGetVariable.class);
-        addNodeToList(NodeIf.class);
-        addNodeToList(NodeIsButtonDown.class);
-        addNodeToList(NodeSetVariable.class);
-        addNodeToList(NodeKill.class);
-        addNodeToList(NodeLoop.class);
-        addNodeToList(NodeRule.class);
-        addNodeToList(NodeWait.class);
-        addNodeToList(NodeWhile.class);
-        addNodeToList(NodeRespawn.class);
-        addNodeToList(NodeTeleport.class);
-        addNodeToList(NodeVector.class);
-        addNodeToList(NodeMap.class);
-        addNodeToList(NodeHostPlayer.class);
-        addNodeToList(NodeSetMaxHealth.class);
-        addNodeToList(NodeSetMatchTime.class);
-        addNodeToList(NodeFloat.class);
-        addNodeToList(NodeDistanceBetween.class);
-        addNodeToList(NodeSetMoveSpeed.class);
-        addNodeToList(NodeStartScalingPlayer.class);
-        addNodeToList(NodeRestart.class);
-        addNodeToList(NodeHero.class);
-        addNodeToList(NodeCustomColor.class);
-        addNodeToList(NodeSetGravity.class);
-        addNodeToList(NodeRandomReal.class);
-        addNodeToList(NodeSetSlowMotion.class);
-        addNodeToList(NodeSetAbilityResource.class);
-        addNodeToList(NodeSetHealingDealt.class);
-        addNodeToList(NodeSetDamageDealt.class);
-        addNodeToList(NodeSetDamageReceived.class);
-        addNodeToList(NodeSetHealingReceived.class);
-        addNodeToList(NodeKnockbackDealt.class);
-        addNodeToList(NodeKnockbackReceived.class);
-        addNodeToList(NodeSetProjectileGravity.class);
-        addNodeToList(NodeSetProjectileSpeed.class);
-        addNodeToList(NodeAddition.class);
-        addNodeToList(NodeCreateEffect.class);
-        addNodeToList(NodeEmptyArray.class);
-        addNodeToList(NodeSmallMessage.class);
-        addNodeToList(NodeBigMessage.class);
-        addNodeToList(NodeCreateDummyBot.class);
-        addNodeToList(NodePositionOf.class);
-        addNodeToList(NodeEventDamage.class);
-//        addNodeToList(NodeConditionCompare.class);
-        addNodeToList(NodeConditionList.class);
-        addNodeToList(NodeLastCreateEntity.class);
-        addNodeToList(NodeLastTextId.class);
-        addNodeToList(NodeStartForcingPlayerToBeHero.class);
-        addNodeToList(NodeSetAbility2Enabled.class);
-        addNodeToList(NodeIsUsingAbility2.class);
-        addNodeToList(NodeCancelPrimaryAction.class);
-        addNodeToList(NodePressButton.class);
-        addNodeToList(NodeIsGameInProgress.class);
-        addNodeToList(NodeIsInSetup.class);
-        addNodeToList(NodeIsAssemblingHeroes.class);
-        addNodeToList(NodeIfCompare.class);
-        addNodeToList(NodeOr.class);
-        addNodeToList(NodeAnd.class);
-        addNodeToList(NodeAbort.class);
-        addNodeToList(NodeAbortIf.class);
-        addNodeToList(NodeAbortIfConditionIsFalse.class);
-        addNodeToList(NodeAbortIfConditionIsTrue.class);
-        addNodeToList(NodeAllowButton.class);
-        addNodeToList(NodeSubroutine.class);
-        addNodeToList(NodeToCondition.class);
-        addNodeToList(NodeAllPlayers.class);
-        addNodeToList(NodeStartFocingPlayerPosition.class);
-        addNodeToList(NodeTeam.class);
-        addNodeToList(NodeAppendToArray.class);
+        try {
+            ArrayList<Class> nodeList = Global.findAllNodes();
+            for (int i = 0; i < nodeList.size(); i++) {
+                addNodeToList(nodeList.get(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override

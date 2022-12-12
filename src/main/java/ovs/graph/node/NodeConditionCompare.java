@@ -4,10 +4,12 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
 //TODO possibly remove this as it may not be needed anymore
+@NodeDisabled()
 public class NodeConditionCompare extends Node{
 
     ComboBox conditionBox = new ComboBox();

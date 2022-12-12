@@ -1,8 +1,10 @@
 package ovs.graph.node;
 
 import ovs.graph.Graph;
+import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.pin.PinAction;
 
+@NodeDisabled
 public class NodeEnd extends Node{
 
     PinAction output = new PinAction();

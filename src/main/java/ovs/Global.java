@@ -1,8 +1,13 @@
 package ovs;
 
-import imgui.ImGui;
 import imgui.ImVec2;
+import ovs.graph.node.Node;
+import ovs.graph.node.interfaces.NodeDisabled;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +83,34 @@ public class Global {
             return 0;
         }
         return storage.get(key);
+    }
+
+    public static ArrayList<Class> findAllNodes() throws IOException {
+        String packageName = "ovs.graph.node";
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+        ArrayList<Class> nodeList = new ArrayList<>();
+
+
+        String line;
+        while((line = br.readLine()) != null){
+            if(line.endsWith(".class") && !line.contains("$")){
+                try {
+                    Class node = Class.forName(packageName + "." + line.substring(0, line.lastIndexOf('.')));
+                    if(node.getSuperclass().equals(Node.class)){
+                        if(node.getAnnotation(NodeDisabled.class) == null){
+                            nodeList.add(node);
+                        }
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        }
+        br.close();
+
+        return nodeList;
     }
 
     //TODO add a function to allow elements to align to the right side of the screen
