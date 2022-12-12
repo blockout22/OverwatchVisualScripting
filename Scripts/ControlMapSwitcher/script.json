@@ -456,14 +456,18 @@
           "ID": 1185,
           "type": "ovs.graph.pin.PinCondition",
           "value": "Current Map \u003d\u003d Map(Busan);",
-          "connectedTo": 1193,
+          "connections": [
+            1193
+          ],
           "canDelete": false
         },
         {
           "ID": 1186,
           "type": "ovs.graph.pin.PinAction",
           "value": "Global.Map1 \u003d Vector(38.0, 10.0, -116.0);\nGlobal.Map2 \u003d Vector(-368.0, 12.0, 140.0);\nGlobal.Map3 \u003d Vector(206.0, 18.0, 205.0);\n",
-          "connectedTo": 1197,
+          "connections": [
+            1197
+          ],
           "canDelete": false
         }
       ],
@@ -482,14 +486,18 @@
           "ID": 1189,
           "type": "ovs.graph.pin.PinVar",
           "value": "Current Map",
-          "connectedTo": 1194,
+          "connections": [
+            1194
+          ],
           "canDelete": false
         },
         {
           "ID": 1190,
           "type": "ovs.graph.pin.PinVar",
           "value": "Map(Busan)",
-          "connectedTo": 1195,
+          "connections": [
+            1195
+          ],
           "canDelete": false
         }
       ],
@@ -497,7 +505,9 @@
         {
           "ID": 1191,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1192,
+          "connections": [
+            1192
+          ],
           "canDelete": false
         }
       ]
@@ -513,7 +523,9 @@
           "ID": 1192,
           "type": "ovs.graph.pin.PinIf",
           "value": "Current Map \u003d\u003d Map(Busan)",
-          "connectedTo": 1191,
+          "connections": [
+            1191
+          ],
           "canDelete": false
         }
       ],
@@ -521,7 +533,9 @@
         {
           "ID": 1193,
           "type": "ovs.graph.pin.PinCondition",
-          "connectedTo": 1185,
+          "connections": [
+            1185
+          ],
           "canDelete": false
         }
       ]
@@ -537,7 +551,9 @@
         {
           "ID": 1194,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1189,
+          "connections": [
+            1189
+          ],
           "canDelete": false
         }
       ]
@@ -555,7 +571,9 @@
         {
           "ID": 1195,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1190,
+          "connections": [
+            1190
+          ],
           "canDelete": false
         }
       ]
@@ -571,21 +589,27 @@
           "ID": 1196,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1201,
+          "connections": [
+            1201
+          ],
           "canDelete": false
         },
         {
           "ID": 1198,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1203,
+          "connections": [
+            1203
+          ],
           "canDelete": true
         },
         {
           "ID": 1199,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1205,
+          "connections": [
+            1205
+          ],
           "canDelete": true
         }
       ],
@@ -593,7 +617,9 @@
         {
           "ID": 1197,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1186,
+          "connections": [
+            1186
+          ],
           "canDelete": false
         }
       ]
@@ -611,7 +637,9 @@
           "ID": 1200,
           "type": "ovs.graph.pin.PinVar",
           "value": "Vector(38.0, 10.0, -116.0)",
-          "connectedTo": 1207,
+          "connections": [
+            1207
+          ],
           "canDelete": false
         }
       ],
@@ -619,7 +647,9 @@
         {
           "ID": 1201,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1196,
+          "connections": [
+            1196
+          ],
           "canDelete": false
         }
       ]
@@ -637,7 +667,9 @@
           "ID": 1202,
           "type": "ovs.graph.pin.PinVar",
           "value": "Vector(-368.0, 12.0, 140.0)",
-          "connectedTo": 1209,
+          "connections": [
+            1209
+          ],
           "canDelete": false
         }
       ],
@@ -645,7 +677,9 @@
         {
           "ID": 1203,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1198,
+          "connections": [
+            1198
+          ],
           "canDelete": false
         }
       ]
@@ -663,7 +697,9 @@
           "ID": 1204,
           "type": "ovs.graph.pin.PinVar",
           "value": "Vector(206.0, 18.0, 205.0)",
-          "connectedTo": 1211,
+          "connections": [
+            1211
+          ],
           "canDelete": false
         }
       ],
@@ -671,7 +707,9 @@
         {
           "ID": 1205,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1199,
+          "connections": [
+            1199
+          ],
           "canDelete": false
         }
       ]
@@ -687,7 +725,7 @@
           "ID": 1206,
           "type": "ovs.graph.pin.PinVector",
           "value": "ImVec4{x\u003d38.0, y\u003d10.0, z\u003d-116.0, w\u003d0.0}",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -695,7 +733,9 @@
         {
           "ID": 1207,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1200,
+          "connections": [
+            1200
+          ],
           "canDelete": false
         }
       ]
@@ -711,7 +751,7 @@
           "ID": 1208,
           "type": "ovs.graph.pin.PinVector",
           "value": "ImVec4{x\u003d-368.0, y\u003d12.0, z\u003d140.0, w\u003d0.0}",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -719,7 +759,9 @@
         {
           "ID": 1209,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1202,
+          "connections": [
+            1202
+          ],
           "canDelete": false
         }
       ]
@@ -735,7 +777,7 @@
           "ID": 1210,
           "type": "ovs.graph.pin.PinVector",
           "value": "ImVec4{x\u003d206.0, y\u003d18.0, z\u003d205.0, w\u003d0.0}",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -743,7 +785,9 @@
         {
           "ID": 1211,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1204,
+          "connections": [
+            1204
+          ],
           "canDelete": false
         }
       ]
@@ -764,14 +808,16 @@
           "ID": 1212,
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1213,
           "type": "ovs.graph.pin.PinAction",
           "value": "Create HUD Text(Event Player,Null, Null, Position Of(Event Player), Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
-          "connectedTo": 1222,
+          "connections": [
+            1222
+          ],
           "canDelete": false
         }
       ],
@@ -790,56 +836,60 @@
           "ID": 1214,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1226,
+          "connections": [
+            1226
+          ],
           "canDelete": false
         },
         {
           "ID": 1215,
           "type": "ovs.graph.pin.PinVar",
           "value": "Null",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1216,
           "type": "ovs.graph.pin.PinVar",
           "value": "Null",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1217,
           "type": "ovs.graph.pin.PinVar",
           "value": "Position Of(Event Player)",
-          "connectedTo": 1224,
+          "connections": [
+            1224
+          ],
           "canDelete": false
         },
         {
           "ID": 1218,
           "type": "ovs.graph.pin.PinFloat",
           "value": "0.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1219,
           "type": "ovs.graph.pin.PinVar",
           "value": "Color(White)",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1220,
           "type": "ovs.graph.pin.PinVar",
           "value": "Color(White)",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         },
         {
           "ID": 1221,
           "type": "ovs.graph.pin.PinVar",
           "value": "Color(White)",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -847,7 +897,9 @@
         {
           "ID": 1222,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1213,
+          "connections": [
+            1213
+          ],
           "canDelete": false
         }
       ]
@@ -863,7 +915,9 @@
           "ID": 1223,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1225,
+          "connections": [
+            1226
+          ],
           "canDelete": false
         }
       ],
@@ -871,7 +925,9 @@
         {
           "ID": 1224,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1217,
+          "connections": [
+            1217
+          ],
           "canDelete": false
         }
       ]
@@ -879,31 +935,18 @@
     {
       "className": "ovs.graph.node.NodeEventPlayer",
       "nodeName": "Event Player",
-      "x": -378.0,
-      "y": -162.0,
-      "extraData": [],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 1225,
-          "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1223,
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeEventPlayer",
-      "nodeName": "Event Player",
-      "x": -252.0,
-      "y": -255.0,
+      "x": -380.0,
+      "y": -287.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
         {
           "ID": 1226,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1214,
+          "connections": [
+            1214,
+            1223
+          ],
           "canDelete": false
         }
       ]
@@ -924,14 +967,18 @@
           "ID": 1227,
           "type": "ovs.graph.pin.PinCondition",
           "value": "Is Button Held(Event Player, Button(Jump)) \u003d\u003d True;",
-          "connectedTo": 1230,
+          "connections": [
+            1230
+          ],
           "canDelete": false
         },
         {
           "ID": 1228,
           "type": "ovs.graph.pin.PinAction",
           "value": "If(Event Player.CurrentMap \u003d\u003d 0.0);\nTeleport(Event Player, Global.Map1);\nEvent Player.CurrentMap \u003d 1.0;\nAbort;\nEnd;\nIf(Event Player.CurrentMap \u003d\u003d 1.0);\nTeleport(Event Player, Global.Map2);\nEvent Player.CurrentMap \u003d 2.0;\nAbort;\nEnd;\nIf(Event Player.CurrentMap \u003d\u003d 2.0);\nTeleport(Event Player, Global.Map3);\nEvent Player.CurrentMap \u003d 0.0;\nAbort;\nEnd;\n",
-          "connectedTo": 1243,
+          "connections": [
+            1243
+          ],
           "canDelete": false
         }
       ],
@@ -948,7 +995,9 @@
           "ID": 1229,
           "type": "ovs.graph.pin.PinIf",
           "value": "Is Button Held(Event Player, Button(Jump)) \u003d\u003d True",
-          "connectedTo": 1233,
+          "connections": [
+            1233
+          ],
           "canDelete": false
         }
       ],
@@ -956,7 +1005,9 @@
         {
           "ID": 1230,
           "type": "ovs.graph.pin.PinCondition",
-          "connectedTo": 1227,
+          "connections": [
+            1227
+          ],
           "canDelete": false
         }
       ]
@@ -974,14 +1025,16 @@
           "ID": 1231,
           "type": "ovs.graph.pin.PinVar",
           "value": "Is Button Held(Event Player, Button(Jump))",
-          "connectedTo": 1235,
+          "connections": [
+            1235
+          ],
           "canDelete": false
         },
         {
           "ID": 1232,
           "type": "ovs.graph.pin.PinVar",
           "value": "True",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -989,7 +1042,9 @@
         {
           "ID": 1233,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1229,
+          "connections": [
+            1229
+          ],
           "canDelete": false
         }
       ]
@@ -1007,7 +1062,9 @@
           "ID": 1234,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1236,
+          "connections": [
+            1236
+          ],
           "canDelete": false
         }
       ],
@@ -1015,7 +1072,9 @@
         {
           "ID": 1235,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1231,
+          "connections": [
+            1231
+          ],
           "canDelete": false
         }
       ]
@@ -1031,7 +1090,9 @@
         {
           "ID": 1236,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1234,
+          "connections": [
+            1234
+          ],
           "canDelete": false
         }
       ]
@@ -1047,14 +1108,18 @@
           "ID": 1237,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1240,
+          "connections": [
+            1240
+          ],
           "canDelete": false
         },
         {
           "ID": 1238,
           "type": "ovs.graph.pin.PinVar",
           "value": "Global.Map1",
-          "connectedTo": 1241,
+          "connections": [
+            1241
+          ],
           "canDelete": false
         }
       ],
@@ -1062,7 +1127,9 @@
         {
           "ID": 1239,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1255,
+          "connections": [
+            1255
+          ],
           "canDelete": false
         }
       ]
@@ -1078,7 +1145,9 @@
         {
           "ID": 1240,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1237,
+          "connections": [
+            1237
+          ],
           "canDelete": false
         }
       ]
@@ -1096,7 +1165,9 @@
         {
           "ID": 1241,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1238,
+          "connections": [
+            1238
+          ],
           "canDelete": false
         }
       ]
@@ -1112,21 +1183,27 @@
           "ID": 1242,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1248,
+          "connections": [
+            1248
+          ],
           "canDelete": false
         },
         {
           "ID": 1244,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1266,
+          "connections": [
+            1266
+          ],
           "canDelete": true
         },
         {
           "ID": 1245,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1290,
+          "connections": [
+            1290
+          ],
           "canDelete": true
         }
       ],
@@ -1134,7 +1211,9 @@
         {
           "ID": 1243,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1228,
+          "connections": [
+            1228
+          ],
           "canDelete": false
         }
       ]
@@ -1152,14 +1231,18 @@
           "ID": 1246,
           "type": "ovs.graph.pin.PinIf",
           "value": "Event Player.CurrentMap \u003d\u003d 0.0",
-          "connectedTo": 1251,
+          "connections": [
+            1251
+          ],
           "canDelete": false
         },
         {
           "ID": 1247,
           "type": "ovs.graph.pin.PinAction",
           "value": "Teleport(Event Player, Global.Map1);\nEvent Player.CurrentMap \u003d 1.0;\nAbort;\n",
-          "connectedTo": 1256,
+          "connections": [
+            1256
+          ],
           "canDelete": false
         }
       ],
@@ -1167,7 +1250,9 @@
         {
           "ID": 1248,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1242,
+          "connections": [
+            1242
+          ],
           "canDelete": false
         }
       ]
@@ -1185,14 +1270,18 @@
           "ID": 1249,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player.CurrentMap",
-          "connectedTo": 1252,
+          "connections": [
+            1252
+          ],
           "canDelete": false
         },
         {
           "ID": 1250,
           "type": "ovs.graph.pin.PinVar",
           "value": "0.0",
-          "connectedTo": 1254,
+          "connections": [
+            1254
+          ],
           "canDelete": false
         }
       ],
@@ -1200,7 +1289,9 @@
         {
           "ID": 1251,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1246,
+          "connections": [
+            1246
+          ],
           "canDelete": false
         }
       ]
@@ -1218,7 +1309,9 @@
         {
           "ID": 1252,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1249,
+          "connections": [
+            1249
+          ],
           "canDelete": false
         }
       ]
@@ -1234,7 +1327,7 @@
           "ID": 1253,
           "type": "ovs.graph.pin.PinFloat",
           "value": "0.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1242,7 +1335,9 @@
         {
           "ID": 1254,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1250,
+          "connections": [
+            1250
+          ],
           "canDelete": false
         }
       ]
@@ -1258,21 +1353,27 @@
           "ID": 1255,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1239,
+          "connections": [
+            1239
+          ],
           "canDelete": false
         },
         {
           "ID": 1257,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1261,
+          "connections": [
+            1261
+          ],
           "canDelete": true
         },
         {
           "ID": 1258,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1259,
+          "connections": [
+            1259
+          ],
           "canDelete": true
         }
       ],
@@ -1280,7 +1381,9 @@
         {
           "ID": 1256,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1247,
+          "connections": [
+            1247
+          ],
           "canDelete": false
         }
       ]
@@ -1296,7 +1399,9 @@
         {
           "ID": 1259,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1258,
+          "connections": [
+            1258
+          ],
           "canDelete": false
         }
       ]
@@ -1314,7 +1419,9 @@
           "ID": 1260,
           "type": "ovs.graph.pin.PinVar",
           "value": "1.0",
-          "connectedTo": 1263,
+          "connections": [
+            1263
+          ],
           "canDelete": false
         }
       ],
@@ -1322,7 +1429,9 @@
         {
           "ID": 1261,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1257,
+          "connections": [
+            1257
+          ],
           "canDelete": false
         }
       ]
@@ -1338,7 +1447,7 @@
           "ID": 1262,
           "type": "ovs.graph.pin.PinFloat",
           "value": "1.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1346,7 +1455,9 @@
         {
           "ID": 1263,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1260,
+          "connections": [
+            1260
+          ],
           "canDelete": false
         }
       ]
@@ -1364,14 +1475,18 @@
           "ID": 1264,
           "type": "ovs.graph.pin.PinIf",
           "value": "Event Player.CurrentMap \u003d\u003d 1.0",
-          "connectedTo": 1269,
+          "connections": [
+            1269
+          ],
           "canDelete": false
         },
         {
           "ID": 1265,
           "type": "ovs.graph.pin.PinAction",
           "value": "Teleport(Event Player, Global.Map2);\nEvent Player.CurrentMap \u003d 2.0;\nAbort;\n",
-          "connectedTo": 1274,
+          "connections": [
+            1274
+          ],
           "canDelete": false
         }
       ],
@@ -1379,7 +1494,9 @@
         {
           "ID": 1266,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1244,
+          "connections": [
+            1244
+          ],
           "canDelete": false
         }
       ]
@@ -1397,14 +1514,18 @@
           "ID": 1267,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player.CurrentMap",
-          "connectedTo": 1270,
+          "connections": [
+            1270
+          ],
           "canDelete": false
         },
         {
           "ID": 1268,
           "type": "ovs.graph.pin.PinVar",
           "value": "1.0",
-          "connectedTo": 1272,
+          "connections": [
+            1272
+          ],
           "canDelete": false
         }
       ],
@@ -1412,7 +1533,9 @@
         {
           "ID": 1269,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1264,
+          "connections": [
+            1264
+          ],
           "canDelete": false
         }
       ]
@@ -1430,7 +1553,9 @@
         {
           "ID": 1270,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1267,
+          "connections": [
+            1267
+          ],
           "canDelete": false
         }
       ]
@@ -1446,7 +1571,7 @@
           "ID": 1271,
           "type": "ovs.graph.pin.PinFloat",
           "value": "1.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1454,7 +1579,9 @@
         {
           "ID": 1272,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1268,
+          "connections": [
+            1268
+          ],
           "canDelete": false
         }
       ]
@@ -1462,29 +1589,35 @@
     {
       "className": "ovs.graph.node.NodeActionList",
       "nodeName": "Action List",
-      "x": -202.0,
-      "y": 1330.0,
+      "x": -200.0,
+      "y": 1325.0,
       "extraData": [],
       "inputPins": [
         {
           "ID": 1273,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1280,
+          "connections": [
+            1280
+          ],
           "canDelete": false
         },
         {
           "ID": 1275,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1285,
+          "connections": [
+            1285
+          ],
           "canDelete": true
         },
         {
           "ID": 1276,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1277,
+          "connections": [
+            1277
+          ],
           "canDelete": true
         }
       ],
@@ -1492,7 +1625,9 @@
         {
           "ID": 1274,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1265,
+          "connections": [
+            1265
+          ],
           "canDelete": false
         }
       ]
@@ -1508,7 +1643,9 @@
         {
           "ID": 1277,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1276,
+          "connections": [
+            1276
+          ],
           "canDelete": false
         }
       ]
@@ -1524,14 +1661,18 @@
           "ID": 1278,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1282,
+          "connections": [
+            1282
+          ],
           "canDelete": false
         },
         {
           "ID": 1279,
           "type": "ovs.graph.pin.PinVar",
           "value": "Global.Map2",
-          "connectedTo": 1283,
+          "connections": [
+            1283
+          ],
           "canDelete": false
         }
       ],
@@ -1539,7 +1680,9 @@
         {
           "ID": 1280,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1273,
+          "connections": [
+            1273
+          ],
           "canDelete": false
         }
       ]
@@ -1555,7 +1698,9 @@
         {
           "ID": 1282,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1278,
+          "connections": [
+            1278
+          ],
           "canDelete": false
         }
       ]
@@ -1573,7 +1718,9 @@
         {
           "ID": 1283,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1279,
+          "connections": [
+            1279
+          ],
           "canDelete": false
         }
       ]
@@ -1591,7 +1738,9 @@
           "ID": 1284,
           "type": "ovs.graph.pin.PinVar",
           "value": "2.0",
-          "connectedTo": 1287,
+          "connections": [
+            1287
+          ],
           "canDelete": false
         }
       ],
@@ -1599,7 +1748,9 @@
         {
           "ID": 1285,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1275,
+          "connections": [
+            1275
+          ],
           "canDelete": false
         }
       ]
@@ -1615,7 +1766,7 @@
           "ID": 1286,
           "type": "ovs.graph.pin.PinFloat",
           "value": "2.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1623,7 +1774,9 @@
         {
           "ID": 1287,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1284,
+          "connections": [
+            1284
+          ],
           "canDelete": false
         }
       ]
@@ -1641,14 +1794,18 @@
           "ID": 1288,
           "type": "ovs.graph.pin.PinIf",
           "value": "Event Player.CurrentMap \u003d\u003d 2.0",
-          "connectedTo": 1293,
+          "connections": [
+            1293
+          ],
           "canDelete": false
         },
         {
           "ID": 1289,
           "type": "ovs.graph.pin.PinAction",
           "value": "Teleport(Event Player, Global.Map3);\nEvent Player.CurrentMap \u003d 0.0;\nAbort;\n",
-          "connectedTo": 1295,
+          "connections": [
+            1295
+          ],
           "canDelete": false
         }
       ],
@@ -1656,7 +1813,9 @@
         {
           "ID": 1290,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1245,
+          "connections": [
+            1245
+          ],
           "canDelete": false
         }
       ]
@@ -1674,14 +1833,18 @@
           "ID": 1291,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player.CurrentMap",
-          "connectedTo": 1308,
+          "connections": [
+            1308
+          ],
           "canDelete": false
         },
         {
           "ID": 1292,
           "type": "ovs.graph.pin.PinVar",
           "value": "2.0",
-          "connectedTo": 1307,
+          "connections": [
+            1307
+          ],
           "canDelete": false
         }
       ],
@@ -1689,7 +1852,9 @@
         {
           "ID": 1293,
           "type": "ovs.graph.pin.PinIf",
-          "connectedTo": 1288,
+          "connections": [
+            1288
+          ],
           "canDelete": false
         }
       ]
@@ -1705,21 +1870,27 @@
           "ID": 1294,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1300,
+          "connections": [
+            1300
+          ],
           "canDelete": false
         },
         {
           "ID": 1296,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1303,
+          "connections": [
+            1303
+          ],
           "canDelete": true
         },
         {
           "ID": 1297,
           "type": "ovs.graph.pin.PinAction",
           "value": "",
-          "connectedTo": 1301,
+          "connections": [
+            1301
+          ],
           "canDelete": true
         }
       ],
@@ -1727,7 +1898,9 @@
         {
           "ID": 1295,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1289,
+          "connections": [
+            1289
+          ],
           "canDelete": false
         }
       ]
@@ -1743,14 +1916,18 @@
           "ID": 1298,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Player",
-          "connectedTo": 1309,
+          "connections": [
+            1309
+          ],
           "canDelete": false
         },
         {
           "ID": 1299,
           "type": "ovs.graph.pin.PinVar",
           "value": "Global.Map3",
-          "connectedTo": 1310,
+          "connections": [
+            1310
+          ],
           "canDelete": false
         }
       ],
@@ -1758,7 +1935,9 @@
         {
           "ID": 1300,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1294,
+          "connections": [
+            1294
+          ],
           "canDelete": false
         }
       ]
@@ -1774,7 +1953,9 @@
         {
           "ID": 1301,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1297,
+          "connections": [
+            1297
+          ],
           "canDelete": false
         }
       ]
@@ -1792,7 +1973,9 @@
           "ID": 1302,
           "type": "ovs.graph.pin.PinVar",
           "value": "0.0",
-          "connectedTo": 1305,
+          "connections": [
+            1305
+          ],
           "canDelete": false
         }
       ],
@@ -1800,7 +1983,9 @@
         {
           "ID": 1303,
           "type": "ovs.graph.pin.PinAction",
-          "connectedTo": 1296,
+          "connections": [
+            1296
+          ],
           "canDelete": false
         }
       ]
@@ -1816,7 +2001,7 @@
           "ID": 1304,
           "type": "ovs.graph.pin.PinFloat",
           "value": "0.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1824,7 +2009,9 @@
         {
           "ID": 1305,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1302,
+          "connections": [
+            1302
+          ],
           "canDelete": false
         }
       ]
@@ -1840,7 +2027,7 @@
           "ID": 1306,
           "type": "ovs.graph.pin.PinFloat",
           "value": "2.0",
-          "connectedTo": -1,
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1848,7 +2035,9 @@
         {
           "ID": 1307,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1292,
+          "connections": [
+            1292
+          ],
           "canDelete": false
         }
       ]
@@ -1866,7 +2055,9 @@
         {
           "ID": 1308,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1291,
+          "connections": [
+            1291
+          ],
           "canDelete": false
         }
       ]
@@ -1882,7 +2073,9 @@
         {
           "ID": 1309,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1298,
+          "connections": [
+            1298
+          ],
           "canDelete": false
         }
       ]
@@ -1900,7 +2093,9 @@
         {
           "ID": 1310,
           "type": "ovs.graph.pin.PinVar",
-          "connectedTo": 1299,
+          "connections": [
+            1299
+          ],
           "canDelete": false
         }
       ]
