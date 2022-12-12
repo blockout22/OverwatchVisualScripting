@@ -1,12 +1,16 @@
 package ovs.graph.node;
 
+import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.UI.ColorPicker;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinVar;
 
 public class NodeCustomColor extends Node{
+
+    ColorPicker picker = new ColorPicker();
 
     PinVar pinRed = new PinVar();
     PinVar pinGreen = new PinVar();
@@ -37,6 +41,29 @@ public class NodeCustomColor extends Node{
 
         output.setNode(this);
         addCustomOutput(output);
+
+        addUiComponent(picker);
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Color:" + picker.getColor()[0] + "," + picker.getColor()[1] + "," + picker.getColor()[2] + "," + picker.getColor()[0]);
+    }
+
+    @Override
+    public void onLoaded() {
+        for (String data : getExtraSaveData()){
+            if(data.startsWith("Color")){
+                String col = data.split(":")[1];
+                float r = Float.valueOf(col.split(",")[0]);
+                float g = Float.valueOf(col.split(",")[1]);
+                float b = Float.valueOf(col.split(",")[2]);
+                float a = Float.valueOf(col.split(",")[3]);
+
+                picker.setRGBA(r, g, b, a);
+            }
+        }
     }
 
     @Override
@@ -53,7 +80,7 @@ public class NodeCustomColor extends Node{
             PinData<ImString> connectedData = connectedPin.getData();
             redData.getValue().set(connectedData.getValue().get());
         }else{
-            redData.getValue().set("255");
+            redData.getValue().set(String.valueOf(picker.getColor()[0] * 255));
         }
 
         if(pinGreen.isConnected()) {
@@ -62,7 +89,7 @@ public class NodeCustomColor extends Node{
             PinData<ImString> connectedData = connectedPin.getData();
             greenData.getValue().set(connectedData.getValue().get());
         }else{
-            greenData.getValue().set("255");
+            greenData.getValue().set(String.valueOf(picker.getColor()[1] * 255));
         }
 
         if(pinBlue.isConnected()) {
@@ -71,7 +98,7 @@ public class NodeCustomColor extends Node{
             PinData<ImString> connectedData = connectedPin.getData();
             blueData.getValue().set(connectedData.getValue().get());
         }else{
-            blueData.getValue().set("255");
+            blueData.getValue().set(String.valueOf(picker.getColor()[2] * 255));
         }
 
         if(pinAlpha.isConnected()) {
@@ -80,7 +107,7 @@ public class NodeCustomColor extends Node{
             PinData<ImString> connectedData = connectedPin.getData();
             alphaData.getValue().set(connectedData.getValue().get());
         }else{
-            alphaData.getValue().set("255");
+            alphaData.getValue().set(String.valueOf(picker.getColor()[3] * 255));
         }
 
         outputData.getValue().set("Custom Color(" + redData.getValue().get() + ", " + greenData.getValue().get() + ", " + blueData.getValue().get() + ", " + alphaData.getValue().get() + ")");
@@ -95,6 +122,5 @@ public class NodeCustomColor extends Node{
 
     @Override
     public void UI() {
-
     }
 }

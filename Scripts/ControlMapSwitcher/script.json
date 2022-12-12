@@ -2099,6 +2099,53 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomColor",
+      "nodeName": "Custom Color",
+      "x": 813.0,
+      "y": 486.0,
+      "extraData": [
+        "Color:0.640968,0.20117559,0.75543475,0.640968"
+      ],
+      "inputPins": [
+        {
+          "ID": 1501,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "163.44685",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1502,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "51.299774",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1503,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "192.63586",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1504,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "163.53261",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1505,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }
