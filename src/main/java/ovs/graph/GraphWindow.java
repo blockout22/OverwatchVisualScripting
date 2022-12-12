@@ -467,7 +467,9 @@ public class GraphWindow {
 
                                             NodeEditor.beginPin(inPin.getID(), NodeEditorPinKind.Input);
                                             drawPinShapeAndColor(inPin);
-                                            ImGui.dummy(10, 10);
+//                                            ImGui.dummy(10, 10);
+                                            inPin.pinSize = 12;
+                                            ImGui.dummy(inPin.pinSize, inPin.pinSize);
 
                                             if (inPin.getName().length() > 0) {
                                                 ImGui.sameLine();
@@ -502,7 +504,8 @@ public class GraphWindow {
 
                                             NodeEditor.beginPin(outPin.getID(), NodeEditorPinKind.Output);
                                             drawPinShapeAndColor(outPin);
-                                            ImGui.dummy(10, 10);
+//                                            ImGui.dummy(10, 10);
+                                            ImGui.dummy(outPin.pinSize, outPin.pinSize);
 
                                             if (outPin.getName().length() > 0) {
                                                 ImGui.sameLine();

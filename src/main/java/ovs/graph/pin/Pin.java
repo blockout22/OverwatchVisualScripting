@@ -27,11 +27,12 @@ public abstract class Pin {
     private PinType pinType;
     private PinData data;
 
+    public float pinSize = 12f;
+
     private boolean canDelete = false;
 
     public Pin()
     {
-
     }
 
     public boolean connect(Pin targetPin){
@@ -102,12 +103,11 @@ public abstract class Pin {
     }
 
     public void drawDefaultCircle(ImDrawList windowDrawList, float posX, float posY, boolean isConnected, boolean pinDragSame){
-        float size = 10f;
         int doubleGrey = pinDragSame ? rgbToInt(color.x, color.y, color.z, color.w) : rgbToInt(50, 50, 50, 255);
         if(isConnected) {
-            windowDrawList.addCircleFilled(posX + (size / 2), posY + (size / 2), size / 2, doubleGrey);
+            windowDrawList.addCircleFilled(posX + (pinSize / 2), posY + (pinSize / 2), pinSize / 2, doubleGrey);
         }else{
-            windowDrawList.addCircle(posX + (size / 2), posY + (size / 2), size / 2, doubleGrey);
+            windowDrawList.addCircle(posX + (pinSize / 2), posY + (pinSize / 2), pinSize / 2, doubleGrey);
         }
     }
 
