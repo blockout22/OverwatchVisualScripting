@@ -6,6 +6,8 @@ import imgui.ImVec4;
 import ovs.graph.PinData;
 import ovs.graph.node.Node;
 
+import java.util.ArrayList;
+
 public abstract class Pin {
 
     public enum PinType{
@@ -16,7 +18,9 @@ public abstract class Pin {
     private Node node;
 
     public ImVec4 color = new ImVec4(1f, 1f, 1f, 1f);
-    public int connectedTo = -1;
+//    public int connectedTo = -1;
+
+    public ArrayList<Integer> connectedToList = new ArrayList<>();
 
     private int ID;
     private String name = "";
@@ -32,25 +36,65 @@ public abstract class Pin {
 
     public boolean connect(Pin targetPin){
         //remove old connections
-        if (connectedTo != -1) {
-            Pin oldPin = getNode().getGraph().findPinById(connectedTo);
-            if(oldPin != null) {
-                oldPin.connectedTo = -1;
+
+        // remove pin connections from inputs as they shouldn't have multiple pins
+        if(pinType == PinType.Input){
+            if(isConnected()) {
+                Pin connectedPin = getNode().getGraph().findPinById(connectedToList.get(0));
+                disconnectInput(connectedPin);
+                connectedToList.clear();
+            }
+        }else{
+            if(targetPin.isConnected()) {
+                Pin connectedPin = getNode().getGraph().findPinById(targetPin.connectedToList.get(0));
+                targetPin.disconnectInput(connectedPin);
+                targetPin.connectedToList.clear();
             }
         }
 
-        if (targetPin.connectedTo != -1) {
-            Pin oldPin = getNode().getGraph().findPinById(targetPin.connectedTo);
-            if(oldPin != null) {
-                oldPin.connectedTo = -1;
+        connectedToList.add(targetPin.getID());
+        targetPin.connectedToList.add(getID());
+//        if (connectedTo != -1) {
+//            Pin oldPin = getNode().getGraph().findPinById(connectedTo);
+//            if(oldPin != null) {
+//                oldPin.connectedTo = -1;
+//            }
+//        }
+//
+//        if (targetPin.connectedTo != -1) {
+//            Pin oldPin = getNode().getGraph().findPinById(targetPin.connectedTo);
+//            if(oldPin != null) {
+//                oldPin.connectedTo = -1;
+//            }
+//        }
+//        if (connectedTo != targetPin.connectedTo || (targetPin.connectedTo == -1 || connectedTo == -1)) {
+//            connectedTo = targetPin.getID();
+//            targetPin.connectedTo = getID();
+//            return true;
+//        }
+        return true;
+    }
+
+    /**
+     * disconnects input pin
+     * @param pin
+     */
+    private void disconnectInput(Pin pin){
+        for (int i = 0; i < connectedToList.size(); i++) {
+            if(connectedToList.get(i) == pin.getID()){
+                pin.connectedToList.remove(i);
+                break;
             }
         }
-        if (connectedTo != targetPin.connectedTo || (targetPin.connectedTo == -1 || connectedTo == -1)) {
-            connectedTo = targetPin.getID();
-            targetPin.connectedTo = getID();
-            return true;
+    }
+
+    public void remove(int id){
+        for (int i = 0; i < connectedToList.size(); i++) {
+            if(connectedToList.get(i) == id){
+                connectedToList.remove(i);
+                break;
+            }
         }
-        return false;
     }
 
     public void draw(ImDrawList windowDrawList, float posX, float posY, boolean isConnected, boolean pinDragSame){
@@ -126,7 +170,8 @@ public abstract class Pin {
     }
 
     public boolean isConnected(){
-        return connectedTo != -1;// && node.getGraph().findPinById(connectedTo) != null;
+//        return connectedTo != -1;// && node.getGraph().findPinById(connectedTo) != null;
+        return connectedToList.size() > 0;
     }
 
     public Pin getConnectedPin(){
@@ -134,7 +179,8 @@ public abstract class Pin {
             return null;
         }
 
-        return node.getGraph().findPinById(connectedTo);
+//        return node.getGraph().findPinById(connectedTo);
+        return node.getGraph().findPinById(connectedToList.get(0));
     }
 
     public boolean isCanDelete() {

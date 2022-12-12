@@ -190,8 +190,14 @@ public class GraphSaver {
                 PinSave pinSave = new PinSave();
                 pinSave.ID = inputs.getID();
                 pinSave.type = inputs.getClass().getName();
-                pinSave.connectedTo = inputs.connectedTo;
+//                pinSave.connectedTo = inputs.connectedTo;
                 pinSave.canDelete = inputs.isCanDelete();
+
+                pinSave.connections.clear();
+
+                for (int i = 0; i < inputs.connectedToList.size(); i++) {
+                    pinSave.connections.add(inputs.connectedToList.get(i));
+                }
 
                 if(inputs.getData() != null){
                     if(inputs.getData().getValue() != null){
@@ -207,9 +213,12 @@ public class GraphSaver {
                 pinSave.ID = outputs.getID();
                 pinSave.type = outputs.getClass().getName();
                 pinSave.canDelete = outputs.isCanDelete();
+//                pinSave.connectedTo = outputs.connectedTo;
 
-                pinSave.connectedTo = outputs.connectedTo;
-
+                pinSave.connections.clear();
+                for (int i = 0; i < outputs.connectedToList.size(); i++) {
+                    pinSave.connections.add(outputs.connectedToList.get(i));
+                }
                 save.outputPins.add(pinSave);
             }
 
@@ -509,9 +518,13 @@ public class GraphSaver {
                     for (int j = 0; j < save.inputPins.size(); j++)
                     {
                         //check and set the pin ID which this Pin is connected to
-                        int ID = save.inputPins.get(j).connectedTo;
-                        node.inputPins.get(j).connectedTo = ID;
+//                        int ID = save.inputPins.get(j).connectedTo;
+//                        node.inputPins.get(j).connectedTo = ID;
 
+                        for (int k = 0; k < save.inputPins.get(j).connections.size(); k++) {
+                            int ID = save.inputPins.get(j).connections.get(k);
+                            node.inputPins.get(j).connectedToList.add(ID);
+                        }
 //                        System.out.println(node.inputPins.get(j).connectedTo);
 //                        System.out.println(node.inputPins.get(j).isConnected());
 //                        System.out.println(node.inputPins.get(j).getConnectedPin());
@@ -523,10 +536,15 @@ public class GraphSaver {
 
                     for (int j = 0; j < save.outputPins.size(); j++)
                     {
-                        if(save.outputPins.get(j).connectedTo != -1){
+//                        if(save.outputPins.get(j).connectedTo != -1){
 //                            if(node.outputPins.get(j).getNode().getGraph().findPinById(save.outputPins.get(j).connectedTo) != null)
                             {
-                                node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
+//                                node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
+
+                                for (int k = 0; k < save.outputPins.get(j).connections.size(); k++) {
+                                    int ID = save.outputPins.get(j).connections.get(k);
+                                    node.outputPins.get(j).connectedToList.add(ID);
+                                }
 //                                System.out.println(node.outputPins.get(j).connectedTo);
 //                                System.out.println(node.outputPins.get(j).isConnected());
 //                                System.out.println(node.outputPins.get(j).getConnectedPin());
@@ -535,7 +553,7 @@ public class GraphSaver {
 //                                    node.outputPins.get(j).connectedTo = -1;
 //                                }
                             }
-                        }
+//                        }
                     }
 
                 }
@@ -660,7 +678,8 @@ public class GraphSaver {
         private Integer ID;
         private String type;
         private String value;
-        private Integer connectedTo;
+//        private Integer connectedTo;
+        private ArrayList<Integer> connections = new ArrayList<>();
         private boolean canDelete;
     }
 

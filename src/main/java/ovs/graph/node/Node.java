@@ -59,11 +59,17 @@ public abstract class Node {
             Pin targetPin = inputPins.get(i);
             if(targetPin.getID() == id){
                 found = true;
-                if(targetPin.connectedTo != -1){
-                    Pin connection = getGraph().findPinById(targetPin.connectedTo);
-                    connection.connectedTo = -1;
+                if(targetPin.isConnected()){
+                    for (int j = 0; j < targetPin.connectedToList.size(); j++) {
+                        Pin connection = getGraph().findPinById(targetPin.connectedToList.get(j));
+                        connection.remove(targetPin.getID());
+                    }
                 }
-                targetPin.connectedTo = -1;
+//                if(targetPin.connectedTo != -1){
+//                    Pin connection = getGraph().findPinById(targetPin.connectedTo);
+//                    connection.connectedTo = -1;
+//                }
+//                targetPin.connectedTo = -1;
                 inputPins.remove(i);
                 break;
             }
@@ -74,11 +80,18 @@ public abstract class Node {
                 Pin targetPin = outputPins.get(i);
                 if(targetPin.getID() == id){
                     found = true;
-                    if(targetPin.connectedTo != -1){
-                        Pin connection = getGraph().findPinById(targetPin.connectedTo);
-                        connection.connectedTo = -1;
+
+                    if(targetPin.isConnected()){
+                        for (int j = 0; j < targetPin.connectedToList.size(); j++) {
+                            Pin connection = getGraph().findPinById(targetPin.connectedToList.get(j));
+                            connection.remove(targetPin.getID());
+                        }
                     }
-                    targetPin.connectedTo = -1;
+//                    if(targetPin.connectedTo != -1){
+//                        Pin connection = getGraph().findPinById(targetPin.connectedTo);
+//                        connection.connectedTo = -1;
+//                    }
+//                    targetPin.connectedTo = -1;
                     outputPins.remove(i);
                     break;
                 }

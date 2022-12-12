@@ -289,7 +289,6 @@ public class GraphWindow {
                     TaskSchedule.addTask(new Task() {
                         @Override
                         public void onFinished() {
-                            System.out.println("Finished");
                             showSavedText = false;
                         }
                     }, 5000);
@@ -534,16 +533,20 @@ public class GraphWindow {
 
                         int uniqueLinkId = 1;
                         for (Node node : graph.getNodes().values()) {
-                            for (Pin pin : node.outputPins) {
-                                if (pin.connectedTo != -1) {
-//                                        float[] pincolor = getPinColor(pin);
-                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowMarkerDistance, 50);
-                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowDuration, 1000);
-                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowSpeed, 25);
+                            for (Pin pin : node.inputPins) {
+//                                if (pin.connectedTo != -1) {
+////                                        float[] pincolor = getPinColor(pin);
+//                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowMarkerDistance, 50);
+//                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowDuration, 1000);
+//                                    NodeEditor.pushStyleVar(NodeEditorStyleVar.FlowSpeed, 25);
+//
+//                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedTo, pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 2);
+//
+//                                    NodeEditor.popStyleVar(3);
+//                                }
 
-                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedTo, pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 2);
-
-                                    NodeEditor.popStyleVar(3);
+                                for (int i = 0; i < pin.connectedToList.size(); i++) {
+                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedToList.get(i), pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 2);
                                 }
                             }
                         }
@@ -582,8 +585,10 @@ public class GraphWindow {
                                 Pin pin1 = graph.findPinById((int) link2.get());
                                 Pin pin2 = graph.findPinById((int) link3.get());
 
-                                pin1.connectedTo = -1;
-                                pin2.connectedTo = -1;
+                                pin1.remove(pin2.getID());
+                                pin2.remove(pin1.getID());
+//                                pin1.connectedTo = -1;
+//                                pin2.connectedTo = -1;
                             }
 
                             for (int i = 0; i < list.length; i++) {
@@ -892,29 +897,33 @@ public class GraphWindow {
 
             if(NodeEditor.acceptNewItem(0, 1, 0, 1, 1)){
 
-                //disconnect old connections
-                if(sourcePin.connectedTo != -1){
-                    Pin oldPin = graph.findPinById(sourcePin.connectedTo);
-                    if(oldPin != null) {
-                        oldPin.connectedTo = -1;
-                    }
+                if(sourcePin.connect(targetPin)){
+                    //sets the holder pin to -1 otherwise context menu will popup
+                    holdingPinID = -1;
                 }
-
-                if(targetPin.connectedTo != -1){
-                    Pin oldPin = graph.findPinById(targetPin.connectedTo);
-                    if(oldPin != null) {
-                        oldPin.connectedTo = -1;
-                    }
-                }
-
-                //create a new link connection
-                if(sourcePin != null && targetPin != null){
-                    if(sourcePin.connectedTo != targetPin.connectedTo || (targetPin.connectedTo == -1 || sourcePin.connectedTo == -1)){
-                        sourcePin.connectedTo = targetPin.getID();
-                        targetPin.connectedTo = sourcePin.getID();
-                        holdingPinID = -1;
-                    }
-                }
+//                //disconnect old connections
+//                if(sourcePin.connectedTo != -1){
+//                    Pin oldPin = graph.findPinById(sourcePin.connectedTo);
+//                    if(oldPin != null) {
+//                        oldPin.connectedTo = -1;
+//                    }
+//                }
+//
+//                if(targetPin.connectedTo != -1){
+//                    Pin oldPin = graph.findPinById(targetPin.connectedTo);
+//                    if(oldPin != null) {
+//                        oldPin.connectedTo = -1;
+//                    }
+//                }
+//
+//                //create a new link connection
+//                if(sourcePin != null && targetPin != null){
+//                    if(sourcePin.connectedTo != targetPin.connectedTo || (targetPin.connectedTo == -1 || sourcePin.connectedTo == -1)){
+//                        sourcePin.connectedTo = targetPin.getID();
+//                        targetPin.connectedTo = sourcePin.getID();
+//                        holdingPinID = -1;
+//                    }
+//                }
             }
         }
     }
@@ -964,7 +973,7 @@ public class GraphWindow {
 //        if(curSelectedPinDataType != null){
 //            pinDragSame = pin.getClass() == curSelectedPinDataType.getClass();
 //        }
-        pin.draw(ImGui.getWindowDrawList(), posX, posY, pin.connectedTo != -1, pinDragSame);
+        pin.draw(ImGui.getWindowDrawList(), posX, posY, pin.isConnected(), pinDragSame);
     }
 
     public void addNodeToList(Class<? extends Node> node){

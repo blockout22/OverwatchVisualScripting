@@ -60,16 +60,24 @@ public class Graph {
 
             //Clear any pin existing connections
             for(Pin pin : n.outputPins){
-                if (pin.connectedTo != -1) {
-                    Pin oldPin = findPinById(pin.connectedTo);
-                    oldPin.connectedTo = -1;
+                for (int i = 0; i < pin.connectedToList.size(); i++) {
+                    Pin connection = findPinById(pin.connectedToList.get(i));
+                    connection.remove(pin.getID());
                 }
+//                if (pin.connectedTo != -1) {
+//                    Pin oldPin = findPinById(pin.connectedTo);
+//                    oldPin.connectedTo = -1;
+//                }
             }
             for(Pin pin : n.inputPins){
-                if (pin.connectedTo != -1) {
-                    Pin oldPin = findPinById(pin.connectedTo);
-                    oldPin.connectedTo = -1;
+                for (int i = 0; i < pin.connectedToList.size(); i++) {
+                    Pin connection = findPinById(pin.connectedToList.get(i));
+                    connection.remove(pin.getID());
                 }
+//                if (pin.connectedTo != -1) {
+//                    Pin oldPin = findPinById(pin.connectedTo);
+//                    oldPin.connectedTo = -1;
+//                }
             }
             nodes.remove(q);
         }
