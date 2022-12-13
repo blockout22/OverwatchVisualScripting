@@ -661,6 +661,28 @@ public class GraphWindow {
                             justOpenedContextMenu = true;
                         }
 
+                        //Copy Paste
+                        if(NodeEditor.beginShortcut()) {
+                            if (NodeEditor.acceptCopy()) {
+                                int size = NodeEditor.getSelectedObjectCount();
+                                long[] list = new long[size];
+                                NodeEditor.getSelectedNodes(list, size);
+
+                                ArrayList<Node> nodeList = new ArrayList<>();
+                                for (int i = 0; i < list.length; i++) {
+                                    Node node = graph.getNodes().get((int)list[i]);
+                                    nodeList.add(node);
+                                }
+                                NodeCopyPasteHandler.copy(nodeList);
+                            }
+
+                            if(NodeEditor.acceptPaste()){
+                                System.out.println("Paste");
+                                NodeCopyPasteHandler.paste(graph);
+                            }
+                        }
+                        NodeEditor.endShortcut();
+
                         if(ImGui.isPopupOpen("context_menu" + id))
                         {
                             if(ImGui.beginPopup("context_menu" + id)){
