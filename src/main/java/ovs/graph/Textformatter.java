@@ -24,7 +24,7 @@ public class Textformatter {
                 }
             }
 
-            if(line.startsWith("End"))
+            if(line.startsWith("End") || line.startsWith("Else If") || line.startsWith("Skip If") || line.startsWith("Else"))
             {
                 tabCount--;
             }
@@ -37,7 +37,7 @@ public class Textformatter {
 
 
             //Handle Indent
-            if(line.startsWith("If") || line.startsWith("Else If") || line.startsWith("Skip If"))
+            if(line.startsWith("If")  || line.startsWith("Else If") || line.startsWith("Skip If") || line.startsWith("Else"))
             {
                 tabCount++;
             }

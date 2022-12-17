@@ -398,30 +398,32 @@ public class GraphWindow {
                                         if (node.inputPins.size() > i) {
                                             Pin inPin = node.inputPins.get(i);
 
-                                            NodeEditor.beginPin(inPin.getID(), NodeEditorPinKind.Input);
-                                            drawPinShapeAndColor(inPin);
+                                            if(inPin.isVisible()){
+                                                NodeEditor.beginPin(inPin.getID(), NodeEditorPinKind.Input);
+                                                drawPinShapeAndColor(inPin);
 //                                            ImGui.dummy(10, 10);
-                                            inPin.pinSize = 12;
-                                            ImGui.dummy(inPin.pinSize, inPin.pinSize);
+                                                inPin.pinSize = 12;
+                                                ImGui.dummy(inPin.pinSize, inPin.pinSize);
 
-                                            if (inPin.getName().length() > 0) {
+                                                if (inPin.getName().length() > 0) {
+                                                    ImGui.sameLine();
+                                                    ImGui.text(inPin.getName());
+                                                }
+
+                                                NodeEditor.pinPivotAlignment(0f, .5f);
+                                                NodeEditor.endPin();
+
+                                                if (ImGui.isItemClicked() && holdingPinID == -1) {
+                                                    lastActivePin = inPin.getID();
+                                                }
+
                                                 ImGui.sameLine();
-                                                ImGui.text(inPin.getName());
+                                                ImGui.beginGroup();
+                                                ImGui.pushItemWidth(150);
+                                                inPin.UI();
+                                                ImGui.popItemWidth();
+                                                ImGui.endGroup();
                                             }
-
-                                            NodeEditor.pinPivotAlignment(0f, .5f);
-                                            NodeEditor.endPin();
-
-                                            if (ImGui.isItemClicked() && holdingPinID == -1) {
-                                                lastActivePin = inPin.getID();
-                                            }
-
-                                            ImGui.sameLine();
-                                            ImGui.beginGroup();
-                                            ImGui.pushItemWidth(150);
-                                            inPin.UI();
-                                            ImGui.popItemWidth();
-                                            ImGui.endGroup();
                                         }
 
                                         if (node.width != -1) {

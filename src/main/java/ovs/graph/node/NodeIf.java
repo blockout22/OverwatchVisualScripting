@@ -1,25 +1,21 @@
 package ovs.graph.node;
 
+import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.Pin;
-import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinIf;
-import ovs.graph.pin.PinVar;
+import ovs.graph.pin.*;
 
 public class NodeIf extends Node{
 
     ComboBox ifTypeCombo = new ComboBox();
-//    ComboBox conditionBox = new ComboBox();
-
-//    PinVar leftPin = new PinVar();
-//    PinVar rightPin = new PinVar();
-
 
     PinIf inputPin = new PinIf();
     PinAction ifActionPin = new PinAction();
+
+    PinElse elsePin = new PinElse();
+
     PinAction output = new PinAction();
 
     public NodeIf(Graph graph) {
@@ -58,6 +54,10 @@ public class NodeIf extends Node{
         ifActionPin.setNode(this);
         addCustomInput(ifActionPin);
 
+        elsePin.setNode(this);
+        elsePin.setName("Else");
+        addCustomInput(elsePin);
+
         output.setNode(this);
         addCustomOutput(output);
     }
@@ -84,49 +84,25 @@ public class NodeIf extends Node{
 
     @Override
     public void execute() {
-//        PinData<ImString> leftData = leftPin.getData();
-//        PinData<ImString> rightData = rightPin.getData();
         PinData<ImString> inputData = inputPin.getData();
         PinData<ImString> ifActionData = ifActionPin.getData();
+        PinData<ImString> elseData = elsePin.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(inputPin, inputData);
+        handlePinStringConnection(elsePin, elseData);
         handlePinStringConnection(ifActionPin, ifActionData);
 
-
-        //TODO Else If isn't setup to work yet
-
-//        if(leftPin.isConnected() && rightPin.isConnected() && ifTypeCombo.getSelectedValue() == "Loop If"){
-//            leftData.getValue().set(((ImString)leftPin.getConnectedPin().getData().getValue()).get());
-//            rightData.getValue().set(((ImString)rightPin.getConnectedPin().getData().getValue()).get());
-//
-//            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ");");
-//            return;
-//        }
-
-//        if(leftPin.isConnected() && rightPin.isConnected() && ifActionPin.isConnected()){
-//            if(ifActionPin.isConnected()){
-//                Pin connectedPin = ifActionPin.getConnectedPin();
-//
-//                PinData<ImString> connectedData = connectedPin.getData();
-//            }
-//
-//            handlePinStringConnection(leftPin, leftData);
-//            handlePinStringConnection(rightPin, rightData);
-//            handlePinStringConnection(ifActionPin, ifActionData);
-////            System.out.println(ifActionData.getValue().get());
-////            dataLeft.getValue().set(((ImString)leftPin.getConnectedPin().getData().getValue()).get());
-////            dataRight.getValue().set(((ImString)rightPin.getConnectedPin().getData().getValue()).get());
-////            ruleData.getValue().set(((ImString)ifActionPin.getConnectedPin().getData().getValue()).get());
-//
         String out = "";
         String[] lines = ifActionData.getValue().get().split("\n");
         for (int i = 0; i < lines.length; i++) {
             out += "" + lines[i] + "\n";
         }
+
+
         outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + inputData.getValue().get() + ");\n" +
                 out +
-                "End;");
+                (elsePin.isConnected() ? elseData.getValue().get() : "") + "\nEnd;");
 //
 //            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ");\n" +
 //                    out +

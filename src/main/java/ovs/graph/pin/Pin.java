@@ -30,6 +30,7 @@ public abstract class Pin {
     public float pinSize = 12f;
 
     private boolean canDelete = false;
+    private boolean isVisible = true;
 
     public Pin()
     {
@@ -189,5 +190,13 @@ public abstract class Pin {
 
     public void setCanDelete(boolean canDelete) {
         this.canDelete = canDelete;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }

@@ -1244,6 +1244,13 @@
             1256
           ],
           "canDelete": false
+        },
+        {
+          "ID": 1056,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "",
+          "connections": [],
+          "canDelete": false
         }
       ],
       "outputPins": [
@@ -1487,6 +1494,13 @@
           "connections": [
             1274
           ],
+          "canDelete": false
+        },
+        {
+          "ID": 1073,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1806,6 +1820,13 @@
           "connections": [
             1295
           ],
+          "canDelete": false
+        },
+        {
+          "ID": 1095,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -2133,7 +2154,7 @@
         {
           "ID": 1504,
           "type": "ovs.graph.pin.PinVar",
-          "value": "163.53261",
+          "value": "163.44685",
           "connections": [],
           "canDelete": false
         }
@@ -2143,6 +2164,711 @@
           "ID": 1505,
           "type": "ovs.graph.pin.PinVar",
           "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 1523.0,
+      "y": -441.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 1697,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "False \u003d\u003d False",
+          "connections": [
+            1703
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1698,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create HUD Text(Null,Null, Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
+          "connections": [
+            1917
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1699,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "If(Current Map \u003d\u003d Map(Midtown));\nKill(Event Player, Event Player);\nEnd;",
+          "connections": [
+            2115
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1700,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            2122
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCompare",
+      "nodeName": "If Compare",
+      "x": 1192.0,
+      "y": -536.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1701,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "False",
+          "connections": [
+            1705
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1702,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "False",
+          "connections": [
+            1707
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1703,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            1697
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1064.0,
+      "y": -513.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1704,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "false",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1705,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1701
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1064.0,
+      "y": -417.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1706,
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "false",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1707,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1702
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCompare",
+      "nodeName": "If Compare",
+      "x": 883.0,
+      "y": -153.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 1904,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Current Map",
+          "connections": [
+            1907
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1905,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Map(Midtown)",
+          "connections": [
+            1908
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1906,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            2112
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCurrentMap",
+      "nodeName": "Current Map",
+      "x": 667.0,
+      "y": -80.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1907,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1904
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeMap",
+      "nodeName": "Map",
+      "x": 671.0,
+      "y": -7.0,
+      "extraData": [
+        "Map:Midtown"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1908,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1905
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 688.0,
+      "y": -396.0,
+      "extraData": [
+        "Location:Left"
+      ],
+      "inputPins": [
+        {
+          "ID": 1909,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1910,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1911,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1912,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1913,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1914,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1915,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1916,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1917,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            1698
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 1336.0,
+      "y": -264.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 2112,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Map \u003d\u003d Map(Midtown)",
+          "connections": [
+            1906
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2113,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Kill(Event Player, Event Player);",
+          "connections": [
+            2118
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2114,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "Create Dummy Bot(Hero(Ana), All Teams, 0, Vector(0, 0, 0), Vector(0, 0, 0));",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2115,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            1699
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeKill",
+      "nodeName": "Kill",
+      "x": 1106.0,
+      "y": -65.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2116,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            2119
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2117,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            2120
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2118,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            2113
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 916.0,
+      "y": -32.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2119,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2116
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 836.0,
+      "y": 64.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2120,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2117
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Else If",
+      "x": 1788.0,
+      "y": -289.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Each Player",
+        "Team:All",
+        "Player:All",
+        "Sub:"
+      ],
+      "inputPins": [
+        {
+          "ID": 2121,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2122,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "If(False \u003d\u003d False);\nCreate HUD Text(Null,Null, Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nElse If(Current Map \u003d\u003d Map(Midtown));\nKill(Event Player, Event Player);\nEnd;",
+          "connections": [
+            1700
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 1422.0,
+      "y": 40.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 2123,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Custom Color(255.0, 255.0, 255.0, 255.0) \u003d\u003d Custom Color(255.0, 255.0, 255.0, 255.0)",
+          "connections": [
+            2129
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2124,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create Effect (Event Player, Sphere, Color(White), Vector(0, 0, 0), 5, Visible To Position and Radius);",
+          "connections": [
+            2146
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2125,
+          "type": "ovs.graph.pin.PinElse",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2126,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIfCompare",
+      "nodeName": "If Compare",
+      "x": 1171.0,
+      "y": 72.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 2127,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom Color(255.0, 255.0, 255.0, 255.0)",
+          "connections": [
+            2134
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2128,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom Color(255.0, 255.0, 255.0, 255.0)",
+          "connections": [
+            2139
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2129,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            2123
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomColor",
+      "nodeName": "Custom Color",
+      "x": 876.0,
+      "y": 212.0,
+      "extraData": [
+        "Color:1.0,1.0,1.0,1.0"
+      ],
+      "inputPins": [
+        {
+          "ID": 2130,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2131,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2132,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2133,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2134,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2127
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomColor",
+      "nodeName": "Custom Color",
+      "x": 908.0,
+      "y": 356.0,
+      "extraData": [
+        "Color:1.0,1.0,1.0,1.0"
+      ],
+      "inputPins": [
+        {
+          "ID": 2135,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2136,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2137,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2138,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "255.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2139,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2128
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateEffect",
+      "nodeName": "Create Effect",
+      "x": 1336.0,
+      "y": 237.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2140,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            2147
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2141,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Sphere",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2142,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2143,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Vector(0, 0, 0)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2144,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "5",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2145,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Visible To Position and Radius",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2146,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            2124
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1140.0,
+      "y": 256.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 2147,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2140
+          ],
           "canDelete": false
         }
       ]
