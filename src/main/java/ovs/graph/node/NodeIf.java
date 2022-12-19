@@ -1,6 +1,5 @@
 package ovs.graph.node;
 
-import imgui.ImGui;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
@@ -12,9 +11,9 @@ public class NodeIf extends Node{
     ComboBox ifTypeCombo = new ComboBox();
 
     PinIf inputPin = new PinIf();
-    PinAction ifActionPin = new PinAction();
+    PinAction truePin = new PinAction();
 
-    PinElse elsePin = new PinElse();
+    PinAction falsePin = new PinAction();
 
     PinAction output = new PinAction();
 
@@ -51,12 +50,13 @@ public class NodeIf extends Node{
         inputPin.setName("If Condition");
         addCustomInput(inputPin);
 
-        ifActionPin.setNode(this);
-        addCustomInput(ifActionPin);
+        truePin.setNode(this);
+        truePin.setName("True");
+        addCustomInput(truePin);
 
-        elsePin.setNode(this);
-        elsePin.setName("Else");
-        addCustomInput(elsePin);
+        falsePin.setNode(this);
+        falsePin.setName("False");
+        addCustomInput(falsePin);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -85,24 +85,26 @@ public class NodeIf extends Node{
     @Override
     public void execute() {
         PinData<ImString> inputData = inputPin.getData();
-        PinData<ImString> ifActionData = ifActionPin.getData();
-        PinData<ImString> elseData = elsePin.getData();
+        PinData<ImString> trueData = truePin.getData();
+        PinData<ImString> falseData = falsePin.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(inputPin, inputData);
-        handlePinStringConnection(elsePin, elseData);
-        handlePinStringConnection(ifActionPin, ifActionData);
+        handlePinStringConnection(inputPin, inputData, "");
+        handlePinStringConnection(truePin, trueData, "");
+        handlePinStringConnection(falsePin, falseData, "");
 
-        String out = "";
-        String[] lines = ifActionData.getValue().get().split("\n");
+        String trueOut = "";
+        String falseOut = "";
+        String[] lines = trueData.getValue().get().split("\n");
         for (int i = 0; i < lines.length; i++) {
-            out += "" + lines[i] + "\n";
+            trueOut += "" + lines[i] + "\n";
         }
 
 
         outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + inputData.getValue().get() + ");\n" +
-                out +
-                (elsePin.isConnected() ? elseData.getValue().get() : "") + "\nEnd;");
+                trueOut +
+                "Else;\n" +
+                (falseData.getValue().get()) + "\nEnd;");
 //
 //            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ");\n" +
 //                    out +

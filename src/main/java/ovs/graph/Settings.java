@@ -67,6 +67,15 @@ public class Settings {
     public int[] pushPushSpeedModifier = new int[]{100};
     public int[] pushWalkSpeedModifier = new int[]{100};
 
+    //Bounty Hunter Settings
+    public int[] baseScoreForKillingABountyTarget = new int[]{300};
+    public int[] bountyIncreasePerKillAsBountyTarget = new int[]{0};
+    public int[] gameTimeBH = new int[]{10};
+    public int[] scorePerKillBH = new int[]{100};
+    public int[] scorePerKillAsBountyTarget = new int[]{300};
+    public int[] scoreToWinBH = new int[]{20};
+    public ImBoolean initRespawnOnOffBH = new ImBoolean(true);
+
     //DeathMatch settings
     public int[] gameTimeDM = new int[] {10};
     public int[] scoreToWinDM = new int[] {20};
@@ -77,6 +86,7 @@ public class Settings {
     public ArrayList<BoolInfoWithName> escortMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> hybridMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> pushMap = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> bhMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> dmMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> extensionBools = new ArrayList<>();
 
@@ -170,6 +180,11 @@ public class Settings {
         dmMap.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
 
+        //BH maps are the same maps as DM Maps
+        for (int i = 0; i < dmMap.size(); i++) {
+            bhMap.add(new BoolInfoWithName(dmMap.get(i).name, new ImBoolean(true)));
+        }
+
         extensionBools.add(new BoolInfoWithName("Beam Sounds", new ImBoolean(false)));
         extensionBools.add(new BoolInfoWithName("Beam Effects", new ImBoolean(false)));
         extensionBools.add(new BoolInfoWithName("Buff and Debuff Sounds", new ImBoolean(false)));
@@ -256,10 +271,10 @@ public class Settings {
             ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
             ImGui.sameLine();
             ImGui.text("Bouty Hunter");
-//        ImGui.sameLine();
-//        if(ImGui.button("Bounty Hunter Options")){
-//            ImGui.openPopup("Bountyhunter_options");
-//        }
+            ImGui.sameLine();
+            if(ImGui.button("Bounty Hunter Options")){
+                ImGui.openPopup("Bountyhunter_options");
+            }
             ImGui.checkbox("##CTF", ctfOnOff);
             ImGui.sameLine();
             ImGui.text("CTF");
@@ -373,7 +388,6 @@ public class Settings {
                     }
                 }
                 ImGui.separator();
-                //Assault maps
                 for(BoolInfoWithName biwn : controlMap) {
                     ImGui.checkbox("##" + biwn.name, biwn.bool);
                     ImGui.sameLine();
@@ -408,7 +422,6 @@ public class Settings {
                     }
                 }
                 ImGui.separator();
-                //Assault maps
                 for(BoolInfoWithName biwn : escortMap) {
                     ImGui.checkbox("##" + biwn.name, biwn.bool);
                     ImGui.sameLine();
@@ -446,7 +459,6 @@ public class Settings {
                     }
                 }
                 ImGui.separator();
-                //Assault maps
                 for(BoolInfoWithName biwn : hybridMap) {
                     ImGui.checkbox("##" + biwn.name, biwn.bool);
                     ImGui.sameLine();
@@ -483,13 +495,42 @@ public class Settings {
                     }
                 }
                 ImGui.separator();
-                //Assault maps
                 for(BoolInfoWithName biwn : pushMap) {
                     ImGui.checkbox("##" + biwn.name, biwn.bool);
                     ImGui.sameLine();
                     ImGui.text(biwn.name);
                 }
 
+                ImGui.endPopup();
+            }
+        }
+
+        if(ImGui.isPopupOpen("Bountyhunter_options"))
+        {
+            if(ImGui.beginPopup("Bountyhunter_options")){
+                ImGui.sliderInt("##baseScoreKillingTarget", baseScoreForKillingABountyTarget, 0, 1000);
+                ImGui.sameLine();
+                ImGui.text("Base Score For Killing A Bounty Target");
+                ImGui.sliderInt("##bountyIncrease", bountyIncreasePerKillAsBountyTarget, 0, 1000);
+                ImGui.sameLine();
+                ImGui.text("Bounty Increase Per Kill As Bounty Target");
+                ImGui.sliderInt("##ScorePerKillBH", scorePerKillBH, 0, 1000);
+                ImGui.sameLine();
+                ImGui.text("Score Per Kill");
+                ImGui.sliderInt("##ScorePerKillBHAsTarget", scorePerKillAsBountyTarget, 0, 1000);
+                ImGui.sameLine();
+                ImGui.text("Score Per Kill As Bounty Target");
+                ImGui.sliderInt("##gameTimeBH", gameTimeBH, 5, 15);
+                ImGui.sameLine();
+                ImGui.text("Game Time in Minutes");
+                ImGui.sliderInt("##scoreToWinBH", scoreToWinBH, 1, 5000);
+                ImGui.sameLine();
+                ImGui.text("Score To Win");
+                ImGui.checkbox("##bhInitRespawn", initRespawnOnOffBH);
+                ImGui.sameLine();
+                ImGui.text("Self Initialize Respawn");
+
+                showMapToggle(bhMap);
                 ImGui.endPopup();
             }
         }
@@ -541,6 +582,28 @@ public class Settings {
                 }
                 ImGui.endPopup();
             }
+        }
+    }
+
+    private void showMapToggle(ArrayList<BoolInfoWithName> mapList){
+        if(ImGui.button("All")) {
+            for (int i = 0; i < mapList.size(); i++) {
+                BoolInfoWithName bool = mapList.get(i);
+                bool.bool.set(true);
+            }
+        }
+        ImGui.sameLine();
+        if(ImGui.button("None")){
+            for (int i = 0; i < mapList.size(); i++) {
+                BoolInfoWithName bool = mapList.get(i);
+                bool.bool.set(false);
+            }
+        }
+        ImGui.separator();
+        for(BoolInfoWithName biwn : mapList) {
+            ImGui.checkbox("##" + biwn.name, biwn.bool);
+            ImGui.sameLine();
+            ImGui.text(biwn.name);
         }
     }
 

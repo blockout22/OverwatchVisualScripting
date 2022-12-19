@@ -12,10 +12,7 @@ import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
-import ovs.GlfwWindow;
-import ovs.Global;
-import ovs.ImGuiWindow;
-import ovs.TaskSchedule;
+import ovs.*;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
@@ -664,6 +661,11 @@ public class GraphWindow {
                         }
 
                         //Copy Paste
+//                        System.out.println(ImGui.getWindowPosX());
+//                        System.out.println(ImGui.getMousePosX() - ImGui.getWindowPosX() + " : " + (ImGui.getMousePosX() - (ImGui.getWindowPosX() + ImGui.getWindowSizeX())));
+
+//                        System.out.println(NodeEditor.toScreenX(0) + " : " + NodeEditor.toCanvasX(0));
+
                         if(NodeEditor.beginShortcut()) {
                             if (NodeEditor.acceptCopy()) {
                                 int size = NodeEditor.getSelectedObjectCount();

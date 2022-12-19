@@ -40,7 +40,8 @@ public class NodeCopyPasteHandler {
                 Node target = nodeList.get(i).node;
                 newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                 graph.addNode(newInstance);
-                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()) + nodeList.get(i).position.x, NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + + nodeList.get(i).position.y));
+//                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()) + nodeList.get(i).position.x, NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + + nodeList.get(i).position.y));
+                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX() + nodeList.get(i).position.x), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + nodeList.get(i).position.y));
 
                 int defaultTotal = newInstance.inputPins.size();
                 for (int j = 0; j < target.inputPins.size(); j++) {

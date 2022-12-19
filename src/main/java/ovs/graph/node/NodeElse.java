@@ -5,10 +5,12 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinElse;
 import ovs.graph.pin.PinIf;
 
+@NodeDisabled
 public class NodeElse extends Node{
 
     ComboBox condition = new ComboBox();
