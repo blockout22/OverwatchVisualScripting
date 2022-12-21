@@ -7,7 +7,7 @@ import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
-public class NodeIfCompare extends Node{
+public class NodeCompare extends Node{
 
     ComboBox conditionBox = new ComboBox();
 
@@ -16,9 +16,9 @@ public class NodeIfCompare extends Node{
 
     PinIf output = new PinIf();
 
-    public NodeIfCompare(Graph graph) {
+    public NodeCompare(Graph graph) {
         super(graph);
-        setName("If Compare");
+        setName("Compare");
 
         conditionBox.addOption("<");
         conditionBox.addOption(">");

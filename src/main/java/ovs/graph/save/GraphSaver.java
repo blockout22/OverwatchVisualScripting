@@ -48,11 +48,14 @@ public class GraphSaver {
         graphSave.saveSettings.pushSettings.MapToggle.clear();
         graphSave.saveSettings.dmSettings.MapToggle.clear();
 
+        ////Lobby Settings
         graphSave.saveSettings.modeName = settings.modeName.get();
         graphSave.saveSettings.description = settings.description.get();
         graphSave.saveSettings.maxT1Players = settings.maxT1Players[0];
         graphSave.saveSettings.maxT2Players = settings.maxT2Players[0];
         graphSave.saveSettings.maxFFAPlayers = settings.maxFFAPlayers[0];
+        graphSave.saveSettings.mapRotation = settings.mapRotCurrent.get();
+        graphSave.saveSettings.returnToLobby = settings.returnToLobbyCurrent.get();
 
         graphSave.saveSettings.assaultMode = settings.assaultOnOff.get();
         graphSave.saveSettings.controlMode = settings.controlOnOff.get();
@@ -261,11 +264,14 @@ public class GraphSaver {
             Node[] loaded = new Node[gs.nodeSaves.size()];
 
             //Load settings
+            //Lobby Settings
             settings.modeName.set(gs.saveSettings.modeName);
             settings.description.set(gs.saveSettings.description);
             settings.maxT1Players[0] = (gs.saveSettings.maxT1Players);
             settings.maxT2Players[0] = (gs.saveSettings.maxT2Players);
             settings.maxFFAPlayers[0] = (gs.saveSettings.maxFFAPlayers);
+            settings.mapRotCurrent.set(gs.saveSettings.mapRotation);
+            settings.returnToLobbyCurrent.set(gs.saveSettings.returnToLobby);
             settings.assaultOnOff.set(gs.saveSettings.assaultMode);
             settings.controlOnOff.set(gs.saveSettings.controlMode);
             settings.escortOnOff.set(gs.saveSettings.escortMode);
@@ -560,6 +566,19 @@ public class GraphSaver {
 
             }
 
+            //loop through all nodes on graph and validate all links
+            for(Node node : graph.getNodes().values()){
+                for (int i = 0; i < node.inputPins.size(); i++) {
+                    Pin pin = node.inputPins.get(i);
+                    pin.validateAllConnections();
+                }
+
+                for (int i = 0; i < node.outputPins.size(); i++) {
+                    Pin pin = node.outputPins.get(i);
+                    pin.validateAllConnections();
+                }
+            }
+
             return graph;
 
         }catch (FileNotFoundException e) {
@@ -602,6 +621,8 @@ public class GraphSaver {
         private int maxT1Players = 5;
         private int maxT2Players = 5;
         private int maxFFAPlayers = 2;
+        private int mapRotation = 0;
+        private int returnToLobby = 0;
 
         private boolean assaultMode;
         private boolean controlMode = true;

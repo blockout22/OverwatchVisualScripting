@@ -82,10 +82,26 @@ public abstract class Pin {
      * @param pin
      */
     private void disconnectInput(Pin pin){
-        for (int i = 0; i < connectedToList.size(); i++) {
-            if(connectedToList.get(i) == pin.getID()){
-                pin.connectedToList.remove(i);
-                break;
+        if(pin == null)
+        {
+
+        }else {
+            for (int i = 0; i < connectedToList.size(); i++) {
+                if (connectedToList.get(i) == pin.getID()) {
+                    pin.connectedToList.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void validateAllConnections(){
+        for (int i = connectedToList.size() - 1; i >= 0 ; i--) {
+            Pin pin = getNode().getGraph().findPinById(connectedToList.get(i));
+            if(pin == null){
+                //If pin is null then remove invalid pin
+                System.out.println("Removed invalid pin");
+                connectedToList.remove(i);
             }
         }
     }

@@ -26,6 +26,12 @@ public class Settings {
             0
     };
 
+    public ImInt mapRotCurrent = new ImInt();
+    public ImInt returnToLobbyCurrent = new ImInt();
+
+    private String[] mapRotItems = {"After A Mirror Match", "After A Game", "Pause"};
+    private String[] returnToLobbyItems = {"Never", "After A Game", "After A Mirror Match"};
+
     public ImBoolean assaultOnOff = new ImBoolean(false);
     public ImBoolean controlOnOff = new ImBoolean(true);
     public ImBoolean escortOnOff = new ImBoolean(true);
@@ -227,6 +233,14 @@ public class Settings {
             ImGui.text("Max FFA Players");
             ImGui.sameLine();
             ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
+
+            ImGui.text("Map Rotation");
+            ImGui.sameLine();
+            ImGui.combo("##MapRotation", mapRotCurrent, mapRotItems);
+
+            ImGui.text("Return To Lobby");
+            ImGui.sameLine();
+            ImGui.combo("##RetrunToLobby", returnToLobbyCurrent, returnToLobbyItems);
         }
 
         ImGui.separator();
@@ -630,6 +644,8 @@ public class Settings {
                 output += "Max Team 2 Players: " + maxT2Players[0] + "\n";
             }
             output += "Max FFA Players: " + maxFFAPlayers[0] + "\n";
+            output += "Map Rotation: " + mapRotItems[mapRotCurrent.get()] + "\n";
+            output += "Return To Lobby: " + returnToLobbyItems[returnToLobbyCurrent.get()] + "\n";
             output += "}\n";
         }
 

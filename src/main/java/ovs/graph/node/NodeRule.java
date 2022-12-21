@@ -185,18 +185,20 @@ public class NodeRule extends Node{
     }
 
     private void checkError(Pin pin){
-        if(pin.getNode() instanceof NodeEventPlayer)
-        {
-            error = "Error: Event player value is not allowed inside a rule with an '" + comboEventOnGoing.getSelectedValue() + "' event";
-            return;
-        }
+        if(pin != null) {
+            if (pin.getNode() instanceof NodeEventPlayer) {
+                error = "Error: Event player value is not allowed inside a rule with an '" + comboEventOnGoing.getSelectedValue() + "' event";
+                return;
+            }
 
-        for (int i = 0; i < pin.getNode().inputPins.size(); i++) {
-            Pin newPin = pin.getNode().inputPins.get(i);
 
-            if(newPin.isConnected()){
-                Pin connectedPin = newPin.getConnectedPin();
-                checkError(connectedPin);
+            for (int i = 0; i < pin.getNode().inputPins.size(); i++) {
+                Pin newPin = pin.getNode().inputPins.get(i);
+
+                if (newPin.isConnected()) {
+                    Pin connectedPin = newPin.getConnectedPin();
+                    checkError(connectedPin);
+                }
             }
         }
     }
