@@ -33,6 +33,7 @@ public class GraphWindow {
     private ImGuiWindow imGuiWindow;
     private GlfwWindow glfwWindow;
     private final ImBoolean closable = new ImBoolean(true);
+    private ConfirmSaveDialog saveDialog = new ConfirmSaveDialog();
 
     public String id;
     private String fileName = "";
@@ -54,6 +55,7 @@ public class GraphWindow {
     private long lastHoldingPinID = -1;
     private long lastActivePin = -1;
 
+    private boolean promptSave = false;
     private boolean showSavedText = false;
     private boolean justOpenedContextMenu = false;
     private boolean isLoading = false;
@@ -79,6 +81,8 @@ public class GraphWindow {
     private float canvasXPos = 0;
     private float canvasYPos = 0;
     private float contextMenuSize = 250;
+
+    private UndoHandler undoHandler = new UndoHandler();
 
     public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
         this.imGuiWindow = imGuiWindow;
@@ -185,14 +189,23 @@ public class GraphWindow {
         ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, ImGuiCond.Once);
         ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
 
-
         if(ImGui.begin(fileName, closable)) {
 
             if(!closable.get())
             {
                 //TODO request user to save before closing
-
-                imGuiWindow.removeGraphWindow(this);
+                if(promptSave){
+                    int state = saveDialog.show();
+                    if(state == 0){
+                        promptSave = false;
+                        imGuiWindow.removeGraphWindow(this);
+                    }else if(state == 1){
+                        graphSaver.save(fileName, settings, graph);
+                        imGuiWindow.removeGraphWindow(this);
+                    }
+                }else{
+                    imGuiWindow.removeGraphWindow(this);
+                }
             }
 
             NodeEditor.setCurrentEditor(context);
@@ -363,6 +376,15 @@ public class GraphWindow {
                             for (Node node : graph.getNodes().values()) {
                                 NodeEditor.beginNode(node.getID());
                                 {
+
+                                    if(!ImGui.isMouseDown(0)) {
+                                        if (node.posX != NodeEditor.getNodePositionX(node.getID()) || node.posY != NodeEditor.getNodePositionY(node.getID())) {
+                                            node.posX = NodeEditor.getNodePositionX(node.getID());
+                                            node.posY = NodeEditor.getNodePositionY(node.getID());
+                                            promptSave = true;
+                                        }
+                                    }
+
                                     //Node Title
                                     if(node.isEditingTitle && editingNodeTitle == node) {
                                         ImString string = new ImString();
@@ -466,6 +488,8 @@ public class GraphWindow {
                             }
                         }
 
+
+
                         int uniqueLinkId = 1;
                         for (Node node : graph.getNodes().values()) {
                             for (Pin pin : node.inputPins) {
@@ -522,6 +546,7 @@ public class GraphWindow {
 
                                 pin1.remove(pin2.getID());
                                 pin2.remove(pin1.getID());
+                                promptSave = true;
 //                                pin1.connectedTo = -1;
 //                                pin2.connectedTo = -1;
                             }
@@ -530,6 +555,7 @@ public class GraphWindow {
                                 ImLong nodeID = new ImLong();
                                 if (NodeEditor.queryDeletedNode(nodeID)) {
                                     graph.removeNode((int) nodeID.get());
+                                    promptSave = true;
                                 }
 
                             }
@@ -831,6 +857,7 @@ public class GraphWindow {
                     newInstance.posX = canvasXPos;
                     newInstance.posY = canvasYPos;
                     NodeEditor.setNodePosition(newInstance.getID(), canvasXPos, canvasYPos);
+                    promptSave = true;
                     autoConnectLink(newInstance);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -858,7 +885,7 @@ public class GraphWindow {
             }
 
             if(NodeEditor.acceptNewItem(0, 1, 0, 1, 1)){
-
+                promptSave = true;
                 if(sourcePin.connect(targetPin)){
                     //sets the holder pin to -1 otherwise context menu will popup
                     holdingPinID = -1;
