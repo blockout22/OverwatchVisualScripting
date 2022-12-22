@@ -4,14 +4,15 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import static org.lwjgl.stb.STBImage.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 public class GlfwWindow {
 
@@ -55,44 +56,21 @@ public class GlfwWindow {
         GLFW.glfwPollEvents();
     }
 
-    public void setIcon(){
-        try {
-            File file = new File("E:\\Github\\OverwatchVisualScripting\\src\\main\\resources\\owvs_icon128.png");
+    public void setIcon() {
 //            File file = new File("src\\main\\resources\\owIcon.ico");
-            System.out.println(file.getAbsolutePath());
-            BufferedImage image = ImageIO.read(file);
+        GLFWImage image = GLFWImage.malloc(); GLFWImage.Buffer imagebf = GLFWImage.malloc(1);
 
-            int width = image.getWidth();
-            int height = image.getHeight();
-            int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
-
-            ByteBuffer imageBuffer = ByteBuffer.allocate(width * height * 4);
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    int pixel = pixels[y * width + x];
-                    imageBuffer.put((byte) ((pixel >> 16) & 0xff)); // red
-                    imageBuffer.put((byte) ((pixel >> 8) & 0xff)); // green
-                    imageBuffer.put((byte) (pixel & 0xff)); // blue
-                    imageBuffer.put((byte) ((pixel >> 24) & 0xff)); // alpha
-                }
-            }
-            imageBuffer.flip();
-
-
-            GLFWImage glfwImage = GLFWImage.malloc();
-            glfwImage.set(width, height, imageBuffer);
-
-            GLFWImage.Buffer images = GLFWImage.malloc(1);
-            images.put(0, glfwImage);
-            images.flip();
-
-            GLFW.glfwSetWindowIcon(windowID, images);
-
-            glfwImage.free();
-            images.free();
+        ImageParser resource_01 = null;
+        try {
+            resource_01 = ImageParser.load_image("owvs_icon128.png");
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
+
+        image.set(resource_01.getWidth(), resource_01.getHeight(), resource_01.getImage());
+        imagebf.put(0, image);
+        GLFW.glfwSetWindowIcon(windowID, imagebf);
     }
 
     private ByteBuffer loadImage(String image) throws IOException {

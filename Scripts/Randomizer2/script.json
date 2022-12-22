@@ -4,17 +4,17 @@
     "description": "",
     "maxT1Players": 5,
     "maxT2Players": 5,
-    "maxFFAPlayers": 0,
+    "maxFFAPlayers": 12,
     "mapRotation": 1,
     "returnToLobby": 0,
     "assaultMode": false,
-    "controlMode": true,
-    "escortMode": true,
-    "hybridMode": true,
-    "pushMode": true,
+    "controlMode": false,
+    "escortMode": false,
+    "hybridMode": false,
+    "pushMode": false,
     "bountyHunterMode": false,
     "ctfMode": false,
-    "deathmatchMode": false,
+    "deathmatchMode": true,
     "eliminationMode": false,
     "teamDeathmatchMode": false,
     "practiceRangeMode": false,
@@ -443,7 +443,8 @@
     "6:KnockbackDealt",
     "7:KnockbackReceived",
     "8:ProjectiveGravity",
-    "9:ProjectiveSpeed"
+    "9:ProjectiveSpeed",
+    "10:MaxHealth"
   ],
   "subroutines": [
     "0:SetPlayerStats"
@@ -1530,7 +1531,7 @@
         {
           "ID": 2914,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Event Player.DamageDealt \u003d Random Real(50.0, 500.0);\nEvent Player.DamageReceived \u003d Random Real(50.0, 500.0);\nEvent Player.HealingDealt \u003d Random Real(50.0, 500.0);\nEvent Player.HealingReceived \u003d Random Real(50.0, 500.0);\nEvent Player.KnockbackDealt \u003d Random Real(50.0, 500.0);\nEvent Player.KnockbackReceived \u003d Random Real(50.0, 500.0);\nEvent Player.ProjectiveGravity \u003d Random Real(50.0, 500.0);\nEvent Player.ProjectiveSpeed \u003d Random Real(50.0, 500.0);\n\nSet Damage Dealt(Event Player, Event Player.DamageDealt);\nSet Damage Received(Event Player, Event Player.DamageReceived);\nSet Healing Dealt(Event Player, Event Player.HealingDealt);\nSet Healing Received(Event Player, Event Player.HealingReceived);\nSet Knockback Dealt(Event Player, Event Player.KnockbackDealt);\nSet Knockback Received(Event Player, Event Player.KnockbackReceived);\nSet Projectile Gravity(Event Player, Event Player.ProjectiveGravity);\nSet Projectile Speed(Event Player, Event Player.ProjectiveSpeed);\n\n",
+          "value": "Event Player.DamageDealt \u003d Random Real(50.0, 500.0);\nEvent Player.DamageReceived \u003d Random Real(50.0, 500.0);\nEvent Player.HealingDealt \u003d Random Real(50.0, 500.0);\nEvent Player.HealingReceived \u003d Random Real(50.0, 500.0);\nEvent Player.KnockbackDealt \u003d Random Real(50.0, 500.0);\nEvent Player.KnockbackReceived \u003d Random Real(50.0, 500.0);\nEvent Player.ProjectiveGravity \u003d Random Real(50.0, 500.0);\nEvent Player.ProjectiveSpeed \u003d Random Real(50.0, 500.0);\nEvent Player.MaxHealth \u003d Random Real(50.0, 500.0);\n\nSet Damage Dealt(Event Player, Event Player.DamageDealt);\nSet Damage Received(Event Player, Event Player.DamageReceived);\nSet Healing Dealt(Event Player, Event Player.HealingDealt);\nSet Healing Received(Event Player, Event Player.HealingReceived);\nSet Knockback Dealt(Event Player, Event Player.KnockbackDealt);\nSet Knockback Received(Event Player, Event Player.KnockbackReceived);\nSet Projectile Gravity(Event Player, Event Player.ProjectiveGravity);\nSet Projectile Speed(Event Player, Event Player.ProjectiveSpeed);\nSet Max Health(Event Player, Event Player.MaxHealth);\n\n",
           "connections": [
             2933
           ],
@@ -1617,6 +1618,15 @@
             3190
           ],
           "canDelete": true
+        },
+        {
+          "ID": 3421,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            3420
+          ],
+          "canDelete": true
         }
       ],
       "outputPins": [
@@ -1698,7 +1708,8 @@
             3139,
             3141,
             3187,
-            3189
+            3189,
+            3419
           ],
           "canDelete": false
         }
@@ -1938,6 +1949,15 @@
             3180
           ],
           "canDelete": true
+        },
+        {
+          "ID": 3417,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            3416
+          ],
+          "canDelete": true
         }
       ],
       "outputPins": [
@@ -2057,7 +2077,8 @@
             3129,
             3132,
             3178,
-            3175
+            3175,
+            3414
           ],
           "canDelete": false
         }
@@ -2145,7 +2166,7 @@
         {
           "ID": 2962,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Null, Null, Left, 0.0, Custom Color(2.9223762, 95.83491, 134.42934, 2.9223762), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
+          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Null, Null, Left, 0.0, Custom Color(3.0, 96.0, 134.0, 255.0), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
           "connections": [
             3045
           ],
@@ -2305,7 +2326,7 @@
         {
           "ID": 2973,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom Color(2.9223762, 95.83491, 134.42934, 2.9223762)",
+          "value": "Custom Color(3.0, 96.0, 134.0, 255.0)",
           "connections": [
             3117
           ],
@@ -3886,34 +3907,34 @@
       "x": -1596.0,
       "y": -2044.0,
       "extraData": [
-        "Color:0.011460299,0.37582317,0.5271739,0.011460299"
+        "Color:0.011764706,0.3764706,0.5254902,0.011764706"
       ],
       "inputPins": [
         {
           "ID": 3113,
           "type": "ovs.graph.pin.PinVar",
-          "value": "2.9223762",
+          "value": "3.0",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3114,
           "type": "ovs.graph.pin.PinVar",
-          "value": "95.83491",
+          "value": "96.0",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3115,
           "type": "ovs.graph.pin.PinVar",
-          "value": "134.42934",
+          "value": "134.0",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3116,
           "type": "ovs.graph.pin.PinVar",
-          "value": "2.9223762",
+          "value": "255.0",
           "connections": [],
           "canDelete": false
         }
@@ -3924,6 +3945,93 @@
           "type": "ovs.graph.pin.PinVar",
           "connections": [
             2973
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetMaxHealth",
+      "nodeName": "Set Max Health",
+      "x": 694.0,
+      "y": 1358.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3414,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            2947
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3415,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.MaxHealth",
+          "connections": [
+            3418
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3416,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3417
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGetVariable",
+      "nodeName": "Get Variable",
+      "x": 358.0,
+      "y": 1369.0,
+      "extraData": [
+        "Var:Event Player.MaxHealth"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3418,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3415
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetVariable",
+      "nodeName": "Set Variable",
+      "x": 600.0,
+      "y": 407.0,
+      "extraData": [
+        "Var:Event Player.MaxHealth"
+      ],
+      "inputPins": [
+        {
+          "ID": 3419,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Random Real(50.0, 500.0)",
+          "connections": [
+            2921
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3420,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3421
           ],
           "canDelete": false
         }
