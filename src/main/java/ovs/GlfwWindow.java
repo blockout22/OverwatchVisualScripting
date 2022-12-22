@@ -6,6 +6,9 @@ import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryUtil;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -34,6 +37,7 @@ public class GlfwWindow {
         });
 
         GLFW.glfwMakeContextCurrent(windowID);
+        setIcon();
         GLFW.glfwSwapInterval(1);
         GLFW.glfwShowWindow(windowID);
         GL.createCapabilities();
@@ -51,23 +55,41 @@ public class GlfwWindow {
         GLFW.glfwPollEvents();
     }
 
-    /**
-     * Doesn't work
-     * @param image
-     */
-    private void setIcon(String image){
+    public void setIcon(){
         try {
-            ByteBuffer byteBuffer = loadImage(image);
+            File file = new File("E:\\Github\\OverwatchVisualScripting\\src\\main\\resources\\owvs_icon128.png");
+//            File file = new File("src\\main\\resources\\owIcon.ico");
+            System.out.println(file.getAbsolutePath());
+            BufferedImage image = ImageIO.read(file);
 
-            if(byteBuffer != null) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
 
-                GLFWImage.Buffer images = GLFWImage.create(1);
-                GLFWImage icon = GLFWImage.create().set(128, 128, byteBuffer);
-                images.put(icon);
-                GLFW.glfwSetWindowIcon(windowID, images);
-                return;
+            ByteBuffer imageBuffer = ByteBuffer.allocate(width * height * 4);
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int pixel = pixels[y * width + x];
+                    imageBuffer.put((byte) ((pixel >> 16) & 0xff)); // red
+                    imageBuffer.put((byte) ((pixel >> 8) & 0xff)); // green
+                    imageBuffer.put((byte) (pixel & 0xff)); // blue
+                    imageBuffer.put((byte) ((pixel >> 24) & 0xff)); // alpha
+                }
             }
+            imageBuffer.flip();
 
+
+            GLFWImage glfwImage = GLFWImage.malloc();
+            glfwImage.set(width, height, imageBuffer);
+
+            GLFWImage.Buffer images = GLFWImage.malloc(1);
+            images.put(0, glfwImage);
+            images.flip();
+
+            GLFW.glfwSetWindowIcon(windowID, images);
+
+            glfwImage.free();
+            images.free();
         } catch (IOException e) {
             e.printStackTrace();
         }
