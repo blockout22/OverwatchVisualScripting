@@ -8,15 +8,15 @@ import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.OnOpenedListener;
 import ovs.graph.pin.PinAction;
 
-public class NodeSubroutine extends Node{
+public class NodeCallSubroutine extends Node{
 
     PinAction output = new PinAction();
 
     ComboBox comboBox = new ComboBox();
 
-    public NodeSubroutine(Graph graph) {
+    public NodeCallSubroutine(Graph graph) {
         super(graph);
-        setName("Subroutine");
+        setName("Call Subroutine");
 
         output.setNode(this);
         addCustomOutput(output);

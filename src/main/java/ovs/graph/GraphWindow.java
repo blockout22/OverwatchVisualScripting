@@ -228,6 +228,7 @@ public class GraphWindow {
                 boolean success = graphSaver.save(fileName, settings, graph);
 
                 if(success){
+                    promptSave = false;
                     showSavedText = true;
                     TaskSchedule.addTask(new Task() {
                         @Override

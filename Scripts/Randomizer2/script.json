@@ -2020,7 +2020,7 @@
           "type": "ovs.graph.pin.PinAction",
           "value": "",
           "connections": [
-            3047
+            3653
           ],
           "canDelete": true
         }
@@ -2031,26 +2031,6 @@
           "type": "ovs.graph.pin.PinAction",
           "connections": [
             2962
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSubroutine",
-      "nodeName": "Subroutine",
-      "x": 718.0,
-      "y": -1047.0,
-      "extraData": [
-        "Sub:SetPlayerStats"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 3047,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            3095
           ],
           "canDelete": false
         }
@@ -2086,26 +2066,6 @@
         }
       ],
       "outputPins": []
-    },
-    {
-      "className": "ovs.graph.node.NodeSubroutine",
-      "nodeName": "Subroutine",
-      "x": 478.0,
-      "y": -1767.0,
-      "extraData": [
-        "Sub:SetPlayerStats"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 3050,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            3084
-          ],
-          "canDelete": false
-        }
-      ]
     },
     {
       "className": "ovs.graph.node.NodeGetVariable",
@@ -2538,7 +2498,7 @@
           "type": "ovs.graph.pin.PinAction",
           "value": "",
           "connections": [
-            3050
+            3655
           ],
           "canDelete": false
         },
@@ -4032,6 +3992,46 @@
           "type": "ovs.graph.pin.PinVar",
           "connections": [
             3195
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCallSubroutine",
+      "nodeName": "Call Subroutine",
+      "x": 702.0,
+      "y": -1063.0,
+      "extraData": [
+        "Sub:SetPlayerStats"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3653,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3095
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCallSubroutine",
+      "nodeName": "Call Subroutine",
+      "x": 446.0,
+      "y": -1783.0,
+      "extraData": [
+        "Sub:SetPlayerStats"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3655,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3084
           ],
           "canDelete": false
         }
