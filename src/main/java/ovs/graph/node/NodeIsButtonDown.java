@@ -24,6 +24,7 @@ public class NodeIsButtonDown extends Node{
         }
 
         input.setNode(this);
+        input.setName("Player");
         addCustomInput(input);
 
         output.setNode(this);

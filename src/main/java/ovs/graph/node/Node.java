@@ -110,6 +110,8 @@ public abstract class Node {
                 PinData<ImString> connectedData = connectedPin.getData();
                 pinData.getValue().set(connectedData.getValue().get());
             }
+        }else{
+            pinData.getValue().set("");
         }
     }
 

@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OverwatchVisualScripting:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/OverwatchVisualScripting_jar2</output-path>
+    <root id="archive" name="OverwatchVisualScripting.jar">
+      <element id="module-output" name="OverwatchVisualScripting" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl/3.3.2-SNAPSHOT/lwjgl-3.3.2-20221218.004659-8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-stb/3.3.2-SNAPSHOT/lwjgl-stb-3.3.2-20221218.004659-8-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/github/spair/imgui-java-binding/1.86.4/imgui-java-binding-1.86.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/github/spair/imgui-java-lwjgl3/1.86.4/imgui-java-lwjgl3-1.86.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10/gson-2.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-stb/3.3.2-SNAPSHOT/lwjgl-stb-3.3.2-20221218.004659-8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-glfw/3.3.2-SNAPSHOT/lwjgl-glfw-3.3.2-20221218.004659-8-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-opengl/3.3.2-SNAPSHOT/lwjgl-opengl-3.3.2-20221218.004659-8-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-opengl/3.3.2-SNAPSHOT/lwjgl-opengl-3.3.2-20221218.004659-8-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl/3.3.2-SNAPSHOT/lwjgl-3.3.2-20221218.004659-8-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl/3.3.2-SNAPSHOT/lwjgl-3.3.2-20221218.004659-8-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-opengl/3.3.2-SNAPSHOT/lwjgl-opengl-3.3.2-20221218.004659-8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-glfw/3.3.2-SNAPSHOT/lwjgl-glfw-3.3.2-20221218.004659-8-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-glfw/3.3.2-SNAPSHOT/lwjgl-glfw-3.3.2-20221218.004659-8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl/3.3.2-SNAPSHOT/lwjgl-3.3.2-20221218.004659-8-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-opengl/3.3.2-SNAPSHOT/lwjgl-opengl-3.3.2-20221218.004659-8-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/github/spair/imgui-java-app/1.86.4/imgui-java-app-1.86.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-glfw/3.3.2-SNAPSHOT/lwjgl-glfw-3.3.2-20221218.004659-8-natives-windows.jar" path-in-jar="/" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

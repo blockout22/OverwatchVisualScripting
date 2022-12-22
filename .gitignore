@@ -31,3 +31,4 @@ target/
 META-INF/MANIFEST.MF
 Build/
 .idea/artifacts/OverwatchVisualScripting_jar.xml
+src/main/java/META-INF/MANIFEST.MF
