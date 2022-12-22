@@ -48,7 +48,6 @@ public class NodeCustomColor extends Node{
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        System.out.println(picker.getColor()[0] + " : " + picker.getColor()[1] + " : " + picker.getColor()[2] + " : " + picker.getColor()[3]);
         getExtraSaveData().add("Color:" + picker.getColor()[0] + "," + picker.getColor()[1] + "," + picker.getColor()[2] + "," + picker.getColor()[3]);
     }
 

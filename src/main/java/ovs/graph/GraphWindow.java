@@ -747,9 +747,11 @@ public class GraphWindow {
                                         justOpenedContextMenu = false;
                                     }
 
+                                    ImGui.pushItemWidth(350);
                                     ImGui.inputTextWithHint("##", "Search Node", nodeSearch);
-                                    ImGui.setNextWindowSize(250, 0, ImGuiCond.Once);
-                                    ImGui.beginChild("ScrollArea", 250, (contextMenuAutoSize ? 500 : contextMenuSize));
+                                    ImGui.popItemWidth();
+//                                    ImGui.setNextWindowSize(250, 0, ImGuiCond.Once);
+                                    ImGui.beginChild("ScrollArea", 350, (contextMenuAutoSize ? 500 : contextMenuSize));
                                     for (Node instance : nodeInstanceCache) {
                                         createContextMenuItem(instance, 0);
                                     }
