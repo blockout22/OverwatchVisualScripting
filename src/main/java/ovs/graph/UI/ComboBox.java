@@ -59,6 +59,15 @@ public class ComboBox extends UiComponent{
         }
     };
 
+    public ComboBox() {
+    }
+
+    public ComboBox(String... options){
+        for(String option : options){
+            addOption(option);
+        }
+    }
+
     public void select(int index){
         if(index < 0){
             currentSelectedIndex = -1;
