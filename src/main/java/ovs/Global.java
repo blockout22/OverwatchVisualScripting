@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class Global {
 
+    protected static int BUILD = -1;
     public static String SCRIPTS_DIR = "Scripts";
 
     private static ImVec2 textSize = new ImVec2();
@@ -111,6 +112,10 @@ public class Global {
         br.close();
 
         return nodeList;
+    }
+
+    public static int getBuild(){
+        return BUILD;
     }
 
     //TODO add a function to allow elements to align to the right side of the screen

@@ -5,6 +5,8 @@
     "maxT1Players": 5,
     "maxT2Players": 5,
     "maxFFAPlayers": 0,
+    "mapRotation": 0,
+    "returnToLobby": 0,
     "assaultMode": true,
     "controlMode": true,
     "escortMode": true,
@@ -763,7 +765,7 @@
         {
           "ID": 1412,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Hero Icon String(Hero(Soldier: 76))",
+          "value": "Hero Icon String(Hero())",
           "connections": [
             2720
           ],
@@ -2052,7 +2054,7 @@
         {
           "ID": 2302,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Null, Null, Custom String(\"Damage Dealt: {0}\", Event Player.DamageDealt), Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Hero Icon String(Hero(Soldier: 76)), Custom String(\"Damage Received {0}\", Event Player.DamageReceived), Left, 1.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Null, Custom String(\"Healing Dealt: {0}\", Event Player.HealingDealt), Left, 2.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Null, Custom String(\"Healing Received: {0}\", Event Player.HealingDealt), Left, 3.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "value": "Create HUD Text(Event Player,Null, Null, Custom String(\"Damage Dealt: {0}\", Event Player.DamageDealt), Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Hero Icon String(Hero()), Custom String(\"Damage Received {0}\", Event Player.DamageReceived), Left, 1.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Null, Custom String(\"Healing Dealt: {0}\", Event Player.HealingDealt), Left, 2.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Null, Custom String(\"Healing Received: {0}\", Event Player.HealingDealt), Left, 3.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
           "connections": [
             1188
           ],
@@ -2600,7 +2602,7 @@
         {
           "ID": 2719,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Hero(Soldier: 76)",
+          "value": "Hero()",
           "connections": [
             2721
           ],
@@ -2624,7 +2626,7 @@
       "x": -843.0,
       "y": 313.0,
       "extraData": [
-        "Hero:Soldier: 76"
+        "Hero:"
       ],
       "inputPins": [],
       "outputPins": [

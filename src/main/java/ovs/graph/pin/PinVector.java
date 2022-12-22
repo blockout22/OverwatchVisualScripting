@@ -2,6 +2,7 @@ package ovs.graph.pin;
 
 import imgui.ImGui;
 import imgui.ImVec4;
+import ovs.ClipboardContents;
 import ovs.graph.PinData;
 
 public class PinVector extends Pin{
@@ -43,5 +44,33 @@ public class PinVector extends Pin{
         vec3Float[0] = x;
         vec3Float[1] = y;
         vec3Float[2] = z;
+    }
+
+    @Override
+    public void contextMenu() {
+        if(ImGui.menuItem("Copy")){
+            ClipboardContents.set("Vector(" + vec3Float[0] + ", " + vec3Float[1] + ", " + vec3Float[2] + ")");
+        }
+
+        if(ImGui.menuItem("Paste")){
+            String clipboard = ClipboardContents.get();
+            if(clipboard != null){
+                if(clipboard.startsWith("Vector")){
+                    try {
+                        float x = Float.valueOf(clipboard.substring("Vector(".length(), clipboard.length() - 1).replace(" ", "").split(",")[0]);
+                        float y = Float.valueOf(clipboard.substring("Vector(".length(), clipboard.length() - 1).replace(" ", "").split(",")[1]);
+                        float z = Float.valueOf(clipboard.substring("Vector(".length(), clipboard.length() - 1).replace(" ", "").split(",")[2]);
+
+                        data.getValue().set(x, y, z, 0);
+                        vec3Float[0] = x;
+                        vec3Float[1] = y;
+                        vec3Float[2] = z;
+
+                    }catch (ArrayIndexOutOfBoundsException e){
+
+                    }
+                }
+            }
+        }
     }
 }

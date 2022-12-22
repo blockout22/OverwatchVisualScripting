@@ -2,7 +2,7 @@ package ovs;
 
 import org.lwjgl.opengl.GL11;
 
-import java.io.File;
+import java.io.*;
 
 public class OwVS {
 
@@ -14,7 +14,7 @@ public class OwVS {
         if(!scripts.exists()){
             scripts.mkdir();
         }
-        window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting");
+        window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting | [Build: " + Global.BUILD + "]");
         imGuiWindow = new ImGuiWindow(window);
 
         while(!window.isCloseRequested())
@@ -30,6 +30,71 @@ public class OwVS {
     }
 
     public static void main(String[] args) {
+        boolean inDevMode = false;
+        for(String arg : args){
+            if(arg.equals("dev")){
+                inDevMode = true;
+                File file = new File("src/main/resources/build");
+                System.out.println(file.getAbsolutePath());
+                try {
+
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+
+                    int build = 1;
+                    String line;
+                    while((line = br.readLine()) != null){
+                        try{
+                            build = Integer.valueOf(line);
+                            break;
+                        }catch (NumberFormatException e){
+
+                        }
+                    }
+
+                    br.close();
+
+                    if(build == 0){
+                        System.out.println(")");
+                        return;
+                    }
+
+                    build++;
+
+                    PrintWriter pw = new PrintWriter(file);
+                    pw.write("" + build);
+                    pw.flush();
+                    pw.close();
+
+                    Global.BUILD = build;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if(!inDevMode){
+            try {
+                InputStream stream = OwVS.class.getClassLoader().getResourceAsStream("build");
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+
+                int build = 1;
+                String line;
+                while ((line = br.readLine()) != null) {
+                    try {
+                        build = Integer.valueOf(line);
+                        break;
+                    } catch (NumberFormatException e) {
+
+                    }
+                }
+
+                br.close();
+
+                Global.BUILD = build;
+            }catch (Exception e){}
+        }
+
         new OwVS();
     }
 }

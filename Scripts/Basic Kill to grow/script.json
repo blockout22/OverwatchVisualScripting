@@ -5,6 +5,8 @@
     "maxT1Players": 7,
     "maxT2Players": 2,
     "maxFFAPlayers": 9,
+    "mapRotation": 0,
+    "returnToLobby": 0,
     "assaultMode": false,
     "controlMode": true,
     "escortMode": false,
@@ -448,10 +450,8 @@
         {
           "ID": 5149,
           "type": "ovs.graph.pin.PinIf",
-          "value": "Is Assembling Heroes \u003d\u003d True",
-          "connections": [
-            5153
-          ],
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -461,45 +461,6 @@
           "type": "ovs.graph.pin.PinCondition",
           "connections": [
             3393
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeIfCompare",
-      "nodeName": "If Compare",
-      "x": 1400.0,
-      "y": 1129.0,
-      "extraData": [
-        "Compare:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 5151,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Is Assembling Heroes",
-          "connections": [
-            3401
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 5152,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "True",
-          "connections": [
-            3403
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 5153,
-          "type": "ovs.graph.pin.PinIf",
-          "connections": [
-            5149
           ],
           "canDelete": false
         }
@@ -656,9 +617,7 @@
         {
           "ID": 1819,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5473
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1201,9 +1160,7 @@
         {
           "ID": 1509,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5472
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1496,7 +1453,7 @@
         {
           "ID": 1804,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Start Scaling Player(Event Player, Event Player.Scale, true);\nEvent Player.Scale \u003d Event Player.Scale + 0.1;\nIf(Event Player.Scale \u003e\u003d Global.TargetScale);\nCreate HUD Text(All Players(All Teams),Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nWait(10.0, Ignore Condition);\nRestart Match;\nEnd;\n",
+          "value": "Start Scaling Player(Event Player, Event Player.Scale, true);\nEvent Player.Scale \u003d Event Player.Scale + 0.1;\nIf();\nCreate HUD Text(All Players(All Teams),Null, Custom String(\"{0} has won! Restarting...\", Event Player), Null, Top, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nWait(10.0, Ignore Condition);\nRestart Match;\nElse;\n\nEnd;\n",
           "connections": [
             1806
           ],
@@ -1566,7 +1523,7 @@
         {
           "ID": 3391,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "Is In Setup \u003d\u003d True;",
+          "value": ";",
           "connections": [
             5145
           ],
@@ -1599,7 +1556,7 @@
         {
           "ID": 3393,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "Is Assembling Heroes \u003d\u003d True;",
+          "value": ";",
           "connections": [
             5150
           ],
@@ -1628,9 +1585,7 @@
         {
           "ID": 3401,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5151
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1654,9 +1609,7 @@
         {
           "ID": 3403,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5152
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1680,9 +1633,7 @@
         {
           "ID": 3405,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5147
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1698,9 +1649,7 @@
         {
           "ID": 3406,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            5146
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -1769,10 +1718,8 @@
         {
           "ID": 3575,
           "type": "ovs.graph.pin.PinIf",
-          "value": "Event Player.Scale \u003e\u003d Global.TargetScale",
-          "connections": [
-            5474
-          ],
+          "value": "",
+          "connections": [],
           "canDelete": false
         },
         {
@@ -1782,6 +1729,13 @@
           "connections": [
             1513
           ],
+          "canDelete": false
+        },
+        {
+          "ID": 2243,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1806,10 +1760,8 @@
         {
           "ID": 5144,
           "type": "ovs.graph.pin.PinIf",
-          "value": "Is In Setup \u003d\u003d True",
-          "connections": [
-            5148
-          ],
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1819,84 +1771,6 @@
           "type": "ovs.graph.pin.PinCondition",
           "connections": [
             3391
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeIfCompare",
-      "nodeName": "If Compare",
-      "x": 1496.0,
-      "y": 777.0,
-      "extraData": [
-        "Compare:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 5146,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Is In Setup",
-          "connections": [
-            3406
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 5147,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "True",
-          "connections": [
-            3405
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 5148,
-          "type": "ovs.graph.pin.PinIf",
-          "connections": [
-            5144
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeIfCompare",
-      "nodeName": "If Compare",
-      "x": 853.0,
-      "y": 377.0,
-      "extraData": [
-        "Compare:\u003e\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 5472,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Event Player.Scale",
-          "connections": [
-            1509
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 5473,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Global.TargetScale",
-          "connections": [
-            1819
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 5474,
-          "type": "ovs.graph.pin.PinIf",
-          "connections": [
-            3575
           ],
           "canDelete": false
         }

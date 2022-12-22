@@ -215,4 +215,8 @@ public abstract class Pin {
     public void setVisible(boolean visible) {
         isVisible = visible;
     }
+
+    public void contextMenu(){
+
+    }
 }

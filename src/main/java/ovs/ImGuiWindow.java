@@ -46,6 +46,7 @@ public class ImGuiWindow {
         ImGui.createContext();
 
         ImGuiIO io = ImGui.getIO();
+        io.setIniFilename(null);
         io.addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);
         io.addConfigFlags(ImGuiConfigFlags.DockingEnable);
         io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);

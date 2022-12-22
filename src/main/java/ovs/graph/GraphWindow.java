@@ -573,15 +573,18 @@ public class GraphWindow {
                         if(ImGui.isPopupOpen("pin_menu" + id)){
                             final int targetPin = ImGui.getStateStorage().getInt(ImGui.getID("node_pin_id"));
                             Pin pin = graph.findPinById(targetPin);
-                            if(pin.isCanDelete()){
-                                if(ImGui.beginPopup("pin_menu" + id)){
+                            if(ImGui.beginPopup("pin_menu" + id)){
+                                pin.contextMenu();
+                                if(pin.isCanDelete()){
+
                                     if(ImGui.menuItem("Delete Pin")){
                                         pin.getNode().removePinById(targetPin);
                                         ImGui.closeCurrentPopup();
                                     }
+
                                 }
-                                ImGui.endPopup();
                             }
+                            ImGui.endPopup();
                         }
 
                         final long nodeWithContextMenu = NodeEditor.getNodeWithContextMenu();
@@ -800,8 +803,7 @@ public class GraphWindow {
                         outputInFocus = true;
                         String compiledText = Textformatter.prettyPrint(Compiler.compile(graph, settings));
                         EDITOR.setText(compiledText);
-                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                        clipboard.setContents(new StringSelection(compiledText), null);
+                        ClipboardContents.set(compiledText);
                     }
                 }
             }
