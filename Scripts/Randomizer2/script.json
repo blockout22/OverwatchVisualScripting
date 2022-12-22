@@ -451,6 +451,640 @@
   ],
   "nodeSaves": [
     {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": -1650.0,
+      "y": -488.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3211,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Projectile Gravity {0}",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 3212,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.ProjectiveGravity",
+          "connections": [
+            3216
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3213,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 3214,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3215,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3204
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGetVariable",
+      "nodeName": "Get Variable",
+      "x": -1938.0,
+      "y": -471.0,
+      "extraData": [
+        "Var:Event Player.ProjectiveGravity"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3216,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3212
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": -1640.0,
+      "y": -257.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3217,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Projectile Speed {0}",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 3218,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.ProjectiveSpeed",
+          "connections": [
+            3222
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3219,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 3220,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3221,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3195
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCallSubroutine",
+      "nodeName": "Call Subroutine",
+      "x": 702.0,
+      "y": -1063.0,
+      "extraData": [
+        "Sub:SetPlayerStats"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3653,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3095
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCallSubroutine",
+      "nodeName": "Call Subroutine",
+      "x": 446.0,
+      "y": -1783.0,
+      "extraData": [
+        "Sub:SetPlayerStats"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3655,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3084
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 2328.0,
+      "y": -264.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Each Player",
+        "Team:All",
+        "Player:All",
+        "Sub:"
+      ],
+      "inputPins": [
+        {
+          "ID": 3890,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "Is Button Held(Event Player, Button(Jump)) \u003d\u003d True;",
+          "connections": [
+            3893
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3891,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Global.Test \u003d 1.0;\nChase Player Variable At Rate(Event Player, MaxHealth, 500.0, 1.0, Destination And Rate);\nCreate HUD Text(Event Player,Null, Custom String(\"{0}\", Event Player.MaxHealth), Null, Right, 50.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "connections": [
+            4143
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeToCondition",
+      "nodeName": "To Condition",
+      "x": 1950.0,
+      "y": -188.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3892,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Is Button Held(Event Player, Button(Jump)) \u003d\u003d True",
+          "connections": [
+            3896
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3893,
+          "type": "ovs.graph.pin.PinCondition",
+          "connections": [
+            3890
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCompare",
+      "nodeName": "Compare",
+      "x": 1720.0,
+      "y": -232.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 3894,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is Button Held(Event Player, Button(Jump))",
+          "connections": [
+            3899
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3895,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3896,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            3892
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsButtonDown",
+      "nodeName": "Is Button Down",
+      "x": 1544.0,
+      "y": -232.0,
+      "extraData": [
+        "Button:Jump"
+      ],
+      "inputPins": [
+        {
+          "ID": 3898,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            3900
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3899,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3894
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 1380.0,
+      "y": -192.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3900,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3898,
+            4145,
+            4404
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeActionList",
+      "nodeName": "Action List",
+      "x": 2240.0,
+      "y": -72.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4142,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            4161
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4144,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            4407
+          ],
+          "canDelete": true
+        },
+        {
+          "ID": 4159,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            4153
+          ],
+          "canDelete": true
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4143,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3891
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 2016.0,
+      "y": 131.0,
+      "extraData": [
+        "Location:Right"
+      ],
+      "inputPins": [
+        {
+          "ID": 4145,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            3900
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4146,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4147,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"{0}\", Event Player.MaxHealth)",
+          "connections": [
+            4158
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4148,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4149,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "50.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4150,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4151,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4152,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4153,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            4159
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 1726.0,
+      "y": 199.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4154,
+          "type": "ovs.graph.pin.PinString",
+          "value": "{0}",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4155,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player.MaxHealth",
+          "connections": [
+            4162
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4156,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4157,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4158,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4147
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetVariable",
+      "nodeName": "Set Variable",
+      "x": 1816.0,
+      "y": -104.0,
+      "extraData": [
+        "Var:Global.Test"
+      ],
+      "inputPins": [
+        {
+          "ID": 4160,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "1.0",
+          "connections": [
+            4723
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4161,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            4142
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGetVariable",
+      "nodeName": "Get Variable",
+      "x": 1660.0,
+      "y": 345.0,
+      "extraData": [
+        "Var:Event Player.MaxHealth"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 4162,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4155
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeChasePlayerVariableAtRate",
+      "nodeName": "Chase Player Variable At Rate",
+      "x": 1756.0,
+      "y": 1.0,
+      "extraData": [
+        "Var:Event Player.MaxHealth",
+        "Reeval:Destination And Rate"
+      ],
+      "inputPins": [
+        {
+          "ID": 4404,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            3900
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4405,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "500.0",
+          "connections": [
+            4721
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4406,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "1.0",
+          "connections": [
+            4723
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4407,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            4144
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": 1368.0,
+      "y": -65.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4720,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "500.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4721,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4405
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeFloat",
+      "nodeName": "Float",
+      "x": 1374.0,
+      "y": 31.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4722,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "1.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4723,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4160,
+            4406
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
       "className": "ovs.graph.node.NodeGetVariable",
       "nodeName": "Get Variable",
       "x": -1924.0,
@@ -1127,7 +1761,7 @@
         {
           "ID": 2962,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Null, Null, Left, 0.0, Custom Color(3.0, 96.0, 134.0, 3.0), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
+          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Null, Null, Left, 0.0, Custom Color(239.75543, 239.75543, 15.63622, 255.0), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
           "connections": [
             3045
           ],
@@ -1287,7 +1921,7 @@
         {
           "ID": 2973,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom Color(3.0, 96.0, 134.0, 3.0)",
+          "value": "Custom Color(239.75543, 239.75543, 15.63622, 255.0)",
           "connections": [
             3117
           ],
@@ -2828,34 +3462,34 @@
       "x": -1596.0,
       "y": -2044.0,
       "extraData": [
-        "Color:0.011764706,0.3764706,0.5254902,0.011764706"
+        "Color:0.9402174,0.9402174,0.06131851,1.0"
       ],
       "inputPins": [
         {
           "ID": 3113,
           "type": "ovs.graph.pin.PinVar",
-          "value": "3.0",
+          "value": "239.75543",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3114,
           "type": "ovs.graph.pin.PinVar",
-          "value": "96.0",
+          "value": "239.75543",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3115,
           "type": "ovs.graph.pin.PinVar",
-          "value": "134.0",
+          "value": "15.63622",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 3116,
           "type": "ovs.graph.pin.PinVar",
-          "value": "3.0",
+          "value": "255.0",
           "connections": [],
           "canDelete": false
         }
@@ -3874,164 +4508,6 @@
           "type": "ovs.graph.pin.PinAction",
           "connections": [
             3191
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -1650.0,
-      "y": -488.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 3211,
-          "type": "ovs.graph.pin.PinString",
-          "value": "Projectile Gravity {0}",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 3212,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Event Player.ProjectiveGravity",
-          "connections": [
-            3216
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 3213,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 3214,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 3215,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            3204
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeGetVariable",
-      "nodeName": "Get Variable",
-      "x": -1938.0,
-      "y": -471.0,
-      "extraData": [
-        "Var:Event Player.ProjectiveGravity"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 3216,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            3212
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCustomString",
-      "nodeName": "Custom String",
-      "x": -1640.0,
-      "y": -257.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 3217,
-          "type": "ovs.graph.pin.PinString",
-          "value": "Projectile Speed {0}",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 3218,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Event Player.ProjectiveSpeed",
-          "connections": [
-            3222
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 3219,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 3220,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 3221,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            3195
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCallSubroutine",
-      "nodeName": "Call Subroutine",
-      "x": 702.0,
-      "y": -1063.0,
-      "extraData": [
-        "Sub:SetPlayerStats"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 3653,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            3095
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCallSubroutine",
-      "nodeName": "Call Subroutine",
-      "x": 446.0,
-      "y": -1783.0,
-      "extraData": [
-        "Sub:SetPlayerStats"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 3655,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            3084
           ],
           "canDelete": false
         }
