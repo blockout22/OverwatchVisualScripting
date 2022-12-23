@@ -20,9 +20,6 @@ import ovs.graph.node.*;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

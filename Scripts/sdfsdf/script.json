@@ -1,0 +1,695 @@
+{
+  "saveSettings": {
+    "modeName": "",
+    "description": "",
+    "maxT1Players": 5,
+    "maxT2Players": 5,
+    "maxFFAPlayers": 0,
+    "mapRotation": 0,
+    "returnToLobby": 0,
+    "assaultMode": false,
+    "controlMode": false,
+    "escortMode": false,
+    "hybridMode": true,
+    "pushMode": false,
+    "bountyHunterMode": false,
+    "ctfMode": false,
+    "deathmatchMode": false,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false,
+    "extensionToggle": [
+      {
+        "name": "Beam Sounds",
+        "value": false
+      },
+      {
+        "name": "Beam Effects",
+        "value": false
+      },
+      {
+        "name": "Buff and Debuff Sounds",
+        "value": false
+      },
+      {
+        "name": "Buff Status Effects",
+        "value": false
+      },
+      {
+        "name": "Debuff Status Effects",
+        "value": false
+      },
+      {
+        "name": "Energy Explosion Effects",
+        "value": false
+      },
+      {
+        "name": "Play More Effects",
+        "value": false
+      },
+      {
+        "name": "Spawn More Dummy Bots",
+        "value": false
+      },
+      {
+        "name": "Explosion Sounds",
+        "value": false
+      },
+      {
+        "name": "Kinetic Explosion Effects",
+        "value": false
+      }
+    ],
+    "assaultSettings": {
+      "speedModifier": 100,
+      "compRules": false,
+      "MapToggle": [
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        }
+      ]
+    },
+    "controlSettings": {
+      "speedModifier": 100,
+      "compRules": false,
+      "validPoints": 0,
+      "scoreToWin": 2,
+      "scoringSpeedModifier": 100,
+      "MapToggle": [
+        {
+          "name": "Busan",
+          "value": true
+        },
+        {
+          "name": "Ilios",
+          "value": true
+        },
+        {
+          "name": "Lijiang Tower",
+          "value": true
+        },
+        {
+          "name": "Lijiang Tower Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Nepal",
+          "value": true
+        },
+        {
+          "name": "Oasis",
+          "value": true
+        }
+      ]
+    },
+    "escortSettings": {
+      "compRules": false,
+      "speedModifier": 100,
+      "MapToggle": [
+        {
+          "name": "Circuit Royal",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Junkertown",
+          "value": true
+        },
+        {
+          "name": "Rialto",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Shambali Monastery",
+          "value": true
+        },
+        {
+          "name": "Watchpoint: Gibraltar",
+          "value": true
+        }
+      ]
+    },
+    "hybridSettings": {
+      "speedModifier": 100,
+      "compRules": false,
+      "payloadSpeedModifier": 100,
+      "MapToggle": [
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": false
+        },
+        {
+          "name": "Eichenwalde",
+          "value": false
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": false
+        },
+        {
+          "name": "Hollywood",
+          "value": false
+        },
+        {
+          "name": "Hollywood Halloween",
+          "value": false
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": false
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": false
+        },
+        {
+          "name": "Midtown",
+          "value": false
+        },
+        {
+          "name": "Numbani",
+          "value": false
+        },
+        {
+          "name": "Paraíso",
+          "value": false
+        }
+      ]
+    },
+    "pushSettings": {
+      "compRules": false,
+      "pushSpeedModifier": 100,
+      "walkSpeedModifier": 100,
+      "MapToggle": [
+        {
+          "name": "Colossea",
+          "value": true
+        },
+        {
+          "name": "Esperança",
+          "value": true
+        },
+        {
+          "name": "new Queen Street",
+          "value": true
+        }
+      ]
+    },
+    "dmSettings": {
+      "GameLenthDM": 10,
+      "scoreToWinDM": 20,
+      "initRespawnDM": true,
+      "MapToggle": [
+        {
+          "name": "Black Forest",
+          "value": true
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": true
+        },
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": true
+        },
+        {
+          "name": "Castillo",
+          "value": true
+        },
+        {
+          "name": "Château",
+          "value": true
+        },
+        {
+          "name": "Château Guillard",
+          "value": true
+        },
+        {
+          "name": "Château Guillard Halloween",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": true
+        },
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Hollywood",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilois Well",
+          "value": true
+        },
+        {
+          "name": "Kanezaka",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Malevento",
+          "value": true
+        },
+        {
+          "name": "Necropolis",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Petra",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    }
+  },
+  "globalVariables": [],
+  "playerVariables": [],
+  "subroutines": [],
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 691.0,
+      "y": 347.0,
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All",
+        "Sub:"
+      ],
+      "inputPins": [
+        {
+          "ID": 1292,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1293,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create HUD Text(All Players(All Teams),Position Of(Host Player), Custom String(\"TEST TEST\"), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);",
+          "connections": [
+            1302
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 312.0,
+      "y": 412.0,
+      "extraData": [
+        "Location:Left"
+      ],
+      "inputPins": [
+        {
+          "ID": 1294,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Players(All Teams)",
+          "connections": [
+            1600
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1295,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Position Of(Host Player)",
+          "connections": [
+            1305
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1296,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"TEST TEST\")",
+          "connections": [
+            1607
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1297,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1298,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1299,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1300,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1301,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1302,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            1293
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodePositionOf",
+      "nodeName": "Position Of",
+      "x": 120.0,
+      "y": 495.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1304,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Host Player",
+          "connections": [
+            1602
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1305,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1295
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllPlayers",
+      "nodeName": "All Players",
+      "x": 92.0,
+      "y": 339.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1599,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Teams",
+          "connections": [
+            1601
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1600,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1294
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeTeam",
+      "nodeName": "Team",
+      "x": -63.0,
+      "y": 329.0,
+      "extraData": [
+        "Team:All Teams"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1601,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1599
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeHostPlayer",
+      "nodeName": "Host Player",
+      "x": -37.0,
+      "y": 496.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1602,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1304
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 40.0,
+      "y": 597.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1603,
+          "type": "ovs.graph.pin.PinString",
+          "value": "TEST TEST",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1604,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1605,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1606,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1607,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1296
+          ],
+          "canDelete": false
+        }
+      ]
+    }
+  ]
+}

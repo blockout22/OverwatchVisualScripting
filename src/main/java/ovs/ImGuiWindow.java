@@ -10,6 +10,7 @@ import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImInt;
 import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL13;
 import ovs.graph.GraphWindow;
 
 import java.io.File;
@@ -39,6 +40,8 @@ public class ImGuiWindow {
 
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
     private ImFont font;
+
+    Texture texture;
 
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
@@ -72,6 +75,12 @@ public class ImGuiWindow {
 
         imGuiGLFW.init(glfwWindow.getWindowID(), true);
         imGuiGl3.init("#version 150");
+
+        try {
+            texture = TextureLoader.loadTexture("blizzard_world.jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private byte[] loadFromResources(String name){
@@ -101,6 +110,11 @@ public class ImGuiWindow {
             ImGui.setNextWindowViewport(ImGui.getMainViewport().getID());
 
 //            ImGui.showDemoWindow();
+
+//            ImGui.image(texture.getId(), texture.getWidth(), texture.getHeight());
+//            float xPos = ImGui.getMousePosX() - ImGui.getWindowPosX();
+//            float yPos = ImGui.getMousePosY() - ImGui.getWindowPosY();
+//            System.out.println(Global.map(xPos, 0, texture.getWidth(), 0, 1));
 
 
             if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
@@ -284,6 +298,7 @@ public class ImGuiWindow {
     }
 
     public void close(){
+        texture.cleanup();
         ImNodes.destroyContext();
         ImGui.destroyContext();
     }
