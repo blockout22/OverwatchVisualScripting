@@ -37,7 +37,7 @@ public class Textformatter {
 
 
             //Handle Indent
-            if(line.startsWith("If")  || line.startsWith("Else If") || line.startsWith("Skip If") || line.startsWith("Else"))
+            if(line.startsWith("If")  || line.startsWith("Else If") || line.startsWith("Skip If") || line.startsWith("Else") || line.startsWith("While"))
             {
                 tabCount++;
             }

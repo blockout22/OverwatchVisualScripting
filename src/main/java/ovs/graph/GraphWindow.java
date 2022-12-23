@@ -553,10 +553,12 @@ public class GraphWindow {
                                 ImLong nodeID = new ImLong();
                                 if (NodeEditor.queryDeletedNode(nodeID)) {
                                     graph.removeNode((int) nodeID.get());
+                                    NodeEditor.deselectNode(nodeID.get());
                                     promptSave = true;
                                 }
 
                             }
+
                         }
                         NodeEditor.endDelete();
                         NodeEditor.suspend();
@@ -587,6 +589,7 @@ public class GraphWindow {
 
                         final long nodeWithContextMenu = NodeEditor.getNodeWithContextMenu();
                         if(nodeWithContextMenu != -1){
+                            NodeEditor.selectNode(nodeWithContextMenu, true);
                             ImGui.openPopup("node_menu" + id);
                             ImGui.getStateStorage().setInt(ImGui.getID("node_id"), (int)nodeWithContextMenu);
                         }

@@ -41,7 +41,7 @@ public class ImGuiWindow {
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
     private ImFont font;
 
-    Texture texture;
+//    Texture texture;
 
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
@@ -76,11 +76,11 @@ public class ImGuiWindow {
         imGuiGLFW.init(glfwWindow.getWindowID(), true);
         imGuiGl3.init("#version 150");
 
-        try {
-            texture = TextureLoader.loadTexture("blizzard_world.jpg");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            texture = TextureLoader.loadTexture("blizzard_world.jpg");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private byte[] loadFromResources(String name){
@@ -298,7 +298,7 @@ public class ImGuiWindow {
     }
 
     public void close(){
-        texture.cleanup();
+//        texture.cleanup();
         ImNodes.destroyContext();
         ImGui.destroyContext();
     }

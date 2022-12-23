@@ -4507,6 +4507,187 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeStartDamageOverTime",
+      "nodeName": "Start Damage Over Time",
+      "x": -40.0,
+      "y": 427.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 5399,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            5404
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 5400,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 5401,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 5402,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5403,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            5407
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": -44.0,
+      "y": 364.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 5404,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5399
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeWhile",
+      "nodeName": "While",
+      "x": 360.0,
+      "y": 344.0,
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 5405,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Players(All Teams)",
+          "connections": [
+            5410
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 5406,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Button(Ability 1)",
+          "connections": [
+            5411
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 5407,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Start Damage Over Time(Event Player, Null, 0, 0);",
+          "connections": [
+            5403
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5408,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllPlayers",
+      "nodeName": "All Players",
+      "x": 235.0,
+      "y": 271.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 5409,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Teams",
+          "connections": [
+            5412
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5410,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5405
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeButton",
+      "nodeName": "Button",
+      "x": 177.0,
+      "y": 377.0,
+      "extraData": [
+        "Button:Ability 1"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 5411,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5406
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeTeam",
+      "nodeName": "Team",
+      "x": 49.0,
+      "y": 249.0,
+      "extraData": [
+        "Team:All Teams"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 5412,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5409
+          ],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }
