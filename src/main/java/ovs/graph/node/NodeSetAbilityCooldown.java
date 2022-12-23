@@ -43,7 +43,7 @@ public class NodeSetAbilityCooldown extends Node{
 
         handlePinStringConnection(pinPlayer, playerData);
         handlePinStringConnection(pinButton, buttonData);
-        handlePinStringConnection(pinChargeCount, chargeData);
+        handlePinStringConnection(pinChargeCount, chargeData, "100");
 
         outputData.getValue().set("Set Ability Cooldown(" + playerData.getValue().get() + ", " + buttonData.getValue().get() + ", " + chargeData.getValue().get() + ");");
     }

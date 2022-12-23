@@ -3,32 +3,32 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetAbilityCharge extends Node{
+public class NodeSetFacing extends Node {
+
+    ComboBox relative = new ComboBox("To World", "To Player");
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinButton = new PinVar();
-    PinVar pinChargeCount = new PinVar();
+    PinVar pinDir = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeSetAbilityCharge(Graph graph) {
+    public NodeSetFacing(Graph graph) {
         super(graph);
-        setName("Set Ability Charge");
+        setName("Set Facing");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
 
-        pinButton.setNode(this);
-        pinButton.setName("Button");
-        addCustomInput(pinButton);
+        pinDir.setNode(this);
+        pinDir.setName("Direction");
+        addCustomInput(pinDir);
 
-        pinChargeCount.setNode(this);
-        pinChargeCount.setName("Charge Count");
-        addCustomInput(pinChargeCount);
+        relative.select(0);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -37,15 +37,13 @@ public class NodeSetAbilityCharge extends Node{
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> buttonData = pinButton.getData();
-        PinData<ImString> chargeData = pinChargeCount.getData();
+        PinData<ImString> dirData = pinDir.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(pinButton, buttonData);
-        handlePinStringConnection(pinChargeCount, chargeData, "100");
+        handlePinStringConnection(pinDir, dirData, "Vector(0, 0, 0)");
 
-        outputData.getValue().set("Set Ability Charge(" + playerData.getValue().get() + ", " + buttonData.getValue().get() + ", " + chargeData.getValue().get() + ");");
+        outputData.getValue().set("Set Facing(" + playerData.getValue().get() + ", " + dirData.getValue().get() + ", " + relative.getSelectedValue() + ");");
     }
 
     @Override
