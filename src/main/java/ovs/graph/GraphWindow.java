@@ -1,11 +1,14 @@
 package ovs.graph;
 
+import imgui.ImColor;
+import imgui.ImDrawList;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
+import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
 import imgui.flag.*;
 import imgui.type.ImBoolean;
@@ -99,6 +102,7 @@ public class GraphWindow {
         NodeEditorConfig config = new NodeEditorConfig();
         config.setSettingsFile(null);
         context = new NodeEditorContext(config);
+
 
         //Add Nodes to list (this will also auto-populate context menu)
         try {
@@ -359,6 +363,10 @@ public class GraphWindow {
 
                         ImGui.sameLine();
 
+                        ImVec2 headerMin = null;
+                        ImVec2 headerMax = null;
+
+                        float headerMaxY = 0;
                         NodeEditor.begin("Editor");
                         {
                             for (Node node : graph.getNodes().values()) {
@@ -372,6 +380,7 @@ public class GraphWindow {
                             }
 
                             for (Node node : graph.getNodes().values()) {
+                                float maxWidth = 0;
                                 NodeEditor.beginNode(node.getID());
                                 {
 
@@ -399,6 +408,11 @@ public class GraphWindow {
                                             node.isEditingTitle = true;
                                             editingNodeTitle = node;
                                         }
+                                    }
+
+                                    if(node.hasTitleBar()){
+                                        headerMin = ImGui.getItemRectMin();
+                                        headerMaxY = ImGui.getItemRectMaxY();
                                     }
 
                                     //Node Custom UI
@@ -472,9 +486,40 @@ public class GraphWindow {
                                             }
                                             ImGui.sameLine();
                                         }
+                                        if(maxWidth < NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x){
+                                            maxWidth = NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x;
+                                        }
                                     }
+
+//                                    if(maxWidth < node.width){
+//                                        maxWidth = node.width;
+//                                    }
+                                    headerMax = new ImVec2(NodeEditor.getNodePositionX(node.getID()) < 0 ? (NodeEditor.getNodeSizeX(node.getID()) + NodeEditor.getNodePositionX(node.getID())) - NodeEditor.getStyle().getNodePadding().x : maxWidth, headerMaxY);
+//                                    headerMax = new ImVec2(maxWidth, headerMaxY);
                                 }
                                 NodeEditor.endNode();
+
+                                //draw color ontop of titlebar
+                                if(ImGui.isItemVisible() && node.hasTitleBar()){
+                                    int alpha = (int) (ImGui.getStyle().getAlpha() * 255);
+
+                                    ImDrawList drawList = NodeEditor.getNodeBackgroundDrawList(node.getID());
+                                    float halfBorderWidth = NodeEditor.getStyle().getNodeBorderWidth() * 0.5f;
+
+                                    float uvX = (headerMax.x - headerMin.x) / (4.0f * 100);
+                                    float uvY = (headerMax.y - headerMin.y) / (4.0f * 100);
+
+                                    if ((headerMax.x > headerMin.x) && (headerMax.y > headerMin.y)) {
+                                        drawList.addRectFilled(headerMin.x - (8 - halfBorderWidth), headerMin.y - (8 - halfBorderWidth), headerMax.x + (8 - halfBorderWidth), headerMax.y + (0), ImColor.intToColor(node.getRed(), node.getGreen(), node.getBlue(), node.getAlpha()), NodeEditor.getStyle().getNodeRounding(), ImDrawFlags.RoundCornersTop);
+                                    }
+
+                                    ImVec2 headerSeparatorMin = new ImVec2(headerMin.x, headerMin.y);
+                                    ImVec2 headerSeparatorMax = new ImVec2(headerMax.x, headerMax.y);
+
+                                    if ((headerSeparatorMax.x > headerSeparatorMin.x) && (headerSeparatorMax.y > headerSeparatorMin.y)) {
+                                        drawList.addLine(headerMin.x - 8 - halfBorderWidth, headerMax.y, headerMax.x + (8 - halfBorderWidth), headerMax.y, ImColor.intToColor(node.getRed(), node.getGreen(), node.getBlue(), 96 * alpha / (3 * 255)), 1);
+                                    }
+                                }
 
                                 if (node.width == -1)
                                 {

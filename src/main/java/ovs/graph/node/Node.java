@@ -29,6 +29,11 @@ public abstract class Node {
     public float posX = 0;
     public float posY = 0;
 
+    private int Red = 255;
+    private int Green = 255;
+    private int Blue = 255;
+    private int Alpha = 45;
+
     public Node(Graph graph){
         this.self = this;
         this.graph = graph;
@@ -51,6 +56,19 @@ public abstract class Node {
         pin.setID(id);
         pin.setPinType(Pin.PinType.Output);
         outputPins.add(pin);
+    }
+
+    public void setColor(int red, int green, int blue){
+        this.Red = red;
+        this.Blue = blue;
+        this.Green = green;
+    }
+
+    public void setColor(int red, int green, int blue, int alpha){
+        this.Red = red;
+        this.Blue = blue;
+        this.Green = green;
+        this.Alpha = alpha;
     }
 
     public boolean removePinById(int id){
@@ -174,4 +192,36 @@ public abstract class Node {
     public abstract void execute();
     public abstract String getOutput();
     public abstract void UI();
+
+    public int getRed() {
+        return Red;
+    }
+
+    public void setRed(int red) {
+        Red = red;
+    }
+
+    public int getGreen() {
+        return Green;
+    }
+
+    public void setGreen(int green) {
+        Green = green;
+    }
+
+    public int getBlue() {
+        return Blue;
+    }
+
+    public void setBlue(int blue) {
+        Blue = blue;
+    }
+
+    public int getAlpha() {
+        return Alpha;
+    }
+
+    public void setAlpha(int alpha) {
+        Alpha = alpha;
+    }
 }

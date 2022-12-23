@@ -20,6 +20,7 @@ public class NodeSetVariable extends Node{
     public NodeSetVariable(Graph graph) {
         super(graph);
         setName("Set Variable");
+        setColor(0, 125, 255);
 
         inputPin.setNode(this);
         inputPin.setName("Value");

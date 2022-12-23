@@ -18,6 +18,7 @@ public class NodeGetVariable extends Node{
     public NodeGetVariable(Graph graph) {
         super(graph);
         setName("Get Variable");
+        setColor(0, 125, 255);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);

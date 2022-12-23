@@ -22,6 +22,7 @@ public class NodeCustomColor extends Node{
     public NodeCustomColor(Graph graph) {
         super(graph);
         setName("Custom Color");
+        setColor(213, 232, 0);
 
         pinRed.setNode(this);
         pinRed.setName("Red");

@@ -18,6 +18,7 @@ public class NodeCustomString extends Node{
     public NodeCustomString(Graph graph) {
         super(graph);
         setName("Custom String");
+        setColor(213, 232, 0);
 
         input.setNode(this);
         addCustomInput(input);

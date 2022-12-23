@@ -21,6 +21,7 @@ public class NodeCreateEffect extends Node{
     public NodeCreateEffect(Graph graph) {
         super(graph);
         setName("Create Effect");
+        setColor(255, 0, 0);
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Visible To");

@@ -19,6 +19,7 @@ public class NodeActionList extends Node{
     public NodeActionList(Graph graph) {
         super(graph);
         setName("Action List");
+        setColor(0, 255, 0);
 
         inputPin.setNode(this);
         addCustomInput(inputPin);

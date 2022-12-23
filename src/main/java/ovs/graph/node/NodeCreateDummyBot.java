@@ -19,6 +19,7 @@ public class NodeCreateDummyBot extends Node{
     public NodeCreateDummyBot(Graph graph) {
         super(graph);
         setName("Create Dummy Bot");
+        setColor(255, 0, 0);
 
         pinHero.setNode(this);
         pinHero.setName("Hero");

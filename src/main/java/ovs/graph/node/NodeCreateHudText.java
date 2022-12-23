@@ -31,6 +31,7 @@ public class NodeCreateHudText extends Node{
     public NodeCreateHudText(Graph graph) {
         super(graph);
         setName("Create Hud Text");
+        setColor(255, 0, 0);
 
         inputVisibleTo.setNode(this);
         inputVisibleTo.setName("Visible To");

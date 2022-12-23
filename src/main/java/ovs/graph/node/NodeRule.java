@@ -31,6 +31,7 @@ public class NodeRule extends Node{
     public NodeRule(Graph graph) {
         super(graph);
         setName("Rule");
+        setColor(0, 255, 0);
         canEditTitle = true;
 
         conditionPin.setNode(this);
