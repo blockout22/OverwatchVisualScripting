@@ -3,53 +3,42 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetInvisible extends Node {
-
-    ComboBox invisTo = new ComboBox("All", "Enemies", "None");
+public class NodeSetJumpEnabled extends Node {
 
     PinVar pinPlayer = new PinVar();
+    PinVar pinEnabled = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeSetInvisible(Graph graph) {
+    public NodeSetJumpEnabled(Graph graph) {
         super(graph);
-        setName("Set Invisible");
+        setName("Set Jump Enabled");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
+
+        pinEnabled.setNode(this);
+        pinEnabled.setName("Enabled");
+        addCustomInput(pinEnabled);
 
         output.setNode(this);
         addCustomOutput(output);
     }
 
     @Override
-    public void onSaved() {
-        getExtraSaveData().clear();
-        getExtraSaveData().add("Invisible:" + invisTo.getSelectedValue());
-    }
-
-    @Override
-    public void onLoaded() {
-        for(String data : getExtraSaveData()){
-            if(data.startsWith("Invisible")){
-                invisTo.selectValue(data.split(":")[1]);
-            }
-        }
-    }
-
-    @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
+        PinData<ImString> enabledData = pinEnabled.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
+        handlePinStringConnection(pinEnabled, enabledData, "True");
 
-        outputData.getValue().set("Set Invisible(" + playerData.getValue().get() + ", " + invisTo.getSelectedValue() + ");");
+        outputData.getValue().set("Set Jump Enabled(" + playerData.getValue().get() + ", " + enabledData.getValue().get() + ");");
     }
 
     @Override
@@ -60,7 +49,6 @@ public class NodeSetInvisible extends Node {
 
     @Override
     public void UI() {
-        invisTo.show();
 
     }
 }
