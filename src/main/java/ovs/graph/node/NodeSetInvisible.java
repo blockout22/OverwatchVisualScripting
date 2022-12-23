@@ -7,28 +7,21 @@ import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetFacing extends Node {
+public class NodeSetInvisible extends Node {
 
-    ComboBox relative = new ComboBox("To World", "To Player");
+    ComboBox invisTo = new ComboBox("All", "Enemies", "None");
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinDir = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeSetFacing(Graph graph) {
+    public NodeSetInvisible(Graph graph) {
         super(graph);
-        setName("Set Facing");
+        setName("Set Invisible");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
-
-        pinDir.setNode(this);
-        pinDir.setName("Direction");
-        addCustomInput(pinDir);
-
-        relative.select(0);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -37,14 +30,14 @@ public class NodeSetFacing extends Node {
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Relative:" + relative.getSelectedValue());
+        getExtraSaveData().add("Invisible:" + invisTo.getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
         for(String data : getExtraSaveData()){
-            if(data.startsWith("Relative")){
-                relative.selectValue(data.split(":")[1]);
+            if(data.startsWith("Invisible")){
+                invisTo.selectValue(data.split(":")[1]);
             }
         }
     }
@@ -52,13 +45,11 @@ public class NodeSetFacing extends Node {
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> dirData = pinDir.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(pinDir, dirData, "Vector(0, 0, 0)");
 
-        outputData.getValue().set("Set Facing(" + playerData.getValue().get() + ", " + dirData.getValue().get() + ", " + relative.getSelectedValue() + ");");
+        outputData.getValue().set("Set Invisible(" + playerData.getValue().get() + ", " + invisTo.getSelectedValue());
     }
 
     @Override
@@ -69,6 +60,7 @@ public class NodeSetFacing extends Node {
 
     @Override
     public void UI() {
-        relative.show();
+        invisTo.show();
+
     }
 }
