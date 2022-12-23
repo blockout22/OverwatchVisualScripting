@@ -7,7 +7,6 @@ import ovs.graph.pin.PinAction;
 
 public class NodePauseMatchTime extends Node{
 
-}
     PinAction output = new PinAction();
 
     public NodePauseMatchTime(Graph graph) {
