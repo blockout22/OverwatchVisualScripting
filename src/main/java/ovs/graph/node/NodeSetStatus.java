@@ -40,6 +40,21 @@ public class NodeSetStatus extends Node {
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Status:" + status.getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Status")){
+                status.selectValue(data.split(":")[1]);
+            }
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
         PinData<ImString> assisterData = pinAssister.getData();
@@ -61,6 +76,6 @@ public class NodeSetStatus extends Node {
 
     @Override
     public void UI() {
-
+        status.show();
     }
 }
