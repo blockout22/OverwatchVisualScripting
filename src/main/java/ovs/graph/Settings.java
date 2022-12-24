@@ -1,7 +1,6 @@
 package ovs.graph;
 
 import imgui.ImGui;
-import imgui.extension.nodeditor.NodeEditor;
 import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
@@ -82,10 +81,59 @@ public class Settings {
     public int[] scoreToWinBH = new int[]{20};
     public ImBoolean initRespawnOnOffBH = new ImBoolean(true);
 
+    public ImBoolean blitzFlagLocation = new ImBoolean(false);
+    public ImBoolean damageInterruptsFlagInteractions = new ImBoolean(false);
+    public ImInt flagCarrierAbilitiesSelection = new ImInt();
+    public String[] flagCarrierAbilitiesOptions = {"All", "None", "Restricted"};
+    public float[] flagDroppedLockTime = new float[]{5.0f};
+    public float[] flagPickupTime = new float[]{0.0f};
+    public float[] flagReturnTime = new float[]{4.0f};
+    public float[] flagScoreRespawnTime = new float[]{15.0f};
+    public int[] gameTimeCTF = new int[] {10};
+    public float[] respawnSpeedBuffDuration = new float[]{0.0f};
+    public int[] scoreToWinCtf = new int[] {3};
+    public ImBoolean teamNeedsFlagAtBaseToScore = new ImBoolean(false);
+
+
     //DeathMatch settings
     public int[] gameTimeDM = new int[] {10};
     public int[] scoreToWinDM = new int[] {20};
     public ImBoolean initRespawnOnOffDM = new ImBoolean(true);
+
+    //Elimination Settings
+    public int[] heroSelectionTime = new int[]{20};
+    public int[] scoreToWinElim = new int[]{3};
+    public ImInt restrictPreviouslyUsedHeroElimSelection = new ImInt();
+    public String[] restrictPreviouslyUsedHeroElimOptions = {"Off", "After Round Won", "After Round Played"};
+    public ImInt heroSelectionElimSelection = new ImInt();
+    public String[] heroSelectionElimOptions = {"Any", "Limited", "Random", "Random Mirrored"};
+    public ImInt limitedChoicePoolElimSelection = new ImInt();
+    public String[] limitedChoicePoolElimOptions = {"Team Size", "Team Size +1", "Team Size +2", "Team Size +3"};
+    public ImBoolean captureObjectiveTiebreakerElim = new ImBoolean(true);
+    public int[] tiebreakerAfterMatchTimeElapsedElim = new int[]{105};
+    public int[] timeToCapture = new int[]{3};
+    public int[] drawAfterMatchTimeElapsedWithNoTiebreakerElim = new int[]{135};
+    public ImBoolean revealHeroesElim = new ImBoolean(false);
+    public int[] revealHeroesAfterMatchTimeElapsedElim = new int[]{75};
+
+    //Team Deathmatch Settings
+    public int[] gameTimeTDM = new int[]{10};
+    public ImBoolean mercyResCounteractsKillsTDM = new ImBoolean(true);
+    public int[] scoreToWinTDM = new int[]{30};
+    public ImBoolean initRespawnOnOfTDM = new ImBoolean(true);
+    public ImBoolean imbalancedTeamScoreToWinTDM = new ImBoolean(false);
+    public int[] team1ScoreToWinTDM = new int[]{30};
+    public int[] team2ScoreToWinTDM = new int[]{30};
+
+    //Practise Range Settings
+    public ImBoolean spawnTrainingBots = new ImBoolean(true);
+    public int[] trainingBotRespawnTimeScaler = new int[]{100};
+    public ImBoolean trainingPartner = new ImBoolean(true);
+
+    //Skirmish Settings
+    public ImInt skirmishValidControlPointsSelection = new ImInt();
+    public String[] skirmishValidControlPointsOptions = {"All", "First", "Second", "Third"};
+
     //Maps Toggle
     public ArrayList<BoolInfoWithName> assaultMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> controlMap = new ArrayList<>();
@@ -93,7 +141,11 @@ public class Settings {
     public ArrayList<BoolInfoWithName> hybridMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> pushMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> bhMap = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> ctfMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> dmMap = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> elimMap = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> teamDmMap = new ArrayList<>();
+    public ArrayList<BoolInfoWithName> skirmishMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> extensionBools = new ArrayList<>();
 
     public Settings(){
@@ -137,6 +189,25 @@ public class Settings {
         pushMap.add(new BoolInfoWithName("Esperança", new ImBoolean(true)));
         pushMap.add(new BoolInfoWithName("new Queen Street", new ImBoolean(true)));
 
+        ctfMap.add(new BoolInfoWithName("Ayutthaya", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Busan Downtown Lunar New Year", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Busan Sanctuary Lunar New Year", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Ilios Lighthouse", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Ilios Ruins", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Ilios Well", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Control Center", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Control Center Lunar New Year", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Garden", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Garden Lunar New Year", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Night Market", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Lijiang Night Market Lunar New Year", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Nepal Sanctum", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Nepal Shrine", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Nepal Village", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Oasis City Center", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Oasis Gardens", new ImBoolean(true)));
+        ctfMap.add(new BoolInfoWithName("Oasis University ", new ImBoolean(true)));
+
         dmMap.add(new BoolInfoWithName("Black Forest", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Black Forest Winter", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Blizzard World", new ImBoolean(true)));
@@ -156,7 +227,7 @@ public class Settings {
         dmMap.add(new BoolInfoWithName("Horizon Lunar Colony", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Ilios Lighthouse", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Ilios Ruins", new ImBoolean(true)));
-        dmMap.add(new BoolInfoWithName("Ilois Well", new ImBoolean(true)));
+        dmMap.add(new BoolInfoWithName("Ilios Well", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("Kanezaka", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("King's Row", new ImBoolean(true)));
         dmMap.add(new BoolInfoWithName("King's Row Winter", new ImBoolean(true)));
@@ -190,6 +261,79 @@ public class Settings {
         for (int i = 0; i < dmMap.size(); i++) {
             bhMap.add(new BoolInfoWithName(dmMap.get(i).name, new ImBoolean(true)));
         }
+
+        elimMap.add(new BoolInfoWithName("Ayutthaya", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Black Forest", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Black Forest Winter", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Castillo", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Ecopoint: Antarctica", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Ecopoint: Antarctica Winter", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Ilios Lighthouse", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Ilios Ruins", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Ilios Well", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Control Center", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Control Center Lunar New Year", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Garden", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Lunar New Year", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Night Market", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Lijiang Night Market Lunar New Year", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Necropolis", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Nepal Sanctum", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Nepal Shrine", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Nepal Village", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Oasis City Center", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Oasis Gardens", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Oasis University", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Chamber", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Expanse", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Expanse Night", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Green Screen", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
+        elimMap.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
+
+        for (int i = 0; i < dmMap.size(); i++) {
+            teamDmMap.add(new BoolInfoWithName(dmMap.get(i).name, new ImBoolean(true)));
+        }
+
+        skirmishMap.add(new BoolInfoWithName("Blizzard World", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Blizzard World Winter", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Busan", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Circuit Royal", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Colosseo", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Dorado", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Eichenwalde", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Eichenwalde Halloween", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Esperança", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Hanamura", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Hanamura Winter", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Havana", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Hollywood", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Hollywood Halloween", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Horizon Lunar Colony", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Ilios", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Junkertown", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("King's Row", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("King's Row Winter", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Lijiang Tower", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Lijiang Tower Lunar New Year", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Nepal", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("New Queen Street", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Numbani", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Oasis", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Paraíso", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Paris", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Rialto", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Route 66", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Shambali Monastery", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Temple of Anubis", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Volskaya Industries", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Watchpoint: Gibraltar", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Chamber", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Expanse", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Expanse Night", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Green Screen", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
+        skirmishMap.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
 
         extensionBools.add(new BoolInfoWithName("Beam Sounds", new ImBoolean(false)));
         extensionBools.add(new BoolInfoWithName("Beam Effects", new ImBoolean(false)));
@@ -292,10 +436,10 @@ public class Settings {
             ImGui.checkbox("##CTF", ctfOnOff);
             ImGui.sameLine();
             ImGui.text("CTF");
-//        ImGui.sameLine();
-//        if(ImGui.button("CTF Options")){
-//            ImGui.openPopup("Ctf_options");
-//        }
+            ImGui.sameLine();
+            if(ImGui.button("CTF Options")){
+                ImGui.openPopup("Ctf_options");
+            }
             ImGui.checkbox("##DeathMatch", deathmatchOnOff);
             ImGui.sameLine();
             ImGui.text("DeathMatch");
@@ -306,31 +450,31 @@ public class Settings {
             ImGui.checkbox("##Elimination", eliminationOnOff);
             ImGui.sameLine();
             ImGui.text("Elimination");
-//        ImGui.sameLine();
-//        if(ImGui.button("Elimination Options")){
-//            ImGui.openPopup("Elimination_options");
-//        }
+            ImGui.sameLine();
+            if(ImGui.button("Elimination Options")){
+                ImGui.openPopup("Elimination_options");
+            }
             ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
             ImGui.sameLine();
             ImGui.text("Team DeathMatch");
-//        ImGui.sameLine();
-//        if(ImGui.button("Team DeathMatch Options")){
-//            ImGui.openPopup("Teamdeathmatch_options");
-//        }
+            ImGui.sameLine();
+            if(ImGui.button("Team DeathMatch Options")){
+                ImGui.openPopup("Teamdeathmatch_options");
+            }
             ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
             ImGui.sameLine();
             ImGui.text("Practice Range");
-//        ImGui.sameLine();
-//        if(ImGui.button("Practice Range Options")){
-//            ImGui.openPopup("Practicerange_options");
-//        }
+            ImGui.sameLine();
+            if(ImGui.button("Practice Range Options")){
+                ImGui.openPopup("Practicerange_options");
+            }
             ImGui.checkbox("##Skirmish", skirmishOnOff);
             ImGui.sameLine();
             ImGui.text("Skirmish");
-//            ImGui.sameLine();
-//        if(ImGui.button("Skirmish Options")){
-//            ImGui.openPopup("Skirmish_options");
-//        }
+                ImGui.sameLine();
+            if(ImGui.button("Skirmish Options")){
+                ImGui.openPopup("Skirmish_options");
+            }
         }
 
         ImGui.popItemWidth();
@@ -549,7 +693,50 @@ public class Settings {
             }
         }
 
-        //Deatch Match options popup
+        if(ImGui.isPopupOpen("Ctf_options"))
+        {
+            if(ImGui.beginPopup("Ctf_options")){
+
+                ImGui.checkbox("##BlitzFlagLocation", blitzFlagLocation);
+                ImGui.sameLine();
+                ImGui.text("Blitz Flag Location");
+                ImGui.checkbox("##DamageInterruptsFlagInteraction", damageInterruptsFlagInteractions);
+                ImGui.sameLine();
+                ImGui.text("Damage Interrupts Flag Interactions");
+                ImGui.combo("##FlagCarrierAbilities", flagCarrierAbilitiesSelection, flagCarrierAbilitiesOptions);
+                ImGui.sameLine();
+                ImGui.text("Flag Carrier Abilities");
+                ImGui.sliderFloat("##FlagDroppedLockTime", flagDroppedLockTime, 0.0f, 10.0f);
+                ImGui.sameLine();
+                ImGui.text("Flag Dropped Lock Time");
+                ImGui.sliderFloat("##FlagPickupTime", flagPickupTime, 0.0f, 5.0f);
+                ImGui.sameLine();
+                ImGui.text("Flag Pickup Time");
+                ImGui.sliderFloat("##FlagReturnTime", flagReturnTime, 0.0f, 5.0f);
+                ImGui.sameLine();
+                ImGui.text("Flag Return Time");
+                ImGui.sliderFloat("##FlagScoreRespawnTime", flagScoreRespawnTime, 0.0f, 20.0f);
+                ImGui.sameLine();
+                ImGui.text("Flag Score Respawn Time");
+                ImGui.sliderInt("##GameTimeCtf", gameTimeCTF, 5, 15);
+                ImGui.sameLine();
+                ImGui.text("Game Time");
+                ImGui.sliderFloat("##RespawnSpeedBuffDuration", respawnSpeedBuffDuration, 0, 60);
+                ImGui.sameLine();
+                ImGui.text("Respawn Speed Buff Duration");
+                ImGui.sliderInt("##ScoreToWinCtf", scoreToWinCtf, 1, 9);
+                ImGui.sameLine();
+                ImGui.text("Score To Win");
+                ImGui.checkbox("##TeamNeedsFlagAtBaseToScore", teamNeedsFlagAtBaseToScore);
+                ImGui.sameLine();
+                ImGui.text("Team Needs Flag At Base To Score");
+
+                showMapToggle(ctfMap);
+                ImGui.endPopup();
+            }
+        }
+
+        //Death Match options popup
         if(ImGui.isPopupOpen("Deathmatch_options")){
             if(ImGui.beginPopup("Deathmatch_options")){
                 ImGui.text("Game Time");
@@ -582,6 +769,105 @@ public class Settings {
                     ImGui.sameLine();
                     ImGui.text(biwn.name);
                 }
+                ImGui.endPopup();
+            }
+        }
+
+        //Elimination Options
+        if(ImGui.isPopupOpen("Elimination_options")){
+            if(ImGui.beginPopup("Elimination_options")){
+                ImGui.sliderInt("##HeroSelectionTime", heroSelectionTime, 20, 60);
+                ImGui.sameLine();
+                ImGui.text("Hero Selection Time");
+                ImGui.sliderInt("##ScoreToWinElim", scoreToWinElim, 1, 9);
+                ImGui.sameLine();
+                ImGui.text("Score To Win");
+                ImGui.combo("##RescrictPrevUsedHeroElim", restrictPreviouslyUsedHeroElimSelection, restrictPreviouslyUsedHeroElimOptions);
+                ImGui.sameLine();
+                ImGui.text("Restrict Previously Used Hero");
+                ImGui.combo("##HeroSelectionElim", heroSelectionElimSelection, heroSelectionElimOptions);
+                ImGui.sameLine();
+                ImGui.text("Hero Selection");
+                ImGui.combo("##LimitedChoicePoolElim", limitedChoicePoolElimSelection, limitedChoicePoolElimOptions);
+                ImGui.sameLine();
+                ImGui.text("Limited Choice Pool");
+                ImGui.checkbox("##CaptureObjectiveTiebreakerElim", captureObjectiveTiebreakerElim);
+                ImGui.sameLine();
+                ImGui.text("Capture Objective Tiebreaker");
+                ImGui.sliderInt("##TiebreakerAfterMatchTimeElapsedElim", tiebreakerAfterMatchTimeElapsedElim, 30, 300);
+                ImGui.sameLine();
+                ImGui.text("Tiebreaker After Match Time Elapsed");
+                ImGui.sliderInt("##TimeToCaptureElim", timeToCapture, 1, 7);
+                ImGui.sameLine();
+                ImGui.text("Time To Capture");
+                ImGui.sliderInt("##DrawAfterMatchTimeElapsedWithNoTiebreakerElim", drawAfterMatchTimeElapsedWithNoTiebreakerElim, 60, 300);
+                ImGui.sameLine();
+                ImGui.text("Draw After Match Time Elapsed With No Tiebreaker");
+                ImGui.checkbox("##RevealHeroesElim", revealHeroesElim);
+                ImGui.sameLine();
+                ImGui.text("Reveal Heroes");
+                ImGui.sliderInt("##RevealHeroesAfterMatchTimeElapsedElim", revealHeroesAfterMatchTimeElapsedElim, 0, 180);
+
+                showMapToggle(elimMap);
+
+                ImGui.endPopup();
+            }
+        }
+
+        if(ImGui.isPopupOpen("Teamdeathmatch_options")){
+            if(ImGui.beginPopup("Teamdeathmatch_options")){
+                ImGui.sliderInt("##gameTimeTDM", gameTimeTDM, 5, 15);
+                ImGui.sameLine();
+                ImGui.text("Game Time");
+                ImGui.checkbox("##mercyResCounteractsKillsTDM", mercyResCounteractsKillsTDM);
+                ImGui.sameLine();
+                ImGui.text("Mercy Resurrect Counteracts Kills");
+                ImGui.sliderInt("##scoreToWinTDM", scoreToWinTDM, 1, 200);
+                ImGui.sameLine();
+                ImGui.text("Score To Win");
+                ImGui.checkbox("##selfInitRespawnTDM", initRespawnOnOfTDM);
+                ImGui.sameLine();
+                ImGui.text("Self Initiated Respawn");
+                ImGui.checkbox("##imbalancedTeamScoreToWinTDM", imbalancedTeamScoreToWinTDM);
+                ImGui.sameLine();
+                ImGui.text("Imbalanced Team Score To Win");
+                ImGui.sliderInt("##team1ScoreToWinTDM", team1ScoreToWinTDM, 1, 200);
+                ImGui.sameLine();
+                ImGui.text("Team 1 Score To Win");
+                ImGui.sliderInt("##team2ScoreToWinTDM", team2ScoreToWinTDM, 1, 200);
+                ImGui.sameLine();
+                ImGui.text("Team 2 Score To Win");
+
+                showMapToggle(teamDmMap);
+
+                ImGui.endPopup();
+            }
+        }
+
+        if(ImGui.isPopupOpen("Practicerange_options")){
+            if(ImGui.beginPopup("Practicerange_options")){
+                ImGui.checkbox("##SpawnTrainingBots", spawnTrainingBots);
+                ImGui.sameLine();
+                ImGui.text("Spawn Training Bots");
+                ImGui.sliderInt("##trainingBotRespawnTimeScaler", trainingBotRespawnTimeScaler, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Training Bot Respawn Time Scaler");
+                ImGui.checkbox("##trainingPartner", trainingPartner);
+                ImGui.sameLine();
+                ImGui.text("Training Partner");
+
+                ImGui.endPopup();
+            }
+        }
+
+        if(ImGui.isPopupOpen("Skirmish_options")){
+            if(ImGui.beginPopup("Skirmish_options")){
+                ImGui.combo("##LimitValidControlsPointsSkirmish", skirmishValidControlPointsSelection, skirmishValidControlPointsOptions);
+                ImGui.sameLine();
+                ImGui.text("Limit Valid Control Points");
+
+                showMapToggle(skirmishMap);
+
                 ImGui.endPopup();
             }
         }
@@ -778,6 +1064,22 @@ public class Settings {
 
             if(ctfOnOff.get()){
                 output += "Capture the Flag\n";
+                output += "{\n";
+
+                output += "Blitz Flag Locations: " + (blitzFlagLocation.get() ? "On" : "Off") + "\n";
+                output += "Damage Interrupts Flag Interaction: " + (damageInterruptsFlagInteractions.get() ? "On" : "Off") + "\n";
+                output += "Flag Dropped Lock Time:" + flagDroppedLockTime[0] + "\n";
+                output += "Flag Pickup Time:" + flagPickupTime[0] + "\n";
+                output += "Flag Return Time:" + flagReturnTime[0] + "\n";
+                output += "Flag Score Respawn Time:" + flagScoreRespawnTime[0] + "\n";
+                output += "Game Length Minutes:" + gameTimeCTF[0] + "\n";
+                output += "Respawn Speed Buff Duration:" + respawnSpeedBuffDuration[0] + "\n";
+                output += "Score To Win:" + scoreToWinCtf[0] + "\n";
+                output += "Team Needs Flag At Base To Score:" + (teamNeedsFlagAtBaseToScore.get() ? "On" : "Off") + "\n";
+
+                output += getMapOutput(ctfMap);
+
+                output += "}\n";
             }
 
             if(deathmatchOnOff.get()){
@@ -822,18 +1124,64 @@ public class Settings {
 
             if(eliminationOnOff.get()) {
                 output += "Elimination\n";
+                output += "{\n";
+
+                output += "Capture Objective Tiebreaker: " + (captureObjectiveTiebreakerElim.get() ? "On" : "Off") + "\n";
+                output += "Draw After Match Time Elapsed With No Tiebreaker: " + drawAfterMatchTimeElapsedWithNoTiebreakerElim[0] + "\n";
+                output += "Hero Selection: " + heroSelectionElimOptions[heroSelectionElimSelection.get()] + "\n";
+                output += "Hero Selection Time: " + heroSelectionTime[0] + "\n";
+                output += "Limited Choice Pool: " + limitedChoicePoolElimOptions[limitedChoicePoolElimSelection.get()] + "\n";
+                output += "Restrict Previously Used Heroes: " + restrictPreviouslyUsedHeroElimOptions[restrictPreviouslyUsedHeroElimSelection.get()] + "\n";
+                output += "Reveal Heroes: " + (revealHeroesElim.get() ? "On" : "Off") + "\n";
+                output += "Reveal Heroes After Match Time Elapsed: " + revealHeroesAfterMatchTimeElapsedElim[0] + "\n";
+                output += "Score To Win: " + scoreToWinElim[0] + "\n";
+                output += "Tiebreaker After Match Time Elapsed: " + tiebreakerAfterMatchTimeElapsedElim[0] + "\n";
+                output += "Time To Capture: " + timeToCapture[0] + "\n";
+
+                output += getMapOutput(elimMap);
+
+                output += "}\n";
             }
 
             if(teamDeathmatchOnOff.get()){
                 output += "Team Deathmatch\n";
+
+                output += "{\n";
+
+                output += "Game Length In Minutes: " + gameTimeTDM[0] + "\n";
+                output += "Imbalanced Team Score To Win: " + (imbalancedTeamScoreToWinTDM.get() ? "On" : "Off") + "\n";
+                output += "Mercy Resurrect Counteracts Kills: " + (mercyResCounteractsKillsTDM.get() ? "On" : "Off") + "\n";
+                output += "Score To Win: " + scoreToWinTDM[0] + "\n";
+                output += "Self Initiated Respawn: " + (initRespawnOnOfTDM.get() ? "On" : "Off") + "\n";
+                output += "Team 1 Score To Win: " + team1ScoreToWinTDM[0] + "\n";
+                output += "Team 2 Score To Win: " + team2ScoreToWinTDM[0] + "\n";
+
+                output += getMapOutput(teamDmMap);
+                output += "}\n";
             }
 
             if(practiceRangeOnOff.get()){
                 output += "Practice Range\n";
+
+                output += "{\n";
+
+                output += "Spawn Training Bots: " + (spawnTrainingBots.get() ? "On" : "Off") + "\n";
+                output += "Training Bot Respawn Time Scalar: " + trainingBotRespawnTimeScaler[0] + "%\n";
+                output += "Training Partner: " + (trainingPartner.get() ? "On" : "Off") + "\n";
+
+                output += "}\n";
             }
 
             if(skirmishOnOff.get()){
                 output += "Skirmish\n";
+
+                output += "{\n";
+
+                output += "Limit Valid Control Points: " + skirmishValidControlPointsOptions[skirmishValidControlPointsSelection.get()] + "\n";
+
+                output += getMapOutput(skirmishMap);
+
+                output += "}\n";
             }
 
 

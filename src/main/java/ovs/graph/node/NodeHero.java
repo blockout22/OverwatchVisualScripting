@@ -37,7 +37,11 @@ public class NodeHero extends Node{
     public void onLoaded() {
         for(String data : getExtraSaveData()){
             if(data.startsWith("Hero")){
-                heroes.selectValue(data.split(":")[1]);
+                try {
+                    heroes.selectValue(data.split(":")[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    heroes.select(0);
+                }
             }
         }
     }
