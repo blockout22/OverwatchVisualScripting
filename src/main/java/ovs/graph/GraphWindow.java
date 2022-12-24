@@ -84,6 +84,13 @@ public class GraphWindow {
 
     private UndoHandler undoHandler = new UndoHandler();
 
+    private ImVec2 headerMin = null;
+    private ImVec2 headerMax = null;
+    private ImVec2 headerSeparatorMin = new ImVec2();
+    private ImVec2 headerSeparatorMax = new ImVec2();
+
+    private ArrayList<Node> ruleNodes = new ArrayList<>();
+
     public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
         this.imGuiWindow = imGuiWindow;
         this.glfwWindow = window;
@@ -269,8 +276,7 @@ public class GraphWindow {
 //                                    ImGui.separator();
 //                                    ImGui.text("Rules");
 
-                                    //TODO STOP CREATING NEW EVERY FRAME!!!!
-                                    ArrayList<Node> ruleNodes = new ArrayList<>();
+                                    ruleNodes.clear();
 
                                     for (Node node : graph.getNodes().values()) {
                                         if (node instanceof NodeRule) {
@@ -362,9 +368,6 @@ public class GraphWindow {
                         }
 
                         ImGui.sameLine();
-
-                        ImVec2 headerMin = null;
-                        ImVec2 headerMax = null;
 
                         float headerMaxY = 0;
                         NodeEditor.begin("Editor");
@@ -494,7 +497,10 @@ public class GraphWindow {
 //                                    if(maxWidth < node.width){
 //                                        maxWidth = node.width;
 //                                    }
-                                    headerMax = new ImVec2(NodeEditor.getNodePositionX(node.getID()) < 0 ? (NodeEditor.getNodeSizeX(node.getID()) + NodeEditor.getNodePositionX(node.getID())) - NodeEditor.getStyle().getNodePadding().x : maxWidth, headerMaxY);
+                                    if(headerMax == null){
+                                        headerMax = new ImVec2();
+                                    }
+                                    headerMax.set(NodeEditor.getNodePositionX(node.getID()) < 0 ? (NodeEditor.getNodeSizeX(node.getID()) + NodeEditor.getNodePositionX(node.getID())) - NodeEditor.getStyle().getNodePadding().x : maxWidth, headerMaxY);
 //                                    headerMax = new ImVec2(maxWidth, headerMaxY);
                                 }
                                 NodeEditor.endNode();
@@ -513,8 +519,8 @@ public class GraphWindow {
                                         drawList.addRectFilled(headerMin.x - (8 - halfBorderWidth), headerMin.y - (8 - halfBorderWidth), headerMax.x + (8 - halfBorderWidth), headerMax.y + (0), ImColor.intToColor(node.getRed(), node.getGreen(), node.getBlue(), node.getAlpha()), NodeEditor.getStyle().getNodeRounding(), ImDrawFlags.RoundCornersTop);
                                     }
 
-                                    ImVec2 headerSeparatorMin = new ImVec2(headerMin.x, headerMin.y);
-                                    ImVec2 headerSeparatorMax = new ImVec2(headerMax.x, headerMax.y);
+                                    headerSeparatorMin.set(headerMin.x, headerMin.y);
+                                    headerSeparatorMax.set(headerMax.x, headerMax.y);
 
                                     if ((headerSeparatorMax.x > headerSeparatorMin.x) && (headerSeparatorMax.y > headerSeparatorMin.y)) {
                                         drawList.addLine(headerMin.x - 8 - halfBorderWidth, headerMax.y, headerMax.x + (8 - halfBorderWidth), headerMax.y, ImColor.intToColor(node.getRed(), node.getGreen(), node.getBlue(), 96 * alpha / (3 * 255)), 1);
