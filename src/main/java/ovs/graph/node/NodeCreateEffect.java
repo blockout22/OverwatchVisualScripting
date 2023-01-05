@@ -82,8 +82,8 @@ public class NodeCreateEffect extends Node{
 
     private void populateTypeOptions(){
         for (int i = 0; i < Global.effectType.size(); i++) {
-            String effecctType = Global.effectType.get(i);
-            pinType.addOption(effecctType);
+            String effectType = Global.effectType.get(i);
+            pinType.addOption(effectType);
         }
 
         pinType.sort();
