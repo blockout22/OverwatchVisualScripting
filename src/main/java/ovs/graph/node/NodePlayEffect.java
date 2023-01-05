@@ -1,28 +1,25 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
-import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
-public class NodeCreateEffect extends Node{
+public class NodePlayEffect extends Node {
 
     PinVar pinVisibleTo = new PinVar();
     PinCombo pinType = new PinCombo();
     PinVar pinColor = new PinVar();
     PinVar pinPosition = new PinVar();
     PinVar pinRadius = new PinVar();
-    PinVar pinReevaluation = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeCreateEffect(Graph graph) {
+    public NodePlayEffect(Graph graph) {
         super(graph);
-        setName("Create Effect");
-        setColor(255, 0, 0);
+        setName("Play Effect");
 
         pinVisibleTo.setNode(this);
         pinVisibleTo.setName("Visible To");
@@ -31,8 +28,6 @@ public class NodeCreateEffect extends Node{
         pinType.setNode(this);
         pinType.setName("Type");
         addCustomInput(pinType);
-
-        populateTypeOptions();
 
         pinColor.setNode(this);
         pinColor.setName("Color");
@@ -46,10 +41,6 @@ public class NodeCreateEffect extends Node{
         pinRadius.setName("Radius");
         addCustomInput(pinRadius);
 
-        pinReevaluation.setNode(this);
-        pinReevaluation.setName("Reevaluation");
-        addCustomInput(pinReevaluation);
-
         output.setNode(this);
         addCustomOutput(output);
     }
@@ -61,7 +52,6 @@ public class NodeCreateEffect extends Node{
         PinData<ImString> colorData = pinColor.getData();
         PinData<ImString> positionData = pinPosition.getData();
         PinData<ImString> radiusData = pinRadius.getData();
-        PinData<ImString> reevaluationData = pinReevaluation.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinVisibleTo, visibleToData);
@@ -69,24 +59,14 @@ public class NodeCreateEffect extends Node{
         handlePinStringConnection(pinColor, colorData, "Color(White)");
         handlePinStringConnection(pinPosition, positionData, "Vector(0, 0, 0)");
         handlePinStringConnection(pinRadius, radiusData, "5");
-        handlePinStringConnection(pinReevaluation, reevaluationData, "Visible To Position and Radius");
 
-        outputData.getValue().set("Create Effect (" + visibleToData.getValue().get() + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ", " + reevaluationData.getValue().get() + ");");
+        outputData.getValue().set("Play Effect(" + visibleToData.getValue().get() + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ");");
     }
 
     @Override
     public String getOutput() {
         PinData<ImString> outputData = output.getData();
         return outputData.getValue().get();
-    }
-
-    private void populateTypeOptions(){
-        for (int i = 0; i < Global.effectType.size(); i++) {
-            String effecctType = Global.effectType.get(i);
-            pinType.addOption(effecctType);
-        }
-
-        pinType.sort();
     }
 
     @Override
