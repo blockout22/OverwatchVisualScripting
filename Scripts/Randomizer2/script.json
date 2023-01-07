@@ -1,6 +1,6 @@
 {
   "saveSettings": {
-    "modeName": "Ranzomizer",
+    "modeName": "Ranzomizer2",
     "description": "",
     "maxT1Players": 5,
     "maxT2Players": 5,
@@ -15,10 +15,10 @@
     "bountyHunterMode": false,
     "ctfMode": false,
     "deathmatchMode": false,
-    "eliminationMode": true,
-    "teamDeathmatchMode": true,
-    "practiceRangeMode": true,
-    "skirmishMode": true,
+    "eliminationMode": false,
+    "teamDeathmatchMode": false,
+    "practiceRangeMode": false,
+    "skirmishMode": false,
     "extensionToggle": [
       {
         "name": "Beam Sounds",
@@ -4558,7 +4558,7 @@
         {
           "ID": 2962,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Null, Null, Left, 0.0, Custom Color(239.75543, 239.75543, 15.63622, 255.0), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
+          "value": "Create HUD Text(Event Player,Custom String(\"Player Stats\"), Count Of(All Players(All Teams)), Null, Left, 0.0, Custom Color(239.75543, 239.75543, 15.63622, 255.0), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Dealt {0}%\", Event Player.DamageDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Damage Received {0}%\", Event Player.DamageReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Dealt {0}%\", Event Player.HealingDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Healing Received {0}%\", Event Player.HealingReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Dealt {0}%\", Event Player.KnockbackDealt), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Knockback Received {0}\", Event Player.KnockbackReceived), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Gravity {0}\", Event Player.ProjectiveGravity), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCreate HUD Text(Event Player,Null, Custom String(\"Projectile Speed {0}\", Event Player.ProjectiveSpeed), Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEvent Player.MaxKills \u003d 10.0;\nEvent Player.CurrentKills \u003d 0.0;\nCreate HUD Text(Event Player,Custom String(\"Kills: {0}/{1}\", Event Player.CurrentKills, Event Player.MaxKills), Null, Null, Right, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\nCall Subroutine(SetPlayerStats);\n",
           "connections": [
             3045
           ],
@@ -4697,8 +4697,10 @@
         {
           "ID": 2970,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Null",
-          "connections": [],
+          "value": "Count Of(All Players(All Teams))",
+          "connections": [
+            5419
+          ],
           "canDelete": false
         },
         {
@@ -5289,6 +5291,82 @@
           "type": "ovs.graph.pin.PinVar",
           "connections": [
             3004
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCountOf",
+      "nodeName": "Count Of",
+      "x": -1808.0,
+      "y": -2097.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 5418,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Players(All Teams)",
+          "connections": [
+            5421
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5419,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2970
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllPlayers",
+      "nodeName": "All Players",
+      "x": -1944.0,
+      "y": -2097.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 5420,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Teams",
+          "connections": [
+            5422
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5421,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5418
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeTeam",
+      "nodeName": "Team",
+      "x": -2079.0,
+      "y": -2103.0,
+      "extraData": [
+        "Team:All Teams"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 5422,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5420
           ],
           "canDelete": false
         }
