@@ -23,6 +23,8 @@ public class Global {
     public static ArrayList<String> buttons = new ArrayList<>();
     public static ArrayList<String> effectType = new ArrayList<>();
 
+    public static ArrayList<String> colors = new ArrayList<>();
+
     private static Map<String, Object> storage = new HashMap<>();
 
     static {
@@ -145,6 +147,24 @@ public class Global {
         effectType.add("Widowmaker Venom Mine Target Effect");
         effectType.add("Winston Tesla Cannon Target Effect");
         effectType.add("Zenyatta Orb Of Discord Target Effect");
+
+        colors.add("White");
+        colors.add("Aqua");
+        colors.add("Black");
+        colors.add("Blue");
+        colors.add("Gray");
+        colors.add("Green");
+        colors.add("Lime Green");
+        colors.add("Orange");
+        colors.add("Purple");
+        colors.add("Red");
+        colors.add("Rose");
+        colors.add("Sky Blue");
+        colors.add("Team 1");
+        colors.add("Team 2");
+        colors.add("Turquoise");
+        colors.add("Violet");
+        colors.add("Yellow");
     }
 
     public static void setStorage(String key, Object obj){

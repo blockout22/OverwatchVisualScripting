@@ -28,6 +28,14 @@ public class PinCombo extends Pin{
         comboBox.setSearchable(true);
     }
 
+    public void select(int index){
+        comboBox.select(index);
+    }
+
+    public void selectValue(String value){
+        comboBox.selectValue(value);
+    }
+
     public void sort(){
         comboBox.sort();
     }
