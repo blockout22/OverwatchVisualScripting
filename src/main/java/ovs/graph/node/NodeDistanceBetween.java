@@ -18,11 +18,11 @@ public class NodeDistanceBetween extends Node{
         setName("Distance Between");
 
         input1.setNode(this);
-        input1.setName("Start Pos");
+        input1.setName("Start Position");
         addCustomInput(input1);
 
         input2.setNode(this);
-        input2.setName("End Pos");
+        input2.setName("End Position");
         addCustomInput(input2);
 
         output.setNode(this);

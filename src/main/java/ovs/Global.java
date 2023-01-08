@@ -22,6 +22,9 @@ public class Global {
     public static ArrayList<String> heroes = new ArrayList<>();
     public static ArrayList<String> buttons = new ArrayList<>();
     public static ArrayList<String> effectType = new ArrayList<>();
+    public static ArrayList<String> gameModes = new ArrayList<>();
+    public static ArrayList<String> status = new ArrayList<>();
+    public static ArrayList<String> healthType = new ArrayList<>();
 
     public static ArrayList<String> colors = new ArrayList<>();
 
@@ -165,6 +168,34 @@ public class Global {
         colors.add("Turquoise");
         colors.add("Violet");
         colors.add("Yellow");
+
+        gameModes.add("Assault");
+        gameModes.add("Bounty Hunter");
+        gameModes.add("Control ");
+        gameModes.add("Capture The Flag");
+        gameModes.add("Elimination");
+        gameModes.add("Escort");
+        gameModes.add("Deathmatch");
+        gameModes.add("Hybrid");
+        gameModes.add("Practice Range");
+        gameModes.add("Push");
+        gameModes.add("Skirmish");
+        gameModes.add("Team Deathmatch");
+
+        status.add("Asleep");
+        status.add("Burning");
+        status.add("Frozen");
+        status.add("Hacked");
+        status.add("Invisible");
+        status.add("Knocked Down");
+        status.add("Phased Out");
+        status.add("Rooted");
+        status.add("Stunned");
+        status.add("Unkillable");
+
+        healthType.add("Health");
+        healthType.add("Armor");
+        healthType.add("Shields");
     }
 
     public static void setStorage(String key, Object obj){

@@ -62,6 +62,12 @@ public class ComboBox extends UiComponent{
     public ComboBox() {
     }
 
+    public ComboBox(ArrayList<String> options){
+        for (int i = 0; i < options.size(); i++) {
+            addOption(options.get(i));
+        }
+    }
+
     public ComboBox(String... options){
         for(String option : options){
             addOption(option);

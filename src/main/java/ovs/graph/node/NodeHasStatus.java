@@ -5,36 +5,24 @@ import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetStatus extends Node {
+public class NodeHasStatus extends Node {
 
     ComboBox status = new ComboBox(Global.status);
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinAssister = new PinVar();
-    PinVar pinDuration = new PinVar();
+    PinVar output = new PinVar();
 
-    PinAction output = new PinAction();
-
-    public NodeSetStatus(Graph graph) {
+    public NodeHasStatus(Graph graph) {
         super(graph);
-        setName("Set Status");
+        setName("Has Status");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
 
-        pinAssister.setNode(this);
-        pinAssister.setName("Assister");
-        addCustomInput(pinAssister);
-
-        pinDuration.setNode(this);
-        pinDuration.setName("Duration");
-        addCustomInput(pinDuration);
-
-        status.select(3);
+        status.select(0);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -58,15 +46,11 @@ public class NodeSetStatus extends Node {
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> assisterData = pinAssister.getData();
-        PinData<ImString> durationData = pinDuration.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(pinAssister, assisterData, "Null");
-        handlePinStringConnection(pinDuration, durationData, "0");
 
-        outputData.getValue().set("Set Status(" + playerData.getValue().get() + ", " + assisterData.getValue().get() + ", " + status.getSelectedValue() + ", " + durationData.getValue().get() + ");");
+        outputData.getValue().set("Has Status(" + playerData.getValue().get() + ", " + status.getSelectedValue() + ")");
     }
 
     @Override

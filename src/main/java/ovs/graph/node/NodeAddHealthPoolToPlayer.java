@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
@@ -9,7 +10,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeAddHealthPoolToPlayer extends Node{
 
-    ComboBox healthType = new ComboBox("Health", "Armor", "Shields");
+    ComboBox healthType = new ComboBox(Global.healthType);
 
     PinVar pinPlayer = new PinVar();
     PinVar pinMaxHealth = new PinVar();

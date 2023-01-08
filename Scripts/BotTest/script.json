@@ -1971,7 +1971,7 @@
         {
           "ID": 8225,
           "type": "ovs.graph.pin.PinCombo",
-          "value": "Orange",
+          "value": "",
           "connections": [],
           "canDelete": false
         }
@@ -1981,6 +1981,125 @@
           "ID": 8226,
           "type": "ovs.graph.pin.PinVar",
           "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGameMode",
+      "nodeName": "Game Mode",
+      "x": 921.0,
+      "y": -231.0,
+      "extraData": [
+        "Mode:Deathmatch"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 8731,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            8733
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCompare",
+      "nodeName": "Compare",
+      "x": 1123.0,
+      "y": -328.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 8732,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Current Game Mode",
+          "connections": [
+            8739
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 8733,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Game Mode(Deathmatch)",
+          "connections": [
+            8731
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 8734,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            8735
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 1368.0,
+      "y": -328.0,
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 8735,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Current Game Mode \u003d\u003d Game Mode(Deathmatch)",
+          "connections": [
+            8734
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 8736,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 8737,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 8738,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCurrentGameMode",
+      "nodeName": "Current Game Mode",
+      "x": 913.0,
+      "y": -336.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 8739,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            8732
+          ],
           "canDelete": false
         }
       ]
