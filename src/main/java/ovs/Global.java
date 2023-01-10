@@ -25,6 +25,7 @@ public class Global {
     public static ArrayList<String> gameModes = new ArrayList<>();
     public static ArrayList<String> status = new ArrayList<>();
     public static ArrayList<String> healthType = new ArrayList<>();
+    public static ArrayList<String> icons = new ArrayList<>();
 
     public static ArrayList<String> colors = new ArrayList<>();
 
@@ -196,6 +197,43 @@ public class Global {
         healthType.add("Health");
         healthType.add("Armor");
         healthType.add("Shields");
+
+        icons.add("Arrow: Down");
+        icons.add("Arrow: Left");
+        icons.add("Arrow: Right");
+        icons.add("Arrow: Up");
+        icons.add("Asterisk");
+        icons.add("Bolt");
+        icons.add("Checkmark");
+        icons.add("Circle");
+        icons.add("Club");
+        icons.add("Diamond");
+        icons.add("Dizzy");
+        icons.add("Exclamation Mark");
+        icons.add("Eye");
+        icons.add("Fire");
+        icons.add("Flag");
+        icons.add("Halo");
+        icons.add("Happy");
+        icons.add("Heart");
+        icons.add("Moon");
+        icons.add("No");
+        icons.add("Plus");
+        icons.add("Poison");
+        icons.add("Poison 2");
+        icons.add("Question Mark");
+        icons.add("Radioactive");
+        icons.add("Recycle");
+        icons.add("Ring Thick");
+        icons.add("Ring Thin");
+        icons.add("Sad");
+        icons.add("Skull");
+        icons.add("Spade");
+        icons.add("Spiral");
+        icons.add("Stop");
+        icons.add("Trashcan");
+        icons.add("Warning");
+        icons.add("X");
     }
 
     public static void setStorage(String key, Object obj){

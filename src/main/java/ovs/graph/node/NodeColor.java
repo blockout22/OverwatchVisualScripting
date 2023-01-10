@@ -31,6 +31,25 @@ public class NodeColor extends Node {
     }
 
     @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Color:" + color.getComboBox().getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Color")){
+                try{
+                    color.getComboBox().selectValue(data.split(":")[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    color.getComboBox().select(-1);
+                }
+            }
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> colorData = color.getData();
         PinData<ImString> outputData = output.getData();

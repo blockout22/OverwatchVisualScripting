@@ -8,16 +8,16 @@ import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinVar;
 
-public class NodeIsButtonDown extends Node{
+public class NodeIsButtonHeld extends Node{
 
     ComboBox comboBox = new ComboBox();
 
     PinVar input = new PinVar();
     PinVar output = new PinVar();
 
-    public NodeIsButtonDown(Graph graph) {
+    public NodeIsButtonHeld(Graph graph) {
         super(graph);
-        setName("Is Button Down");
+        setName("Is Button Held");
 
         for (int i = 0; i < Global.buttons.size(); i++) {
             comboBox.addOption(Global.buttons.get(i));

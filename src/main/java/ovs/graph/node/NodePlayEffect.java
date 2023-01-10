@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
@@ -43,6 +44,30 @@ public class NodePlayEffect extends Node {
 
         output.setNode(this);
         addCustomOutput(output);
+
+        pinType.getComboBox().addOptions(Global.effectType);
+        pinType.sort();
+
+        pinType.select(0);
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Type:" + pinType.getComboBox().getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Type")){
+                try{
+                    pinType.getComboBox().selectValue(data.split(":")[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    pinType.getComboBox().select(-1);
+                }
+            }
+        }
     }
 
     @Override

@@ -52,6 +52,27 @@ public class NodeCreateEffect extends Node{
 
         output.setNode(this);
         addCustomOutput(output);
+
+        pinType.select(0);
+    }
+
+    @Override
+    public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Type:" + pinType.getComboBox().getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
+        for(String data : getExtraSaveData()){
+            if(data.startsWith("Type")){
+                try{
+                    pinType.getComboBox().selectValue(data.split(":")[1]);
+                }catch (ArrayIndexOutOfBoundsException e){
+                    pinType.getComboBox().select(-1);
+                }
+            }
+        }
     }
 
     @Override

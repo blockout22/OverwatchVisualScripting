@@ -103,6 +103,12 @@ public class ComboBox extends UiComponent{
         items = temp;
     }
 
+    public void addOptions(ArrayList<String> options){
+        for (int i = 0; i < options.size(); i++) {
+            addOption(options.get(i));
+        }
+    }
+
     public int getSelectedIndex(){
         return currentSelectedIndex;
     }

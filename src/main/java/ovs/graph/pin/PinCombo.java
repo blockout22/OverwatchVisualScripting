@@ -32,6 +32,10 @@ public class PinCombo extends Pin{
         comboBox.select(index);
     }
 
+    public ComboBox getComboBox(){
+        return comboBox;
+    }
+
     public void selectValue(String value){
         comboBox.selectValue(value);
     }

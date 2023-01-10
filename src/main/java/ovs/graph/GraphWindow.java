@@ -784,6 +784,7 @@ public class GraphWindow {
                                             instance = nodeClass.newInstance(graph);
                                             nodeInstanceCache.add(instance);
                                         } catch (Exception e) {
+                                            System.out.println(nodeClass.getName());
                                             e.printStackTrace();
                                         }
 
