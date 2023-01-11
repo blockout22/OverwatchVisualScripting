@@ -2136,6 +2136,32 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsCommunicating",
+      "nodeName": "Is Communicating",
+      "x": 387.0,
+      "y": 472.0,
+      "extraData": [
+        "Type:Group Up"
+      ],
+      "inputPins": [
+        {
+          "ID": 10400,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 10401,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

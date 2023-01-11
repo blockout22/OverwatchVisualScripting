@@ -26,6 +26,8 @@ public class Global {
     public static ArrayList<String> status = new ArrayList<>();
     public static ArrayList<String> healthType = new ArrayList<>();
     public static ArrayList<String> icons = new ArrayList<>();
+    public static ArrayList<String> communicationLines = new ArrayList<>();
+    public static ArrayList<String> barriersLOS = new ArrayList<>();
 
     public static ArrayList<String> colors = new ArrayList<>();
 
@@ -234,6 +236,47 @@ public class Global {
         icons.add("Trashcan");
         icons.add("Warning");
         icons.add("X");
+
+        communicationLines.add("Acknowledge");
+        communicationLines.add("Attacking");
+        communicationLines.add("Countdown");
+        communicationLines.add("Defending");
+        communicationLines.add("Emote Down");
+        communicationLines.add("Emote Left");
+        communicationLines.add("Emote Right");
+        communicationLines.add("Emote Up");
+        communicationLines.add("Fall Back");
+        communicationLines.add("Go");
+        communicationLines.add("Going In");
+        communicationLines.add("Goodbye");
+        communicationLines.add("Group Up");
+        communicationLines.add("Hello");
+        communicationLines.add("Incoming");
+        communicationLines.add("Need Healing");
+        communicationLines.add("Need Help");
+        communicationLines.add("No");
+        communicationLines.add("On My Way");
+        communicationLines.add("Press The Attack");
+        communicationLines.add("Push Forward");
+        communicationLines.add("Ready");
+        communicationLines.add("Sorry");
+        communicationLines.add("Spray Down");
+        communicationLines.add("Spray Left");
+        communicationLines.add("Spray Right");
+        communicationLines.add("Spray Up");
+        communicationLines.add("Thanks");
+        communicationLines.add("Ultimate Status");
+        communicationLines.add("Voice Line Down");
+        communicationLines.add("Voice Line Left");
+        communicationLines.add("Voice Line Right");
+        communicationLines.add("Voice Line Up");
+        communicationLines.add("With You");
+        communicationLines.add("Yes");
+        communicationLines.add("You Are Welcome");
+
+        barriersLOS.add("Barriers Do Not Block Los");
+        barriersLOS.add("All Barriers Block LOS");
+        barriersLOS.add("Enemy Barriers Block LOS");
     }
 
     public static void setStorage(String key, Object obj){
