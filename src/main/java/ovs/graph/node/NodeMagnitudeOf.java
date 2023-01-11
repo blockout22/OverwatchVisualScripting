@@ -5,13 +5,18 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinVar;
 
-public class NodeLastCreateEntity extends Node{
+public class NodeMagnitudeOf extends Node {
 
+    PinVar pinVector = new PinVar();
     PinVar output = new PinVar();
 
-    public NodeLastCreateEntity(Graph graph) {
+    public NodeMagnitudeOf(Graph graph) {
         super(graph);
-        setName("Last Create Entity");
+        setName("Magnitude Of");
+
+        pinVector.setNode(this);
+        pinVector.setName("Vector");
+        addCustomInput(pinVector);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -19,9 +24,12 @@ public class NodeLastCreateEntity extends Node{
 
     @Override
     public void execute() {
+        PinData<ImString> vecctorData = pinVector.getData();
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Last Created Entity");
+        handlePinStringConnection(pinVector, vecctorData);
+
+        outputData.getValue().set(getName() + "(" + vecctorData.getValue().get() + ")");
     }
 
     @Override

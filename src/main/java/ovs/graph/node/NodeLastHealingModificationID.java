@@ -5,13 +5,13 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinVar;
 
-public class NodeLastTextId extends Node{
+public class NodeLastHealingModificationID extends Node {
 
     PinVar output = new PinVar();
 
-    public NodeLastTextId(Graph graph) {
+    public NodeLastHealingModificationID(Graph graph) {
         super(graph);
-        setName("Last Text ID");
+        setName("Last Healing Modification ID");
 
         output.setNode(this);
         addCustomOutput(output);
@@ -21,7 +21,7 @@ public class NodeLastTextId extends Node{
     public void execute() {
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Last Text ID");
+        outputData.getValue().set("Last Healing Modification ID");
     }
 
     @Override
