@@ -8,14 +8,14 @@ import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinFloat;
 import ovs.graph.pin.PinVar;
 
-public class NodeFloat extends Node{
+public class NodeNumber extends Node{
 
     PinFloat input = new PinFloat();
     PinVar output = new PinVar();
 
-    public NodeFloat(Graph graph) {
+    public NodeNumber(Graph graph) {
         super(graph);
-        setName("Float");
+        setName("Number");
 
         input.setNode(this);
         addCustomInput(input);
@@ -26,8 +26,8 @@ public class NodeFloat extends Node{
 
     @Override
     public void copy(Node node) {
-        if(node instanceof NodeFloat){
-            PinData<ImFloat> nodeData = ((NodeFloat) node).input.getData();
+        if(node instanceof NodeNumber){
+            PinData<ImFloat> nodeData = ((NodeNumber) node).input.getData();
             PinData<ImFloat> data = input.getData();
 
             data.getValue().set(nodeData.getValue().get());
