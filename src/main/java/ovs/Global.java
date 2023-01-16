@@ -28,6 +28,8 @@ public class Global {
     public static ArrayList<String> icons = new ArrayList<>();
     public static ArrayList<String> communicationLines = new ArrayList<>();
     public static ArrayList<String> barriersLOS = new ArrayList<>();
+    public static ArrayList<String> stats = new ArrayList<>();
+    public static ArrayList<String> LOSCheck = new ArrayList<>();
 
     public static ArrayList<String> colors = new ArrayList<>();
 
@@ -66,7 +68,7 @@ public class Global {
         heroes.add("Symmetra");
         heroes.add("Torbjörn");
         heroes.add("Tracer");
-        heroes.add("Windowmaker");
+        heroes.add("Widowmaker");
         heroes.add("Winston");
         heroes.add("Zarya");
         heroes.add("Zenyatta");
@@ -277,6 +279,45 @@ public class Global {
         barriersLOS.add("Barriers Do Not Block Los");
         barriersLOS.add("All Barriers Block LOS");
         barriersLOS.add("Enemy Barriers Block LOS");
+
+        stats.add("All Damage Dealt");
+        stats.add("Barrier Damage Dealt");
+        stats.add("Critical Hit Accuracy");
+        stats.add("Critical Hits");
+        stats.add("Damage Blocked");
+        stats.add("Damage Taken");
+        stats.add("Deaths");
+        stats.add("Defensive Assists");
+        stats.add("Eliminations");
+        stats.add("Environmental Deaths");
+        stats.add("Environmental Kills");
+        stats.add("Final Blows");
+        stats.add("Healing Dealt");
+        stats.add("Healing Received");
+        stats.add("Hero Damage Dealt");
+        stats.add("Multikill Best");
+        stats.add("Mulltikills");
+        stats.add("Objective Kills");
+        stats.add("Objective Assists");
+        stats.add("Scoped Accuracy");
+        stats.add("Scoped Critical Hit Accuracy");
+        stats.add("Scoped Critical Hit Kills");
+        stats.add("Scoped Critical Hits");
+        stats.add("Scoped Hits");
+        stats.add("Scoped Shots");
+        stats.add("Self Healing");
+        stats.add("Shots Fired");
+        stats.add("Shots Hit");
+        stats.add("Shots Missed");
+        stats.add("Solo Kills");
+        stats.add("Ultimates Earned");
+        stats.add("Ultimates Used");
+        stats.add("Weapon Accuracy");
+
+        LOSCheck.add("Off");
+        LOSCheck.add("Surfaces");
+        LOSCheck.add("Surfaces And All Barriers");
+        LOSCheck.add("Surfaces And Enemy Barriers");
     }
 
     public static void setStorage(String key, Object obj){

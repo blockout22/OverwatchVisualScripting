@@ -1813,10 +1813,8 @@
         {
           "ID": 1417,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Last Created Entity",
-          "connections": [
-            1419
-          ],
+          "value": "",
+          "connections": [],
           "canDelete": false
         }
       ],
@@ -1826,24 +1824,6 @@
           "type": "ovs.graph.pin.PinAction",
           "connections": [
             1416
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeLastCreateEntity",
-      "nodeName": "Last Create Entity",
-      "x": 426.0,
-      "y": 385.0,
-      "extraData": [],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 1419,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1417
           ],
           "canDelete": false
         }
