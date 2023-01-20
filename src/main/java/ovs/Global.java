@@ -355,7 +355,6 @@ public class Global {
                         Class node = Class.forName(className);
                         if (node.getSuperclass().equals(Node.class)) {
                             if (node.getAnnotation(NodeDisabled.class) == null) {
-                                System.out.println("Added: " + node.getName());
                                 nodeList.add(node);
                             }
                         }
@@ -390,8 +389,6 @@ public class Global {
             }
             br.close();
         }
-
-        System.out.println(nodeList.size());
 
         return nodeList;
     }

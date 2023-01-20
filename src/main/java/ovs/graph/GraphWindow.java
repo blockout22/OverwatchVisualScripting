@@ -800,7 +800,6 @@ public class GraphWindow {
                                         Node instance = null;
                                         try {
                                             nodeClass = node.getDeclaredConstructor(Graph.class);
-                                            System.out.println(nodeClass.getName());
                                             instance = nodeClass.newInstance(graph);
                                             nodeInstanceCache.add(instance);
                                         } catch (Exception e) {
