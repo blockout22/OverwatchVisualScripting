@@ -28,7 +28,7 @@ public class Settings {
     public ImInt mapRotCurrent = new ImInt();
     public ImInt returnToLobbyCurrent = new ImInt();
 
-    private String[] mapRotItems = {"After A Mirror Match", "After A Game", "Pause"};
+    private String[] mapRotItems = {"After A Mirror Match", "After A Game", "Paused"};
     private String[] returnToLobbyItems = {"Never", "After A Game", "After A Mirror Match"};
 
     public ImBoolean assaultOnOff = new ImBoolean(false);

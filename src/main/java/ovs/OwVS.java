@@ -1,8 +1,12 @@
 package ovs;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.lwjgl.opengl.GL11;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -14,11 +18,16 @@ public class OwVS {
     public ImGuiWindow imGuiWindow;
 
     public OwVS(){
+        try {
+            checkLatestReleases("blockout22", "OverwatchVisualScripting");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         File scripts = new File(Global.SCRIPTS_DIR);
         if(!scripts.exists()){
             scripts.mkdir();
         }
-        window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting | [Build: " + Global.BUILD + "]");
+        window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting | [Build: " + Global.BUILD + "]" + (Global.LATEST_BUILD > Global.BUILD ? " - Update Available" : ""));
         imGuiWindow = new ImGuiWindow(window);
 
         while(!window.isCloseRequested())
@@ -33,6 +42,47 @@ public class OwVS {
         window.close();
     }
 
+    private void checkLatestReleases(String user, String repo) throws Exception {
+        String url = "https://api.github.com/repos/" + user + "/" + repo + "/releases/latest";
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod("GET");
+        String token = "";
+//        con.setRequestProperty("Authorization", "Bearer " + token);
+
+        int responseCode = con.getResponseCode();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        String line;
+        StringBuilder response = new StringBuilder();
+        while((line = in.readLine()) != null){
+            response.append(line);
+        }
+        in.close();
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Repo toJson = gson.fromJson(response.toString(), Repo.class);
+
+        int build = extractNumbers(toJson.tag_name);
+        Global.LATEST_BUILD = build;
+    }
+
+    private int extractNumbers(String s) {
+        char[] chars = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for(char c : chars){
+            if(Character.isDigit(c)){
+                sb.append(c);
+            }
+        }
+
+        return Integer.valueOf(sb.toString());
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Starting Overwatch Visual Scripting...");
         for(String arg : args){
@@ -41,7 +91,6 @@ public class OwVS {
                 File file = new File("src/main/resources/build");
                 System.out.println(file.getAbsolutePath());
                 try {
-
                     BufferedReader br = new BufferedReader(new FileReader(file));
 
                     int build = 1;
