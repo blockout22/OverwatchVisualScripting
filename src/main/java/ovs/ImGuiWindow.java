@@ -1,21 +1,23 @@
 package ovs;
 
 import imgui.*;
+import imgui.extension.imguifiledialog.ImGuiFileDialog;
 import imgui.extension.imnodes.ImNodes;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.ImGuiInputTextFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
-import imgui.type.ImInt;
 import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL13;
+import ovs.chat.Chat;
+import ovs.chat.ScriptInfo;
+import ovs.chat.packet.FilePacket;
+import ovs.chat.packet.JSonPacket;
 import ovs.graph.GraphWindow;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -39,7 +41,11 @@ public class ImGuiWindow {
     private ImVec2 textSize = new ImVec2();
 
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
-    private ImFont font;
+//    private ImFont font;
+
+    private Chat chat = new Chat();
+    private ImString inputChat = new ImString();
+    private ImString userNameText = new ImString(30);
 
 //    Texture texture;
 
@@ -61,17 +67,17 @@ public class ImGuiWindow {
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesJapanese());
 
-        final ImFontConfig fontConfig = new ImFontConfig();
-        fontConfig.setMergeMode(true);
+//        final ImFontConfig fontConfig = new ImFontConfig();
+//        fontConfig.setMergeMode(true);
 
-        final short[] glyphRanges = rangesBuilder.buildRanges();
-        font = io.getFonts().addFontFromMemoryTTF(loadFromResources("OpenSans-Regular.ttf"), 72, fontConfig, glyphRanges);
+//        final short[] glyphRanges = rangesBuilder.buildRanges();
+//        font = io.getFonts().addFontFromMemoryTTF(loadFromResources("OpenSans-Regular.ttf"), 72, fontConfig, glyphRanges);
+//
+//        //this no work???
+//        io.getFonts().build();
+//        io.setFontDefault(font);
 
-        //this no work???
-        io.getFonts().build();
-        io.setFontDefault(font);
-
-        fontConfig.destroy();
+//        fontConfig.destroy();
 
         imGuiGLFW.init(glfwWindow.getWindowID(), true);
         imGuiGl3.init("#version 150");
@@ -99,9 +105,8 @@ public class ImGuiWindow {
     public void update(){
         imGuiGLFW.newFrame();
         ImGui.newFrame();
-        ImGui.pushFont(font);
+//        ImGui.pushFont(font);
         {
-
             createMainMenuBar();
             float menuBarHeight = 20f;
             float taskbarHeight = 50f;
@@ -124,6 +129,73 @@ public class ImGuiWindow {
             }
             ImGui.end();
 
+//            ImGui.setNextWindowPos(-200, -200, ImGuiCond.Always);
+            ImGui.setNextWindowSize(1000, 800, ImGuiCond.Once);
+            if(ImGui.begin("ChatWindow", NoBringToFrontOnFocus | NoDocking)){
+                if(!chat.isConnected()){
+                    ImGui.text("UserName");
+                    if(ImGui.inputText("##UserName", userNameText)){
+                        chat.userName = userNameText.get();
+                    }
+
+                    if(chat.isConnecting() || chat.userName.length() <= 0)
+                    {
+                        ImGui.beginDisabled();
+                    }
+                    if(ImGui.button((chat.isConnecting() ? "Attempting to connect..." : "Connect To Chat"))){
+                        chat.connect();
+                    }
+
+                    if(chat.isConnecting() || chat.userName.length() <= 0)
+                    {
+                        ImGui.endDisabled();
+                    }
+                }else{
+
+                    if(ImGui.button("Disconnect")){
+                        chat.disconnect();
+                    }
+
+                    ImGui.text("Connected Users: " + chat.getUserCount());
+
+                    ImGui.beginDisabled();
+                    ImGui.inputTextMultiline("##ChatHistory", chat.chatHistory);
+                    ImGui.endDisabled();
+
+                    if(ImGui.inputText("##ChatInput", inputChat, ImGuiInputTextFlags.EnterReturnsTrue)){
+//                        chat.sendMessage(inputChat.get());
+//                        chat.sendPacket(new PacketMessage(inputChat.get()));
+                        JSonPacket jsonPacket = new JSonPacket();
+                        jsonPacket.type = "MESSAGE";
+                        jsonPacket.data = inputChat.get();
+                        chat.sendJSon(jsonPacket);
+                        inputChat.set("");
+                    };
+
+                    if(ImGui.button("Send Script")){
+                        lastMenuAction = "SendScriptFile";
+                    }
+
+                    ImGui.separator();
+                    ImGui.text("Scripts");
+
+                    if(ImGui.beginChild("Chat-Scripts", 500, 500)){
+                        for (int i = 0; i < chat.scripts.size(); i++) {
+                            ScriptInfo filePacket = chat.scripts.get(i);
+
+                            if(ImGui.button(filePacket.fileName)){
+                                GraphWindow window = new GraphWindow(this, glfwWindow, null);
+                                window.setFileName(filePacket.fileName);
+                                window.loadFromString(filePacket.data);
+                                graphWindows.add(window);
+                            }
+                        }
+                    }
+                    ImGui.endChild();
+                }
+            }
+            ImGui.end();
+
             if(lastMenuAction == "New"){
 
                 inputFileName.set("");
@@ -139,6 +211,12 @@ public class ImGuiWindow {
 
             if(lastMenuAction == "Open"){
                 ImGui.openPopup("open_file_popup");
+                lastMenuAction = null;
+            }
+
+            if(lastMenuAction == "SendScriptFile"){
+                ImGui.openPopup("SendScriptFile");
+                System.out.println("Open Popup");
                 lastMenuAction = null;
             }
 
@@ -224,6 +302,43 @@ public class ImGuiWindow {
                 ImGui.endPopup();
             }
 
+            if(ImGui.beginPopupModal("SendScriptFile", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
+            {
+                File scriptDir = new File(Global.SCRIPTS_DIR);
+
+               for (File script : scriptDir.listFiles()) {
+                   if (ImGui.button(script.getName())) {
+                       String scriptFileName = script.getName();
+                       File file = new File(Global.SCRIPTS_DIR + File.separator + scriptFileName + File.separator + "script.json");
+
+                       try {
+                           BufferedReader br = new BufferedReader(new FileReader(file));
+                           String line;
+                           String content = "";
+                           while ((line = br.readLine()) != null) {
+                               content += line + "\n";
+                           }
+//                            Packet packet = new PacketFile(content);
+                           FilePacket jsonPacket = new FilePacket();
+                           jsonPacket.type = "FILE";
+                           jsonPacket.data = content;
+                           jsonPacket.fileName = scriptFileName;
+                           chat.sendJSon(jsonPacket);
+                       } catch (Exception e) {
+                           e.printStackTrace();
+                       }
+                       ImGui.closeCurrentPopup();
+                   }
+               }
+
+               ImGui.separator();
+               if(ImGui.button("Close")){
+                   ImGui.closeCurrentPopup();
+               }
+
+                ImGui.endPopup();
+            }
+
             for(GraphWindow graphWindow : graphWindows){
                 graphWindow.show(menuBarHeight, taskbarHeight);
             }
@@ -249,7 +364,7 @@ public class ImGuiWindow {
             }
         }
 
-        ImGui.popFont();
+//        ImGui.popFont();
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 
@@ -299,6 +414,7 @@ public class ImGuiWindow {
 
     public void close(){
 //        texture.cleanup();
+        chat.disconnect();
         ImNodes.destroyContext();
         ImGui.destroyContext();
     }

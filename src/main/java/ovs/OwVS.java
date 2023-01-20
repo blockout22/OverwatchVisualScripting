@@ -3,6 +3,10 @@ package ovs;
 import org.lwjgl.opengl.GL11;
 
 import java.io.*;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class OwVS {
 
@@ -30,10 +34,10 @@ public class OwVS {
     }
 
     public static void main(String[] args) {
-        boolean inDevMode = false;
+        System.out.println("Starting Overwatch Visual Scripting...");
         for(String arg : args){
             if(arg.equals("dev")){
-                inDevMode = true;
+                Global.devMode = true;
                 File file = new File("src/main/resources/build");
                 System.out.println(file.getAbsolutePath());
                 try {
@@ -72,7 +76,7 @@ public class OwVS {
             }
         }
 
-        if(!inDevMode){
+        if(!Global.devMode){
             try {
                 InputStream stream = OwVS.class.getClassLoader().getResourceAsStream("build");
 

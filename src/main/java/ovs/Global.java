@@ -4,17 +4,16 @@ import imgui.ImVec2;
 import ovs.graph.node.Node;
 import ovs.graph.node.interfaces.NodeDisabled;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.net.URL;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class Global {
 
     protected static int BUILD = -1;
+    protected static boolean devMode = false;
     public static String SCRIPTS_DIR = "Scripts";
 
     private static ImVec2 textSize = new ImVec2();
@@ -337,33 +336,99 @@ public class Global {
     }
 
 
-    public static ArrayList<Class> findAllNodes() throws IOException {
+    public static ArrayList<Class> findAllNodes() throws Exception {
         String packageName = "ovs.graph.node";
-        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
         ArrayList<Class> nodeList = new ArrayList<>();
 
+        InputStream stream;
+        BufferedReader br;
 
-        String line;
-        while((line = br.readLine()) != null){
-            if(line.endsWith(".class") && !line.contains("$")){
-                try {
-                    Class node = Class.forName(packageName + "." + line.substring(0, line.lastIndexOf('.')));
-                    if(node.getSuperclass().equals(Node.class)){
-                        if(node.getAnnotation(NodeDisabled.class) == null){
-                            nodeList.add(node);
+
+        if(!Global.devMode){
+            ArrayList<String> paths = clasesFromJar();
+            for(String name : paths){
+                String toStream = name + ".class";
+                stream  = ClassLoader.getSystemClassLoader().getResourceAsStream(toStream);
+                if(stream != null) {
+                    try {
+                        String className = toStream.replaceAll("/", "\\.").substring(0, toStream.lastIndexOf('.'));
+                        Class node = Class.forName(className);
+                        if (node.getSuperclass().equals(Node.class)) {
+                            if (node.getAnnotation(NodeDisabled.class) == null) {
+                                System.out.println("Added: " + node.getName());
+                                nodeList.add(node);
+                            }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }catch (Exception e){
-
+                }else{
+                    System.out.println("Stream is null for: " + name);
                 }
             }
+        }else {
+
+            stream = Global.class.getClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
+            System.out.println(stream == null);
+//        URL url = Global.class.getClassLoader().getResource("ovs/graph/node");
+            br = new BufferedReader(new InputStreamReader(stream));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.endsWith(".class") && !line.contains("$")) {
+                    try {
+                        Class node = Class.forName(packageName + "." + line.substring(0, line.lastIndexOf('.')));
+                        if (node.getSuperclass().equals(Node.class)) {
+                            if (node.getAnnotation(NodeDisabled.class) == null) {
+                                nodeList.add(node);
+                            }
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+            }
+            br.close();
         }
-        br.close();
+
+        System.out.println(nodeList.size());
 
         return nodeList;
     }
+
+    private static ArrayList<String> clasesFromJar()
+    {
+        JarFile jf = null;
+        try{
+            ArrayList<String> paths = new ArrayList<>();
+            String s = new File(Global.class.getResource("").getPath()).getParent().replaceAll("(!|file:\\\\)", "");
+            jf = new JarFile(s);
+            Enumeration<JarEntry> entries = jf.entries();
+
+            while(entries.hasMoreElements()){
+                JarEntry je = entries.nextElement();
+                if(je.getName().startsWith("ovs/graph/node/") && je.getName().endsWith(".class")){
+                    paths.add(je.getName().split("\\.")[0]);
+                }
+            }
+
+            return paths;
+        }catch (IOException e) {
+//            e.printStackTrace();
+        }finally {
+            if(jf != null) {
+                try {
+                    jf.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+
+        return null;
+    }
+
 
     public static int getBuild(){
         return BUILD;

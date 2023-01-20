@@ -342,15 +342,31 @@ public class GraphSaver {
     }
 
     public Graph load(String fileName, Settings settings){
-        try{
+        try {
             File file = new File(dir + File.separator + fileName + File.separator + "script.json");
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            Gson json = new GsonBuilder().setPrettyPrinting().create();
-
-            GraphSave gs = json.fromJson(br, GraphSave.class);
+            String line;
+            String content = "";
+            while ((line = br.readLine()) != null) {
+                content += line;
+            }
 
             br.close();
+
+            return loadFromString(content, settings);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Graph loadFromString(String content, Settings settings){
+        try {
+            Gson json = new GsonBuilder().setPrettyPrinting().create();
+
+            GraphSave gs = json.fromJson(content, GraphSave.class);
 
             Node[] loaded = new Node[gs.nodeSaves.size()];
 
@@ -381,7 +397,7 @@ public class GraphSaver {
 
                 for (int j = 0; j < settings.extensionBools.size(); j++) {
                     Settings.BoolInfoWithName extInfo = settings.extensionBools.get(j);
-                    if(info.name.equals(extInfo.name)){
+                    if (info.name.equals(extInfo.name)) {
                         extInfo.bool.set(info.value);
                         break;
                     }
@@ -397,7 +413,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.assaultMap.size(); j++) {
                     Settings.BoolInfoWithName mapInfo = settings.assaultMap.get(j);
-                    if(info.name.equals(mapInfo.name)){
+                    if (info.name.equals(mapInfo.name)) {
                         mapInfo.bool.set(info.value);
                         break;
                     }
@@ -416,7 +432,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.controlMap.size(); j++) {
                     Settings.BoolInfoWithName mapInfo = settings.controlMap.get(j);
-                    if(info.name.equals(mapInfo.name)){
+                    if (info.name.equals(mapInfo.name)) {
                         mapInfo.bool.set(info.value);
                         break;
                     }
@@ -432,7 +448,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.escortMap.size(); j++) {
                     Settings.BoolInfoWithName mapInfo = settings.escortMap.get(j);
-                    if(info.name.equals(mapInfo.name)){
+                    if (info.name.equals(mapInfo.name)) {
                         mapInfo.bool.set(info.value);
                         break;
                     }
@@ -449,7 +465,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.hybridMap.size(); j++) {
                     Settings.BoolInfoWithName mapInfo = settings.hybridMap.get(j);
-                    if(info.name.equals(mapInfo.name)){
+                    if (info.name.equals(mapInfo.name)) {
                         mapInfo.bool.set(info.value);
                         break;
                     }
@@ -466,7 +482,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.pushMap.size(); j++) {
                     Settings.BoolInfoWithName mapInfo = settings.pushMap.get(j);
-                    if(info.name.equals(mapInfo.name)){
+                    if (info.name.equals(mapInfo.name)) {
                         mapInfo.bool.set(info.value);
                         break;
                     }
@@ -487,7 +503,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.bhMap.size(); j++) {
                     Settings.BoolInfoWithName bhInfo = settings.bhMap.get(j);
-                    if(info.name.equals(bhInfo.name)){
+                    if (info.name.equals(bhInfo.name)) {
                         bhInfo.bool.set(info.value);
                         break;
                     }
@@ -512,7 +528,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.ctfMap.size(); j++) {
                     Settings.BoolInfoWithName ctfInfo = settings.ctfMap.get(j);
-                    if(info.name.equals(ctfInfo.name)){
+                    if (info.name.equals(ctfInfo.name)) {
                         ctfInfo.bool.set(info.value);
                         break;
                     }
@@ -529,7 +545,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.dmMap.size(); j++) {
                     Settings.BoolInfoWithName dmInfo = settings.dmMap.get(j);
-                    if(info.name.equals(dmInfo.name)){
+                    if (info.name.equals(dmInfo.name)) {
                         dmInfo.bool.set(info.value);
                         break;
                     }
@@ -554,7 +570,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.elimMap.size(); j++) {
                     Settings.BoolInfoWithName elimInfo = settings.elimMap.get(j);
-                    if(info.name.equals(elimInfo.name)){
+                    if (info.name.equals(elimInfo.name)) {
                         elimInfo.bool.set(info.value);
                         break;
                     }
@@ -575,7 +591,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.teamDmMap.size(); j++) {
                     Settings.BoolInfoWithName tdmInfo = settings.teamDmMap.get(j);
-                    if(info.name.equals(tdmInfo.name)){
+                    if (info.name.equals(tdmInfo.name)) {
                         tdmInfo.bool.set(info.value);
                         break;
                     }
@@ -595,7 +611,7 @@ public class GraphSaver {
                 //find name and change value;
                 for (int j = 0; j < settings.skirmishMap.size(); j++) {
                     Settings.BoolInfoWithName skirmishInfo = settings.skirmishMap.get(j);
-                    if(info.name.equals(skirmishInfo.name)){
+                    if (info.name.equals(skirmishInfo.name)) {
                         skirmishInfo.bool.set(info.value);
                         break;
                     }
@@ -604,7 +620,7 @@ public class GraphSaver {
 
             Graph graph = new Graph();
 
-            for(String var : gs.globalVariables){
+            for (String var : gs.globalVariables) {
                 String[] split = var.split(":");
                 Variable variable = new Variable();
                 variable.type = Variable.Type.GLOBAL;
@@ -613,7 +629,7 @@ public class GraphSaver {
                 graph.globalVariables.add(variable);
             }
 
-            for(String var : gs.playerVariables){
+            for (String var : gs.playerVariables) {
                 String[] split = var.split(":");
                 Variable variable = new Variable();
                 variable.type = Variable.Type.PLAYER;
@@ -622,7 +638,7 @@ public class GraphSaver {
                 graph.playerVariables.add(variable);
             }
 
-            for (String sub : gs.subroutines){
+            for (String sub : gs.subroutines) {
                 String[] split = sub.split(":");
                 graph.subroutines.add(split[1]);
             }
@@ -631,14 +647,14 @@ public class GraphSaver {
                 NodeSave save = gs.nodeSaves.get(i);
                 Class classNode = null;
 
-                try{
+                try {
                     ClassLoader loader = GraphSaver.class.getClassLoader();
                     classNode = Class.forName(save.className, true, loader);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                if(classNode == null){
+                if (classNode == null) {
                     System.out.println("Class was null, couldn't load: " + save.className);
 //                    return null;
                     continue;
@@ -650,7 +666,7 @@ public class GraphSaver {
                 node.posX = save.x;
                 node.posY = save.y;
 
-                for(String extraData : save.extraData){
+                for (String extraData : save.extraData) {
                     node.getExtraSaveData().add(extraData);
                 }
 
@@ -660,18 +676,18 @@ public class GraphSaver {
             for (int i = 0; i < loaded.length; i++) {
                 Node node = loaded[i];
 
-                if(node != null){
+                if (node != null) {
                     NodeSave save = gs.nodeSaves.get(i);
 
                     //load input pins
                     for (int j = 0; j < save.inputPins.size(); j++) {
-                        if(j >= node.inputPins.size()){
+                        if (j >= node.inputPins.size()) {
                             Class classNode = null;
 
                             ClassLoader loader = GraphSaver.class.getClassLoader();
                             classNode = Class.forName(save.inputPins.get(j).type, true, loader);
 
-                            if(classNode == null){
+                            if (classNode == null) {
                                 System.out.println("Class " + save.inputPins.get(j).type + " was null, couldn't load");
                                 return null;
                             }
@@ -690,21 +706,20 @@ public class GraphSaver {
 
                         //Load any custom values set to pins that haven't got a connection
                         //
-                        if(node.inputPins.get(j).getData() != null){
+                        if (node.inputPins.get(j).getData() != null) {
                             node.inputPins.get(j).loadValue(save.inputPins.get(j).value);
                         }
                     }
 
                     //load output pins
                     for (int j = 0; j < save.outputPins.size(); j++) {
-                        if(j >= node.outputPins.size())
-                        {
+                        if (j >= node.outputPins.size()) {
                             Class classNode = null;
 
                             ClassLoader loader = GraphSaver.class.getClassLoader();
                             classNode = Class.forName(save.outputPins.get(j).type, true, loader);
 
-                            if(classNode == null){
+                            if (classNode == null) {
                                 System.out.println("Class " + save.inputPins.get(j).type + " was null, couldn't load");
                                 return null;
                             }
@@ -724,8 +739,7 @@ public class GraphSaver {
                     node.onLoaded();
 
                     // Load and setup pin connections
-                    for (int j = 0; j < save.inputPins.size(); j++)
-                    {
+                    for (int j = 0; j < save.inputPins.size(); j++) {
                         //check and set the pin ID which this Pin is connected to
 //                        int ID = save.inputPins.get(j).connectedTo;
 //                        node.inputPins.get(j).connectedTo = ID;
@@ -743,17 +757,16 @@ public class GraphSaver {
 //                        }
                     }
 
-                    for (int j = 0; j < save.outputPins.size(); j++)
-                    {
+                    for (int j = 0; j < save.outputPins.size(); j++) {
 //                        if(save.outputPins.get(j).connectedTo != -1){
 //                            if(node.outputPins.get(j).getNode().getGraph().findPinById(save.outputPins.get(j).connectedTo) != null)
-                            {
+                        {
 //                                node.outputPins.get(j).connectedTo = save.outputPins.get(j).connectedTo;
 
-                                for (int k = 0; k < save.outputPins.get(j).connections.size(); k++) {
-                                    int ID = save.outputPins.get(j).connections.get(k);
-                                    node.outputPins.get(j).connectedToList.add(ID);
-                                }
+                            for (int k = 0; k < save.outputPins.get(j).connections.size(); k++) {
+                                int ID = save.outputPins.get(j).connections.get(k);
+                                node.outputPins.get(j).connectedToList.add(ID);
+                            }
 //                                System.out.println(node.outputPins.get(j).connectedTo);
 //                                System.out.println(node.outputPins.get(j).isConnected());
 //                                System.out.println(node.outputPins.get(j).getConnectedPin());
@@ -761,7 +774,7 @@ public class GraphSaver {
 //                                if(node.outputPins.get(j).getConnectedPin() == null){
 //                                    node.outputPins.get(j).connectedTo = -1;
 //                                }
-                            }
+                        }
 //                        }
                     }
 
@@ -770,7 +783,7 @@ public class GraphSaver {
             }
 
             //loop through all nodes on graph and validate all links
-            for(Node node : graph.getNodes().values()){
+            for (Node node : graph.getNodes().values()) {
                 for (int i = 0; i < node.inputPins.size(); i++) {
                     Pin pin = node.inputPins.get(i);
                     pin.validateAllConnections();
@@ -784,12 +797,6 @@ public class GraphSaver {
 
             return graph;
 
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         } catch (InvocationTargetException e) {
             e.printStackTrace();
             return null;

@@ -36,7 +36,7 @@ public class GraphWindow {
     private ConfirmSaveDialog saveDialog = new ConfirmSaveDialog();
 
     public String id;
-    private String fileName = "";
+    private String fileName = "untitled";
 
     private NodeEditorContext context;
     private GraphSaver graphSaver;
@@ -96,10 +96,7 @@ public class GraphWindow {
         this.glfwWindow = window;
         graphSaver = new GraphSaver();
         if(loadFile != null) {
-            graph = graphSaver.load(loadFile, settings);
-            fileName = loadFile;
-            id = fileName;
-            isLoading = true;
+            load(loadFile);
         }else {
             graph = new Graph();
         }
@@ -117,8 +114,9 @@ public class GraphWindow {
             for (int i = 0; i < nodeList.size(); i++) {
                 addNodeToList(nodeList.get(i));
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error Finding Nodes");
         }
 
 
@@ -187,6 +185,22 @@ public class GraphWindow {
         graph.subroutines.triggerOnChanged();
     }
 
+    public void load(String loadFile){
+        graph = graphSaver.load(loadFile, settings);
+        fileName = loadFile;
+        id = fileName;
+        isLoading = true;
+    }
+
+    public void loadFromString(String data){
+        graph = graphSaver.loadFromString(data, settings);
+        isLoading = true;
+    }
+
+    public void save(){
+        graphSaver.save(fileName, settings, graph);
+    }
+
     public void setFileName(String name){
         this.fileName = name;
     }
@@ -215,6 +229,7 @@ public class GraphWindow {
                     imGuiWindow.removeGraphWindow(this);
                 }
             }
+
 
             NodeEditor.setCurrentEditor(context);
             NodeEditor.getStyle().setNodeRounding(2.0f);
@@ -504,6 +519,10 @@ public class GraphWindow {
 //                                    headerMax = new ImVec2(maxWidth, headerMaxY);
                                 }
                                 NodeEditor.endNode();
+                                float x = ImGui.getMousePosX();
+                                float y = ImGui.getMousePosY();
+
+//                                ImGui.getWindowDrawList().addRect(x, y,x + 4, y + 4, ImColor.floatToColor(1, 0, 0, 1));
 
                                 //draw color ontop of titlebar
                                 if(ImGui.isItemVisible() && node.hasTitleBar()){
@@ -554,7 +573,7 @@ public class GraphWindow {
 //                                }
 
                                 for (int i = 0; i < pin.connectedToList.size(); i++) {
-                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedToList.get(i), pin.getColor().x, pin.getColor().y, pin.getColor().z, pin.getColor().w, 2);
+                                    NodeEditor.link(uniqueLinkId++, pin.getID(), pin.connectedToList.get(i), pin.getColor().r, pin.getColor().g, pin.getColor().b, pin.getColor().a, 2);
                                 }
                             }
                         }
@@ -781,6 +800,7 @@ public class GraphWindow {
                                         Node instance = null;
                                         try {
                                             nodeClass = node.getDeclaredConstructor(Graph.class);
+                                            System.out.println(nodeClass.getName());
                                             instance = nodeClass.newInstance(graph);
                                             nodeInstanceCache.add(instance);
                                         } catch (Exception e) {

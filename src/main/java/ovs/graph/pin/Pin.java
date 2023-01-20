@@ -2,7 +2,7 @@ package ovs.graph.pin;
 
 import imgui.ImColor;
 import imgui.ImDrawList;
-import imgui.ImVec4;
+import ovs.RGBA;
 import ovs.graph.PinData;
 import ovs.graph.node.Node;
 
@@ -17,7 +17,7 @@ public abstract class Pin {
 
     private Node node;
 
-    public ImVec4 color = new ImVec4(1f, 1f, 1f, 1f);
+    public RGBA color = new RGBA(1f, 1f, 1f, 1f);
 //    public int connectedTo = -1;
 
     public ArrayList<Integer> connectedToList = new ArrayList<>();
@@ -120,7 +120,7 @@ public abstract class Pin {
     }
 
     public void drawDefaultCircle(ImDrawList windowDrawList, float posX, float posY, boolean isConnected, boolean pinDragSame){
-        int doubleGrey = pinDragSame ? rgbToInt(color.x, color.y, color.z, color.w) : rgbToInt(50, 50, 50, 255);
+        int doubleGrey = pinDragSame ? rgbToInt(color.r, color.g, color.b, color.a) : rgbToInt(50, 50, 50, 255);
         if(isConnected) {
             windowDrawList.addCircleFilled(posX + (pinSize / 2), posY + (pinSize / 2), pinSize / 2, doubleGrey);
         }else{
@@ -166,7 +166,7 @@ public abstract class Pin {
         return name;
     }
 
-    public ImVec4 getColor() {
+    public RGBA getColor() {
         return color;
     }
 

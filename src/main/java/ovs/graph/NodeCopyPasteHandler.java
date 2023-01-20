@@ -12,7 +12,12 @@ public class NodeCopyPasteHandler {
 
     private static ArrayList<NodeData> nodeList = new ArrayList<>();
 
+    private static float copyLocationX = 0;
+    private static float copyLocationY = 0;
+
     public static void copy(ArrayList<Node> listOfNodes){
+        copyLocationX = ImGui.getMousePosX();
+        copyLocationY = ImGui.getMousePosY();
         nodeList.clear();
         for (int i = 0; i < listOfNodes.size(); i++) {
             NodeData newData = new NodeData();
@@ -41,7 +46,11 @@ public class NodeCopyPasteHandler {
                 newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                 graph.addNode(newInstance);
 //                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()) + nodeList.get(i).position.x, NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + + nodeList.get(i).position.y));
-                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX() + nodeList.get(i).position.x), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + nodeList.get(i).position.y));
+//                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX() + nodeList.get(i).position.x), NodeEditor.toCanvasY(ImGui.getMousePosY() + nodeList.get(i).position.y));
+                float xOffset = 0;//copyLocationX - ImGui.getMousePosX() + nodeList.get(i).position.x;
+                float yOffset = 0; //copyLocationY - ImGui.getMousePosY() + nodeList.get(i).position.y;
+                System.out.println(nodeList.get(i).position.x + " : " + copyLocationX + " : " + ImGui.getMousePosX());
+                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX())  + xOffset, NodeEditor.toCanvasY(ImGui.getMousePosY()) + yOffset);
 
                 int defaultTotal = newInstance.inputPins.size();
                 for (int j = 0; j < target.inputPins.size(); j++) {
