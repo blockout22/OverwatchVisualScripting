@@ -54,7 +54,7 @@ public class NodeColor extends Node {
         PinData<ImString> colorData = color.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(color, colorData);
+        handlePinStringConnection(color, colorData, color.getComboBox().getSelectedValue());
 
         outputData.getValue().set("Color(" + colorData.getValue().get() + ")");
     }

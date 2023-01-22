@@ -16,7 +16,7 @@ public class NodeHealthOfType extends Node {
 
     public NodeHealthOfType(Graph graph) {
         super(graph);
-        setName("HealthOfType");
+        setName("Health Of Type");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");

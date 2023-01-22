@@ -67,6 +67,7 @@ public class OwVS {
         Repo toJson = gson.fromJson(response.toString(), Repo.class);
 
         int build = extractNumbers(toJson.tag_name);
+//        System.out.println(toJson.assets.get(0).download_count);
         Global.LATEST_BUILD = build;
     }
 

@@ -7,6 +7,8 @@ import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class NodeCopyPasteHandler {
 
@@ -14,6 +16,9 @@ public class NodeCopyPasteHandler {
 
     private static float copyLocationX = 0;
     private static float copyLocationY = 0;
+
+    private static float averageX = 0;
+    private static float averageY = 0;
 
     public static void copy(ArrayList<Node> listOfNodes){
         copyLocationX = ImGui.getMousePosX();
@@ -35,37 +40,56 @@ public class NodeCopyPasteHandler {
             }
 
             nodeList.add(newData);
+
+            averageX += nodeList.get(i).position.x;
+            averageY += nodeList.get(i).position.y;
         }
+
+        averageX /= nodeList.size();
+        averageY /= nodeList.size();
     }
 
     public static void paste(Graph graph){
+
+//        HashMap<Integer, Integer> pinIdMap = new HashMap<>();
         for (int i = 0; i < nodeList.size(); i++) {
             Node newInstance = null;
             try {
                 Node target = nodeList.get(i).node;
                 newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                 graph.addNode(newInstance);
-//                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()) + nodeList.get(i).position.x, NodeEditor.toCanvasY(ImGui.getCursorScreenPosY() + + nodeList.get(i).position.y));
-//                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX() + nodeList.get(i).position.x), NodeEditor.toCanvasY(ImGui.getMousePosY() + nodeList.get(i).position.y));
-                float xOffset = 0;//copyLocationX - ImGui.getMousePosX() + nodeList.get(i).position.x;
-                float yOffset = 0; //copyLocationY - ImGui.getMousePosY() + nodeList.get(i).position.y;
-                System.out.println(nodeList.get(i).position.x + " : " + copyLocationX + " : " + ImGui.getMousePosX());
-                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX())  + xOffset, NodeEditor.toCanvasY(ImGui.getMousePosY()) + yOffset);
+
+                float nodeRelativePositionX = nodeList.get(i).position.x;
+                float nodeRelativePositionY = nodeList.get(i).position.y;
+                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX() - averageX * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(ImGui.getMousePosY() - averageY * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
 
                 int defaultTotal = newInstance.inputPins.size();
                 for (int j = 0; j < target.inputPins.size(); j++) {
+                    Pin oldPin = target.inputPins.get(j);
+                    Pin newPin = target.inputPins.get(j).getClass().getDeclaredConstructor().newInstance();
                     if(j > defaultTotal - 1){
-                        Pin newPin = target.inputPins.get(j).getClass().getDeclaredConstructor().newInstance();
                         newPin.setNode(newInstance);
                         newPin.setName(target.inputPins.get(j).getName());
                         newPin.setCanDelete(true);
                         newInstance.addCustomInput(newPin);
-
                     }
-//                    for (Integer connection : target.inputPins.get(i).connectedToList) {
-//                        graph.findPinById(connection);
-////                        newInstance.inputPins.get(j).connectedToList.add(connection);
-//                    }
+
+//                    pinIdMap.put(oldPin.getID(), newPin.getID());
+                }
+
+                for (int j = 0; j < target.inputPins.size(); j++) {
+                    Pin oldPin = target.inputPins.get(j);
+                    Pin newPin = newInstance.inputPins.get(j);
+                    int oldValue = oldPin.getID();
+
+                    try {
+                        for (int k = 0; k < oldPin.connectedToList.size(); k++) {
+//                            int newConnection = pinIdMap.get(k);
+                            Pin pin = oldPin.getConnectedPin();
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 newInstance.copy(target);

@@ -76,6 +76,17 @@ public class NodeCreateEffect extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCreateEffect){
+            PinData<ImString> data = ((NodeCreateEffect)node).pinType.getData();
+
+            PinData<ImString> inputData = pinType.getData();
+            inputData.getValue().set(data.getValue().get());
+            System.out.println(data.getValue().get());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> visibleToData = pinVisibleTo.getData();
         PinData<ImString> typeData = pinType.getData();
@@ -86,7 +97,7 @@ public class NodeCreateEffect extends Node{
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinVisibleTo, visibleToData);
-        handlePinStringConnection(pinType, typeData);
+        handlePinStringConnection(pinType, typeData, pinType.getComboBox().getSelectedValue());
         handlePinStringConnection(pinColor, colorData, "Color(White)");
         handlePinStringConnection(pinPosition, positionData, "Vector(0, 0, 0)");
         handlePinStringConnection(pinRadius, radiusData, "5");
