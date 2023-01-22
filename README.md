@@ -1,6 +1,6 @@
 # OverwatchVisualScripting
 
-## requirements
+## Requirements
 Requires Java 17 installed and setup, you can check your java version in your command line by typing: `java -version`
 
 ## Images
