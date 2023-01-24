@@ -69,6 +69,7 @@ public class OwVS {
         int build = extractNumbers(toJson.tag_name);
 //        System.out.println(toJson.assets.get(0).download_count);
         Global.LATEST_BUILD = build;
+        System.out.println("Build: " + build);
     }
 
     private int extractNumbers(String s) {

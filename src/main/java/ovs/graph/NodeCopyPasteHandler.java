@@ -6,6 +6,7 @@ import imgui.extension.nodeditor.NodeEditor;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,15 +15,12 @@ public class NodeCopyPasteHandler {
 
     private static ArrayList<NodeData> nodeList = new ArrayList<>();
 
-    private static float copyLocationX = 0;
-    private static float copyLocationY = 0;
-
     private static float averageX = 0;
     private static float averageY = 0;
 
     public static void copy(ArrayList<Node> listOfNodes){
-        copyLocationX = ImGui.getMousePosX();
-        copyLocationY = ImGui.getMousePosY();
+        averageX = 0;
+        averageY = 0;
         nodeList.clear();
         for (int i = 0; i < listOfNodes.size(); i++) {
             NodeData newData = new NodeData();
@@ -61,7 +59,8 @@ public class NodeCopyPasteHandler {
 
                 float nodeRelativePositionX = nodeList.get(i).position.x;
                 float nodeRelativePositionY = nodeList.get(i).position.y;
-                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getMousePosX() - averageX * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(ImGui.getMousePosY() - averageY * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
+                Point point = MouseInfo.getPointerInfo().getLocation();
+                NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(point.x - averageX * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(point.y - averageY * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
 
                 int defaultTotal = newInstance.inputPins.size();
                 for (int j = 0; j < target.inputPins.size(); j++) {
@@ -93,7 +92,7 @@ public class NodeCopyPasteHandler {
                 }
 
                 newInstance.copy(target);
-                System.out.println("Added New Instance: " + newInstance.getName());
+//                System.out.println("Added New Instance: " + newInstance.getName());
             }catch (Exception e){
                 e.printStackTrace();
             }
