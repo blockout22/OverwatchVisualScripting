@@ -12,7 +12,7 @@ public class NodeAppendToArray extends Node{
     PinVar pinVariable = new PinVar();
     PinVar input = new PinVar();
 
-    PinAction output = new PinAction();
+    PinVar output = new PinVar();
 
     public NodeAppendToArray(Graph graph) {
         super(graph);
