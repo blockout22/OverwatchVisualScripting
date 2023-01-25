@@ -55,6 +55,7 @@ public class GraphWindow {
     private long lastHoldingPinID = -1;
     private long lastActivePin = -1;
 
+    private boolean isFocused = false;
     private boolean promptSave = false;
     private boolean showSavedText = false;
     private boolean justOpenedContextMenu = false;
@@ -81,6 +82,9 @@ public class GraphWindow {
     private float canvasXPos = 0;
     private float canvasYPos = 0;
     private float contextMenuSize = 250;
+
+    private double animation_time = 1.0f; // animation duration in seconds
+    private double animation_start_time = ImGui.getTime();
 
     private UndoHandler undoHandler = new UndoHandler();
 
@@ -208,10 +212,31 @@ public class GraphWindow {
     public void show(float menuBarHeight, float taskbarHeight){
         cursorPos = ImGui.getMousePos();
         graph.update();
-        ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, ImGuiCond.Once);
-        ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
+        float ySize = glfwWindow.getHeight() - menuBarHeight - taskbarHeight;
+        ImGui.setNextWindowSize(glfwWindow.getWidth(), ySize, ImGuiCond.Once);
+//        ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight, ImGuiCond.Once);
+        ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY(), ImGuiCond.Once);
 
         if(ImGui.begin(fileName, closable)) {
+            if(ImGui.isWindowFocused()){
+                if(!isFocused) {
+                    ImGui.setWindowPos(fileName, ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + taskbarHeight);
+                    animation_time = 1.0f;
+                    animation_start_time = ImGui.getTime();
+                    isFocused = true;
+                }
+            }
+
+            ImVec2 target_pos = new ImVec2(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
+            double current_time = ImGui.getTime();
+            if (current_time - animation_start_time < animation_time)
+            {
+                float t = (float) ((current_time - animation_start_time) / animation_time);
+                ImVec2 pos = new ImVec2();
+                pos.x = Global.lerpFloat(ImGui.getWindowPosX(), target_pos.x, t);
+                pos.y = Global.lerpFloat(ImGui.getWindowPosY(), target_pos.y, t);
+                ImGui.setWindowPos(fileName, pos.x, pos.y);
+            }
 
             if(!closable.get())
             {
@@ -1053,5 +1078,9 @@ public class GraphWindow {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public void setFocus(boolean focus){
+        this.isFocused = focus;
     }
 }

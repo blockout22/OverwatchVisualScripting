@@ -3,6 +3,7 @@ package ovs.chat;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import imgui.type.ImString;
+import ovs.Notification;
 import ovs.chat.packet.*;
 
 import java.io.*;
@@ -163,6 +164,7 @@ public class Chat {
             chatHistory.resize(history.length());
         }
         chatHistory.set(history);
+        Notification.add(text);
     }
 
     public String getChatHistory(){

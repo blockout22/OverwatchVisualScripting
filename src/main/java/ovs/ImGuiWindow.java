@@ -130,71 +130,7 @@ public class ImGuiWindow {
             ImGui.end();
 
 //            ImGui.setNextWindowPos(-200, -200, ImGuiCond.Always);
-            ImGui.setNextWindowSize(1000, 800, ImGuiCond.Once);
-            if(ImGui.begin("ChatWindow", NoBringToFrontOnFocus | NoDocking)){
-                if(!chat.isConnected()){
-                    ImGui.text("UserName");
-                    if(ImGui.inputText("##UserName", userNameText)){
-                        chat.userName = userNameText.get();
-                    }
-
-                    if(chat.isConnecting() || chat.userName.length() <= 0)
-                    {
-                        ImGui.beginDisabled();
-                    }
-                    if(ImGui.button((chat.isConnecting() ? "Attempting to connect..." : "Connect To Chat"))){
-                        chat.connect();
-                    }
-
-                    if(chat.isConnecting() || chat.userName.length() <= 0)
-                    {
-                        ImGui.endDisabled();
-                    }
-                }else{
-
-                    if(ImGui.button("Disconnect")){
-                        chat.disconnect();
-                    }
-
-                    ImGui.text("Connected Users: " + chat.getUserCount());
-
-                    ImGui.beginDisabled();
-                    ImGui.inputTextMultiline("##ChatHistory", chat.chatHistory);
-                    ImGui.endDisabled();
-
-                    if(ImGui.inputText("##ChatInput", inputChat, ImGuiInputTextFlags.EnterReturnsTrue)){
-//                        chat.sendMessage(inputChat.get());
-//                        chat.sendPacket(new PacketMessage(inputChat.get()));
-                        JSonPacket jsonPacket = new JSonPacket();
-                        jsonPacket.type = "MESSAGE";
-                        jsonPacket.data = inputChat.get();
-                        chat.sendJSon(jsonPacket);
-                        inputChat.set("");
-                    };
-
-                    if(ImGui.button("Send Script")){
-                        lastMenuAction = "SendScriptFile";
-                    }
-
-                    ImGui.separator();
-                    ImGui.text("Scripts");
-
-                    if(ImGui.beginChild("Chat-Scripts", 500, 500)){
-                        for (int i = 0; i < chat.scripts.size(); i++) {
-                            ScriptInfo filePacket = chat.scripts.get(i);
-
-                            if(ImGui.button(filePacket.fileName)){
-                                GraphWindow window = new GraphWindow(this, glfwWindow, null);
-                                window.setFileName(filePacket.fileName);
-                                window.loadFromString(filePacket.data);
-                                graphWindows.add(window);
-                            }
-                        }
-                    }
-                    ImGui.endChild();
-                }
-            }
-            ImGui.end();
+            chatWindow();
 
             if(lastMenuAction == "New"){
 
@@ -351,6 +287,9 @@ public class ImGuiWindow {
                 for (GraphWindow graphWindow : graphWindows){
                     if(ImGui.button(graphWindow.getFileName(), 0, taskbarHeight - 15))
                     {
+                        for (GraphWindow gw : graphWindows){
+                            gw.setFocus(false);
+                        }
                         ImGui.setWindowFocus(graphWindow.getFileName());
                     }
                     ImGui.sameLine();
@@ -362,6 +301,8 @@ public class ImGuiWindow {
             for (int i = 0; i < queueRemoveGraphWindow.size(); i++) {
                 graphWindows.remove(queueRemoveGraphWindow.get(i));
             }
+
+            Notification.show();
         }
 
 //        ImGui.popFont();
@@ -374,6 +315,74 @@ public class ImGuiWindow {
             ImGui.renderPlatformWindowsDefault();
             GLFW.glfwMakeContextCurrent(backupWindowPtr);
         }
+    }
+
+    private void chatWindow(){
+        ImGui.setNextWindowSize(1000, 800, ImGuiCond.Once);
+        if(ImGui.begin("ChatWindow", NoBringToFrontOnFocus | NoDocking | NoNavFocus | NoFocusOnAppearing)){
+            if(!chat.isConnected()){
+                ImGui.text("UserName");
+                if(ImGui.inputText("##UserName", userNameText)){
+                    chat.userName = userNameText.get();
+                }
+
+                if(chat.isConnecting() || chat.userName.length() <= 0)
+                {
+                    ImGui.beginDisabled();
+                }
+                if(ImGui.button((chat.isConnecting() ? "Attempting to connect..." : "Connect To Chat"))){
+                    chat.connect();
+                }
+
+                if(chat.isConnecting() || chat.userName.length() <= 0)
+                {
+                    ImGui.endDisabled();
+                }
+            }else{
+
+                if(ImGui.button("Disconnect")){
+                    chat.disconnect();
+                }
+
+                ImGui.text("Connected Users: " + chat.getUserCount());
+
+                ImGui.beginDisabled();
+                ImGui.inputTextMultiline("##ChatHistory", chat.chatHistory);
+                ImGui.endDisabled();
+
+                if(ImGui.inputText("##ChatInput", inputChat, ImGuiInputTextFlags.EnterReturnsTrue)){
+//                        chat.sendMessage(inputChat.get());
+//                        chat.sendPacket(new PacketMessage(inputChat.get()));
+                    JSonPacket jsonPacket = new JSonPacket();
+                    jsonPacket.type = "MESSAGE";
+                    jsonPacket.data = inputChat.get();
+                    chat.sendJSon(jsonPacket);
+                    inputChat.set("");
+                };
+
+                if(ImGui.button("Send Script")){
+                    lastMenuAction = "SendScriptFile";
+                }
+
+                ImGui.separator();
+                ImGui.text("Scripts");
+
+                if(ImGui.beginChild("Chat-Scripts", 500, 500)){
+                    for (int i = 0; i < chat.scripts.size(); i++) {
+                        ScriptInfo filePacket = chat.scripts.get(i);
+
+                        if(ImGui.button(filePacket.fileName)){
+                            GraphWindow window = new GraphWindow(this, glfwWindow, null);
+                            window.setFileName(filePacket.fileName);
+                            window.loadFromString(filePacket.data);
+                            graphWindows.add(window);
+                        }
+                    }
+                }
+                ImGui.endChild();
+            }
+        }
+        ImGui.end();
     }
 
     private void tipsWindow() {

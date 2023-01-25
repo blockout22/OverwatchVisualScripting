@@ -427,6 +427,11 @@ public class Global {
         return null;
     }
 
+    public static float lerpFloat(float start, float end, float t)
+    {
+        return start + (end - start) * t;
+    }
+
 
     public static int getBuild(){
         return BUILD;
