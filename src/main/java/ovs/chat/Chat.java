@@ -35,7 +35,9 @@ public class Chat {
             public void run() {
                 try {
                     isConnecting = true;
-                    String ip = ipScramble("90.5.198.224", 4, -3, 5, 3);
+                    //151.227.84.118
+                    String ip = ipScramble("150.230.90.115", 1, -3, -6, 3);
+                    System.out.println(ip);
                     socket = new Socket(ip, 4000);
                     socket.setSoTimeout(2000);
                     if(socket.isConnected()){

@@ -157,6 +157,7 @@ public class Settings {
         assaultMap.add(new BoolInfoWithName("Temple Of Anubis", new ImBoolean(true)));
         assaultMap.add(new BoolInfoWithName("Volskaya Industries", new ImBoolean(true)));
 
+        controlMap.add(new BoolInfoWithName("Antarctic Peninsula", new ImBoolean(true)));
         controlMap.add(new BoolInfoWithName("Busan", new ImBoolean(true)));
         controlMap.add(new BoolInfoWithName("Ilios", new ImBoolean(true)));
         controlMap.add(new BoolInfoWithName("Lijiang Tower", new ImBoolean(true)));

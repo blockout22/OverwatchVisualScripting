@@ -72,6 +72,7 @@ public class NodeMap extends Node{
         selectedMap.addOption("Busan Sanctuary Lunar New Year");
 
         //Control
+        selectedMap.addOption("Antarctic Peninsula");
         selectedMap.addOption("Busan");
         selectedMap.addOption("Ilios");
         selectedMap.addOption("Lijiang Tower");
