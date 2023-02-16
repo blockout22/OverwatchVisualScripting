@@ -16,6 +16,7 @@ public class Global {
     protected static int LATEST_BUILD = -1;
     protected static boolean devMode = false;
     public static String SCRIPTS_DIR = "Scripts";
+    public static String NODE_GROUP_DIR = "NodeGroups";
 
     private static ImVec2 textSize = new ImVec2();
 
@@ -354,7 +355,9 @@ public class Global {
                     try {
                         String className = toStream.replaceAll("/", "\\.").substring(0, toStream.lastIndexOf('.'));
                         Class node = Class.forName(className);
-                        if (node.getSuperclass().equals(Node.class)) {
+                        Class topSuperClass = getTopmostSuperclass(node, Node.class);
+//                        if (node.getSuperclass().equals(Node.class)) {
+                        if (topSuperClass.equals(Node.class)) {
                             if (node.getAnnotation(NodeDisabled.class) == null) {
                                 nodeList.add(node);
                             }
@@ -378,7 +381,9 @@ public class Global {
                 if (line.endsWith(".class") && !line.contains("$")) {
                     try {
                         Class node = Class.forName(packageName + "." + line.substring(0, line.lastIndexOf('.')));
-                        if (node.getSuperclass().equals(Node.class)) {
+                        Class topSuperClass = getTopmostSuperclass(node, Node.class);
+//                        if (node.getSuperclass().equals(Node.class)) {
+                        if (topSuperClass.equals(Node.class)) {
                             if (node.getAnnotation(NodeDisabled.class) == null) {
                                 nodeList.add(node);
                             }
@@ -393,6 +398,18 @@ public class Global {
 
         return nodeList;
     }
+
+    public static Class getTopmostSuperclass(Class clazz, Class targetClass) {
+        while (clazz.getSuperclass() != null && !clazz.getSuperclass().equals(targetClass)) {
+            clazz = clazz.getSuperclass();
+        }
+        if (clazz.getSuperclass() != null) {
+            clazz = clazz.getSuperclass();
+        }
+        return clazz;
+    }
+
+
 
     private static ArrayList<String> clasesFromJar()
     {
@@ -425,6 +442,23 @@ public class Global {
         }
 
         return null;
+    }
+
+    public static void createBackup(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try{
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while((length = is.read(buffer)) > 0){
+                os.write(buffer, 0, length);
+            }
+
+        }finally {
+
+        }
     }
 
     public static float lerpFloat(float start, float end, float t)

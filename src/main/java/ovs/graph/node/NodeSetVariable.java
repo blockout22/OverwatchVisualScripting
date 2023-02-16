@@ -100,10 +100,11 @@ public class NodeSetVariable extends Node{
         if(inputPin.isConnected()){
             Pin connectedPin = inputPin.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
 
-
-            inputData.getValue().set(connectedData.getValue().get());
+                inputData.getValue().set(connectedData.getValue().get());
+            }
         }
 
         if (output.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {

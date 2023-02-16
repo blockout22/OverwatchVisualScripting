@@ -27,6 +27,12 @@ public class OwVS {
         if(!scripts.exists()){
             scripts.mkdir();
         }
+
+        File groups = new File(Global.NODE_GROUP_DIR);
+        if(!groups.exists()){
+            groups.mkdir();
+        }
+
         window = new GlfwWindow(1920, 1080, "Overwatch Visual Scripting | [Build: " + Global.BUILD + "]" + (Global.LATEST_BUILD > Global.BUILD ? " - Update Available" : ""));
         imGuiWindow = new ImGuiWindow(window);
 

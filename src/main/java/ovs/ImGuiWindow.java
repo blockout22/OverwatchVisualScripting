@@ -16,6 +16,7 @@ import ovs.chat.ScriptInfo;
 import ovs.chat.packet.FilePacket;
 import ovs.chat.packet.JSonPacket;
 import ovs.graph.GraphWindow;
+import ovs.graph.GroupNodeWindow;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -34,6 +35,9 @@ public class ImGuiWindow {
     private ArrayList<GraphWindow> graphWindows = new ArrayList<>();
     private ArrayList<GraphWindow> queueRemoveGraphWindow = new ArrayList<>();
 
+    private ArrayList<GroupNodeWindow> groupNodeWindows = new ArrayList<>();
+    private ArrayList<GroupNodeWindow> queueRemoveGroupNodeWindows = new ArrayList<>();
+
     private ImString inputFileName = new ImString();
 
     private String lastMenuAction = null;
@@ -41,6 +45,7 @@ public class ImGuiWindow {
     private ImVec2 textSize = new ImVec2();
 
     private ArrayList<String> alreadyExistingScripts = new ArrayList<>();
+    private ArrayList<String> alreadyExistingNodeGroups = new ArrayList<>();
 //    private ImFont font;
 
     private Chat chat = new Chat();
@@ -150,9 +155,25 @@ public class ImGuiWindow {
                 lastMenuAction = null;
             }
 
+            if(lastMenuAction == "CreateNodeGroup"){
+                inputFileName.set("");
+                File file = new File(Global.NODE_GROUP_DIR);
+                alreadyExistingNodeGroups.clear();
+                for(File group : file.listFiles()){
+                    alreadyExistingNodeGroups.add(group.getName());
+                }
+                ImGui.openPopup("create_node_group");
+                lastMenuAction = null;
+            }
+
             if(lastMenuAction == "SendScriptFile"){
                 ImGui.openPopup("SendScriptFile");
                 System.out.println("Open Popup");
+                lastMenuAction = null;
+            }
+
+            if(lastMenuAction == "OpenNodeGroup") {
+                ImGui.openPopup("open_node_group");
                 lastMenuAction = null;
             }
 
@@ -238,6 +259,90 @@ public class ImGuiWindow {
                 ImGui.endPopup();
             }
 
+            if(ImGui.beginPopupModal("create_node_group", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
+            {
+                float width = ImGui.getWindowSize().x;
+                ImGui.calcTextSize(textSize, "Node Group Name");
+                ImGui.setCursorPosX((width - textSize.x) * 0.5f);
+                ImGui.text("Node Group Name");
+                if(ImGui.inputText("##", inputFileName)){
+                }
+
+                boolean alreadyExists = false;
+
+                //TODO check if Node Group Name Already Exists
+                for(String group : alreadyExistingNodeGroups){
+                    if(inputFileName.get().equals(group)){
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+
+                if(inputFileName.get().length() > 0 && !alreadyExists){
+                    if(ImGui.button("Create")){
+                        GroupNodeWindow groupNodeWindow = new GroupNodeWindow(this, glfwWindow, null);
+                        groupNodeWindows.add(groupNodeWindow);
+                        groupNodeWindow.setFileName(inputFileName.get());
+//                        GraphWindow window = new GraphWindow(this, glfwWindow, null);
+//                        graphWindows.add(window);
+                        ImGui.closeCurrentPopup();
+                    }
+                }else{
+                    ImGui.alignTextToFramePadding();
+                    ImGui.text("Create");
+                }
+
+                ImGui.sameLine();
+                if(ImGui.button("Close")){
+                    ImGui.closeCurrentPopup();
+                }
+                ImGui.endPopup();
+            }
+
+            if(ImGui.beginPopupModal("open_node_group", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
+            {
+                float width = ImGui.getWindowSize().x;
+                ImGui.calcTextSize(textSize, "Open Group");
+                ImGui.setCursorPosX((width - textSize.x) * 0.5f);
+                ImGui.text("Open Group");
+                ImGui.separator();
+                ImGui.dummy(5, 5);
+
+                File groups = new File(Global.NODE_GROUP_DIR);
+                if(groups.exists()){
+                    for(File file : groups.listFiles()){
+                        boolean alreadyOpen = false;
+
+                        for(GroupNodeWindow window : groupNodeWindows){
+                            if(window.getFileName().equals(file.getName())){
+                                alreadyOpen = true;
+                                break;
+                            }
+                        }
+
+                        if(alreadyOpen){
+                            ImGui.alignTextToFramePadding();
+                            ImGui.text(file.getName());
+                        }else{
+                            if(ImGui.button(file.getName())){
+                                GroupNodeWindow window = new GroupNodeWindow(this, glfwWindow, file.getName());
+                                groupNodeWindows.add(window);
+                                ImGui.closeCurrentPopup();
+                            }
+                        }
+                    }
+                }
+
+                ImGui.dummy(5, 5);
+                ImGui.separator();
+
+                if(ImGui.button("Close", -1, 0)){
+                    ImGui.closeCurrentPopup();
+                }
+
+                ImGui.endPopup();
+            }
+
             if(ImGui.beginPopupModal("SendScriptFile", NoTitleBar | NoResize | AlwaysAutoResize | NoMove | NoSavedSettings))
             {
                 File scriptDir = new File(Global.SCRIPTS_DIR);
@@ -279,6 +384,10 @@ public class ImGuiWindow {
                 graphWindow.show(menuBarHeight, taskbarHeight);
             }
 
+            for(GroupNodeWindow groupNodeWindow : groupNodeWindows){
+                groupNodeWindow.show(menuBarHeight, taskbarHeight);
+            }
+
             ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + glfwWindow.getHeight() - taskbarHeight, ImGuiCond.Always);
             ImGui.setNextWindowSize(glfwWindow.getWidth(), taskbarHeight, ImGuiCond.Always);
             ImGui.pushStyleColor(ImGuiCol.WindowBg, 25, 25, 25, 255);
@@ -294,6 +403,16 @@ public class ImGuiWindow {
                     }
                     ImGui.sameLine();
                 }
+
+                for(GroupNodeWindow groupNodeWindow : groupNodeWindows){
+                    if(ImGui.button(groupNodeWindow.getFileName(), 0, taskbarHeight- 15)){
+                        for(GroupNodeWindow gnw : groupNodeWindows){
+                            gnw.setFocus(false);
+                        }
+                        ImGui.setWindowFocus(groupNodeWindow.getFileName());
+                    }
+                    ImGui.sameLine();
+                }
             }
             ImGui.end();
             ImGui.popStyleColor();
@@ -301,6 +420,14 @@ public class ImGuiWindow {
             for (int i = 0; i < queueRemoveGraphWindow.size(); i++) {
                 graphWindows.remove(queueRemoveGraphWindow.get(i));
             }
+
+            queueRemoveGraphWindow.clear();
+
+            for (int i = 0; i < queueRemoveGroupNodeWindows.size(); i++) {
+                groupNodeWindows.remove(queueRemoveGroupNodeWindows.get(i));
+            }
+
+            queueRemoveGroupNodeWindows.clear();
 
             Notification.show();
         }
@@ -411,6 +538,15 @@ public class ImGuiWindow {
 //                    GraphWindow window = new GraphWindow(glfwWindow, "SomeNewScript");
 //                    graphWindows.add(window);
                 }
+
+                if(ImGui.menuItem("Create Node Group")){
+                    lastMenuAction = "CreateNodeGroup";
+                }
+
+                if(ImGui.menuItem("Open Node Group")){
+                    lastMenuAction = "OpenNodeGroup";
+                }
+
                 ImGui.endMenu();
             }
         }
@@ -419,6 +555,10 @@ public class ImGuiWindow {
 
     public void removeGraphWindow(GraphWindow graphWindow){
         queueRemoveGraphWindow.add(graphWindow);
+    }
+
+    public void removeGroupNodeWindow(GroupNodeWindow groupNodeWindow){
+        queueRemoveGroupNodeWindows.add(groupNodeWindow);
     }
 
     public void close(){

@@ -13,7 +13,7 @@ import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinCondition;
 
-public class NodeRule extends Node{
+public class NodeRule extends NodeEntry{
 
     private PinCondition conditionPin = new PinCondition();
     private PinAction actionPin = new PinAction();
@@ -299,7 +299,6 @@ public class NodeRule extends Node{
 //        }
 
         out += "}\n";
-
         return out;
     }
 

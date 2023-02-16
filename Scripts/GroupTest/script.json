@@ -1,17 +1,17 @@
 {
   "saveSettings": {
-    "modeName": "Clicker",
+    "modeName": "",
     "description": "",
-    "maxT1Players": 11,
-    "maxT2Players": 1,
+    "maxT1Players": 5,
+    "maxT2Players": 5,
     "maxFFAPlayers": 0,
     "mapRotation": 0,
     "returnToLobby": 0,
     "assaultMode": false,
     "controlMode": true,
-    "escortMode": false,
-    "hybridMode": false,
-    "pushMode": false,
+    "escortMode": true,
+    "hybridMode": true,
+    "pushMode": true,
     "bountyHunterMode": false,
     "ctfMode": false,
     "deathmatchMode": false,
@@ -99,8 +99,12 @@
       "scoringSpeedModifier": 100,
       "MapToggle": [
         {
+          "name": "Antarctic Peninsula",
+          "value": true
+        },
+        {
           "name": "Busan",
-          "value": false
+          "value": true
         },
         {
           "name": "Ilios",
@@ -108,19 +112,19 @@
         },
         {
           "name": "Lijiang Tower",
-          "value": false
+          "value": true
         },
         {
           "name": "Lijiang Tower Lunar New Year",
-          "value": false
+          "value": true
         },
         {
           "name": "Nepal",
-          "value": false
+          "value": true
         },
         {
           "name": "Oasis",
-          "value": false
+          "value": true
         }
       ]
     },
@@ -1219,23 +1223,93 @@
     }
   },
   "globalVariables": [
-    "0:BotSpawn",
-    "1:PlayerSpawn",
-    "2:RingMoney",
-    "3:RingChangeHero",
-    "4:RingRestart",
-    "5:TextNextHeroLineup",
-    "6:RingAbilities",
-    "7:RingDamageDefenceHealth"
+    "0:VarName0"
   ],
   "playerVariables": [],
   "subroutines": [],
   "nodeSaves": [
     {
+      "className": "ovs.graph.node.NodeGroup",
+      "nodeName": "Node Group",
+      "x": 440.0,
+      "y": 295.0,
+      "extraData": [
+        "Group:TestGroupFile"
+      ],
+      "inputPins": [
+        {
+          "ID": 2705,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Heroes",
+          "connections": [
+            4374
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2706,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            5221,
+            6070
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllHeroes",
+      "nodeName": "All Heroes",
+      "x": 226.0,
+      "y": 423.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 4374,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2705
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetVariable",
+      "nodeName": "Set Variable",
+      "x": 695.0,
+      "y": 287.0,
+      "extraData": [
+        "Var:Global.VarName0"
+      ],
+      "inputPins": [
+        {
+          "ID": 5221,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Count Of(All Heroes)",
+          "connections": [
+            2706
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 5222,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
       "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Setup Locations",
-      "x": 760.0,
-      "y": 198.0,
+      "nodeName": "Rule",
+      "x": 920.0,
+      "y": 348.0,
       "extraData": [
         "EventOnGoing:Ongoing - Global",
         "Team:All",
@@ -1244,18 +1318,18 @@
       ],
       "inputPins": [
         {
-          "ID": 1826,
+          "ID": 6068,
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
           "connections": [],
           "canDelete": false
         },
         {
-          "ID": 1827,
+          "ID": 6069,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Current Map \u003d\u003d Map(Ilios));\nGlobal.BotSpawn \u003d Vector(-199.577, 1.4, -7.782);\nGlobal.PlayerSpawn \u003d Vector(-219.506, 0.455, -22.704);\nGlobal.RingMoney \u003d Vector(-214.979, 1.0, -27.22);\nGlobal.RingChangeHero \u003d Vector(-219.758, 1.549, -30.806);\nGlobal.RingRestart \u003d Vector(-225.871, 0.35, -33.823);\nGlobal.TextNextHeroLineup \u003d Vector(-215.634, 2.3, -32.878);\nGlobal.RingAbilities \u003d Vector(-224.382, 2.549, -20.642);\nGlobal.RingDamageDefenceHealth \u003d Vector(-219.761, 0.25, -37.83);\nElse;\n\nEnd;\n",
+          "value": "Global.VarName0 \u003d Count Of(All Heroes);",
           "connections": [
-            1829
+            6071
           ],
           "canDelete": false
         }
@@ -1263,963 +1337,30 @@
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeActionList",
-      "nodeName": "Action List",
-      "x": 587.0,
-      "y": 248.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1828,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1835
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 1830,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [],
-          "canDelete": true
-        },
-        {
-          "ID": 1831,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [],
-          "canDelete": true
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1829,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1827
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeIf",
-      "nodeName": "If",
-      "x": 344.0,
-      "y": 248.0,
-      "extraData": [
-        "Type:If"
-      ],
-      "inputPins": [
-        {
-          "ID": 1832,
-          "type": "ovs.graph.pin.PinIf",
-          "value": "Current Map \u003d\u003d Map(Ilios)",
-          "connections": [
-            1838
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 1833,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Global.BotSpawn \u003d Vector(-199.577, 1.4, -7.782);\nGlobal.PlayerSpawn \u003d Vector(-219.506, 0.455, -22.704);\nGlobal.RingMoney \u003d Vector(-214.979, 1.0, -27.22);\nGlobal.RingChangeHero \u003d Vector(-219.758, 1.549, -30.806);\nGlobal.RingRestart \u003d Vector(-225.871, 0.35, -33.823);\nGlobal.TextNextHeroLineup \u003d Vector(-215.634, 2.3, -32.878);\nGlobal.RingAbilities \u003d Vector(-224.382, 2.549, -20.642);\nGlobal.RingDamageDefenceHealth \u003d Vector(-219.761, 0.25, -37.83);\n",
-          "connections": [
-            1885
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 1834,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1835,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1828
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCompare",
-      "nodeName": "Compare",
-      "x": -120.0,
-      "y": 248.0,
-      "extraData": [
-        "Compare:\u003d\u003d"
-      ],
-      "inputPins": [
-        {
-          "ID": 1836,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Current Map",
-          "connections": [
-            1839
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 1837,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Map(Ilios)",
-          "connections": [
-            1840
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1838,
-          "type": "ovs.graph.pin.PinIf",
-          "connections": [
-            1832
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCurrentMap",
-      "nodeName": "Current Map",
-      "x": -432.0,
-      "y": 208.0,
-      "extraData": [],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 1839,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1836
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeMap",
-      "nodeName": "Map",
-      "x": -398.0,
-      "y": 281.0,
-      "extraData": [
-        "Map:Ilios"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 1840,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1837
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeActionList",
-      "nodeName": "Action List",
-      "x": 168.0,
-      "y": 344.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1884,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1894
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 1886,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1896
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1887,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1906
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1888,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1904
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1890,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1902
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1891,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1900
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1892,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1908
-          ],
-          "canDelete": true
-        },
-        {
-          "ID": 1909,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            1911
-          ],
-          "canDelete": true
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1885,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1833
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
       "className": "ovs.graph.node.NodeSetVariable",
       "nodeName": "Set Variable",
-      "x": -488.0,
-      "y": 376.0,
+      "x": 696.0,
+      "y": 415.0,
       "extraData": [
-        "Var:Global.BotSpawn"
+        "Var:Global.VarName0"
       ],
       "inputPins": [
         {
-          "ID": 1893,
+          "ID": 6070,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-199.577, 1.4, -7.782)",
+          "value": "Count Of(All Heroes)",
           "connections": [
-            1913
+            2706
           ],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 1894,
+          "ID": 6071,
           "type": "ovs.graph.pin.PinAction",
           "connections": [
-            1884
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -488.0,
-      "y": 487.0,
-      "extraData": [
-        "Var:Global.PlayerSpawn"
-      ],
-      "inputPins": [
-        {
-          "ID": 1895,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-219.506, 0.455, -22.704)",
-          "connections": [
-            1915
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1896,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1886
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -478.0,
-      "y": 936.0,
-      "extraData": [
-        "Var:Global.TextNextHeroLineup"
-      ],
-      "inputPins": [
-        {
-          "ID": 1899,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-215.634, 2.3, -32.878)",
-          "connections": [
-            1925
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1900,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1891
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -478.0,
-      "y": 824.0,
-      "extraData": [
-        "Var:Global.RingRestart"
-      ],
-      "inputPins": [
-        {
-          "ID": 1901,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-225.871, 0.35, -33.823)",
-          "connections": [
-            1923
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1902,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1890
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -489.0,
-      "y": 711.0,
-      "extraData": [
-        "Var:Global.RingChangeHero"
-      ],
-      "inputPins": [
-        {
-          "ID": 1903,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-219.758, 1.549, -30.806)",
-          "connections": [
-            1919
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1904,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1888
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -489.0,
-      "y": 599.0,
-      "extraData": [
-        "Var:Global.RingMoney"
-      ],
-      "inputPins": [
-        {
-          "ID": 1905,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-214.979, 1.0, -27.22)",
-          "connections": [
-            1917
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1906,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1887
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -477.0,
-      "y": 1049.0,
-      "extraData": [
-        "Var:Global.RingAbilities"
-      ],
-      "inputPins": [
-        {
-          "ID": 1907,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-224.382, 2.549, -20.642)",
-          "connections": [
-            1927
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1908,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1892
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": -557.0,
-      "y": 1161.0,
-      "extraData": [
-        "Var:Global.RingDamageDefenceHealth"
-      ],
-      "inputPins": [
-        {
-          "ID": 1910,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(-219.761, 0.25, -37.83)",
-          "connections": [
-            1929
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1911,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            1909
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -818.0,
-      "y": 399.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1912,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-199.577, y\u003d1.4, z\u003d-7.782, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1913,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1893
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -818.0,
-      "y": 511.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1914,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-219.506, y\u003d0.455, z\u003d-22.704, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1915,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1895
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -818.0,
-      "y": 623.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1916,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-214.979, y\u003d1.0, z\u003d-27.22, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1917,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1905
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -818.0,
-      "y": 735.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1918,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-219.758, y\u003d1.549, z\u003d-30.806, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1919,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1903
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -807.0,
-      "y": 849.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1922,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-225.871, y\u003d0.35, z\u003d-33.823, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1923,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1901
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -807.0,
-      "y": 961.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1924,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-215.634, y\u003d2.3, z\u003d-32.878, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1925,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1899
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -807.0,
-      "y": 1073.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1926,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-224.382, y\u003d2.549, z\u003d-20.642, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1927,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1907
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeVector",
-      "nodeName": "Vector",
-      "x": -807.0,
-      "y": 1185.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 1928,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d-219.761, y\u003d0.25, z\u003d-37.83, w\u003d0.0}",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 1929,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            1910
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Create Effects",
-      "x": 393.0,
-      "y": 1673.0,
-      "extraData": [
-        "EventOnGoing:Ongoing - Global",
-        "Team:All",
-        "Player:All",
-        "Sub:"
-      ],
-      "inputPins": [
-        {
-          "ID": 2756,
-          "type": "ovs.graph.pin.PinCondition",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 2757,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "Create Effect (All Players(Team 1), , Color(), Global.RingMoney, 1.0, Visible To Position and Radius);\n",
-          "connections": [
-            2759
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": []
-    },
-    {
-      "className": "ovs.graph.node.NodeActionList",
-      "nodeName": "Action List",
-      "x": 216.0,
-      "y": 1720.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 2758,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [
-            2766
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 2775,
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [],
-          "canDelete": true
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2759,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            2757
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeCreateEffect",
-      "nodeName": "Create Effect",
-      "x": -248.0,
-      "y": 1741.0,
-      "extraData": [
-        "Type:Ring"
-      ],
-      "inputPins": [
-        {
-          "ID": 2760,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "All Players(Team 1)",
-          "connections": [
-            2768
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 2761,
-          "type": "ovs.graph.pin.PinCombo",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 2762,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Color()",
-          "connections": [
-            2771
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 2763,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Global.RingMoney",
-          "connections": [
-            2774
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 2764,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "1.0",
-          "connections": [
-            2773
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 2765,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Visible To Position and Radius",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2766,
-          "type": "ovs.graph.pin.PinAction",
-          "connections": [
-            2758
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeAllPlayers",
-      "nodeName": "All Players",
-      "x": -901.0,
-      "y": 1742.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 2767,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Team 1",
-          "connections": [
-            2769
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2768,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            2760
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeTeam",
-      "nodeName": "Team",
-      "x": -1039.0,
-      "y": 1737.0,
-      "extraData": [
-        "Team:Team 1"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 2769,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            2767
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeColor",
-      "nodeName": "Color",
-      "x": -473.0,
-      "y": 1807.0,
-      "extraData": [
-        "Color:Orange"
-      ],
-      "inputPins": [
-        {
-          "ID": 2770,
-          "type": "ovs.graph.pin.PinCombo",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2771,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            2762
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeNumber",
-      "nodeName": "Number",
-      "x": -1096.0,
-      "y": 1935.0,
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 2772,
-          "type": "ovs.graph.pin.PinFloat",
-          "value": "1.0",
-          "connections": [],
-          "canDelete": false
-        }
-      ],
-      "outputPins": [
-        {
-          "ID": 2773,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            2764
-          ],
-          "canDelete": false
-        }
-      ]
-    },
-    {
-      "className": "ovs.graph.node.NodeGetVariable",
-      "nodeName": "Get Variable",
-      "x": -496.0,
-      "y": 1897.0,
-      "extraData": [
-        "Var:Global.RingMoney"
-      ],
-      "inputPins": [],
-      "outputPins": [
-        {
-          "ID": 2774,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            2763
+            6069
           ],
           "canDelete": false
         }

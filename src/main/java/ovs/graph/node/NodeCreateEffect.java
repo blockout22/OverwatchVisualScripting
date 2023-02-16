@@ -82,7 +82,6 @@ public class NodeCreateEffect extends Node{
 
             PinData<ImString> inputData = pinType.getData();
             inputData.getValue().set(data.getValue().get());
-            System.out.println(data.getValue().get());
         }
     }
 

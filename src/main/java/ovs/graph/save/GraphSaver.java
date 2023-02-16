@@ -5,8 +5,10 @@ import com.google.gson.GsonBuilder;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import ovs.Global;
+import ovs.TaskSchedule;
 import ovs.graph.Graph;
 import ovs.graph.Settings;
+import ovs.graph.Task;
 import ovs.graph.Variable;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
@@ -26,7 +28,14 @@ public class GraphSaver {
         validateDirExists(dir);
         validateDirExists(dir + File.separator + fileName);
 
+
         File file = new File(dir + File.separator + fileName + File.separator + "script.json");
+        File backup = new File(dir + File.separator + fileName + File.separator + "backup_script.json");
+        try {
+            Global.createBackup(file, backup);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(!file.exists()){
             try {
                 file.createNewFile();
@@ -728,7 +737,7 @@ public class GraphSaver {
                             pin.setNode(node);
                             pin.setCanDelete(save.outputPins.get(i).canDelete);
 
-                            pin.setCanDelete(true);
+//                            pin.setCanDelete(true);
                             pin.setPinType(Pin.PinType.Output);
                             node.outputPins.add(pin);
                         }
@@ -783,17 +792,23 @@ public class GraphSaver {
             }
 
             //loop through all nodes on graph and validate all links
-            for (Node node : graph.getNodes().values()) {
-                for (int i = 0; i < node.inputPins.size(); i++) {
-                    Pin pin = node.inputPins.get(i);
-                    pin.validateAllConnections();
-                }
+            TaskSchedule.addTask(new Task() {
+                @Override
+                public void onFinished() {
+                    for (Node node : graph.getNodes().values()) {
+                        for (int i = 0; i < node.inputPins.size(); i++) {
+                            Pin pin = node.inputPins.get(i);
+                            pin.validateAllConnections();
+                        }
 
-                for (int i = 0; i < node.outputPins.size(); i++) {
-                    Pin pin = node.outputPins.get(i);
-                    pin.validateAllConnections();
+                        for (int i = 0; i < node.outputPins.size(); i++) {
+                            Pin pin = node.outputPins.get(i);
+                            pin.validateAllConnections();
+                        }
+                    }
                 }
-            }
+            }, 2000);
+
 
             return graph;
 

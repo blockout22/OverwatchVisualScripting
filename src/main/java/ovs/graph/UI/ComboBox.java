@@ -18,6 +18,7 @@ public class ComboBox extends UiComponent{
     private boolean justOpened = false;
     private boolean requestPopup = false;
     private boolean isSearchable = false;
+    private boolean silentSelect = false;
 
     private ImString itemSearch = new ImString();
 
@@ -46,10 +47,19 @@ public class ComboBox extends UiComponent{
                 }
                 if(ImGui.menuItem(items[i])){
                     String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
+                    boolean hasChanged = (currentSelectedIndex  !=  i);
                     currentSelectedIndex = i;
                     String newValue = items[currentSelectedIndex];
-                    for (int j = 0; j < changeListeners.size(); j++) {
-                        changeListeners.get(j).onChanged(oldValue, newValue);
+
+                    if(silentSelect){
+                        silentSelect = false;
+                        return true;
+                    }
+
+                    if(hasChanged) {
+                        for (int j = 0; j < changeListeners.size(); j++) {
+                            changeListeners.get(j).onChanged(oldValue, newValue);
+                        }
                     }
                     return true;
                 }
@@ -80,10 +90,19 @@ public class ComboBox extends UiComponent{
             return;
         }
         String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
+        boolean hasChanged = (currentSelectedIndex  !=  index);
         currentSelectedIndex = index;
         String newValue = items[currentSelectedIndex];
-        for (int j = 0; j < changeListeners.size(); j++) {
-            changeListeners.get(j).onChanged(oldValue, newValue);
+
+        if(silentSelect){
+            silentSelect = false;
+            return;
+        }
+
+        if(hasChanged) {
+            for (int j = 0; j < changeListeners.size(); j++) {
+                changeListeners.get(j).onChanged(oldValue, newValue);
+            }
         }
     }
 
@@ -175,6 +194,14 @@ public class ComboBox extends UiComponent{
         }
 
         currentSelectedIndex = -1;
+    }
+
+    /**
+     * Select and change the value without triggering On Change Listener
+     */
+    public void silentSelectValue(String value) {
+        silentSelect = true;
+        selectValue(value);
     }
 
     public void setSearchable(boolean searchable){

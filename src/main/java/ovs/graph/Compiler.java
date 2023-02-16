@@ -1,6 +1,7 @@
 package ovs.graph;
 
 import ovs.graph.node.Node;
+import ovs.graph.node.NodeEntry;
 import ovs.graph.node.NodeRule;
 
 public class Compiler {
@@ -64,7 +65,7 @@ public class Compiler {
         output.append("\n");
 
         for(Node node : graph.getNodes().values()){
-            if(node instanceof NodeRule){
+            if(node instanceof NodeEntry){
                 output.append(handleNode(node));
                 output.append("\n\n");
             }

@@ -1657,6 +1657,32 @@
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroup",
+      "nodeName": "Node Group",
+      "x": 942.0,
+      "y": 318.0,
+      "extraData": [
+        "Group:"
+      ],
+      "inputPins": [
+        {
+          "ID": 13042,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 13043,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

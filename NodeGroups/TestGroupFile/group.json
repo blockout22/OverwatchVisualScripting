@@ -1,0 +1,69 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeGroupInput",
+      "nodeName": "Group Input",
+      "x": 852.0,
+      "y": 451.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1844,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1845
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCountOf",
+      "nodeName": "Count Of",
+      "x": 1021.0,
+      "y": 438.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1845,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            1844
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1846,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            2686
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 1224.0,
+      "y": 399.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2686,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Count Of()",
+          "connections": [
+            1846
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    }
+  ]
+}
