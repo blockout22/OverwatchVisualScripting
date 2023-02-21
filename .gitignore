@@ -31,3 +31,5 @@ target/
 META-INF/MANIFEST.MF
 Build/
 *.xml
+*\backup_script.json
+*\backup_group.json
