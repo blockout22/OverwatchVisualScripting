@@ -62,7 +62,9 @@ public class Graph {
             for(Pin pin : n.outputPins){
                 for (int i = 0; i < pin.connectedToList.size(); i++) {
                     Pin connection = findPinById(pin.connectedToList.get(i));
-                    connection.remove(pin.getID());
+                    if(connection != null) {
+                        connection.remove(pin.getID());
+                    }
                 }
 //                if (pin.connectedTo != -1) {
 //                    Pin oldPin = findPinById(pin.connectedTo);
@@ -72,7 +74,9 @@ public class Graph {
             for(Pin pin : n.inputPins){
                 for (int i = 0; i < pin.connectedToList.size(); i++) {
                     Pin connection = findPinById(pin.connectedToList.get(i));
-                    connection.remove(pin.getID());
+                    if(connection != null) {
+                        connection.remove(pin.getID());
+                    }
                 }
 //                if (pin.connectedTo != -1) {
 //                    Pin oldPin = findPinById(pin.connectedTo);

@@ -62,28 +62,34 @@ public class NodeCustomString extends Node{
         if(pinInput0.isConnected()){
             Pin connectedPin = pinInput0.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
-            input0Data.getValue().set(connectedData.getValue().get());
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
+                input0Data.getValue().set(connectedData.getValue().get());
 
-            toOutput += ", " + input0Data.getValue().get();
+                toOutput += ", " + input0Data.getValue().get();
+            }
         }
 
         if(pinInput1.isConnected()){
             Pin connectedPin = pinInput1.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
-            input1Data.getValue().set(connectedData.getValue().get());
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
+                input1Data.getValue().set(connectedData.getValue().get());
 
-            toOutput += ", " + input1Data.getValue().get();
+                toOutput += ", " + input1Data.getValue().get();
+            }
         }
 
         if(pinInput2.isConnected()){
             Pin connectedPin = pinInput2.getConnectedPin();
 
-            PinData<ImString> connectedData = connectedPin.getData();
-            input2Data.getValue().set(connectedData.getValue().get());
+            if(connectedPin != null) {
+                PinData<ImString> connectedData = connectedPin.getData();
+                input2Data.getValue().set(connectedData.getValue().get());
 
-            toOutput += ", " + input2Data.getValue().get();
+                toOutput += ", " + input2Data.getValue().get();
+            }
         }
 
         outputData.getValue().set(toOutput + ")");

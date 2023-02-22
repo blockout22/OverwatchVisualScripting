@@ -112,6 +112,9 @@ public class GroupSaver {
     public Graph load(String fileName){
         try{
             File file = new File(dir + File.separator + fileName + File.separator + "group.json");
+            if(!file.exists()){
+                return null;
+            }
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String line;

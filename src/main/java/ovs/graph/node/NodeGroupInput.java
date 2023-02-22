@@ -3,9 +3,11 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinVar;
 
+@NodeGroupOnly
 public class NodeGroupInput extends Node {
 
     PinVar output = new PinVar();
@@ -15,6 +17,7 @@ public class NodeGroupInput extends Node {
     public NodeGroupInput(Graph graph) {
         super(graph);
         setName("Group Input");
+        canEditTitle = true;
         setColor(167, 205, 60);
 
 

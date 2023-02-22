@@ -52,10 +52,12 @@ public class NodeActionList extends Node{
             if(pin.isConnected()){
                 Pin connectedPin = pin.getConnectedPin();
 
-                PinData<ImString> connectedData = connectedPin.getData();
+                if(connectedPin != null) {
+                    PinData<ImString> connectedData = connectedPin.getData();
 
-                output += "" + connectedData.getValue().get();// + (connectedData.getValue().get().endsWith(";") ? "" : ";");
-                output += "\n";
+                    output += "" + connectedData.getValue().get();// + (connectedData.getValue().get().endsWith(";") ? "" : ";");
+                    output += "\n";
+                }
             }
         }
 

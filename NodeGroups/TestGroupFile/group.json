@@ -40,7 +40,7 @@
           "ID": 1846,
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            2686
+            3535
           ],
           "canDelete": false
         }
@@ -49,12 +49,21 @@
     {
       "className": "ovs.graph.node.NodeGroupOutput",
       "nodeName": "Group Output",
-      "x": 1224.0,
+      "x": 1272.0,
       "y": 399.0,
       "extraData": [],
       "inputPins": [
         {
-          "ID": 2686,
+          "ID": 3534,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Kill(Event Player, Null);",
+          "connections": [
+            4386
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3535,
           "type": "ovs.graph.pin.PinVar",
           "value": "Count Of()",
           "connections": [
@@ -64,6 +73,59 @@
         }
       ],
       "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeKill",
+      "nodeName": "Kill",
+      "x": 1064.0,
+      "y": 287.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4384,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            4387
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4385,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4386,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            3534
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 900.0,
+      "y": 304.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 4387,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4384
+          ],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }

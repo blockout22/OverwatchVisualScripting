@@ -9,6 +9,8 @@ import ovs.Global;
 import ovs.ImGuiWindow;
 import ovs.TaskSchedule;
 import ovs.graph.node.Node;
+import ovs.graph.node.interfaces.NodeDisabled;
+import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.save.GroupSaver;
 
 public class GroupNodeWindow {
@@ -50,7 +52,7 @@ public class GroupNodeWindow {
         }
 
 
-        nodeEditorRenderer = new NodeEditorRenderer(id, graph);
+        nodeEditorRenderer = new NodeEditorRenderer(id, graph, NodeDisabled.class);
         nodeEditorRenderer.addChangeListener(new GraphChangeListener() {
             @Override
             public void changed() {

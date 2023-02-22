@@ -3,6 +3,7 @@ package ovs.graph.pin;
 import imgui.ImColor;
 import imgui.ImDrawList;
 import ovs.RGBA;
+import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.node.Node;
 
@@ -74,6 +75,18 @@ public abstract class Pin {
 //            targetPin.connectedTo = getID();
 //            return true;
 //        }
+        return true;
+    }
+
+    public boolean disconnectAll(){
+        for (int i = 0; i < connectedToList.size(); i++) {
+            int connectionID = connectedToList.get(i);
+            Pin connectedPin = getNode().getGraph().findPinById(connectionID);
+
+            connectedPin.remove(ID);
+            remove(connectionID);
+        }
+
         return true;
     }
 

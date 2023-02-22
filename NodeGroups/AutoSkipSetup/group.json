@@ -1,0 +1,148 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeIsInSetup",
+      "nodeName": "Is In Setup",
+      "x": 747.0,
+      "y": 317.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 15638,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            15635
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetMatchTime",
+      "nodeName": "Set Match Time",
+      "x": 974.0,
+      "y": 444.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 15639,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 15640,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            1842
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 1384.0,
+      "y": 300.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1841,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "Is In Setup \u003d\u003d True;",
+          "connections": [
+            15634
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1842,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Set Match Time(0.0);",
+          "connections": [
+            15640
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 14791,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeToCondition",
+      "nodeName": "To Condition",
+      "x": 1097.0,
+      "y": 294.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 15633,
+          "type": "ovs.graph.pin.PinIf",
+          "value": "Is In Setup \u003d\u003d True",
+          "connections": [
+            15637
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 15634,
+          "type": "ovs.graph.pin.PinCondition",
+          "connections": [
+            1841
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCompare",
+      "nodeName": "Compare",
+      "x": 904.0,
+      "y": 277.0,
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 15635,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is In Setup",
+          "connections": [
+            15638
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 15636,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 15637,
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            15633
+          ],
+          "canDelete": false
+        }
+      ]
+    }
+  ]
+}

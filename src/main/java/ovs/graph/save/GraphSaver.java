@@ -735,7 +735,7 @@ public class GraphSaver {
 
                             Pin pin = (Pin) classNode.getDeclaredConstructor().newInstance();
                             pin.setNode(node);
-                            pin.setCanDelete(save.outputPins.get(i).canDelete);
+                            pin.setCanDelete(save.outputPins.get(j).canDelete);
 
 //                            pin.setCanDelete(true);
                             pin.setPinType(Pin.PinType.Output);

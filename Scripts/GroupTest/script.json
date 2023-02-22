@@ -1231,75 +1231,188 @@
     {
       "className": "ovs.graph.node.NodeGroup",
       "nodeName": "Node Group",
-      "x": 440.0,
-      "y": 295.0,
+      "x": 757.0,
+      "y": 409.0,
       "extraData": [
-        "Group:TestGroupFile"
+        "Group:AutoSkipSetup"
       ],
-      "inputPins": [
-        {
-          "ID": 2705,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "All Heroes",
-          "connections": [
-            4374
-          ],
-          "canDelete": false
-        }
-      ],
+      "inputPins": [],
       "outputPins": [
         {
-          "ID": 2706,
-          "type": "ovs.graph.pin.PinVar",
+          "ID": 15707,
+          "type": "ovs.graph.pin.PinCondition",
           "connections": [
-            5221,
-            6070
+            16551
           ],
+          "canDelete": false
+        },
+        {
+          "ID": 15708,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            16552
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 15709,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
           "canDelete": false
         }
       ]
     },
     {
-      "className": "ovs.graph.node.NodeAllHeroes",
-      "nodeName": "All Heroes",
-      "x": 226.0,
-      "y": 423.0,
+      "className": "ovs.graph.node.NodeAttacker",
+      "nodeName": "Attacker",
+      "x": -167.0,
+      "y": 512.0,
       "extraData": [],
       "inputPins": [],
       "outputPins": [
         {
-          "ID": 4374,
+          "ID": 10423,
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            2705
+            10420
           ],
           "canDelete": false
         }
       ]
     },
     {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": 695.0,
-      "y": 287.0,
-      "extraData": [
-        "Var:Global.VarName0"
-      ],
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 148.0,
+      "y": 448.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 11264,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            13011
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeClosestPlayerTo",
+      "nodeName": "Closest Player To",
+      "x": 113.0,
+      "y": 527.0,
+      "extraData": [],
       "inputPins": [
         {
-          "ID": 5221,
+          "ID": 10416,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Count Of(All Heroes)",
+          "value": "Position Of(Attacker)",
           "connections": [
-            2706
+            10421
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 10417,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Teams",
+          "connections": [
+            10419
           ],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 5222,
-          "type": "ovs.graph.pin.PinAction",
+          "ID": 10418,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            13012
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeTeam",
+      "nodeName": "Team",
+      "x": -38.0,
+      "y": 585.0,
+      "extraData": [
+        "Team:All Teams"
+      ],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 10419,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            10417
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodePositionOf",
+      "nodeName": "Position Of",
+      "x": -44.0,
+      "y": 495.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 10420,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Attacker",
+          "connections": [
+            10423
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 10421,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            10416
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAdd",
+      "nodeName": "Add",
+      "x": 403.0,
+      "y": 636.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 12981,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Living Players()",
+          "connections": [
+            12985
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 12982,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Ammo(All Dead Players(Team Of(Event Player)), 0.0)",
+          "connections": [
+            12989
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 12983,
+          "type": "ovs.graph.pin.PinVar",
           "connections": [],
           "canDelete": false
         }
@@ -1308,8 +1421,8 @@
     {
       "className": "ovs.graph.node.NodeRule",
       "nodeName": "Rule",
-      "x": 920.0,
-      "y": 348.0,
+      "x": 936.0,
+      "y": 358.0,
       "extraData": [
         "EventOnGoing:Ongoing - Global",
         "Team:All",
@@ -1318,18 +1431,20 @@
       ],
       "inputPins": [
         {
-          "ID": 6068,
+          "ID": 16551,
           "type": "ovs.graph.pin.PinCondition",
-          "value": "",
-          "connections": [],
+          "value": "Is In Setup \u003d\u003d True;",
+          "connections": [
+            15707
+          ],
           "canDelete": false
         },
         {
-          "ID": 6069,
+          "ID": 16552,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Global.VarName0 \u003d Count Of(All Heroes);",
+          "value": "Set Match Time(0.0);",
           "connections": [
-            6071
+            15708
           ],
           "canDelete": false
         }
@@ -1337,31 +1452,227 @@
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeSetVariable",
-      "nodeName": "Set Variable",
-      "x": 696.0,
-      "y": 415.0,
-      "extraData": [
-        "Var:Global.VarName0"
-      ],
+      "className": "ovs.graph.node.NodeAllLivingPlayers",
+      "nodeName": "All Living Players",
+      "x": 170.0,
+      "y": 670.0,
+      "extraData": [],
       "inputPins": [
         {
-          "ID": 6070,
+          "ID": 12984,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Count Of(All Heroes)",
+          "value": "",
           "connections": [
-            2706
+            12986
           ],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 6071,
-          "type": "ovs.graph.pin.PinAction",
+          "ID": 12985,
+          "type": "ovs.graph.pin.PinVar",
           "connections": [
-            6069
+            12981
           ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllHeroes",
+      "nodeName": "All Heroes",
+      "x": 2.0,
+      "y": 688.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 12986,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12984
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAmmo",
+      "nodeName": "Ammo",
+      "x": 269.0,
+      "y": 827.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 12987,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "All Dead Players(Team Of(Event Player))",
+          "connections": [
+            12991
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 12988,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0.0",
+          "connections": [
+            12996
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 12989,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12982
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeAllDeadPlayers",
+      "nodeName": "All Dead Players",
+      "x": 99.0,
+      "y": 827.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 12990,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Team Of(Event Player)",
+          "connections": [
+            12993
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 12991,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12987
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeTeamOf",
+      "nodeName": "Team Of",
+      "x": -46.0,
+      "y": 830.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 12992,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            12994
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 12993,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12990
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": -188.0,
+      "y": 848.0,
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 12994,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12992
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeNumber",
+      "nodeName": "Number",
+      "x": -8.0,
+      "y": 911.0,
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 12995,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 12996,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            12988
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroup",
+      "nodeName": "Node Group",
+      "x": 319.0,
+      "y": 408.0,
+      "extraData": [
+        "Group:MultiInputs"
+      ],
+      "inputPins": [
+        {
+          "ID": 13011,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            11264
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 13012,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Closest Player To(Position Of(Attacker), All Teams)",
+          "connections": [
+            10418
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 13009,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 13010,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
           "canDelete": false
         }
       ]

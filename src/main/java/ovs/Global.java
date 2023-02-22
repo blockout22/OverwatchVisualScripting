@@ -338,13 +338,12 @@ public class Global {
     }
 
 
-    public static ArrayList<Class> findAllNodes() throws Exception {
+    public static ArrayList<Class> findAllNodes(Class... ignoredAnnotations) throws Exception {
         String packageName = "ovs.graph.node";
         ArrayList<Class> nodeList = new ArrayList<>();
 
         InputStream stream;
         BufferedReader br;
-
 
         if(!Global.devMode){
             ArrayList<String> paths = clasesFromJar();
@@ -357,10 +356,20 @@ public class Global {
                         Class node = Class.forName(className);
                         Class topSuperClass = getTopmostSuperclass(node, Node.class);
 //                        if (node.getSuperclass().equals(Node.class)) {
+                        boolean canAdd = true;
                         if (topSuperClass.equals(Node.class)) {
-                            if (node.getAnnotation(NodeDisabled.class) == null) {
+                            for(Class c : ignoredAnnotations){
+                                if(node.getAnnotation(c) != null){
+                                    canAdd = false;
+                                }
+                            }
+
+                            if(canAdd){
                                 nodeList.add(node);
                             }
+//                            if (node.getAnnotation(NodeDisabled.class) == null) {
+//                                nodeList.add(node);
+//                            }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -383,10 +392,20 @@ public class Global {
                         Class node = Class.forName(packageName + "." + line.substring(0, line.lastIndexOf('.')));
                         Class topSuperClass = getTopmostSuperclass(node, Node.class);
 //                        if (node.getSuperclass().equals(Node.class)) {
+                        boolean canAdd = true;
                         if (topSuperClass.equals(Node.class)) {
-                            if (node.getAnnotation(NodeDisabled.class) == null) {
+                            for(Class c : ignoredAnnotations){
+                                if(node.getAnnotation(c) != null){
+                                    canAdd = false;
+                                }
+                            }
+
+                            if(canAdd){
                                 nodeList.add(node);
                             }
+//                            if (node.getAnnotation(NodeDisabled.class) == null) {
+//                                nodeList.add(node);
+//                            }
                         }
                     } catch (Exception e) {
 

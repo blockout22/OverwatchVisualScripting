@@ -20,6 +20,8 @@ import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.*;
+import ovs.graph.node.interfaces.NodeDisabled;
+import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
@@ -86,7 +88,7 @@ public class GraphWindow {
 
         EDITOR = new TextEditor();
 
-        nodeEditorRenderer = new NodeEditorRenderer(id, graph);
+        nodeEditorRenderer = new NodeEditorRenderer(id, graph, NodeDisabled.class, NodeGroupOnly.class);
         graphChangeListener = new GraphChangeListener() {
             @Override
             public void changed() {

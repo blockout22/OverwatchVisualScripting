@@ -17,6 +17,7 @@ import imgui.type.ImString;
 import ovs.Global;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.Node;
+import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.pin.Pin;
 
 import java.lang.reflect.Constructor;
@@ -63,7 +64,7 @@ public class NodeEditorRenderer {
     private String id;
 
 
-    public NodeEditorRenderer(String id, Graph graph) {
+    public NodeEditorRenderer(String id, Graph graph, Class... ignoedNodeAnitations) {
         this.id = id;
         this.graph = graph;
         NodeEditorConfig config = new NodeEditorConfig();
@@ -71,7 +72,7 @@ public class NodeEditorRenderer {
         context = new NodeEditorContext(config);
 
         try {
-            ArrayList<Class> nodeList = Global.findAllNodes();
+            ArrayList<Class> nodeList = Global.findAllNodes(ignoedNodeAnitations);
             for (int i = 0; i < nodeList.size(); i++) {
                 addNodeToList(nodeList.get(i));
             }
@@ -213,7 +214,7 @@ public class NodeEditorRenderer {
                             if (ImGui.isItemClicked() && holdingPinID == -1) {
                                 lastActivePin = outPin.getID();
                             }
-                            ImGui.sameLine();
+//                            ImGui.sameLine();
                         }
                         if(maxWidth < NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x){
                             maxWidth = NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x;
