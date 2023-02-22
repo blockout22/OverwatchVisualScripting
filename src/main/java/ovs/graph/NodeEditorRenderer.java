@@ -82,6 +82,10 @@ public class NodeEditorRenderer {
         }
     }
 
+    public void setGraph(Graph graph){
+        this.graph = graph;
+    }
+
     public void setId(String id){
         this.id = id;
     }

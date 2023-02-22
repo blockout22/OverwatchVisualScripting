@@ -171,6 +171,7 @@ public class GraphWindow {
 
     public void loadFromString(String data){
         graph = graphSaver.loadFromString(data, settings);
+        nodeEditorRenderer.setGraph(graph);
         isLoading = true;
     }
 
