@@ -27,3 +27,7 @@ We can run it on the command line to see what errors we are getting
 ![img](Images/img4.png)
 
 ![img](Images/img2.png)
+
+![img](Images/GroupGraph.png)
+
+![img](Images/GroupNode.png)
