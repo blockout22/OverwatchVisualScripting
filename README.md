@@ -1,6 +1,8 @@
 # OverwatchVisualScripting
 
 ## Requirements
+### **If you are not using the Bundle read the following requirements**
+  
 Requires Java 17 installed and setup, you can check your java version in your command line by typing: `java -version`
 
 Download the Latest release [HERE](https://github.com/blockout22/OverwatchVisualScripting/releases/latest)
