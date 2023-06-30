@@ -1,35 +1,25 @@
 package ovs.graph;
 
-import imgui.ImColor;
-import imgui.ImDrawList;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
-import imgui.extension.nodeditor.NodeEditorConfig;
-import imgui.extension.nodeditor.NodeEditorContext;
-import imgui.extension.nodeditor.flag.NodeEditorPinKind;
-import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.extension.texteditor.TextEditor;
 import imgui.flag.*;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
-import imgui.type.ImLong;
-import imgui.type.ImString;
 import ovs.*;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.TextField;
-import ovs.graph.UI.UiComponent;
+import ovs.graph.importer.ScriptImporter;
 import ovs.graph.node.*;
 import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.List;
 
 public class GraphWindow {
     private ImGuiWindow imGuiWindow;
@@ -37,6 +27,7 @@ public class GraphWindow {
 
     private final ImBoolean closable = new ImBoolean(true);
     private ConfirmSaveDialog saveDialog = new ConfirmSaveDialog();
+    private ImportDialog importDialog = new ImportDialog();
 
     public String id;
     private String fileName = "untitled";
@@ -233,6 +224,37 @@ public class GraphWindow {
                 nodeEditorRenderer.removeChangeListener(graphChangeListener);
             }
 
+            if(importDialog.isOpen()){
+                int state = importDialog.show();
+                if(state == 1){
+                    System.out.println(importDialog.getContent());
+                    List<ScriptImporter.Rule> rules = ScriptImporter.importFromString(importDialog.getContent());
+
+                    for(ScriptImporter.Rule rule : rules){
+                        NodeRule nodeRule = new NodeRule(graph);
+                        nodeRule.comboEventOnGoing.selectValue(rule.eventType);
+
+                        if(rule.playerType != null){
+                            nodeRule.comboPlayers.selectValue(rule.playerType);
+                        }
+
+                        if(rule.teamType != null){
+                            nodeRule.comboTeam.selectValue(rule.teamType);
+                        }
+
+                        //TODO set positions
+                        nodeRule.posX = 0;
+                        nodeRule.posY = 0;
+                        graph.addNode(nodeRule);
+
+                        for (int i = 0; i < rule.actions.size(); i++) {
+                            String action = rule.actions.get(i);
+//                            nodeRule.inputPins.get(1).connect()
+                        }
+                    }
+                }
+            }
+
 //            NodeEditor.setCurrentEditor(context);
 //            NodeEditor.getStyle().setNodeRounding(2.0f);
 //            nodeEditorRenderer.initFrame();
@@ -263,6 +285,12 @@ public class GraphWindow {
                         }
                     }, 5000);
                 }
+            }
+
+            ImGui.sameLine();
+
+            if(ImGui.button("Import")){
+                importDialog.open();
             }
 
             if(showSavedText){

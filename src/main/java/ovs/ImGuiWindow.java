@@ -135,7 +135,7 @@ public class ImGuiWindow {
             ImGui.end();
 
 //            ImGui.setNextWindowPos(-200, -200, ImGuiCond.Always);
-            chatWindow();
+//            chatWindow();
 
             if(lastMenuAction == "New"){
 

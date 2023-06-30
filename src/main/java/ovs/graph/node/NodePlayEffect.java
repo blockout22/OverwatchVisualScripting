@@ -80,7 +80,7 @@ public class NodePlayEffect extends Node {
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinVisibleTo, visibleToData);
-        handlePinStringConnection(pinType, typeData);
+        handlePinStringConnection(pinType, typeData, pinType.getComboBox().getSelectedValue());
         handlePinStringConnection(pinColor, colorData, "Color(White)");
         handlePinStringConnection(pinPosition, positionData, "Vector(0, 0, 0)");
         handlePinStringConnection(pinRadius, radiusData, "5");

@@ -67,7 +67,7 @@ public class NodeWait extends Node{
             inputData.getValue().set(connectedData.getValue().get());
         }
 
-        outputData.getValue().set("Wait(" + data.getValue() + ", Ignore Condition);");
+        outputData.getValue().set("Wait(" + data.getValue() + ", "+ waitBehavior.getSelectedValue() +");");
     }
 
     @Override

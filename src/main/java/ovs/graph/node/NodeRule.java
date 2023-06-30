@@ -18,10 +18,10 @@ public class NodeRule extends NodeEntry{
     private PinCondition conditionPin = new PinCondition();
     private PinAction actionPin = new PinAction();
 
-    ComboBox comboEventOnGoing = new ComboBox();
-    ComboBox comboTeam = new ComboBox();
-    ComboBox comboPlayers = new ComboBox();
-    ComboBox comboSub = new ComboBox();
+    public ComboBox comboEventOnGoing = new ComboBox();
+    public ComboBox comboTeam = new ComboBox();
+    public ComboBox comboPlayers = new ComboBox();
+    public ComboBox comboSub = new ComboBox();
 
     boolean isGlobal = false;
     boolean isSub = false;
