@@ -26,6 +26,7 @@ public class NodeCallSubroutine extends Node{
             public void onOpen() {
                 String lastSelectedValue = comboBox.getSelectedValue();
 
+                comboBox.clear();
                 for (int i = 0; i < getGraph().subroutines.size(); i++) {
                     comboBox.addOption(getGraph().subroutines.get(i));
                 }

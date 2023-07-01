@@ -60,7 +60,7 @@ public class NodeRandomNumber extends Node {
         handlePinStringConnection(pinMin, minData);
         handlePinStringConnection(pinMax, maxData);
 
-        outputData.getValue().set(getName() + randomType.getSelectedValue() + "(" + minData.getValue().get() + ", " + maxData.getValue().get() + ")");
+        outputData.getValue().set("Random " + randomType.getSelectedValue() + "(" + minData.getValue().get() + ", " + maxData.getValue().get() + ")");
     }
 
     @Override
