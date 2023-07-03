@@ -5,6 +5,7 @@ import ovs.graph.node.Node;
 import ovs.graph.node.interfaces.NodeDisabled;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
@@ -435,7 +436,7 @@ public class Global {
         JarFile jf = null;
         try{
             ArrayList<String> paths = new ArrayList<>();
-            String s = new File(Global.class.getResource("").getPath()).getParent().replaceAll("(!|file:\\\\)", "");
+            String s = new File(Global.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
             jf = new JarFile(s);
             Enumeration<JarEntry> entries = jf.entries();
 
@@ -449,7 +450,9 @@ public class Global {
             return paths;
         }catch (IOException e) {
 //            e.printStackTrace();
-        }finally {
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } finally {
             if(jf != null) {
                 try {
                     jf.close();
