@@ -1,6 +1,7 @@
 package ovs.graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AdvancedArrayList<E> {
 
@@ -38,6 +39,11 @@ public class AdvancedArrayList<E> {
         for (int i = 0; i < changedListener.size(); i++) {
             changedListener.get(i).onChanged();
         }
+    }
+
+    public void swap(int i, int j){
+        Collections.swap(getList(), i, j);
+        triggerOnChanged();
     }
 
     public void addListChangedListener(ListChangedListener listChangedListener){

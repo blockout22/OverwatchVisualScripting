@@ -30,7 +30,7 @@ public class NodeEditorRenderer {
     private Graph graph;
 
     private ArrayList<GraphChangeListener> changeListeners = new ArrayList<>();
-    private final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
+    public final ArrayList<Node> nodeInstanceCache = new ArrayList<>();
     protected final ArrayList<Class<? extends Node>> nodeList = new ArrayList<>();
 
     private final ImLong LINKA = new ImLong();

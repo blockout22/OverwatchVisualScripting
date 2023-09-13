@@ -18,7 +18,9 @@ import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GraphWindow {
@@ -227,7 +229,7 @@ public class GraphWindow {
             if(importDialog.isOpen()){
                 int state = importDialog.show();
                 if(state == 1){
-                    System.out.println(importDialog.getContent());
+
                     List<ScriptImporter.Rule> rules = ScriptImporter.importFromString(importDialog.getContent());
 
                     for(ScriptImporter.Rule rule : rules){
@@ -249,7 +251,20 @@ public class GraphWindow {
 
                         for (int i = 0; i < rule.actions.size(); i++) {
                             String action = rule.actions.get(i);
-//                            nodeRule.inputPins.get(1).connect()
+                            System.out.println(action);
+
+                            for (Node node : nodeEditorRenderer.nodeInstanceCache) {
+                                if(node.getName().equals(action.trim().split("\\(")[0])){
+                                    try {
+                                        Node newInstance = node.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
+                                        graph.addNode(newInstance);
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -370,6 +385,24 @@ public class GraphWindow {
                                         ImGui.sameLine();
                                         tfGlobalVars.get(i).show();
                                         ImGui.sameLine();
+
+                                        //check if this is not the first element
+                                        if(i != 0){
+                                            if(ImGui.button("^" + "##g" + i)){
+                                                graph.globalVariables.swap(i, i - 1);
+
+                                            };
+                                            ImGui.sameLine();
+                                        }
+
+                                        //check if this is not the last element
+                                        if(i != tfGlobalVars.size() - 1){
+                                            if(ImGui.button("v" + "##g" + i)){
+                                                graph.globalVariables.swap(i, i + 1);
+                                            }
+                                            ImGui.sameLine();
+                                        }
+
                                         if (ImGui.button("X##globalVars" + i)) {
                                             graph.globalVariables.remove(i);
                                         }
@@ -382,6 +415,24 @@ public class GraphWindow {
                                         ImGui.sameLine();
                                         tfPlayerVars.get(i).show();
                                         ImGui.sameLine();
+
+                                        //check if this is not the first element
+                                        if(i != 0){
+                                            if(ImGui.button("^" + "##p" + i)){
+                                                graph.playerVariables.swap(i, i - 1);
+
+                                            };
+                                            ImGui.sameLine();
+                                        }
+
+                                        //check if this is not the last element
+                                        if(i != tfPlayerVars.size() - 1){
+                                            if(ImGui.button("v" + "##p" + i)){
+                                                graph.playerVariables.swap(i, i + 1);
+                                            }
+                                            ImGui.sameLine();
+                                        }
+
                                         if (ImGui.button("X##playerVars" + i)) {
                                             graph.playerVariables.remove(i);
                                         }
