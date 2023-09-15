@@ -25,11 +25,17 @@ public class Settings {
             0
     };
 
+    public int[] maxSpectators = {
+            2
+    };
+
     public ImInt mapRotCurrent = new ImInt();
     public ImInt returnToLobbyCurrent = new ImInt();
 
     private String[] mapRotItems = {"After A Mirror Match", "After A Game", "Paused"};
     private String[] returnToLobbyItems = {"Never", "After A Game", "After A Mirror Match"};
+
+    public ImBoolean allowInQueueOnOff = new ImBoolean(true);
 
     public ImBoolean assaultOnOff = new ImBoolean(false);
     public ImBoolean controlOnOff = new ImBoolean(true);
@@ -379,6 +385,10 @@ public class Settings {
             ImGui.sameLine();
             ImGui.sliderInt("##Max FFA Players", maxFFAPlayers, 0, 12);
 
+            ImGui.text("Max Spectators");
+            ImGui.sameLine();
+            ImGui.sliderInt("##Max Spectators", maxSpectators, 0, 12);
+
             ImGui.text("Map Rotation");
             ImGui.sameLine();
             ImGui.combo("##MapRotation", mapRotCurrent, mapRotItems);
@@ -386,6 +396,10 @@ public class Settings {
             ImGui.text("Return To Lobby");
             ImGui.sameLine();
             ImGui.combo("##RetrunToLobby", returnToLobbyCurrent, returnToLobbyItems);
+
+            ImGui.text("Allow Players Who Are In Queue");
+            ImGui.sameLine();
+            ImGui.checkbox("##AllowInQueue", allowInQueueOnOff);
         }
 
         ImGui.separator();
@@ -932,7 +946,9 @@ public class Settings {
             }
             output += "Max FFA Players: " + maxFFAPlayers[0] + "\n";
             output += "Map Rotation: " + mapRotItems[mapRotCurrent.get()] + "\n";
+            output += "Max Spectators:" + maxSpectators[0] + "\n";
             output += "Return To Lobby: " + returnToLobbyItems[returnToLobbyCurrent.get()] + "\n";
+            output += "Allow Players Who Are In Queue:" + (allowInQueueOnOff.get() ? "Yes" : "No") + "\n";
             output += "}\n";
         }
 

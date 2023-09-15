@@ -68,8 +68,10 @@ public class GraphSaver {
         graphSave.saveSettings.maxT1Players = settings.maxT1Players[0];
         graphSave.saveSettings.maxT2Players = settings.maxT2Players[0];
         graphSave.saveSettings.maxFFAPlayers = settings.maxFFAPlayers[0];
+        graphSave.saveSettings.maxSpectators = settings.maxSpectators[0];
         graphSave.saveSettings.mapRotation = settings.mapRotCurrent.get();
         graphSave.saveSettings.returnToLobby = settings.returnToLobbyCurrent.get();
+        graphSave.saveSettings.allowInQueue = settings.allowInQueueOnOff.get();
 
         graphSave.saveSettings.assaultMode = settings.assaultOnOff.get();
         graphSave.saveSettings.controlMode = settings.controlOnOff.get();
@@ -386,8 +388,10 @@ public class GraphSaver {
             settings.maxT1Players[0] = (gs.saveSettings.maxT1Players);
             settings.maxT2Players[0] = (gs.saveSettings.maxT2Players);
             settings.maxFFAPlayers[0] = (gs.saveSettings.maxFFAPlayers);
+            settings.maxSpectators[0] = (gs.saveSettings.maxSpectators);
             settings.mapRotCurrent.set(gs.saveSettings.mapRotation);
             settings.returnToLobbyCurrent.set(gs.saveSettings.returnToLobby);
+            settings.allowInQueueOnOff.set(gs.saveSettings.allowInQueue);
             settings.assaultOnOff.set(gs.saveSettings.assaultMode);
             settings.controlOnOff.set(gs.saveSettings.controlMode);
             settings.escortOnOff.set(gs.saveSettings.escortMode);
@@ -846,8 +850,11 @@ public class GraphSaver {
         private int maxT1Players = 5;
         private int maxT2Players = 5;
         private int maxFFAPlayers = 2;
+        private int maxSpectators = 2;
         private int mapRotation = 0;
         private int returnToLobby = 0;
+
+        private boolean allowInQueue = true;
 
         private boolean assaultMode;
         private boolean controlMode = true;
