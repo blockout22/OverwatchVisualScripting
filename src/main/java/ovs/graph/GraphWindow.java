@@ -369,7 +369,7 @@ public class GraphWindow {
                                             NodeEditor.selectNode(id, false);
                                             NodeEditor.navigateToSelection(false, 0.5f);
                                         }
-                                        
+
                                         if(i != 0){
                                             ImGui.sameLine();
                                             if(ImGui.button("^##rn" + i)){

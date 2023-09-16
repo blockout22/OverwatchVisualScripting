@@ -58,7 +58,15 @@ public class Graph {
 
     public void update(){
         for(Integer q : queuedForRemoval){
-            Node n = nodes.get(q);
+            Node n = null;
+
+            for (int i = 0; i < nodes.size(); i++) {
+                Node node = nodes.get(i);
+                if(node.getID() == q){
+                    n = node;
+                    break;
+                }
+            }
 
             //Clear any pin existing connections
             for(Pin pin : n.outputPins){
@@ -85,13 +93,13 @@ public class Graph {
 //                    oldPin.connectedTo = -1;
 //                }
             }
-            nodes.remove(q);
+            nodes.remove(n);
         }
         queuedForRemoval.clear();
     }
 
-    public void removeNode(int node){
-        queuedForRemoval.add(node);
+    public void removeNode(int nodeId){
+        queuedForRemoval.add(nodeId);
     }
 
     public void setHighestPinID(int id){
