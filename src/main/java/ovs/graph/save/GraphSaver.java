@@ -62,7 +62,7 @@ public class GraphSaver {
         graphSave.saveSettings.teamDmSettings.MapToggle.clear();
         graphSave.saveSettings.skirmishSettings.MapToggle.clear();
 
-        ////Lobby Settings
+        //Lobby Settings
         graphSave.saveSettings.modeName = settings.modeName.get();
         graphSave.saveSettings.description = settings.description.get();
         graphSave.saveSettings.maxT1Players = settings.maxT1Players[0];
@@ -85,6 +85,31 @@ public class GraphSaver {
         graphSave.saveSettings.teamDeathmatchMode = settings.teamDeathmatchOnOff.get();
         graphSave.saveSettings.practiceRangeMode = settings.practiceRangeOnOff.get();
         graphSave.saveSettings.skirmishMode = settings.skirmishOnOff.get();
+
+        //hero settings
+        graphSave.saveSettings.heroSettings.abilityCooldown = settings.abilityCooldownTime[0];
+        graphSave.saveSettings.heroSettings.quickMelee = settings.quickMelee.get();
+        graphSave.saveSettings.heroSettings.ultimateAbility = settings.ultimateAbility.get();
+        graphSave.saveSettings.heroSettings.ultimateGeneration = settings.ultimateGeneration[0];
+        graphSave.saveSettings.heroSettings.ultimateGenerationCombat = settings.ultimateGenerationCombat[0];
+        graphSave.saveSettings.heroSettings.ultimateGenerationPassive = settings.ultimateGenerationPassive[0];
+        graphSave.saveSettings.heroSettings.spawnWithUltimateReady = settings.spawnWithUltimateReady.get();
+        graphSave.saveSettings.heroSettings.ultimateDuration = settings.ultimateDuration[0];
+        graphSave.saveSettings.heroSettings.infiniteUltimateDuration = settings.infiniteUltimateDuration.get();
+        graphSave.saveSettings.heroSettings.damageDealt = settings.damageDealt[0];
+        graphSave.saveSettings.heroSettings.damageReceived = settings.damageReceived[0];
+        graphSave.saveSettings.heroSettings.healingDealt = settings.healingDealt[0];
+        graphSave.saveSettings.heroSettings.healingReceived = settings.healingReceived[0];
+        graphSave.saveSettings.heroSettings.health = settings.health[0];
+        graphSave.saveSettings.heroSettings.jumpVerticalSpeed = settings.jumpVerticalSpeed[0];
+        graphSave.saveSettings.heroSettings.movementGravity = settings.movementGravity[0];
+        graphSave.saveSettings.heroSettings.movementSpeed = settings.movementSpeed[0];
+        graphSave.saveSettings.heroSettings.projectileGravity = settings.projectileGravity[0];
+        graphSave.saveSettings.heroSettings.projectileSpeed = settings.projectileSpeed[0];
+        graphSave.saveSettings.heroSettings.receiveHeadshotsOnly = settings.receiveHeadshotsOnly.get();
+        graphSave.saveSettings.heroSettings.primaryFire = settings.primaryFire.get();
+        graphSave.saveSettings.heroSettings.ammunitionClipSizeScaler = settings.ammunitionClipSizeScalar[0];
+        graphSave.saveSettings.heroSettings.noAmmunitionRequirements = settings.noAmmunitionRequirements.get();
 
         for (int i = 0; i < settings.extensionBools.size(); i++) {
             Settings.BoolInfoWithName info = settings.extensionBools.get(i);
@@ -404,6 +429,31 @@ public class GraphSaver {
             settings.teamDeathmatchOnOff.set(gs.saveSettings.teamDeathmatchMode);
             settings.practiceRangeOnOff.set(gs.saveSettings.practiceRangeMode);
             settings.skirmishOnOff.set(gs.saveSettings.skirmishMode);
+
+            //hero settings
+            settings.abilityCooldownTime[0] = (gs.saveSettings.heroSettings.abilityCooldown);
+            settings.quickMelee.set(gs.saveSettings.heroSettings.quickMelee);
+            settings.ultimateAbility.set(gs.saveSettings.heroSettings.ultimateAbility);
+            settings.ultimateGeneration[0] = (gs.saveSettings.heroSettings.ultimateGeneration);
+            settings.ultimateGenerationCombat[0] = (gs.saveSettings.heroSettings.ultimateGenerationCombat);
+            settings.ultimateGenerationPassive[0] = (gs.saveSettings.heroSettings.ultimateGenerationPassive);
+            settings.spawnWithUltimateReady.set(gs.saveSettings.heroSettings.spawnWithUltimateReady);
+            settings.ultimateDuration[0] = (gs.saveSettings.heroSettings.ultimateDuration);
+            settings.infiniteUltimateDuration.set(gs.saveSettings.heroSettings.infiniteUltimateDuration);
+            settings.damageDealt[0] = (gs.saveSettings.heroSettings.damageDealt);
+            settings.damageReceived[0] = (gs.saveSettings.heroSettings.damageReceived);
+            settings.healingDealt[0] = (gs.saveSettings.heroSettings.healingDealt);
+            settings.healingReceived[0] = (gs.saveSettings.heroSettings.healingReceived);
+            settings.health[0] = (gs.saveSettings.heroSettings.health);
+            settings.jumpVerticalSpeed[0] = (gs.saveSettings.heroSettings.jumpVerticalSpeed);
+            settings.movementGravity[0] = (gs.saveSettings.heroSettings.movementGravity);
+            settings.movementSpeed[0] = (gs.saveSettings.heroSettings.movementSpeed);
+            settings.projectileGravity[0] = (gs.saveSettings.heroSettings.projectileGravity);
+            settings.projectileSpeed[0] = (gs.saveSettings.heroSettings.projectileSpeed);
+            settings.receiveHeadshotsOnly.set(gs.saveSettings.heroSettings.receiveHeadshotsOnly);
+            settings.primaryFire.set(gs.saveSettings.heroSettings.primaryFire);
+            settings.ammunitionClipSizeScalar[0] = (gs.saveSettings.heroSettings.ammunitionClipSizeScaler);
+            settings.noAmmunitionRequirements.set(gs.saveSettings.heroSettings.noAmmunitionRequirements);
 
             for (int i = 0; i < gs.saveSettings.extensionToggle.size(); i++) {
                 BoolInfo info = gs.saveSettings.extensionToggle.get(i);
@@ -883,6 +933,8 @@ public class GraphSaver {
         private TeamDeatchMatchSettings teamDmSettings = new TeamDeatchMatchSettings();
         private PracticeRangeSettings practiceRangeSettings = new PracticeRangeSettings();
         private SkirmishSettings skirmishSettings = new SkirmishSettings();
+
+        private HeroSettings heroSettings = new HeroSettings();
     }
 
     private static class AssaultSettings{
@@ -989,6 +1041,34 @@ public class GraphSaver {
     private static class SkirmishSettings{
         private int limitValidControlPoints = 0;
         private ArrayList<BoolInfo> MapToggle = new ArrayList<>();
+    }
+
+    private static class HeroSettings{
+        private int abilityCooldown = 100;
+        private boolean quickMelee = true;
+        private boolean ultimateAbility = true;
+        private int ultimateGeneration = 100;
+        private int ultimateGenerationCombat = 100;
+        private int ultimateGenerationPassive = 100;
+        private boolean spawnWithUltimateReady = false;
+        private int ultimateDuration = 100;
+        private boolean infiniteUltimateDuration = false;
+
+        private int damageDealt = 100;
+        private int damageReceived = 100;
+        private int healingDealt = 100;
+        private int healingReceived = 100;
+        private int health = 100;
+        private int jumpVerticalSpeed = 100;
+        private int movementGravity = 100;
+        private int movementSpeed = 100;
+        private int projectileGravity = 100;
+        private int projectileSpeed = 100;
+        private boolean receiveHeadshotsOnly = false;
+
+        private boolean primaryFire = true;
+        private int ammunitionClipSizeScaler = 100;
+        private boolean noAmmunitionRequirements = false;
     }
 
     private static class BoolInfo{

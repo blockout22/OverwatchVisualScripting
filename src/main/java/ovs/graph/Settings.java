@@ -154,6 +154,36 @@ public class Settings {
     public ArrayList<BoolInfoWithName> skirmishMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> extensionBools = new ArrayList<>();
 
+    //Hero Settings - Abilities
+    public int[] abilityCooldownTime = new int[]{100};
+    public ImBoolean quickMelee = new ImBoolean(true);
+    public ImBoolean ultimateAbility = new ImBoolean(true);
+    public int[] ultimateGeneration = new int[]{100};
+    public int[] ultimateGenerationCombat = new int[]{100};
+    public int[] ultimateGenerationPassive = new int[]{100};
+    public ImBoolean spawnWithUltimateReady = new ImBoolean(false);
+    public int[] ultimateDuration = new int[]{100};
+    public ImBoolean infiniteUltimateDuration = new ImBoolean(false);
+
+    //Hero Settings - Modifiers
+    public int[] damageDealt = new int[]{100};
+    public int[] damageReceived = new int[]{100};
+    public int[] healingDealt = new int[]{100};
+    public int[] healingReceived = new int[]{100};
+    public int[] health = new int[]{100};
+    public int[] jumpVerticalSpeed = new int[]{100};
+    public int[] movementGravity = new int[]{100};
+    public int[] movementSpeed = new int[]{100};
+    public int[] projectileGravity = new int[]{100};
+    public int[] projectileSpeed = new int[]{100};
+    public ImBoolean receiveHeadshotsOnly = new ImBoolean(false);
+
+    //Hero Settings - Weapons
+    public ImBoolean primaryFire = new ImBoolean(true);
+    public int[] ammunitionClipSizeScalar = new int[]{100};
+    public ImBoolean noAmmunitionRequirements = new ImBoolean(false);
+
+
     public Settings(){
 
         assaultMap.add(new BoolInfoWithName("Hanamura", new ImBoolean(true)));
@@ -490,6 +520,102 @@ public class Settings {
             if(ImGui.button("Skirmish Options")){
                 ImGui.openPopup("Skirmish_options");
             }
+        }
+
+        if(ImGui.collapsingHeader("Heroes")){
+            ImGui.sliderInt("##AbilityCooldownTime", abilityCooldownTime, 0, 500);
+            ImGui.sameLine();
+            ImGui.text("Ability Cooldown Time");
+
+            ImGui.checkbox("##QuickMelee", quickMelee);
+            ImGui.sameLine();
+            ImGui.text("Quick Melee");
+
+            ImGui.checkbox("##UltimateAbility", ultimateAbility);
+            ImGui.sameLine();
+            ImGui.text("UltimateAbility");
+
+            ImGui.sliderInt("##UltimateGeneration", ultimateGeneration, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Ultimate Generation");
+
+            ImGui.sliderInt("##UltimateGenerationCombat", ultimateGenerationCombat, 0, 500);
+            ImGui.sameLine();
+            ImGui.text("Ultimate Generation - Combat");
+
+            ImGui.sliderInt("##UltimateGenerationPassive", ultimateGenerationPassive, 0, 500);
+            ImGui.sameLine();
+            ImGui.text("Ultimate Generation - Passive");
+
+            ImGui.checkbox("##SpawnWithUltimateReady", spawnWithUltimateReady);
+            ImGui.sameLine();
+            ImGui.text("Spawn With Ultimate Ready");
+
+            ImGui.sliderInt("##UltimateDuration", ultimateDuration, 25, 500);
+            ImGui.sameLine();
+            ImGui.text("Ultimate Duration");
+
+            ImGui.checkbox("##InfiniateUltimateDuration", infiniteUltimateDuration);
+            ImGui.sameLine();
+            ImGui.text("Infiniate Ultimate Duration");
+
+            //combat modifiers
+            ImGui.sliderInt("##DamageDealt", damageDealt, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Damage Dealt");
+
+            ImGui.sliderInt("##DamageReceived", damageReceived, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Damage Received");
+
+            ImGui.sliderInt("##HealingDealt", healingDealt, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Healing Dealt");
+
+            ImGui.sliderInt("##HealingReceived", healingReceived, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Healing Received");
+
+            ImGui.sliderInt("##Health", health, 10, 500);
+            ImGui.sameLine();
+            ImGui.text("Health");
+
+            ImGui.sliderInt("##JumpVerticalSpeed", jumpVerticalSpeed, 10, 800);
+            ImGui.sameLine();
+            ImGui.text("Jump Vertical Speed");
+
+            ImGui.sliderInt("##MovementGravity", movementGravity, 25, 400);
+            ImGui.sameLine();
+            ImGui.text("Movement Gravity");
+
+            ImGui.sliderInt("##MovementSpeed", movementSpeed, 50, 300);
+            ImGui.sameLine();
+            ImGui.text("Movement Speed");
+
+            ImGui.sliderInt("##Projective Gravity", projectileGravity, 0, 500);
+            ImGui.sameLine();
+            ImGui.text("Projectile Gravity");
+
+            ImGui.sliderInt("##ProjectileSpeed", projectileSpeed, 0, 500);
+            ImGui.sameLine();
+            ImGui.text("Projectile Speed");
+
+            ImGui.checkbox("##ReceiveHeadshotsOnly", receiveHeadshotsOnly);
+            ImGui.sameLine();
+            ImGui.text("Receive Headshots Only");
+
+            //Weapons
+            ImGui.checkbox("##PrimaryFire", primaryFire);
+            ImGui.sameLine();
+            ImGui.text("Primary Fire");
+
+            ImGui.sliderInt("##AmmunitionClipSizeScalar", ammunitionClipSizeScalar, 25, 500);
+            ImGui.sameLine();
+            ImGui.text("Ammunition Clip Size Scalar");
+
+            ImGui.checkbox("##NoAmmunitionRequirements", noAmmunitionRequirements);
+            ImGui.sameLine();
+            ImGui.text("No Ammunition Requirements");
         }
 
         ImGui.popItemWidth();
@@ -1201,6 +1327,41 @@ public class Settings {
                 output += "}\n";
             }
 
+
+            output += "}\n";
+        }
+
+        {
+            output += "heroes\n";
+            output += "{\n";
+
+            {
+                output += "General\n";
+                output += "{\n";
+                {
+                    output += "Ability Cooldown Time: " + abilityCooldownTime[0] + "%\n";
+                    output += "Ammunition Clip Size Scalar: " + ammunitionClipSizeScalar[0] + "%\n";
+                    output += "Damage Dealt: " + damageDealt[0] + "%\n";
+                    output += "Damage Received: " + damageReceived[0] + "%\n";
+                    output += "Healing Dealt: " + healingDealt[0] + "%\n";
+                    output += "Healing Received: " + healingReceived[0] + "%\n";
+                    output += "Health: " + health[0] + "%\n";
+                    output += "Infinite Ultimate Duration: " + (infiniteUltimateDuration.get() ? "On" : "Off") + "\n";
+                    output += "Jump Vertical Speed: " + jumpVerticalSpeed[0] + "%\n";
+                    output += "Movement Gravity: " + movementGravity[0] + "%\n";
+                    output += "Movement Speed: " + movementSpeed[0] + "%\n";
+                    output += "No Ammunition Requirement: " + (noAmmunitionRequirements.get() ? "On" : "Off") + "\n";
+                    output += "Primary Fire: " + (primaryFire.get() ? "On" : "Off") + "\n";
+                    output += "Projectile Gravity: " + projectileGravity[0] + "%\n";
+                    output += "Projectile Speed: " + projectileSpeed[0] + "%\n";
+                    output += "Quick Melee: " + (quickMelee.get() ? "On" : "Off") + "\n";
+                    output += "Receive Headshots Only: " + (receiveHeadshotsOnly.get() ? "On" : "Off") + "\n";
+                    output += "Spawn With Ultimate Ready: " + (spawnWithUltimateReady.get() ? "On" : "Off") + "\n";
+                    output += "Ultimate Ability: " + (ultimateAbility.get() ? "On" : "Off") + "\n";
+                    output += "Ultimate Duration: " + ultimateDuration[0] + "%\n";
+                }
+                output += "}\n";
+            }
 
             output += "}\n";
         }

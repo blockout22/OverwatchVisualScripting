@@ -1222,6 +1222,31 @@
           "value": true
         }
       ]
+    },
+    "heroSettings": {
+      "abilityCooldown": 500,
+      "quickMelee": false,
+      "ultimateAbility": false,
+      "ultimateGeneration": 500,
+      "ultimateGenerationCombat": 500,
+      "ultimateGenerationPassive": 500,
+      "spawnWithUltimateReady": false,
+      "ultimateDuration": 500,
+      "infiniteUltimateDuration": false,
+      "damageDealt": 500,
+      "damageReceived": 500,
+      "healingDealt": 500,
+      "healingReceived": 500,
+      "health": 500,
+      "jumpVerticalSpeed": 800,
+      "movementGravity": 400,
+      "movementSpeed": 300,
+      "projectileGravity": 500,
+      "projectileSpeed": 500,
+      "receiveHeadshotsOnly": false,
+      "primaryFire": false,
+      "ammunitionClipSizeScaler": 500,
+      "noAmmunitionRequirements": false
     }
   },
   "globalVariables": [
