@@ -3,12 +3,14 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
+import ovs.graph.pin.PinCondition;
+import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
 public class NodeFilteredArray extends Node {
 
     PinVar pinArray = new PinVar();
-    PinVar pinCondition = new PinVar();
+    PinIf pinCondition = new PinIf();
     PinVar output = new PinVar();
 
     public NodeFilteredArray(Graph graph) {

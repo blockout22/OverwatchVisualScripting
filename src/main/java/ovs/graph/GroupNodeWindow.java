@@ -105,7 +105,7 @@ public class GroupNodeWindow {
 
             if(ImGui.button("Save")){
 
-                for(Node node : graph.getNodes().values()){
+                for(Node node : graph.getNodes().getList()){
                     node.onSaved();
                 }
 

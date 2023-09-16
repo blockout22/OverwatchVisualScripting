@@ -64,7 +64,7 @@ public class Compiler {
         output.append("}\n");
         output.append("\n");
 
-        for(Node node : graph.getNodes().values()){
+        for(Node node : graph.getNodes().getList()){
             if(node instanceof NodeEntry){
                 output.append(handleNode(node));
                 output.append("\n\n");

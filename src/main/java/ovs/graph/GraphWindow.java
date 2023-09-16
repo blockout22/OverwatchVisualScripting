@@ -50,6 +50,7 @@ public class GraphWindow {
     private boolean isLoading = false;
     private boolean outputInFocus = false;
 
+    private final ArrayList<TextField> tfRulesList = new ArrayList<>();
     private final ArrayList<TextField> tfGlobalVars = new ArrayList<>();
     private final ArrayList<TextField> tfPlayerVars = new ArrayList<>();
     private final ArrayList<TextField> tfSubroutines = new ArrayList<>();
@@ -89,6 +90,27 @@ public class GraphWindow {
             }
         };
         nodeEditorRenderer.addChangeListener(graphChangeListener);
+
+        graph.getNodes().addListChangedListener(new ListChangedListener() {
+            public void onChanged() {
+                tfRulesList.clear();
+                ruleNodes.clear();
+                for(Node node : graph.getNodes().getList()){
+                    if (node instanceof NodeRule) {
+                        TextField tf = new TextField(true);
+                        ruleNodes.add(node);
+                        tf.addChangedListener(new ChangeListener() {
+                            @Override
+                            public void onChanged(String oldValue, String newValue) {
+                                node.setName(newValue);
+                            }
+                        });
+                        tf.setText(node.getName());
+                        tfRulesList.add(tf);
+                    }
+                }
+            }
+        });
 
         graph.globalVariables.addListChangedListener(new ListChangedListener() {
             @Override
@@ -150,6 +172,7 @@ public class GraphWindow {
             }
         });
 
+        graph.getNodes().triggerOnChanged();
         graph.playerVariables.triggerOnChanged();
         graph.globalVariables.triggerOnChanged();
         graph.subroutines.triggerOnChanged();
@@ -285,7 +308,7 @@ public class GraphWindow {
 
             if(ImGui.button("Save"))
             {
-                for(Node node : graph.getNodes().values()){
+                for(Node node : graph.getNodes().getList()){
                     node.onSaved();
                 }
                 boolean success = graphSaver.save(fileName, settings, graph);
@@ -334,32 +357,35 @@ public class GraphWindow {
                                 ImGui.separator();
                                 if(ImGui.collapsingHeader("Rules"))
                                 {
-//                                    ImGui.separator();
-//                                    ImGui.text("Rules");
+//                                    ImGui.pushItemWidth(400);
+//                                    ImGui.listBox("##Rules", ruleListSelected, items);
+                                    for (int i = 0; i < tfRulesList.size(); i++) {
+                                        tfRulesList.get(i).show();
+                                        ImGui.sameLine();
 
-                                    ruleNodes.clear();
+                                        if(ImGui.button("->##rn" + i))
+                                        {
+                                            int id = ruleNodes.get(i).getID();
+                                            NodeEditor.selectNode(id, false);
+                                            NodeEditor.navigateToSelection(false, 0.5f);
+                                        }
+                                        
+                                        if(i != 0){
+                                            ImGui.sameLine();
+                                            if(ImGui.button("^##rn" + i)){
+                                                boolean swapped = graph.nodes.swap(ruleNodes.get(i), ruleNodes.get(i - 1));
+                                            }
+                                        }
 
-                                    for (Node node : graph.getNodes().values()) {
-                                        if (node instanceof NodeRule) {
-                                            ruleNodes.add((NodeRule) node);
+                                        if(i != tfRulesList.size() - 1){
+                                            ImGui.sameLine();
+                                            if(ImGui.button("v##rn" + i)){
+                                                boolean swapped = graph.nodes.swap(ruleNodes.get(i), ruleNodes.get(i + 1));
+                                            }
                                         }
                                     }
 
-                                    String[] items = new String[ruleNodes.size()];
-                                    for (int i = 0; i < ruleNodes.size(); i++) {
-                                        items[i] = ruleNodes.get(i).getName();
-                                    }
-
-
-                                    ImGui.pushItemWidth(400);
-                                    ImGui.listBox("##Rules", ruleListSelected, items);
-                                    if(ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0)){
-
-                                        int id = ruleNodes.get(ruleListSelected.get()).getID();
-                                        NodeEditor.selectNode(id, false);
-                                        NodeEditor.navigateToSelection(false, 0.5f);
-                                    }
-                                    ImGui.popItemWidth();
+//                                    ImGui.popItemWidth();
                                 }
 
 //                                ImGui.newLine();

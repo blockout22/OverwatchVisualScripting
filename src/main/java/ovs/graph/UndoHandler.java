@@ -11,7 +11,7 @@ public class UndoHandler {
 
     public void addState(Graph graph){
         State state = new State();
-        for(Node node : graph.getNodes().values()){
+        for(Node node : graph.getNodes().getList()){
             state.nodeStates.add(new NodeState(node.getID(), node.posX, node.posY));
         }
         graphHistory.add(state);
@@ -19,7 +19,7 @@ public class UndoHandler {
 
     public void undo(Graph graph){
         State lastState = graphHistory.get(graphHistory.size() - 1);
-        for(Node node : graph.getNodes().values())
+        for(Node node : graph.getNodes().getList())
         {
             for (int i = 0; i < lastState.nodeStates.size(); i++) {
                 NodeState nodeState = lastState.nodeStates.get(i);

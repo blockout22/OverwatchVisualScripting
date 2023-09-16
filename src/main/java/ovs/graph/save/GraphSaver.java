@@ -275,7 +275,7 @@ public class GraphSaver {
         }
 
 
-        for(Node node : graph.getNodes().values()){
+        for(Node node : graph.getNodes().getList()){
             String className = node.getClass().getName();
             //get the nodes position in the graph
             ImVec2 pos = new ImVec2();
@@ -799,7 +799,7 @@ public class GraphSaver {
             TaskSchedule.addTask(new Task() {
                 @Override
                 public void onFinished() {
-                    for (Node node : graph.getNodes().values()) {
+                    for (Node node : graph.getNodes().getList()) {
                         for (int i = 0; i < node.inputPins.size(); i++) {
                             Pin pin = node.inputPins.get(i);
                             pin.validateAllConnections();

@@ -103,13 +103,13 @@ public class NodeEditorRenderer {
         float headerMaxY = 0;
         NodeEditor.begin(id);
         {
-            for (Node node : graph.getNodes().values()) {
+            for (Node node : graph.getNodes().getList()) {
                 if (isLoading) {
                     NodeEditor.setNodePosition(node.getID(), node.posX, node.posY);
                 }
             }
 
-            for (Node node : graph.getNodes().values()) {
+            for (Node node : graph.getNodes().getList()) {
                 float maxWidth = 0;
                 NodeEditor.beginNode(node.getID());
                 {
@@ -133,6 +133,7 @@ public class NodeEditorRenderer {
                         if(ImGui.inputText("##", string, ImGuiInputTextFlags.EnterReturnsTrue)){
                             node.setName(string.get());
                             node.isEditingTitle = false;
+                            graph.getNodes().triggerOnChanged();
                         }
                         ImGui.popItemWidth();
                     }else{
@@ -274,7 +275,7 @@ public class NodeEditorRenderer {
 
 
         int uniqueLinkId = 1;
-        for (Node node : graph.getNodes().values()) {
+        for (Node node : graph.getNodes().getList()) {
             for (Pin pin : node.inputPins) {
 //                                if (pin.connectedTo != -1) {
 ////                                        float[] pincolor = getPinColor(pin);

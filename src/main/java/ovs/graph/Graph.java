@@ -9,7 +9,8 @@ import java.util.Map;
 
 public class Graph {
 
-    private final Map<Integer, Node> nodes = new HashMap<>();
+//    private final AdvancedMap<Integer, Node> nodes = new AdvancedMap<>();
+    public final AdvancedArrayList<Node> nodes = new AdvancedArrayList<>();
     private ArrayList<Integer> queuedForRemoval = new ArrayList<>();
     public final AdvancedArrayList<Variable> globalVariables = new AdvancedArrayList<>();
     public final AdvancedArrayList<Variable> playerVariables = new AdvancedArrayList<>();
@@ -25,7 +26,8 @@ public class Graph {
     public boolean addNode(Node node){
         node.setID(nextNodeID++);
         node.setName(node.getName());
-        nodes.put(node.getID(), node);
+//        nodes.put(node.getID(), node);
+        nodes.add(node);
         return true;
     }
 
@@ -49,7 +51,7 @@ public class Graph {
         subroutines.add(name);
     }
 
-    public Map<Integer, Node> getNodes()
+    public AdvancedArrayList<Node> getNodes()
     {
         return nodes;
     }
@@ -99,7 +101,8 @@ public class Graph {
     }
 
     public Pin findPinById(final int ID) {
-        for(Node node : nodes.values()){
+//        for(Node node : nodes.values()){
+        for(Node node : nodes.getList()){
             for(Pin pin : node.inputPins){
                 if(pin.getID() == ID){
                     return pin;

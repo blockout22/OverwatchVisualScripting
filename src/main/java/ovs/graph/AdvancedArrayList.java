@@ -46,6 +46,33 @@ public class AdvancedArrayList<E> {
         triggerOnChanged();
     }
 
+    public boolean swap(E a, E b){
+        int _a = -1;
+        int _b = -1;
+
+        for (int i = 0; i < list.size(); i++) {
+
+            if(list.get(i) == a){
+                _a = i;
+            }
+
+            if(list.get(i) == b){
+                _b = i;
+            }
+
+            if(_a != -1 && _b != -1){
+                break;
+            }
+        }
+
+        if(_a != -1 && _b != -1){
+            swap(_a, _b);
+            return true;
+        }
+
+        return false;
+    }
+
     public void addListChangedListener(ListChangedListener listChangedListener){
         this.changedListener.add(listChangedListener);
     }

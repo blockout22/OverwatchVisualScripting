@@ -15,7 +15,17 @@ public class TextField extends UiComponent{
 
     private ArrayList<ChangeListener> changeListeners = new ArrayList<>();
 
+    private boolean allowSpaces = false;
+
     public TextField(){
+    }
+
+    public TextField(boolean allowSpaces){
+        allowSpaces(allowSpaces);
+    }
+
+    public void allowSpaces(boolean allow){
+        this.allowSpaces = allow;
     }
 
     public void addChangedListener(ChangeListener changeListener){
@@ -24,8 +34,14 @@ public class TextField extends UiComponent{
 
     @Override
     public void show() {
-        if(ImGui.inputText("##" + uniqueID, string, ImGuiInputTextFlags.CharsNoBlank)){
+        if(!allowSpaces) {
+            if (ImGui.inputText("##" + uniqueID, string, ImGuiInputTextFlags.CharsNoBlank)) {
 
+            }
+        }else{
+            if (ImGui.inputText("##" + uniqueID, string)) {
+
+            }
         }
 
         if(lastText != string.get()){

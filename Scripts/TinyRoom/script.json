@@ -5,8 +5,10 @@
     "maxT1Players": 6,
     "maxT2Players": 6,
     "maxFFAPlayers": 0,
+    "maxSpectators": 2,
     "mapRotation": 0,
     "returnToLobby": 0,
+    "allowInQueue": true,
     "assaultMode": false,
     "controlMode": false,
     "escortMode": true,
@@ -1223,37 +1225,37 @@
     }
   },
   "globalVariables": [
-    "0:Team1Spawn",
-    "1:Team2Spawn"
+    "0:Team2Spawn",
+    "1:Team1Spawn"
   ],
   "playerVariables": [],
   "subroutines": [],
   "nodeSaves": [
     {
       "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Set Spawn",
-      "x": 1115.0,
-      "y": 277.0,
+      "nodeName": "respawn after death",
+      "x": 1171.0,
+      "y": 582.0,
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Player Died",
         "Team:All",
         "Player:All",
         "Sub:"
       ],
       "inputPins": [
         {
-          "ID": 1837,
+          "ID": 1862,
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
           "connections": [],
           "canDelete": false
         },
         {
-          "ID": 1838,
+          "ID": 1863,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If(Current Map \u003d\u003d Map(Havana));\nGlobal.Team1Spawn \u003d Vector(69.266, 5.487, -104.692);\nGlobal.Team2Spawn \u003d Vector(81.153, 5.555, -104.4);\nElse;\n\nEnd;\n",
+          "value": "Wait(1.0, Ignore Condition);\nRespawn(Event Player);\nStart Forcing Player To Be Hero(Event Player, Random Value In Array(All Heroes));\n",
           "connections": [
-            1844
+            1923
           ],
           "canDelete": false
         }
@@ -1569,29 +1571,29 @@
     },
     {
       "className": "ovs.graph.node.NodeRule",
-      "nodeName": "respawn after death",
-      "x": 1171.0,
-      "y": 582.0,
+      "nodeName": "Set Spawn",
+      "x": 1115.0,
+      "y": 277.0,
       "extraData": [
-        "EventOnGoing:Player Died",
+        "EventOnGoing:Ongoing - Global",
         "Team:All",
         "Player:All",
         "Sub:"
       ],
       "inputPins": [
         {
-          "ID": 1862,
+          "ID": 1837,
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
           "connections": [],
           "canDelete": false
         },
         {
-          "ID": 1863,
+          "ID": 1838,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Wait(1.0, Ignore Condition);\nRespawn(Event Player);\nStart Forcing Player To Be Hero(Event Player, Random Value In Array(All Heroes));\n",
+          "value": "If(Current Map \u003d\u003d Map(Havana));\nGlobal.Team1Spawn \u003d Vector(69.266, 5.487, -104.692);\nGlobal.Team2Spawn \u003d Vector(81.153, 5.555, -104.4);\nElse;\n\nEnd;\n",
           "connections": [
-            1923
+            1844
           ],
           "canDelete": false
         }

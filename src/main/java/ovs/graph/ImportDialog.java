@@ -24,7 +24,7 @@ public class ImportDialog {
         int state = -1;
         if(ImGui.isPopupOpen("ImportPopup")) {
             if(ImGui.beginPopupModal("ImportPopup", NoTitleBar | NoResize | AlwaysAutoResize)) {
-                ImGui.text("Script Import");
+                ImGui.text("Script Import (Not Functional Yet)");
                 if (ImGui.inputTextMultiline("##teaxArea", outputText, 500, 500)) {
                 }
 

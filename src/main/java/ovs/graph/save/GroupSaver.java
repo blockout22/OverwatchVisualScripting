@@ -41,7 +41,7 @@ public class GroupSaver {
 
         graphSave.nodeSaves.clear();
 
-        for(Node node : graph.getNodes().values())
+        for(Node node : graph.getNodes().getList())
         {
             String className = node.getClass().getName();
 
@@ -243,7 +243,7 @@ public class GroupSaver {
                 }
             }
 
-            for(Node node : graph.getNodes().values()){
+            for(Node node : graph.getNodes().getList()){
                 for (int i = 0; i < node.inputPins.size(); i++) {
                     Pin pin = node.inputPins.get(i);
                     pin.validateAllConnections();

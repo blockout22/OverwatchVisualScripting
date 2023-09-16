@@ -73,7 +73,7 @@ public class NodeGroup extends Node{
 
         //find Input Nodes
 
-        for (Node node : g.getNodes().values()){
+        for (Node node : g.getNodes().getList()){
 
             if(node instanceof NodeGroupInput){
 
@@ -116,7 +116,7 @@ public class NodeGroup extends Node{
         groupGraph = g;
 
         int inputIndex = 0;
-        for(Node node : groupGraph.getNodes().values()){
+        for(Node node : groupGraph.getNodes().getList()){
             if(node instanceof NodeGroupInput){
                 ((NodeGroupInput) node).bind((PinVar) inputPins.get(inputIndex));
                 inputIndex++;
@@ -196,7 +196,7 @@ public class NodeGroup extends Node{
     @Override
     public void execute() {
         if(groupGraph != null){
-            for(Node node : groupGraph.getNodes().values()){
+            for(Node node : groupGraph.getNodes().getList()){
                 node.execute();
             }
         }
@@ -205,7 +205,7 @@ public class NodeGroup extends Node{
     @Override
     public String getOutput() {
         if(groupGraph != null){
-            for(Node node : groupGraph.getNodes().values()){
+            for(Node node : groupGraph.getNodes().getList()){
                 if(node instanceof NodeGroupOutput){
                     return node.getOutput();
                 }
