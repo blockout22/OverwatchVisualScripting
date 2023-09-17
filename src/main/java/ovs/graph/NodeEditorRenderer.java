@@ -392,11 +392,13 @@ public class NodeEditorRenderer {
 
             if(ImGui.beginPopup("node_menu" + id)){
                 //TODO Duplicate all info attatched to this node
-                if(ImGui.menuItem("Duplicate Node " + graph.getNodes().get(targetNode).getName()))
+                Node selectedNode = graph.findNodeById(targetNode);
+                if(ImGui.menuItem("Duplicate Node " + selectedNode.getName()))
                 {
                     Node newInstance = null;
                     try{
-                        Node target = graph.getNodes().get(targetNode);
+//                        Node target = graph.getNodes().get(targetNode);
+                        Node target = graph.findNodeById(targetNode);
                         newInstance = target.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
                         graph.addNode(newInstance);
                         NodeEditor.setNodePosition(newInstance.getID(), NodeEditor.toCanvasX(ImGui.getCursorScreenPosX()), NodeEditor.toCanvasY(ImGui.getCursorScreenPosY()));
@@ -421,7 +423,7 @@ public class NodeEditorRenderer {
 
                 ImGui.separator();
 
-                if(ImGui.menuItem("Delete " + graph.getNodes().get(targetNode).getName())){
+                if(ImGui.menuItem("Delete " + selectedNode.getName())){
                     NodeEditor.deleteNode(targetNode);
                     ImGui.closeCurrentPopup();
                 }
@@ -496,8 +498,18 @@ public class NodeEditorRenderer {
 
                 ArrayList<Node> nodeList = new ArrayList<>();
                 for (int i = 0; i < list.length; i++) {
-                    Node node = graph.getNodes().get((int)list[i]);
-                    nodeList.add(node);
+//                    Node node = graph.getNodes().get((int)list[i]);
+                    Node node = null;
+                    //Find Node with ID == list[id]
+                    for (Node n : graph.getNodes().getList()) {
+                        if(n.getID() == ((int)list[i])){
+                            node = n;
+                            break;
+                        }
+                    }
+                    if(node != null) {
+                        nodeList.add(node);
+                    }
                 }
                 NodeCopyPasteHandler.copy(nodeList);
             }

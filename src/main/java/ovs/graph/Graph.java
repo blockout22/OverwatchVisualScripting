@@ -56,6 +56,17 @@ public class Graph {
         return nodes;
     }
 
+    public Node findNodeById(long id){
+        Node returnNode = null;
+        for (Node n : getNodes().getList()) {
+            if(n.getID() == id){
+                returnNode = n;
+            }
+        }
+
+        return returnNode;
+    }
+
     public void update(){
         for(Integer q : queuedForRemoval){
             Node n = null;
