@@ -468,7 +468,7 @@ public class NodeEditorRenderer {
             if(ImGui.beginPopupModal("PreviewSource" + id, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoSavedSettings))
             {
                 int targetID = (int)Global.getStorage("preview_source");
-                ImGui.text(graph.getNodes().get(targetID).getOutput());
+                ImGui.text(graph.findNodeById(targetID).getOutput());
 
                 ImGui.separator();
                 if(ImGui.button("Close")){
