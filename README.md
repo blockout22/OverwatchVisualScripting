@@ -24,7 +24,7 @@ We can run it on the command line to see what errors we are getting
 
 ![img](Images/img7.png)
 
-![img](Images/img6.png)
+![img](Images/reroute.png)
  
 ![img](Images/img4.png)
 

@@ -43,17 +43,18 @@ public class Global {
         heroes.add("Baptiste");
         heroes.add("Bastion");
         heroes.add("Brigitte");
-        heroes.add("Doomfist");
+        heroes.add("Cassidy");
         heroes.add("D.Va");
+        heroes.add("Doomfist");
         heroes.add("Echo");
         heroes.add("Genji");
-        heroes.add("Wrecking Ball");
         heroes.add("Hanzo");
+        heroes.add("Illari");
         heroes.add("Junker Queen");
         heroes.add("Junkrat");
         heroes.add("Kiriko");
+        heroes.add("Lifeweaver");
         heroes.add("Lúcio");
-        heroes.add("Cassidy");
         heroes.add("Mei");
         heroes.add("Mercy");
         heroes.add("Moira");
@@ -72,6 +73,7 @@ public class Global {
         heroes.add("Tracer");
         heroes.add("Widowmaker");
         heroes.add("Winston");
+        heroes.add("Wrecking Ball");
         heroes.add("Zarya");
         heroes.add("Zenyatta");
 

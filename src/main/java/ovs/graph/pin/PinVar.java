@@ -18,7 +18,7 @@ public class PinVar extends Pin{
     public PinVar(){
         setData(data);
         setColor(1, 0, 0, 1);
-        data.setValue(new ImString(500));
+        data.setValue(new ImString(10000));
     }
 
     @Override

@@ -49,6 +49,7 @@ public abstract class Pin {
             }
         }else{
             if(targetPin.isConnected()) {
+                System.out.println("Target pin is connected to something");
                 Pin connectedPin = getNode().getGraph().findPinById(targetPin.connectedToList.get(0));
                 targetPin.disconnectInput(connectedPin);
                 targetPin.connectedToList.clear();
