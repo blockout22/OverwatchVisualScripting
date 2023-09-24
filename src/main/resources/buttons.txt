@@ -1,0 +1,10 @@
+Ability 1
+Ability 2
+Crouch
+Interact
+Jump
+Melee
+Primary Fire
+Reload
+Secondary Fire
+Ultimate

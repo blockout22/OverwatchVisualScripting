@@ -1,0 +1,10 @@
+Asleep
+Burning
+Frozen
+Hacked
+Invisible
+Knocked Down
+Phased Out
+Rooted
+Stunned
+Unkillable

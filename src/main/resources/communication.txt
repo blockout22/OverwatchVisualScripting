@@ -1,0 +1,36 @@
+Acknowledge
+Attacking
+Countdown
+Defending
+Emote Down
+Emote Left
+Emote Right
+Emote Up
+Fall Back
+Go
+Going In
+Goodbye
+Group Up
+Hello
+Incoming
+Need Healing
+Need Help
+No
+On My Way
+Press The Attack
+Push Forward
+Ready
+Sorry
+Spray Down
+Spray Left
+Spray Right
+Spray Up
+Thanks
+Ultimate Status
+Voice Line Down
+Voice Line Left
+Voice Line Right
+Voice Line Up
+With You
+Yes
+You Are Welcome

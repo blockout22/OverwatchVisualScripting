@@ -1,0 +1,71 @@
+Bad Aura
+Bad Aura Sound
+Beacon Sound
+Cloud
+Decal Sound
+Energy Sound
+Good Aura
+Good Aura Sound
+Light Shaft
+Orb
+Pick-up Sound
+Ring
+Smoke Sound
+Sparkles
+Sparkles Sound
+Sphere
+Echo Focusing Beam Sound
+Junkrat Trap Chain Sound
+Mercy Heal Beam Sound
+Mercy Boost Beam Sound
+Moira Grasp Connected Sound
+Moira Orb Damage Sound
+Moira Orb Heal Sound
+Moira Coalescence Sound
+Orisa Amplifier Sound
+Orisa Halt Tendril Sound
+Symmetra Projector Sound
+Winston Tesla Cannon Sound
+Zarya Particle Beam Sound
+Omnic Slicer Beam Sound
+Ana Nano Boosted Sound
+Baptiste Immortality Field Projected Sound
+Echo Cloning Sound
+Lúcio Sound Barrier Protected Sound
+Mei Frozen Sound
+Mercy Damage Boosted Sound
+Sigma Grvitic Flux Target Sound
+Sombra Hacking Sound
+Sombra Hacked Sound
+Torbjörn Overloading Sound
+Widowmaker Venom Mine Target Sound
+Winston Tesla Cannon Target Sound
+Winstron Primal Rage Sound
+Wrecking Ball Adaptive Sheild Target Sound
+Wrecking Ball Piledriver Fire Sound
+Zenyatta Orb Of Discord Target Sound
+Heal Target Active Effect
+Heal Target Effect
+Ana Biotic Grenade Increased Healing Effect
+Ana Nano Boosted Effect
+Baptiste Immortality Field Protected Effect
+Echo Cloning Effect
+Lúcio Sound Barrier Protected Effect
+Mercy Damage Boosted Effect
+Reaper Wraith Form Effect
+Soldier: 76 Sprinting Effect
+Torbjörn Overloading Effect
+Winston Primal Rage Effect
+Wrecking Ball Adaptive Shield Target Effect
+Wrecking Ball Piledriver Fire Effect
+Ana Biotic Grenade No Healing Effect
+Ana Sleeping Effect
+Ashe Dynamite Burning Particle Effect
+Ashe Dynamite Burning Material Effect
+Cassidy Flashbang Stunned Effect
+Mei Frozen Effect
+Sigma Gravitic Flux Target Effect
+Sombra Hacked Looping Effect
+Widowmaker Venom Mine Target Effect
+Winston Tesla Cannon Target Effect
+Zenyatta Orb Of Discord Target Effect

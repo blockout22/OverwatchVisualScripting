@@ -1,0 +1,33 @@
+All Damage Dealt
+Barrier Damage Dealt
+Critical Hit Accuracy
+Critical Hits
+Damage Blocked
+Damage Taken
+Deaths
+Defensive Assists
+Eliminations
+Environmental Deaths
+Environmental Kills
+Final Blows
+Healing Dealt
+Healing Received
+Hero Damage Dealt
+Multikill Best
+Mulltikills
+Objective Kills
+Objective Assists
+Scoped Accuracy
+Scoped Critical Hit Accuracy
+Scoped Critical Hit Kills
+Scoped Critical Hits
+Scoped Hits
+Scoped Shots
+Self Healing
+Shots Fired
+Shots Hit
+Shots Missed
+Solo Kills
+Ultimates Earned
+Ultimates Used
+Weapon Accuracy
