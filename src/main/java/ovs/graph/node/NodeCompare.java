@@ -59,6 +59,13 @@ public class NodeCompare extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCompare){
+            conditionBox.selectValue(((NodeCompare) node).conditionBox.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> leftData = leftPin.getData();
         PinData<ImString> rightData = rightPin.getData();

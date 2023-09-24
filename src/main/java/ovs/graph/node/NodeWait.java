@@ -55,6 +55,17 @@ public class NodeWait extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeWait){
+            waitBehavior.selectValue(((NodeWait) node).waitBehavior.getSelectedValue());
+
+            PinData<ImFloat> copyData = ((NodeWait) node).inputPin.getData();
+
+            data.getValue().set(copyData.value.get());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = inputPin.getData();
         PinData<ImString> outputData = outputPin.getData();

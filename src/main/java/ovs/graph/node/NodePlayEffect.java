@@ -45,7 +45,7 @@ public class NodePlayEffect extends Node {
         output.setNode(this);
         addCustomOutput(output);
 
-        pinType.getComboBox().addOptions(Global.effectType);
+        pinType.getComboBox().addOptions(Global.playEffectType);
         pinType.sort();
 
         pinType.select(0);

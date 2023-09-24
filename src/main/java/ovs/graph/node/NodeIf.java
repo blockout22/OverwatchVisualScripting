@@ -83,6 +83,13 @@ public class NodeIf extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeIf){
+            ifTypeCombo.selectValue(((NodeIf) node).ifTypeCombo.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = inputPin.getData();
         PinData<ImString> trueData = truePin.getData();

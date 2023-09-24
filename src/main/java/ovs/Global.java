@@ -2,11 +2,9 @@ package ovs;
 
 import imgui.ImVec2;
 import ovs.graph.node.Node;
-import ovs.graph.node.interfaces.NodeDisabled;
 
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -21,9 +19,11 @@ public class Global {
 
     private static ImVec2 textSize = new ImVec2();
 
+    public static ArrayList<String> maps = new ArrayList<>();
     public static ArrayList<String> heroes = new ArrayList<>();
     public static ArrayList<String> buttons = new ArrayList<>();
     public static ArrayList<String> effectType = new ArrayList<>();
+    public static ArrayList<String> playEffectType = new ArrayList<>();
     public static ArrayList<String> gameModes = new ArrayList<>();
     public static ArrayList<String> status = new ArrayList<>();
     public static ArrayList<String> healthType = new ArrayList<>();
@@ -38,44 +38,46 @@ public class Global {
     private static Map<String, Object> storage = new HashMap<>();
 
     static {
-        heroes.add("Ana");
-        heroes.add("Ashe");
-        heroes.add("Baptiste");
-        heroes.add("Bastion");
-        heroes.add("Brigitte");
-        heroes.add("Cassidy");
-        heroes.add("D.Va");
-        heroes.add("Doomfist");
-        heroes.add("Echo");
-        heroes.add("Genji");
-        heroes.add("Hanzo");
-        heroes.add("Illari");
-        heroes.add("Junker Queen");
-        heroes.add("Junkrat");
-        heroes.add("Kiriko");
-        heroes.add("Lifeweaver");
-        heroes.add("Lúcio");
-        heroes.add("Mei");
-        heroes.add("Mercy");
-        heroes.add("Moira");
-        heroes.add("Orisa");
-        heroes.add("Pharah");
-        heroes.add("Ramattra");
-        heroes.add("Reaper");
-        heroes.add("Reinhardt");
-        heroes.add("Roadhog");
-        heroes.add("Sigma");
-        heroes.add("Sojourn");
-        heroes.add("Soldier: 76");
-        heroes.add("Sombra");
-        heroes.add("Symmetra");
-        heroes.add("Torbjörn");
-        heroes.add("Tracer");
-        heroes.add("Widowmaker");
-        heroes.add("Winston");
-        heroes.add("Wrecking Ball");
-        heroes.add("Zarya");
-        heroes.add("Zenyatta");
+        loadFromJarIntoList(heroes, "heroes.txt");
+        loadFromJarIntoList(maps, "maps.txt");
+//        heroes.add("Ana");
+//        heroes.add("Ashe");
+//        heroes.add("Baptiste");
+//        heroes.add("Bastion");
+//        heroes.add("Brigitte");
+//        heroes.add("Cassidy");
+//        heroes.add("D.Va");
+//        heroes.add("Doomfist");
+//        heroes.add("Echo");
+//        heroes.add("Genji");
+//        heroes.add("Hanzo");
+//        heroes.add("Illari");
+//        heroes.add("Junker Queen");
+//        heroes.add("Junkrat");
+//        heroes.add("Kiriko");
+//        heroes.add("Lifeweaver");
+//        heroes.add("Lúcio");
+//        heroes.add("Mei");
+//        heroes.add("Mercy");
+//        heroes.add("Moira");
+//        heroes.add("Orisa");
+//        heroes.add("Pharah");
+//        heroes.add("Ramattra");
+//        heroes.add("Reaper");
+//        heroes.add("Reinhardt");
+//        heroes.add("Roadhog");
+//        heroes.add("Sigma");
+//        heroes.add("Sojourn");
+//        heroes.add("Soldier: 76");
+//        heroes.add("Sombra");
+//        heroes.add("Symmetra");
+//        heroes.add("Torbjörn");
+//        heroes.add("Tracer");
+//        heroes.add("Widowmaker");
+//        heroes.add("Winston");
+//        heroes.add("Wrecking Ball");
+//        heroes.add("Zarya");
+//        heroes.add("Zenyatta");
 
         buttons.add("Ability 1");
         buttons.add("Ability 2");
@@ -159,6 +161,17 @@ public class Global {
         effectType.add("Widowmaker Venom Mine Target Effect");
         effectType.add("Winston Tesla Cannon Target Effect");
         effectType.add("Zenyatta Orb Of Discord Target Effect");
+
+        playEffectType.add("Good Explosion");
+        playEffectType.add("Bad Explosion");
+        playEffectType.add("Ring Explosion");
+        playEffectType.add("Good Pickup Effect");
+        playEffectType.add("Bad Pickup Effect");
+        playEffectType.add("Debuff Impact Sound");
+        playEffectType.add("Buff Impact Sound");
+        playEffectType.add("Ring Explosion Sound");
+        playEffectType.add("Buff Explosion Sound");
+        playEffectType.add("Explosion Sound");
 
         colors.add("White");
         colors.add("Aqua");
@@ -322,6 +335,47 @@ public class Global {
         LOSCheck.add("Surfaces");
         LOSCheck.add("Surfaces And All Barriers");
         LOSCheck.add("Surfaces And Enemy Barriers");
+    }
+
+    public static void writeArrayToFile(ArrayList<String> arrayList, File file){
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            for (String s : arrayList) {
+                pw.println(s);
+            }
+            pw.flush();
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static StringBuilder readFromJar(String fileName) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        InputStream stream = OwVS.class.getClassLoader().getResourceAsStream(fileName);
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+
+        br.close();
+
+        return sb;
+    }
+
+    public static void loadFromJarIntoList(ArrayList<String> list, String fileName){
+        try {
+            StringBuilder sb = Global.readFromJar(fileName);
+            for(String s : sb.toString().split("\n")){
+                if(s.length() > 0)
+                    list.add(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setStorage(String key, Object obj){

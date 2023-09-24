@@ -24,7 +24,7 @@ public class NodeHero extends Node{
             heroes.addOption(Global.heroes.get(i));
         }
 
-        heroes.select(9);
+        heroes.select(0);
     }
 
     @Override
@@ -43,6 +43,13 @@ public class NodeHero extends Node{
                     heroes.select(0);
                 }
             }
+        }
+    }
+
+    @Override
+    public void copy(Node node) {
+        if(node instanceof NodeHero){
+            heroes.selectValue(((NodeHero) node).heroes.getSelectedValue());
         }
     }
 

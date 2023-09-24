@@ -156,6 +156,9 @@ public class OwVS {
             }catch (Exception e){}
         }
 
+        File file = new File("src\\main\\resources\\heroes.txt");
+        System.out.println(file.getAbsoluteFile());
+//        Global.writeArrayToFile(Global.heroes, file);
         new OwVS();
     }
 }

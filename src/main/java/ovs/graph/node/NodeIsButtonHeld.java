@@ -49,6 +49,13 @@ public class NodeIsButtonHeld extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeIsButtonHeld){
+            comboBox.selectValue(((NodeIsButtonHeld) node).comboBox.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> inputData = input.getData();
         PinData<ImString> outputData = output.getData();

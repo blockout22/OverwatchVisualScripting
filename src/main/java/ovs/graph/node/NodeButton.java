@@ -42,6 +42,13 @@ public class NodeButton extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeButton){
+            buttons.selectValue(((NodeButton) node).buttons.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
         PinData<ImString> outputData = output.getData();
 

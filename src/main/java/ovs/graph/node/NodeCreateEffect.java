@@ -78,10 +78,7 @@ public class NodeCreateEffect extends Node{
     @Override
     public void copy(Node node) {
         if(node instanceof NodeCreateEffect){
-            PinData<ImString> data = ((NodeCreateEffect)node).pinType.getData();
-
-            PinData<ImString> inputData = pinType.getData();
-            inputData.getValue().set(data.getValue().get());
+            pinType.getComboBox().selectValue(((NodeCreateEffect) node).pinType.getComboBox().getSelectedValue());
         }
     }
 

@@ -150,6 +150,16 @@ public class NodeRule extends NodeEntry{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeRule){
+            comboEventOnGoing.selectValue(((NodeRule) node).comboEventOnGoing.getSelectedValue());
+            comboTeam.selectValue(((NodeRule) node).comboTeam.getSelectedValue());
+            comboPlayers.selectValue(((NodeRule) node).comboPlayers.getSelectedValue());
+            comboSub.selectValue(((NodeRule) node).comboSub.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
         error = "";
 //        for (int i = 0; i < inputPins.size(); i++) {

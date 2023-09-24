@@ -94,6 +94,7 @@ public class NodeCreateHudText extends Node{
     @Override
     public void copy(Node node) {
         if(node instanceof NodeCreateHudText){
+            comboBox.selectValue(((NodeCreateHudText) node).comboBox.getSelectedValue());
             PinData<ImFloat> sortValue = ((NodeCreateHudText)node).pinSortOrder.getData();
 
             PinData<ImFloat> sort = pinSortOrder.getData();
