@@ -9,6 +9,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeAppendToArray extends Node{
 
+    PinVar pinPlayer = new PinVar();
     PinVar pinVariable = new PinVar();
     PinVar input = new PinVar();
 
@@ -17,6 +18,11 @@ public class NodeAppendToArray extends Node{
     public NodeAppendToArray(Graph graph) {
         super(graph);
         setName("Append to Array");
+
+        pinPlayer.setNode(this);
+        pinPlayer.setName("Player");
+//        pinPlayer.setVisible(false);
+        addCustomInput(pinPlayer);
 
         pinVariable.setNode(this);
         pinVariable.setName("Variable");
@@ -54,7 +60,20 @@ public class NodeAppendToArray extends Node{
             var = varData.getValue().get().split("\\.")[1];
         }
 
-        outputData.getValue().set("Modify " + (type) +" Variable(" + var + ", Append To Array, " + inputData.getValue().get() + ");");
+        if(type.equals("Player")) {
+            pinPlayer.setVisible(true);
+            PinData<ImString> playerData = pinPlayer.getData();
+
+            handlePinStringConnection(pinPlayer, playerData);
+
+            outputData.getValue().set("Modify " + (type) +" Variable(" + playerData.getValue().get() + ", " + var + ", Append To Array, " + inputData.getValue().get() + ");");
+        }else{
+            pinPlayer.setVisible(false);
+            if(pinPlayer.isConnected()){
+                pinPlayer.disconnectAll();
+            }
+            outputData.getValue().set("Modify " + (type) +" Variable(" + var + ", Append To Array, " + inputData.getValue().get() + ");");
+        }
 
     }
 
