@@ -275,39 +275,8 @@ public class NodeRule extends NodeEntry{
 
                 out += (handleTabs ? "" : "") + actionData.getValue().get() + "\n";
             }
-//            for (int i = 0; i < inputPins.size(); i++) {
-//                Pin pin = inputPins.get(i);
-//                PinData<ImString> data = pin.getData();
-//
-//                String tempOut = ""; // data.getValue().get() + "\n";
-//
-//                if(pin.isConnected())
-//                {
-//                    tempOut = "";
-//                    Pin connectedPin = pin.getConnectedPin();
-//                    tempOut += "\t\t" + connectedPin.getNode().getOutput() + "\n";
-//                }
-//
-//                out += tempOut;
-//            }
-
             out += "}\n";
         }
-
-//        for(int i = 0; i < inputPins.size(); i++){
-//            Pin pin = inputPins.get(i);
-//
-//            PinData<ImString> data = pin.getData();
-//            String input = String.valueOf(data.value.get());
-//
-//            if(pin.connectedTo != -1){
-//                Pin conenctedPin = getGraph().findPinById(pin.connectedTo);
-//                input = conenctedPin.getNode().getOutput();
-//            }
-//
-//            out += input;
-//        }
-
         out += "}\n";
         return out;
     }

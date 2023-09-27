@@ -53,6 +53,7 @@ public class GroupSaver {
             save.nodeName = node.getName();
             save.x = pos.x;
             save.y = pos.y;
+            save.comment = node.getComment().get();
 
             for(String extraData : node.getExtraSaveData()){
                 save.extraData.add(extraData);
@@ -161,6 +162,7 @@ public class GroupSaver {
 
                 Node node = (Node) classNode.getDeclaredConstructor(Graph.class).newInstance(graph);
                 node.setName(save.nodeName);
+                node.setComment(save.comment);
                 graph.addNode(node);
                 node.posX = save.x;
                 node.posY = save.y;
@@ -298,6 +300,7 @@ public class GroupSaver {
         private String nodeName;
         private float x;
         private float y;
+        private String comment;
         private ArrayList<String> extraData = new ArrayList<>();
         private ArrayList<PinSave> inputPins = new ArrayList<>();
         private ArrayList<PinSave> outputPins = new ArrayList<>();

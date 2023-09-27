@@ -1261,6 +1261,7 @@
       "nodeName": "respawn after death",
       "x": 1171.0,
       "y": 582.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Player Died",
         "Team:All",
@@ -1292,6 +1293,7 @@
       "nodeName": "Set Variable",
       "x": 313.0,
       "y": 248.0,
+      "comment": "",
       "extraData": [
         "Var:Global.Team1Spawn"
       ],
@@ -1322,6 +1324,7 @@
       "nodeName": "Vector",
       "x": 62.0,
       "y": 271.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1348,6 +1351,7 @@
       "nodeName": "Action List",
       "x": 971.0,
       "y": 327.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1383,6 +1387,7 @@
       "nodeName": "Set Variable",
       "x": 313.0,
       "y": 359.0,
+      "comment": "",
       "extraData": [
         "Var:Global.Team2Spawn"
       ],
@@ -1413,6 +1418,7 @@
       "nodeName": "Vector",
       "x": 56.0,
       "y": 383.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1439,6 +1445,7 @@
       "nodeName": "If",
       "x": 744.0,
       "y": 184.0,
+      "comment": "",
       "extraData": [
         "Type:If"
       ],
@@ -1485,6 +1492,7 @@
       "nodeName": "Action List",
       "x": 584.0,
       "y": 232.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1522,6 +1530,7 @@
       "nodeName": "Compare",
       "x": 504.0,
       "y": 56.0,
+      "comment": "",
       "extraData": [
         "Compare:\u003d\u003d"
       ],
@@ -1561,6 +1570,7 @@
       "nodeName": "Current Map",
       "x": 368.0,
       "y": 89.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1579,6 +1589,7 @@
       "nodeName": "Map",
       "x": 390.0,
       "y": 153.0,
+      "comment": "",
       "extraData": [
         "Map:Havana"
       ],
@@ -1599,6 +1610,7 @@
       "nodeName": "Set Spawn",
       "x": 1115.0,
       "y": 277.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Global",
         "Team:All",
@@ -1630,6 +1642,7 @@
       "nodeName": "If",
       "x": 504.0,
       "y": 2084.0,
+      "comment": "",
       "extraData": [
         "Type:If"
       ],
@@ -1679,6 +1692,7 @@
       "nodeName": "Compare",
       "x": 201.0,
       "y": 2088.0,
+      "comment": "",
       "extraData": [
         "Compare:\u003d\u003d"
       ],
@@ -1718,6 +1732,7 @@
       "nodeName": "Team Of",
       "x": 72.0,
       "y": 2111.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1746,6 +1761,7 @@
       "nodeName": "Event Player",
       "x": -267.0,
       "y": 2384.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1766,6 +1782,7 @@
       "nodeName": "Team",
       "x": 68.0,
       "y": 2202.0,
+      "comment": "",
       "extraData": [
         "Team:Team 1"
       ],
@@ -1786,6 +1803,7 @@
       "nodeName": "Teleport",
       "x": 213.0,
       "y": 2255.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1823,6 +1841,7 @@
       "nodeName": "Get Variable",
       "x": -42.0,
       "y": 2284.0,
+      "comment": "",
       "extraData": [
         "Var:Global.Team1Spawn"
       ],
@@ -1843,6 +1862,7 @@
       "nodeName": "Teleport",
       "x": 217.0,
       "y": 2380.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1880,6 +1900,7 @@
       "nodeName": "Get Variable",
       "x": -54.0,
       "y": 2441.0,
+      "comment": "",
       "extraData": [
         "Var:Global.Team2Spawn"
       ],
@@ -1900,6 +1921,7 @@
       "nodeName": "Player Respawned",
       "x": 760.0,
       "y": 1720.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -1933,6 +1955,7 @@
       "nodeName": "To Condition",
       "x": 584.0,
       "y": 1823.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1961,6 +1984,7 @@
       "nodeName": "Compare",
       "x": 291.0,
       "y": 1733.0,
+      "comment": "",
       "extraData": [
         "Compare:\u003d\u003d"
       ],
@@ -2000,6 +2024,7 @@
       "nodeName": "Has Spawned",
       "x": 83.0,
       "y": 1681.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2028,6 +2053,7 @@
       "nodeName": "Event Player",
       "x": -108.0,
       "y": 1760.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -2047,6 +2073,7 @@
       "nodeName": "Boolean",
       "x": 104.0,
       "y": 1791.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2074,6 +2101,7 @@
       "nodeName": "Compare",
       "x": 312.0,
       "y": 1896.0,
+      "comment": "",
       "extraData": [
         "Compare:\u003d\u003d"
       ],
@@ -2113,6 +2141,7 @@
       "nodeName": "Is In Spawn Room",
       "x": 88.0,
       "y": 1918.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2141,6 +2170,7 @@
       "nodeName": "To Condition",
       "x": 520.0,
       "y": 1919.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2169,6 +2199,7 @@
       "nodeName": "In Spawn Room",
       "x": 760.0,
       "y": 1928.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -2202,6 +2233,7 @@
       "nodeName": "Wait",
       "x": 280.0,
       "y": 664.0,
+      "comment": "waits for 1 second",
       "extraData": [
         "WaitBehavior:Ignore Condition"
       ],
@@ -2230,6 +2262,7 @@
       "nodeName": "Action List",
       "x": 984.0,
       "y": 679.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2276,6 +2309,7 @@
       "nodeName": "Respawn",
       "x": 376.0,
       "y": 783.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2304,6 +2338,7 @@
       "nodeName": "Event Player",
       "x": 20.0,
       "y": 800.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -2323,6 +2358,7 @@
       "nodeName": "Start Forcing Player To Be Hero",
       "x": 568.0,
       "y": 863.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2361,6 +2397,7 @@
       "nodeName": "Random Value In Array",
       "x": 309.0,
       "y": 990.0,
+      "comment": "Picks a random value in the array of all Heroes",
       "extraData": [],
       "inputPins": [
         {
@@ -2389,6 +2426,7 @@
       "nodeName": "All Heroes",
       "x": 162.0,
       "y": 1008.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -2407,6 +2445,7 @@
       "nodeName": "Player Joined",
       "x": 1461.0,
       "y": 792.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Player Joined Match",
         "Team:All",
@@ -2438,6 +2477,7 @@
       "nodeName": "Set Ability Cooldown",
       "x": 2428.0,
       "y": 31.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2484,6 +2524,7 @@
       "nodeName": "Button",
       "x": 2225.0,
       "y": 105.0,
+      "comment": "",
       "extraData": [
         "Button:Ability 1"
       ],
@@ -2504,6 +2545,7 @@
       "nodeName": "Event Player",
       "x": 2008.0,
       "y": 48.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -2523,6 +2565,7 @@
       "nodeName": "Absolute Value",
       "x": 2216.0,
       "y": 207.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2552,6 +2595,7 @@
       "nodeName": "Number",
       "x": 1976.0,
       "y": 207.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2578,6 +2622,7 @@
       "nodeName": "Loop",
       "x": 3048.0,
       "y": 24.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -2609,6 +2654,7 @@
       "nodeName": "Action List",
       "x": 2888.0,
       "y": 120.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2664,6 +2710,7 @@
       "nodeName": "Button",
       "x": 2241.0,
       "y": 297.0,
+      "comment": "",
       "extraData": [
         "Button:Ability 2"
       ],
@@ -2684,6 +2731,7 @@
       "nodeName": "Set Ability Cooldown",
       "x": 2428.0,
       "y": 171.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2730,6 +2778,7 @@
       "nodeName": "Wait",
       "x": 2398.0,
       "y": -88.0,
+      "comment": "",
       "extraData": [
         "WaitBehavior:Ignore Condition"
       ],
@@ -2758,6 +2807,7 @@
       "nodeName": "Loop",
       "x": 2626.0,
       "y": 282.0,
+      "comment": "",
       "extraData": [
         "LoopType:Loop"
       ],
@@ -2778,6 +2828,7 @@
       "nodeName": "Action List",
       "x": 1256.0,
       "y": 872.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -2822,6 +2873,7 @@
       "nodeName": "Wait",
       "x": 638.0,
       "y": 984.0,
+      "comment": "",
       "extraData": [
         "WaitBehavior:Ignore Condition"
       ],

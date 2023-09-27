@@ -331,8 +331,26 @@ public class NodeEditorRenderer {
 
                 //TODO Throttle execute as this doesn't need to run a million times a second
                 node.execute();
+
+                ImGui.setCursorPos(NodeEditor.getNodePositionX(node.getID()), NodeEditor.getNodePositionY(node.getID()) - 25);
+
+                ImGui.pushItemWidth(node.width);
+
+                int size = NodeEditor.getSelectedObjectCount();
+                if(size == 1) {
+                    long[] list = new long[1];
+                    NodeEditor.getSelectedNodes(list, size);
+                    if(node.getID() == list[0]) {
+                        if (ImGui.inputText("##CommentBox" + node.getID(), node.getComment())) {
+
+                        }
+                    }
+                }else{
+                    ImGui.text(node.getFormattedComment());
+                }
             }
         }
+
 
 
 

@@ -66,7 +66,8 @@ public class ImGuiWindow {
         io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         io.setConfigViewportsNoTaskBarIcon(false);
 
-        io.getFonts().addFontDefault();
+//        io.getFonts().addFontDefault();
+        io.getFonts().addFontFromFileTTF("src/main/resources/OpenSans-Regular.ttf", 18);
         final ImFontGlyphRangesBuilder rangesBuilder = new ImFontGlyphRangesBuilder();
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesDefault());
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());

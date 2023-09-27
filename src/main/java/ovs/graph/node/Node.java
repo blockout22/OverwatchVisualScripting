@@ -34,9 +34,13 @@ public abstract class Node {
     private int Blue = 255;
     private int Alpha = 45;
 
+    private ImString comment = new ImString();
+
     public Node(Graph graph){
         this.self = this;
         this.graph = graph;
+
+        setComment("");
     }
 
     public void onSaved(){
@@ -224,5 +228,20 @@ public abstract class Node {
 
     public void setAlpha(int alpha) {
         Alpha = alpha;
+    }
+
+    public ImString getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment.set(comment);
+    }
+
+    public String getFormattedComment() {
+        if (getComment().get().length() > 0) {
+            return "\"" + getComment().get() + "\"\n";
+        }
+        return "";
     }
 }

@@ -309,6 +309,7 @@ public class GraphSaver {
             NodeSave save = new NodeSave();
             save.className = className;
             save.nodeName = node.getName();
+            save.comment = node.getComment().get();
             save.x = pos.x;
             save.y = pos.y;
 
@@ -725,6 +726,7 @@ public class GraphSaver {
 
                 Node node = (Node) classNode.getDeclaredConstructor(Graph.class).newInstance(graph);
                 node.setName(save.nodeName);
+                node.setComment(save.comment);
                 graph.addNode(node);
                 node.posX = save.x;
                 node.posY = save.y;
@@ -1091,6 +1093,7 @@ public class GraphSaver {
         private String nodeName;
         private float x;
         private float y;
+        private String comment;
         private ArrayList<String> extraData = new ArrayList<>();
         //save Pin array
         private ArrayList<PinSave> inputPins = new ArrayList<>();
