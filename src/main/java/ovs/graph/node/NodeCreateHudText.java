@@ -6,10 +6,9 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.Pin;
-import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinFloat;
-import ovs.graph.pin.PinVar;
+import ovs.graph.pin.*;
+
+import java.util.ArrayList;
 
 public class NodeCreateHudText extends Node{
 
@@ -22,7 +21,9 @@ public class NodeCreateHudText extends Node{
     PinVar pinSubHeaderColor = new PinVar();
     PinVar pinTextColor = new PinVar();
 
-    PinFloat pinSortOrder = new PinFloat();
+    PinCombo pinReevaluation = new PinCombo();
+
+    PinVar pinSortOrder = new PinVar();
 
     PinAction outputPin = new PinAction();
 
@@ -49,6 +50,10 @@ public class NodeCreateHudText extends Node{
         inputText.setName("Text");
         addCustomInput(inputText);
 
+        pinReevaluation.setNode(this);
+        pinReevaluation.setName("Reevaluation");
+        addCustomInput(pinReevaluation);
+
         pinSortOrder.setNode(this);
         pinSortOrder.setName("Sort Order");
         addCustomInput(pinSortOrder);
@@ -73,12 +78,29 @@ public class NodeCreateHudText extends Node{
         comboBox.addOption("Right");
 
         comboBox.select(0);
+
+        ArrayList<String> reevalOptions = new ArrayList<>();
+        reevalOptions.add("Visible To And String");
+        reevalOptions.add("String");
+        reevalOptions.add("Visible To, Sort Order, And String");
+        reevalOptions.add("Sort Order And String");
+        reevalOptions.add("Visible To");
+        reevalOptions.add("Sort Order");
+        reevalOptions.add("None");
+        reevalOptions.add("Visible To, String, And Color");
+        reevalOptions.add("String And Color");
+        reevalOptions.add("Visible To, Sort Order, String, And Color");
+        reevalOptions.add("Sort Order, String, And Color");
+
+        pinReevaluation.getComboBox().addOptions(reevalOptions);
+        pinReevaluation.select(0);
     }
 
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
         getExtraSaveData().add("Location:" + comboBox.getSelectedValue());
+        getExtraSaveData().add("Reevaluation:" + pinReevaluation.getComboBox().getSelectedValue());
     }
 
     @Override
@@ -88,6 +110,10 @@ public class NodeCreateHudText extends Node{
             {
                 comboBox.selectValue(data.split(":")[1]);
             }
+
+            if(data.startsWith("Reevaluation")){
+                pinReevaluation.selectValue(data.split(":")[1]);
+            }
         }
     }
 
@@ -95,11 +121,12 @@ public class NodeCreateHudText extends Node{
     public void copy(Node node) {
         if(node instanceof NodeCreateHudText){
             comboBox.selectValue(((NodeCreateHudText) node).comboBox.getSelectedValue());
-            PinData<ImFloat> sortValue = ((NodeCreateHudText)node).pinSortOrder.getData();
-
-            PinData<ImFloat> sort = pinSortOrder.getData();
-
-            sort.getValue().set(sortValue.getValue().get());
+            pinReevaluation.selectValue(((NodeCreateHudText) node).pinReevaluation.getComboBox().getSelectedValue());
+//            PinData<ImFloat> sortValue = ((NodeCreateHudText)node).pinSortOrder.getData();
+//
+//            PinData<ImFloat> sort = pinSortOrder.getData();
+//
+//            sort.getValue().set(sortValue.getValue().get());
         }
     }
 
@@ -113,7 +140,7 @@ public class NodeCreateHudText extends Node{
         PinData<ImString> headerColorData = pinHeaderColor.getData();
         PinData<ImString> subHeaderColorData = pinSubHeaderColor.getData();
         PinData<ImString> textColorData = pinTextColor.getData();
-        PinData<ImFloat> sortOrderData = pinSortOrder.getData();
+        PinData<ImString> sortOrderData = pinSortOrder.getData();
 
         PinData<ImString> outputData = outputPin.getData();
 
@@ -180,16 +207,11 @@ public class NodeCreateHudText extends Node{
             textColorData.getValue().set("Color(White)");
         }
 
-        if(pinSortOrder.isConnected()){
-            Pin connectedPin = pinSortOrder.getConnectedPin();
-
-            PinData<ImFloat> connectedData = connectedPin.getData();
-            sortOrderData.getValue().set(connectedData.getValue().get());
-        }
+        handlePinStringConnection(pinSortOrder, sortOrderData, "0");
 
 
         String location = comboBox.getSelectedValue();
-        String output = "Create HUD Text(" + inputVisibleData.getValue().get() + "," + headerData.getValue().get() + ", " + subHeaderData.getValue().get() + ", " + textData.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", " + headerColorData.getValue().get()+ ", " + subHeaderColorData.getValue().get() + ", " +textColorData.getValue().get() + ", Visible To and String, Default Visibility);";
+        String output = "Create HUD Text(" + inputVisibleData.getValue().get() + "," + headerData.getValue().get() + ", " + subHeaderData.getValue().get() + ", " + textData.getValue().get() + ", " + location + ", " + sortOrderData.getValue().get() + ", " + headerColorData.getValue().get()+ ", " + subHeaderColorData.getValue().get() + ", " +textColorData.getValue().get() + ", "+pinReevaluation.getComboBox().getSelectedValue() +", Default Visibility);";
         outputData.getValue().set(output);
     }
 

@@ -1311,7 +1311,7 @@
         {
           "ID": 1862,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(All Players(All Teams),Custom String(\"Message: {0}\", Global.GlobalVar), Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n",
+          "value": "Create HUD Text(All Players(All Teams),Custom String(\"Message: {0}\", Global.GlobalVar), Null, Null, Left, Global.GlobalVar, Color(White), Color(White), Color(White), Visible To, Default Visibility);\n",
           "connections": [
             1889
           ],
@@ -1352,7 +1352,7 @@
         {
           "ID": 1865,
           "type": "ovs.graph.pin.PinAction",
-          "value": "For Global Variable(GlobalVar, 1.0, 10.0, 1.0);\nCreate HUD Text(All Players(All Teams),Custom String(\"Message: {0}\", Global.GlobalVar), Null, Null, Left, 0.0, Color(White), Color(White), Color(White), Visible To and String, Default Visibility);\n\nEnd;",
+          "value": "For Global Variable(GlobalVar, 1.0, 10.0, 1.0);\nCreate HUD Text(All Players(All Teams),Custom String(\"Message: {0}\", Global.GlobalVar), Null, Null, Left, Global.GlobalVar, Color(White), Color(White), Color(White), Visible To, Default Visibility);\n\nEnd;",
           "connections": [
             1863
           ],
@@ -1364,7 +1364,7 @@
     {
       "className": "ovs.graph.node.NodeGetVariable",
       "nodeName": "Get Variable",
-      "x": -515.0,
+      "x": -707.0,
       "y": 448.0,
       "comment": "",
       "extraData": [
@@ -1376,8 +1376,8 @@
           "ID": 1866,
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            1884,
-            1878
+            1878,
+            1902
           ],
           "canDelete": false
         }
@@ -1441,8 +1441,8 @@
     {
       "className": "ovs.graph.node.NodeAllPlayers",
       "nodeName": "All Players",
-      "x": -325.0,
-      "y": 646.0,
+      "x": -101.0,
+      "y": 566.0,
       "comment": "",
       "extraData": [],
       "inputPins": [
@@ -1470,8 +1470,8 @@
     {
       "className": "ovs.graph.node.NodeTeam",
       "nodeName": "Team",
-      "x": -456.0,
-      "y": 640.0,
+      "x": -232.0,
+      "y": 560.0,
       "comment": "",
       "extraData": [
         "Team:All Teams"
@@ -1508,7 +1508,7 @@
           "type": "ovs.graph.pin.PinVar",
           "value": "Global.GlobalVar",
           "connections": [
-            1866
+            1903
           ],
           "canDelete": false
         },
@@ -1541,7 +1541,7 @@
     {
       "className": "ovs.graph.node.NodeReroute",
       "nodeName": "Reroute",
-      "x": -276.0,
+      "x": -424.0,
       "y": 290.0,
       "comment": "",
       "extraData": [],
@@ -1632,7 +1632,8 @@
       "y": 615.0,
       "comment": "",
       "extraData": [
-        "Location:Left"
+        "Location:Left",
+        "Reevaluation:Visible To"
       ],
       "inputPins": [
         {
@@ -1669,16 +1670,18 @@
         },
         {
           "ID": 1897,
-          "type": "ovs.graph.pin.PinFloat",
-          "value": "0.0",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 1898,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Color(White)",
-          "connections": [],
+          "value": "Global.GlobalVar",
+          "connections": [
+            1905
+          ],
           "canDelete": false
         },
         {
@@ -1694,6 +1697,13 @@
           "value": "Color(White)",
           "connections": [],
           "canDelete": false
+        },
+        {
+          "ID": 1032,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
         }
       ],
       "outputPins": [
@@ -1702,6 +1712,65 @@
           "type": "ovs.graph.pin.PinAction",
           "connections": [
             1888
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeReroute",
+      "nodeName": "Reroute",
+      "x": -500.0,
+      "y": 706.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1902,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Global.GlobalVar",
+          "connections": [
+            1866
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1903,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1898,
+            1904
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeReroute",
+      "nodeName": "Reroute",
+      "x": -72.0,
+      "y": 706.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 1904,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Global.GlobalVar",
+          "connections": [
+            1903
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 1905,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            1898
           ],
           "canDelete": false
         }
