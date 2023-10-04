@@ -8,6 +8,8 @@ import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
+import java.util.ArrayList;
+
 public class NodeCreateEffect extends Node{
 
     PinVar pinVisibleTo = new PinVar();
@@ -15,7 +17,7 @@ public class NodeCreateEffect extends Node{
     PinVar pinColor = new PinVar();
     PinVar pinPosition = new PinVar();
     PinVar pinRadius = new PinVar();
-    PinVar pinReevaluation = new PinVar();
+    PinCombo pinReevaluation = new PinCombo();
 
     PinAction output = new PinAction();
 
@@ -54,12 +56,26 @@ public class NodeCreateEffect extends Node{
         addCustomOutput(output);
 
         pinType.select(0);
+
+        ArrayList<String> reevalOptions = new ArrayList<>();
+        reevalOptions.add("Visible To, Position, And Radius");
+        reevalOptions.add("Position And Radius");
+        reevalOptions.add("Visible To");
+        reevalOptions.add("None");
+        reevalOptions.add("Visible To, Position, Radius, And Color");
+        reevalOptions.add("Position, Radius, And Color");
+        reevalOptions.add("Visible To And Color");
+        reevalOptions.add("Color");
+
+        pinReevaluation.getComboBox().addOptions(reevalOptions);
+        pinReevaluation.select(0);
     }
 
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
         getExtraSaveData().add("Type:" + pinType.getComboBox().getSelectedValue());
+        getExtraSaveData().add("Reevaluation:" + pinReevaluation.getComboBox().getSelectedValue());
     }
 
     @Override
@@ -72,6 +88,14 @@ public class NodeCreateEffect extends Node{
                     pinType.getComboBox().select(-1);
                 }
             }
+
+            if(data.startsWith("Reevaluation")){
+                try {
+                    pinReevaluation.selectValue(data.split(":")[1]);
+                }catch (IndexOutOfBoundsException e){
+                    pinReevaluation.select(0);
+                }
+            }
         }
     }
 
@@ -79,6 +103,7 @@ public class NodeCreateEffect extends Node{
     public void copy(Node node) {
         if(node instanceof NodeCreateEffect){
             pinType.getComboBox().selectValue(((NodeCreateEffect) node).pinType.getComboBox().getSelectedValue());
+            pinReevaluation.selectValue(((NodeCreateEffect) node).pinReevaluation.getComboBox().getSelectedValue());
         }
     }
 
@@ -89,7 +114,6 @@ public class NodeCreateEffect extends Node{
         PinData<ImString> colorData = pinColor.getData();
         PinData<ImString> positionData = pinPosition.getData();
         PinData<ImString> radiusData = pinRadius.getData();
-        PinData<ImString> reevaluationData = pinReevaluation.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinVisibleTo, visibleToData);
@@ -97,9 +121,9 @@ public class NodeCreateEffect extends Node{
         handlePinStringConnection(pinColor, colorData, "Color(White)");
         handlePinStringConnection(pinPosition, positionData, "Vector(0, 0, 0)");
         handlePinStringConnection(pinRadius, radiusData, "5");
-        handlePinStringConnection(pinReevaluation, reevaluationData, "Visible To Position and Radius");
+//        handlePinStringConnection(pinReevaluation, reevaluationData, "Visible To Position and Radius");
 
-        outputData.getValue().set("Create Effect (" + visibleToData.getValue().get() + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ", " + reevaluationData.getValue().get() + ");");
+        outputData.getValue().set("Create Effect (" + visibleToData.getValue().get() + ", " + typeData.getValue().get() + ", " + colorData.getValue().get() + ", " + positionData.getValue().get() + ", " + radiusData.getValue().get() + ", " + pinReevaluation.getComboBox().getSelectedValue() + ");");
     }
 
     @Override
