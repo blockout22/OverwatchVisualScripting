@@ -156,8 +156,8 @@ public class OwVS {
             }catch (Exception e){}
         }
 
-        File file = new File("src\\main\\resources\\stats.txt");
-        Global.writeArrayToFile(Global.stats, file);
+//        File file = new File("src\\main\\resources\\stats.txt");
+//        Global.writeArrayToFile(Global.stats, file);
         new OwVS();
     }
 }

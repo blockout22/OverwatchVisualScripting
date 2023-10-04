@@ -726,7 +726,7 @@ public class GraphSaver {
 
                 Node node = (Node) classNode.getDeclaredConstructor(Graph.class).newInstance(graph);
                 node.setName(save.nodeName);
-                node.setComment(save.comment);
+                node.setComment(save.comment != null ? save.comment : "");
                 graph.addNode(node);
                 node.posX = save.x;
                 node.posY = save.y;

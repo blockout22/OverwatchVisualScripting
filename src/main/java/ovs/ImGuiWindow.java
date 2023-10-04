@@ -67,7 +67,24 @@ public class ImGuiWindow {
         io.setConfigViewportsNoTaskBarIcon(false);
 
 //        io.getFonts().addFontDefault();
-        io.getFonts().addFontFromFileTTF("src/main/resources/OpenSans-Regular.ttf", 18);
+//        io.getFonts().addFontFromFileTTF("src/main/resources/OpenSans-Regular.ttf", 18);
+        InputStream fontStream = getClass().getClassLoader().getResourceAsStream("OpenSans-Regular.ttf");
+        if(fontStream != null){
+            try{
+                byte[] fontBytes = fontStream.readAllBytes();
+                ImFontAtlas atlas = io.getFonts();
+                ImFontConfig config = new ImFontConfig();
+                atlas.addFontFromMemoryTTF(fontBytes, 18, config);
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                try{
+                    fontStream.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
         final ImFontGlyphRangesBuilder rangesBuilder = new ImFontGlyphRangesBuilder();
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesDefault());
         rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());

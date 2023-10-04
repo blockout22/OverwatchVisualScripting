@@ -50,6 +50,7 @@ public class PinVar extends Pin{
     public enum Type{
         Null,
         String,
-        Float
+        Float,
+        Vector
     }
 }

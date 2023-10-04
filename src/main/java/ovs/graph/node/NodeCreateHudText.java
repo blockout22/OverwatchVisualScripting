@@ -112,7 +112,11 @@ public class NodeCreateHudText extends Node{
             }
 
             if(data.startsWith("Reevaluation")){
-                pinReevaluation.selectValue(data.split(":")[1]);
+                try {
+                    pinReevaluation.selectValue(data.split(":")[1]);
+                }catch (IndexOutOfBoundsException e){
+                    pinReevaluation.select(0);
+                }
             }
         }
     }
