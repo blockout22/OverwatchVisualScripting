@@ -10,44 +10,44 @@ import ovs.graph.pin.PinVector;
 
 public class NodeVector extends Node{
 
-    PinVector inputPin = new PinVector();
+//    PinVector inputPin = new PinVector();
+    PinVar pinX = new PinVar();
+    PinVar pinY = new PinVar();
+    PinVar pinZ = new PinVar();
     PinVar outputPin = new PinVar();
 
     public NodeVector(Graph graph) {
         super(graph);
         setName("Vector");
 
-        inputPin.setNode(this);
-        addCustomInput(inputPin);
+        pinX.setNode(this);
+        pinX.setName("X");
+        addCustomInput(pinX);
+
+        pinY.setNode(this);
+        pinY.setName("Y");
+        addCustomInput(pinY);
+
+        pinZ.setNode(this);
+        pinZ.setName("Z");
+        addCustomInput(pinZ);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
     }
 
     @Override
-    public void copy(Node node) {
-        if(node instanceof NodeVector){
-            PinData<ImVec4> nodeData = ((NodeVector) node).inputPin.getData();
-            PinData<ImVec4> data = inputPin.getData();
-
-            data.getValue().set(nodeData.getValue().x, nodeData.getValue().y, nodeData.getValue().y, nodeData.getValue().w);
-        }
-    }
-
-    @Override
     public void execute() {
-        PinData<ImVec4> inputData = inputPin.getData();
+        PinData<ImString> xData = pinX.getData();
+        PinData<ImString> yData = pinY.getData();
+        PinData<ImString> zData = pinZ.getData();
         PinData<ImString> outputData = outputPin.getData();
 
-        if(inputPin.isConnected()){
-            Pin connectedPin = inputPin.getConnectedPin();
+        handlePinStringConnection(pinX, xData, "0");
+        handlePinStringConnection(pinY, yData, "0");
+        handlePinStringConnection(pinZ, zData, "0");
 
-            PinData<ImVec4> connectedData = connectedPin.getData();
-
-            inputData.getValue().set(new ImVec4(connectedData.getValue().x, connectedData.getValue().y, connectedData.getValue().z, connectedData.getValue().w));
-        }
-
-        outputData.getValue().set("Vector(" + inputData.getValue().x + ", " +  inputData.getValue().y + ", " + inputData.getValue().z + ")");
+        outputData.getValue().set("Vector(" + xData.getValue().get() + ", " +  yData.getValue().get() + ", " + zData.getValue().get() + ")");
     }
 
     @Override
