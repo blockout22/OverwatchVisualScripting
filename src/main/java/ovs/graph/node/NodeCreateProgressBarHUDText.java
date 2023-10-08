@@ -92,6 +92,14 @@ public class NodeCreateProgressBarHUDText extends Node {
 
     @Override
     public void onSaved() {
+        getExtraSaveData().clear();
+        getExtraSaveData().add("Location:" + pinLocation.getComboBox().getSelectedValue());
+        getExtraSaveData().add("Reevaluation:" + pinReevaluation.getComboBox().getSelectedValue());
+        getExtraSaveData().add("NonTeamSpectators:" + pinNonTeamSpectators.getComboBox().getSelectedValue());
+    }
+
+    @Override
+    public void onLoaded() {
         for(String data : getExtraSaveData()){
             if(data.startsWith("Location")){
                 try {
@@ -117,14 +125,6 @@ public class NodeCreateProgressBarHUDText extends Node {
                 }
             }
         }
-    }
-
-    @Override
-    public void onLoaded() {
-        getExtraSaveData().clear();
-        getExtraSaveData().add("Location:" + pinLocation.getComboBox().getSelectedValue());
-        getExtraSaveData().add("Reevaluation:" + pinReevaluation.getComboBox().getSelectedValue());
-        getExtraSaveData().add("NonTeamSpectators:" + pinNonTeamSpectators.getComboBox().getSelectedValue());
     }
 
     @Override
