@@ -344,6 +344,8 @@ public class NodeEditorRenderer {
                         if (ImGui.inputText("##CommentBox" + node.getID(), node.getComment())) {
 
                         }
+                    }else{
+                        ImGui.text(node.getFormattedComment());
                     }
                 }else{
                     ImGui.text(node.getFormattedComment());
