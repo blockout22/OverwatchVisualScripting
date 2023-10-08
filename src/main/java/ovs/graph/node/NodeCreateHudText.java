@@ -82,15 +82,15 @@ public class NodeCreateHudText extends Node{
         ArrayList<String> reevalOptions = new ArrayList<>();
         reevalOptions.add("Visible To And String");
         reevalOptions.add("String");
-        reevalOptions.add("Visible To, Sort Order, And String");
+        reevalOptions.add("Visible To Sort Order And String");
         reevalOptions.add("Sort Order And String");
         reevalOptions.add("Visible To");
         reevalOptions.add("Sort Order");
         reevalOptions.add("None");
-        reevalOptions.add("Visible To, String, And Color");
+        reevalOptions.add("Visible To String, And Color");
         reevalOptions.add("String And Color");
-        reevalOptions.add("Visible To, Sort Order, String, And Color");
-        reevalOptions.add("Sort Order, String, And Color");
+        reevalOptions.add("Visible To Sort Order String And Color");
+        reevalOptions.add("Sort Order String, And Color");
 
         pinReevaluation.getComboBox().addOptions(reevalOptions);
         pinReevaluation.select(0);

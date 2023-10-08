@@ -5,8 +5,10 @@
     "maxT1Players": 5,
     "maxT2Players": 5,
     "maxFFAPlayers": 0,
+    "maxSpectators": 2,
     "mapRotation": 0,
     "returnToLobby": 0,
+    "allowInQueue": true,
     "assaultMode": false,
     "controlMode": true,
     "escortMode": true,
@@ -98,6 +100,10 @@
       "scoreToWin": 2,
       "scoringSpeedModifier": 100,
       "MapToggle": [
+        {
+          "name": "Antarctic Peninsula",
+          "value": true
+        },
         {
           "name": "Busan",
           "value": true
@@ -1216,6 +1222,31 @@
           "value": true
         }
       ]
+    },
+    "heroSettings": {
+      "abilityCooldown": 100,
+      "quickMelee": true,
+      "ultimateAbility": true,
+      "ultimateGeneration": 100,
+      "ultimateGenerationCombat": 100,
+      "ultimateGenerationPassive": 100,
+      "spawnWithUltimateReady": false,
+      "ultimateDuration": 100,
+      "infiniteUltimateDuration": false,
+      "damageDealt": 100,
+      "damageReceived": 100,
+      "healingDealt": 100,
+      "healingReceived": 100,
+      "health": 100,
+      "jumpVerticalSpeed": 100,
+      "movementGravity": 100,
+      "movementSpeed": 100,
+      "projectileGravity": 100,
+      "projectileSpeed": 100,
+      "receiveHeadshotsOnly": false,
+      "primaryFire": true,
+      "ammunitionClipSizeScaler": 100,
+      "noAmmunitionRequirements": false
     }
   },
   "globalVariables": [],
@@ -1227,6 +1258,7 @@
       "nodeName": "Rule",
       "x": 792.0,
       "y": 200.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -1244,9 +1276,9 @@
         {
           "ID": 1827,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Player,Null, Custom String(\"{0} {1} {2}\", Server Load, Server Load Average, Server Load Average), Null, Left, 0.0, Color(White), Color(), Color(White), Visible To and String, Default Visibility);",
+          "value": "Create HUD Text(Event Player,Null, Custom String(\"{0} {1} {2}\", Server Load, Server Load Average, Server Load Average), Null, Left, 0, Color(Blue), Color(White), Color(White), Visible To And String, Default Visibility);\nCreate Progress Bar HUD Text(Event Player, Health(Event Player) / Max Health(Event Player) * 100.0, Custom String(\"\"), Left, 0, Color(White), Color(White), Visible To Values And Color, Default Visibility);\n",
           "connections": [
-            1836
+            2721
           ],
           "canDelete": false
         }
@@ -1256,10 +1288,12 @@
     {
       "className": "ovs.graph.node.NodeCreateHudText",
       "nodeName": "Create Hud Text",
-      "x": 464.0,
-      "y": 300.0,
+      "x": 152.0,
+      "y": 271.0,
+      "comment": "",
       "extraData": [
-        "Location:Left"
+        "Location:Left",
+        "Reevaluation:Visible To And String"
       ],
       "inputPins": [
         {
@@ -1296,22 +1330,22 @@
         },
         {
           "ID": 1832,
-          "type": "ovs.graph.pin.PinFloat",
-          "value": "0.0",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To And String",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 1833,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Color(White)",
+          "value": "0",
           "connections": [],
           "canDelete": false
         },
         {
           "ID": 1834,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Color()",
+          "value": "Color(Blue)",
           "connections": [
             1847
           ],
@@ -1323,6 +1357,13 @@
           "value": "Color(White)",
           "connections": [],
           "canDelete": false
+        },
+        {
+          "ID": 1010,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
         }
       ],
       "outputPins": [
@@ -1330,7 +1371,7 @@
           "ID": 1836,
           "type": "ovs.graph.pin.PinAction",
           "connections": [
-            1827
+            2720
           ],
           "canDelete": false
         }
@@ -1339,8 +1380,9 @@
     {
       "className": "ovs.graph.node.NodeServerLoad",
       "nodeName": "Server Load",
-      "x": -37.0,
-      "y": 432.0,
+      "x": -349.0,
+      "y": 403.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1357,8 +1399,9 @@
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
-      "x": 184.0,
-      "y": 398.0,
+      "x": -128.0,
+      "y": 369.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1410,8 +1453,9 @@
     {
       "className": "ovs.graph.node.NodeServerLoadAverage",
       "nodeName": "Server Load Average",
-      "x": -93.0,
-      "y": 496.0,
+      "x": -405.0,
+      "y": 467.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1428,8 +1472,9 @@
     {
       "className": "ovs.graph.node.NodeServerLoadAverage",
       "nodeName": "Server Load Average",
-      "x": -93.0,
-      "y": 560.0,
+      "x": -405.0,
+      "y": 531.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1446,8 +1491,9 @@
     {
       "className": "ovs.graph.node.NodeEventPlayer",
       "nodeName": "Event Player",
-      "x": 276.0,
-      "y": 336.0,
+      "x": -36.0,
+      "y": 307.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1464,8 +1510,9 @@
     {
       "className": "ovs.graph.node.NodeColor",
       "nodeName": "Color",
-      "x": 248.0,
-      "y": 543.0,
+      "x": -54.0,
+      "y": 547.0,
+      "comment": "",
       "extraData": [
         "Color:Blue"
       ],
@@ -1473,7 +1520,7 @@
         {
           "ID": 1846,
           "type": "ovs.graph.pin.PinCombo",
-          "value": "",
+          "value": "Blue",
           "connections": [],
           "canDelete": false
         }
@@ -1484,6 +1531,310 @@
           "type": "ovs.graph.pin.PinVar",
           "connections": [
             1834
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeActionList",
+      "nodeName": "Action List",
+      "x": 568.0,
+      "y": 282.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2720,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            1836
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2722,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            4499
+          ],
+          "canDelete": true
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 2721,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            1827
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeHealth",
+      "nodeName": "Health",
+      "x": -296.0,
+      "y": 630.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3605,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            3607
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3606,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3610
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": -450.0,
+      "y": 652.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 3607,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3605,
+            3608
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeMaxHealth",
+      "nodeName": "Max Health",
+      "x": -296.0,
+      "y": 710.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3608,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            3607
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3609,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3611
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeDivide",
+      "nodeName": "Divide",
+      "x": -136.0,
+      "y": 662.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3610,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Health(Event Player)",
+          "connections": [
+            3606
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3611,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Max Health(Event Player)",
+          "connections": [
+            3609
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3612,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3613
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeMultiply",
+      "nodeName": "Multiply",
+      "x": -24.0,
+      "y": 659.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3613,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Health(Event Player) / Max Health(Event Player)",
+          "connections": [
+            3612
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 3614,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "100.0",
+          "connections": [
+            3617
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3615,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4491
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeNumber",
+      "nodeName": "Number",
+      "x": -280.0,
+      "y": 790.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 3616,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "100.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 3617,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            3614
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateProgressBarHUDText",
+      "nodeName": "Create Progress Bar HUD Text",
+      "x": 264.0,
+      "y": 635.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 4490,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4491,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Health(Event Player) / Max Health(Event Player) * 100.0",
+          "connections": [
+            3615
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4492,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"\")",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4493,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Left",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4494,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4495,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4496,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4497,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To Values And Color",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4498,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Default Visibility",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4499,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            2722
           ],
           "canDelete": false
         }
