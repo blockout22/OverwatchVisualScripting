@@ -35,6 +35,10 @@ public class AdvancedArrayList<E> {
         return list;
     }
 
+    public void setList(ArrayList<E> list){
+        this.list = list;
+    }
+
     public void triggerOnChanged(){
         for (int i = 0; i < changedListener.size(); i++) {
             changedListener.get(i).onChanged();

@@ -107,11 +107,19 @@ public class NodeIf extends Node{
             trueOut += "" + lines[i] + "\n";
         }
 
-
-        outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + inputData.getValue().get() + ");\n" +
-                trueOut +
-                "Else;\n" +
-                (falseData.getValue().get()) + "\nEnd;");
+        if(ifTypeCombo.getSelectedValue().equals("Loop If"))
+        {
+            truePin.setVisible(false);
+            falsePin.setVisible(false);
+            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + inputData.getValue().get() + ");");
+        }else {
+            truePin.setVisible(true);
+            falsePin.setVisible(true);
+            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + inputData.getValue().get() + ");\n" +
+                    trueOut +
+                    "Else;\n" +
+                    (falseData.getValue().get()) + "\nEnd;");
+        }
 //
 //            outputData.getValue().set(ifTypeCombo.getSelectedValue() + "(" + leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get() + ");\n" +
 //                    out +
