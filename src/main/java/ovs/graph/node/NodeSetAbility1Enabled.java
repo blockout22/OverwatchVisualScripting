@@ -35,7 +35,7 @@ public class NodeSetAbility1Enabled extends Node{
         PinData<ImString> boolData = pinBool.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(pinPlayer, playerData);
+        handlePinStringConnection(pinPlayer, playerData, "Event Player");
         handlePinStringConnection(pinBool, boolData, "True");
 
         outputData.getValue().set("Set Ability 1 Enabled(" + playerData.getValue().get() + ", " + boolData.getValue().get() + ");");

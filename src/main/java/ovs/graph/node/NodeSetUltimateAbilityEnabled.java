@@ -6,16 +6,16 @@ import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeSetAbility2Enabled extends Node{
+public class NodeSetUltimateAbilityEnabled extends Node{
 
     PinVar pinPlayer = new PinVar();
     PinVar pinBool = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeSetAbility2Enabled(Graph graph) {
+    public NodeSetUltimateAbilityEnabled(Graph graph) {
         super(graph);
-        setName("Set Ability 2 Enabled");
+        setName("Set Ultimate Ability Enabled");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
@@ -38,7 +38,7 @@ public class NodeSetAbility2Enabled extends Node{
         handlePinStringConnection(pinPlayer, playerData, "Event Player");
         handlePinStringConnection(pinBool, boolData, "True");
 
-        outputData.getValue().set("Set Ability 2 Enabled(" + playerData.getValue().get() + ", " + boolData.getValue().get() + ");");
+        outputData.getValue().set(getName() + "(" + playerData.getValue().get() + ", " + boolData.getValue().get() + ");");
 
     }
 

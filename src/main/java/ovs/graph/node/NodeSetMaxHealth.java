@@ -25,6 +25,7 @@ public class NodeSetMaxHealth extends Node{
         addCustomInput(input);
 
         inputHealth.setNode(this);
+        inputHealth.setName("Percentage");
         addCustomInput(inputHealth);
 
         output.setNode(this);
