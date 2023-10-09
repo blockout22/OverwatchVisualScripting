@@ -280,6 +280,10 @@ public class NodeEditorRenderer {
                                     lastActivePin = outPin.getID();
                                 }
 //                            ImGui.sameLine();
+
+                                if(i + 1 < node.inputPins.size()){
+                                    ImGui.sameLine();
+                                }
                             }
                             if (maxWidth < NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x) {
                                 maxWidth = NodeEditor.getNodePositionX(node.getID()) + NodeEditor.getNodeSizeX(node.getID()) - NodeEditor.getStyle().getNodePadding().x;
