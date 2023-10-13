@@ -184,25 +184,31 @@ public class NodeGroup extends Node{
 //                    ((NodeGroupInput) node).bind(inputPins.get(inputIndex), i);
 //                    inputIndex++;
 //                }
-                ((NodeGroupInput) node).bind((PinVar) inputPins.get(inputIndex));
+                for (int i = 0; i < inputPins.size(); i++) {
+                    ((NodeGroupInput) node).bind(inputPins.get(i));
+                }
+//                ((NodeGroupInput) node).bind(inputPins.get(inputIndex));
                 inputIndex++;
             }
 
             if(node instanceof NodeGroupOutput){
-                for (int i = 0; i < node.inputPins.size(); i++) {
-                    Pin pin = node.inputPins.get(i);
+                for (int i = 0; i < outputPins.size(); i++) {
+                    ((NodeGroupOutput) node).bind(outputPins.get(i));
+                }
+//                for (int i = 0; i < node.inputPins.size(); i++) {
+//                    Pin pin = node.inputPins.get(i);
 
-                    if(pin instanceof PinCondition){
-                        for (int j = 0; j < outputPins.size(); j++) {
+//                    if(pin instanceof PinCondition){
+//                        for (int j = 0; j < outputPins.size(); j++) {
 //                            Pin outputPin = outputPins.get(j);
 //
 //                            if(outputPin instanceof PinCondition){
 ////                                ((NodeGroupOutput) node).bindCondition((PinCondition) outputPin);
 //                            }
 
-                            ((NodeGroupOutput) node).bind(outputPins.get(i));
-                        }
-                    }
+//                            ((NodeGroupOutput) node).bind(outputPins.get(i));
+//                        }
+//                    }
 
 //                    if(pin instanceof PinAction){
 //                        for (int j = 0; j < outputPins.size(); j++) {
@@ -223,7 +229,7 @@ public class NodeGroup extends Node{
 //                            }
 //                        }
 //                    }
-                }
+//                }
             }
         }
     }
@@ -243,6 +249,7 @@ public class NodeGroup extends Node{
                     group.silentSelectValue(data.split(":")[1]);
 
                     loadAndBind();
+//                    createPins();
 
                 }catch (ArrayIndexOutOfBoundsException e){
                     group.select(-1);

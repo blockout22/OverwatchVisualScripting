@@ -1,0 +1,168 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeGroupInput",
+      "nodeName": "Group Input",
+      "x": -135.0,
+      "y": -27.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 9421,
+          "name": "Left Condition",
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            9418
+          ],
+          "canDelete": true
+        },
+        {
+          "ID": 9422,
+          "name": "Right Condition",
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            9419
+          ],
+          "canDelete": true
+        },
+        {
+          "ID": 9423,
+          "name": "True",
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            9415
+          ],
+          "canDelete": true
+        },
+        {
+          "ID": 9424,
+          "name": "False",
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            9416
+          ],
+          "canDelete": true
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 568.0,
+      "y": -14.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 9425,
+          "name": "",
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            9417
+          ],
+          "canDelete": true
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeIf",
+      "nodeName": "If",
+      "x": 392.0,
+      "y": 33.0,
+      "comment": "",
+      "extraData": [
+        "Type:If"
+      ],
+      "inputPins": [
+        {
+          "ID": 9414,
+          "name": "If Condition",
+          "type": "ovs.graph.pin.PinIf",
+          "value": " \u003d\u003d ",
+          "connections": [
+            9420
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 9415,
+          "name": "True",
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            9423
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 9416,
+          "name": "False",
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            9424
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 9417,
+          "name": "",
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            9425
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCompare",
+      "nodeName": "Compare",
+      "x": 195.0,
+      "y": 10.0,
+      "comment": "",
+      "extraData": [
+        "Compare:\u003d\u003d"
+      ],
+      "inputPins": [
+        {
+          "ID": 9418,
+          "name": "Left Condition",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            9421
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 9419,
+          "name": "Right Condition",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            9422
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 9420,
+          "name": "",
+          "type": "ovs.graph.pin.PinIf",
+          "connections": [
+            9414
+          ],
+          "canDelete": false
+        }
+      ]
+    }
+  ]
+}

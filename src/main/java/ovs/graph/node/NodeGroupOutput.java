@@ -82,6 +82,7 @@ public class NodeGroupOutput extends Node {
 
             data.getValue().set(inputData.getValue().get());
         }
+        System.out.println(bindingPins.size());
 //        PinData<ImString> conditionData = pinCondition.getData();
 //        PinData<ImString> actionData = pinAction.getData();
 //        PinData<ImString> varData = pinVar.getData();

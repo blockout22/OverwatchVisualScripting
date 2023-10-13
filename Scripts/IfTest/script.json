@@ -2031,35 +2031,53 @@
     {
       "className": "ovs.graph.node.NodeGroup",
       "nodeName": "Node Group",
-      "x": 488.0,
-      "y": -38.0,
+      "x": 771.0,
+      "y": -465.0,
       "comment": "",
       "extraData": [
-        "Group:CreateHud"
+        "Group:IfGroup"
       ],
       "inputPins": [
         {
-          "ID": 9507,
+          "ID": 15724,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Event Ability",
+          "value": "Event Player",
           "connections": [
-            5797
+            11329
           ],
           "canDelete": false
         },
         {
-          "ID": 9508,
+          "ID": 15725,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Custom String(\"Hello Node group\")",
+          "value": "Is Alive(Event Player)",
           "connections": [
-            10412
+            11327
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 15726,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Set Ultimate Charge(Event Player, 100);",
+          "connections": [
+            11335
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 15727,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Set Player Score(Event Player, 0.0)",
+          "connections": [
+            11343
           ],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 9509,
+          "ID": 15728,
           "type": "ovs.graph.pin.PinAction",
           "connections": [
             10414
@@ -2071,8 +2089,8 @@
     {
       "className": "ovs.graph.node.NodeEventAbility",
       "nodeName": "Event Ability",
-      "x": 190.0,
-      "y": -16.0,
+      "x": -44.0,
+      "y": -64.0,
       "comment": "",
       "extraData": [],
       "inputPins": [],
@@ -2080,9 +2098,7 @@
         {
           "ID": 5797,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            9507
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
@@ -2090,8 +2106,8 @@
     {
       "className": "ovs.graph.node.NodeCustomString",
       "nodeName": "Custom String",
-      "x": 178.0,
-      "y": 43.0,
+      "x": -56.0,
+      "y": -5.0,
       "comment": "",
       "extraData": [],
       "inputPins": [
@@ -2128,21 +2144,19 @@
         {
           "ID": 10412,
           "type": "ovs.graph.pin.PinVar",
-          "connections": [
-            9508
-          ],
+          "connections": [],
           "canDelete": false
         }
       ]
     },
     {
       "className": "ovs.graph.node.NodeRule",
-      "nodeName": "Rule",
-      "x": 648.0,
-      "y": -98.0,
+      "nodeName": "if Test",
+      "x": 1032.0,
+      "y": -586.0,
       "comment": "",
       "extraData": [
-        "EventOnGoing:Ongoing - Global",
+        "EventOnGoing:Ongoing - Each Player",
         "Team:All",
         "Player:All",
         "Sub:"
@@ -2158,14 +2172,195 @@
         {
           "ID": 10414,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Create HUD Text(Event Ability,Null, Null, Custom String(\"Hello Node group\"), Left, 0, Color(White), Color(White), Color(White), Visible To And String, Default Visibility);",
+          "value": "If(Event Player \u003d\u003d Is Alive(Event Player));\nSet Ultimate Charge(Event Player, 100);\nElse;\nSet Player Score(Event Player, 0.0)\nEnd;",
           "connections": [
-            9509
+            15728
           ],
           "canDelete": false
         }
       ],
       "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeEventPlayer",
+      "nodeName": "Event Player",
+      "x": 210.0,
+      "y": -468.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 11325,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            11326,
+            11328,
+            11333,
+            11341
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeIsAlive",
+      "nodeName": "Is Alive",
+      "x": 555.0,
+      "y": -418.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 11326,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            11325
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 11327,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            15725
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeReroute",
+      "nodeName": "Reroute",
+      "x": 623.0,
+      "y": -438.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 11328,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            11325
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 11329,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            15724
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetUltimateCharge",
+      "nodeName": "Set Ultimate Charge",
+      "x": 504.0,
+      "y": -330.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 11333,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            11325
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 11334,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "100",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 11335,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            15726
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeNumber",
+      "nodeName": "Number",
+      "x": 248.0,
+      "y": -202.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 11339,
+          "type": "ovs.graph.pin.PinFloat",
+          "value": "0.0",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 11340,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            11342
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeSetPlayerScore",
+      "nodeName": "Set Player Score",
+      "x": 552.0,
+      "y": -218.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 11341,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Player",
+          "connections": [
+            11325
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 11342,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0.0",
+          "connections": [
+            11340
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 11343,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            15727
+          ],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }
