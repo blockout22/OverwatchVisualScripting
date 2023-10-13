@@ -80,7 +80,7 @@ public class Graph {
             }
 
             //Clear any pin existing connections
-            for(Pin pin : n.outputPins){
+            for(Pin pin : n.outputPins.getList()){
                 for (int i = 0; i < pin.connectedToList.size(); i++) {
                     Pin connection = findPinById(pin.connectedToList.get(i));
                     if(connection != null) {
@@ -92,7 +92,7 @@ public class Graph {
 //                    oldPin.connectedTo = -1;
 //                }
             }
-            for(Pin pin : n.inputPins){
+            for(Pin pin : n.inputPins.getList()){
                 for (int i = 0; i < pin.connectedToList.size(); i++) {
                     Pin connection = findPinById(pin.connectedToList.get(i));
                     if(connection != null) {
@@ -122,13 +122,13 @@ public class Graph {
     public Pin findPinById(final int ID) {
 //        for(Node node : nodes.values()){
         for(Node node : nodes.getList()){
-            for(Pin pin : node.inputPins){
+            for(Pin pin : node.inputPins.getList()){
                 if(pin.getID() == ID){
                     return pin;
                 }
             }
 
-            for(Pin pin : node.outputPins){
+            for(Pin pin : node.outputPins.getList()){
                 if(pin.getID() == ID){
                     return pin;
                 }

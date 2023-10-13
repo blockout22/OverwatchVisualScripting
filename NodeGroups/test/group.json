@@ -1,0 +1,164 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeGroupInput",
+      "nodeName": "Group Input",
+      "x": 234.0,
+      "y": 136.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 1000,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            4794
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 1001,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1002,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1003,
+          "type": "ovs.graph.pin.PinCondition",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 792.0,
+      "y": 118.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 2967,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 2968,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create Progress Bar HUD Text(, 0, Custom String(\"\"), Left, 0, Color(White), Color(White), Visible To Values And Color, Default Visibility);",
+          "connections": [
+            4803
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 2969,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateProgressBarHUDText",
+      "nodeName": "Create Progress Bar HUD Text",
+      "x": 408.0,
+      "y": 145.0,
+      "comment": "",
+      "extraData": [
+        "Location:Left",
+        "Reevaluation:Visible To Values And Color",
+        "NonTeamSpectators:Default Visibility"
+      ],
+      "inputPins": [
+        {
+          "ID": 4794,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            1000
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 4795,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4796,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"\")",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4797,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Left",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4798,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4799,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4800,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4801,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To Values And Color",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 4802,
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Default Visibility",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 4803,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            2968
+          ],
+          "canDelete": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.type.ImString;
+import ovs.graph.AdvancedArrayList;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.UiComponent;
@@ -13,8 +14,8 @@ public abstract class Node {
     public final Node self;
     private final Graph graph;
 
-    public ArrayList<Pin> outputPins = new ArrayList<>();
-    public ArrayList<Pin> inputPins = new ArrayList<>();
+    public AdvancedArrayList<Pin> outputPins = new AdvancedArrayList<>();
+    public AdvancedArrayList<Pin> inputPins = new AdvancedArrayList<>();
     public ArrayList<UiComponent> uiComponents = new ArrayList<>();
     private ArrayList<String> extraSaveData = new ArrayList<>();
 

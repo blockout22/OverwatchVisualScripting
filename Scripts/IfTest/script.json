@@ -5,8 +5,10 @@
     "maxT1Players": 5,
     "maxT2Players": 5,
     "maxFFAPlayers": 0,
+    "maxSpectators": 2,
     "mapRotation": 0,
     "returnToLobby": 0,
+    "allowInQueue": true,
     "assaultMode": false,
     "controlMode": true,
     "escortMode": true,
@@ -98,6 +100,10 @@
       "scoreToWin": 2,
       "scoringSpeedModifier": 100,
       "MapToggle": [
+        {
+          "name": "Antarctic Peninsula",
+          "value": true
+        },
         {
           "name": "Busan",
           "value": true
@@ -232,10 +238,14 @@
         }
       ]
     },
-    "dmSettings": {
-      "GameLenthDM": 10,
-      "scoreToWinDM": 20,
-      "initRespawnDM": true,
+    "bhSettings": {
+      "baseScoreForKillingBountyTarget": 300,
+      "bountyIncreasePerKillAsBountyTarget": 0,
+      "gameTimeBH": 10,
+      "scorePerKillBH": 100,
+      "scorePerKillAsBountyTarget": 300,
+      "scoreToWinBH": 20,
+      "initRespawnBH": true,
       "MapToggle": [
         {
           "name": "Black Forest",
@@ -314,7 +324,7 @@
           "value": true
         },
         {
-          "name": "Ilois Well",
+          "name": "Ilios Well",
           "value": true
         },
         {
@@ -430,6 +440,813 @@
           "value": true
         }
       ]
+    },
+    "ctfSettings": {
+      "blitzFlagLocations": false,
+      "damageInterruptsFlagInteractions": false,
+      "flagCarrierAbilities": 2,
+      "flagDroppedLockTime": 5.0,
+      "flagPickupTime": 0.0,
+      "flagReturnTime": 4.0,
+      "flagScoreRespawnTime": 15.0,
+      "gameTimeCtf": 10,
+      "respawnSpeedBuffDuration": 0.0,
+      "scoreToWinCtf": 3,
+      "teamNeedsFlagAtBaseToScore": false,
+      "MapToggle": [
+        {
+          "name": "Ayutthaya",
+          "value": true
+        },
+        {
+          "name": "Busan Downtown Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Busan Sanctuary Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilios Well",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University ",
+          "value": true
+        }
+      ]
+    },
+    "dmSettings": {
+      "GameLenthDM": 10,
+      "scoreToWinDM": 20,
+      "initRespawnDM": true,
+      "MapToggle": [
+        {
+          "name": "Black Forest",
+          "value": true
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": true
+        },
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": true
+        },
+        {
+          "name": "Castillo",
+          "value": true
+        },
+        {
+          "name": "Château",
+          "value": true
+        },
+        {
+          "name": "Château Guillard",
+          "value": true
+        },
+        {
+          "name": "Château Guillard Halloween",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": true
+        },
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Hollywood",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilios Well",
+          "value": true
+        },
+        {
+          "name": "Kanezaka",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Malevento",
+          "value": true
+        },
+        {
+          "name": "Necropolis",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Petra",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    },
+    "elimSettings": {
+      "heroSelectioinTime": 20,
+      "scoreToWinElim": 3,
+      "restrictPreviouslyUsedHero": 0,
+      "heroSelection": 0,
+      "limitChoicePool": 0,
+      "captureObjectiveTiebreaker": true,
+      "tiebreakerAfterMatchTimeElapsed": 105,
+      "timeToCapture": 3,
+      "drawAfterMatchTimeElapsedWithNoTiebreaker": 135,
+      "revealHeroes": false,
+      "revealHeroesAfterMatchTimeElapsed": 75,
+      "MapToggle": [
+        {
+          "name": "Ayutthaya",
+          "value": true
+        },
+        {
+          "name": "Black Forest",
+          "value": true
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": true
+        },
+        {
+          "name": "Castillo",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica Winter",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilios Well",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Necropolis",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    },
+    "teamDmSettings": {
+      "gameTimeTDM": 10,
+      "mercyResCounteractsKills": true,
+      "scoreToWinTDM": 30,
+      "initRespawnTDM": true,
+      "imbalancedTeamScoreToWin": false,
+      "team1ScoreToWin": 30,
+      "team2ScoreToWin": 30,
+      "MapToggle": [
+        {
+          "name": "Black Forest",
+          "value": true
+        },
+        {
+          "name": "Black Forest Winter",
+          "value": true
+        },
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": true
+        },
+        {
+          "name": "Castillo",
+          "value": true
+        },
+        {
+          "name": "Château",
+          "value": true
+        },
+        {
+          "name": "Château Guillard",
+          "value": true
+        },
+        {
+          "name": "Château Guillard Halloween",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Ecopoint: Antarctica",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": true
+        },
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Hollywood",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Ilios Lighthouse",
+          "value": true
+        },
+        {
+          "name": "Ilios Ruins",
+          "value": true
+        },
+        {
+          "name": "Ilios Well",
+          "value": true
+        },
+        {
+          "name": "Kanezaka",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center",
+          "value": true
+        },
+        {
+          "name": "Lijiang Control Center Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden",
+          "value": true
+        },
+        {
+          "name": "Lijiang Garden Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market",
+          "value": true
+        },
+        {
+          "name": "Lijiang Night Market Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Malevento",
+          "value": true
+        },
+        {
+          "name": "Necropolis",
+          "value": true
+        },
+        {
+          "name": "Nepal Sanctum",
+          "value": true
+        },
+        {
+          "name": "Nepal Shrine",
+          "value": true
+        },
+        {
+          "name": "Nepal Village",
+          "value": true
+        },
+        {
+          "name": "Oasis City Center",
+          "value": true
+        },
+        {
+          "name": "Oasis Gardens",
+          "value": true
+        },
+        {
+          "name": "Oasis University",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Petra",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Temple Of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    },
+    "practiceRangeSettings": {
+      "spawnTrainingBots": true,
+      "trainingBotRespawnTimeScaler": 100,
+      "trainingPartner": true
+    },
+    "skirmishSettings": {
+      "limitValidControlPoints": 0,
+      "MapToggle": [
+        {
+          "name": "Blizzard World",
+          "value": true
+        },
+        {
+          "name": "Blizzard World Winter",
+          "value": true
+        },
+        {
+          "name": "Busan",
+          "value": true
+        },
+        {
+          "name": "Circuit Royal",
+          "value": true
+        },
+        {
+          "name": "Colosseo",
+          "value": true
+        },
+        {
+          "name": "Dorado",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde",
+          "value": true
+        },
+        {
+          "name": "Eichenwalde Halloween",
+          "value": true
+        },
+        {
+          "name": "Esperança",
+          "value": true
+        },
+        {
+          "name": "Hanamura",
+          "value": true
+        },
+        {
+          "name": "Hanamura Winter",
+          "value": true
+        },
+        {
+          "name": "Havana",
+          "value": true
+        },
+        {
+          "name": "Hollywood",
+          "value": true
+        },
+        {
+          "name": "Hollywood Halloween",
+          "value": true
+        },
+        {
+          "name": "Horizon Lunar Colony",
+          "value": true
+        },
+        {
+          "name": "Ilios",
+          "value": true
+        },
+        {
+          "name": "Junkertown",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row",
+          "value": true
+        },
+        {
+          "name": "King\u0027s Row Winter",
+          "value": true
+        },
+        {
+          "name": "Lijiang Tower",
+          "value": true
+        },
+        {
+          "name": "Lijiang Tower Lunar New Year",
+          "value": true
+        },
+        {
+          "name": "Nepal",
+          "value": true
+        },
+        {
+          "name": "New Queen Street",
+          "value": true
+        },
+        {
+          "name": "Numbani",
+          "value": true
+        },
+        {
+          "name": "Oasis",
+          "value": true
+        },
+        {
+          "name": "Paraíso",
+          "value": true
+        },
+        {
+          "name": "Paris",
+          "value": true
+        },
+        {
+          "name": "Rialto",
+          "value": true
+        },
+        {
+          "name": "Route 66",
+          "value": true
+        },
+        {
+          "name": "Shambali Monastery",
+          "value": true
+        },
+        {
+          "name": "Temple of Anubis",
+          "value": true
+        },
+        {
+          "name": "Volskaya Industries",
+          "value": true
+        },
+        {
+          "name": "Watchpoint: Gibraltar",
+          "value": true
+        },
+        {
+          "name": "Workshop Chamber",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse",
+          "value": true
+        },
+        {
+          "name": "Workshop Expanse Night",
+          "value": true
+        },
+        {
+          "name": "Workshop Green Screen",
+          "value": true
+        },
+        {
+          "name": "Workshop Island",
+          "value": true
+        },
+        {
+          "name": "Workshop Island Night",
+          "value": true
+        }
+      ]
+    },
+    "heroSettings": {
+      "abilityCooldown": 100,
+      "quickMelee": true,
+      "ultimateAbility": true,
+      "ultimateGeneration": 100,
+      "ultimateGenerationCombat": 100,
+      "ultimateGenerationPassive": 100,
+      "spawnWithUltimateReady": false,
+      "ultimateDuration": 100,
+      "infiniteUltimateDuration": false,
+      "damageDealt": 100,
+      "damageReceived": 100,
+      "healingDealt": 100,
+      "healingReceived": 100,
+      "health": 100,
+      "jumpVerticalSpeed": 100,
+      "movementGravity": 100,
+      "movementSpeed": 100,
+      "projectileGravity": 100,
+      "projectileSpeed": 100,
+      "receiveHeadshotsOnly": false,
+      "primaryFire": true,
+      "ammunitionClipSizeScaler": 100,
+      "noAmmunitionRequirements": false
     }
   },
   "globalVariables": [],
@@ -441,6 +1258,7 @@
       "nodeName": "All Players",
       "x": -761.0,
       "y": 1309.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -469,6 +1287,7 @@
       "nodeName": "Team",
       "x": -910.0,
       "y": 1312.0,
+      "comment": "",
       "extraData": [
         "Team:All Teams"
       ],
@@ -489,6 +1308,7 @@
       "nodeName": "Action List",
       "x": 315.0,
       "y": 682.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -526,6 +1346,7 @@
       "nodeName": "Small Message",
       "x": 102.0,
       "y": 785.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -563,6 +1384,7 @@
       "nodeName": "Custom String",
       "x": -246.0,
       "y": 807.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -610,6 +1432,7 @@
       "nodeName": "If",
       "x": 552.0,
       "y": 549.0,
+      "comment": "",
       "extraData": [
         "Type:If"
       ],
@@ -633,7 +1456,7 @@
         {
           "ID": 1646,
           "type": "ovs.graph.pin.PinAction",
-          "value": "Big Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0.0, 0.0, 0.0));\n",
+          "value": "Big Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0, 0, 0));\n",
           "connections": [
             2052
           ],
@@ -656,6 +1479,7 @@
       "nodeName": "Button",
       "x": 203.0,
       "y": 528.0,
+      "comment": "",
       "extraData": [
         "Button:Ability 1"
       ],
@@ -674,6 +1498,7 @@
       "nodeName": "Boolean",
       "x": 164.0,
       "y": 647.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -698,6 +1523,7 @@
       "nodeName": "Big Message",
       "x": 280.0,
       "y": 877.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -735,6 +1561,7 @@
       "nodeName": "Event Player",
       "x": 84.0,
       "y": 896.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -754,6 +1581,7 @@
       "nodeName": "Custom String",
       "x": 14.0,
       "y": 967.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -801,6 +1629,7 @@
       "nodeName": "Action List",
       "x": 459.0,
       "y": 840.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -838,6 +1667,7 @@
       "nodeName": "Teleport",
       "x": 308.0,
       "y": 1055.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -852,7 +1682,7 @@
         {
           "ID": 2055,
           "type": "ovs.graph.pin.PinVar",
-          "value": "Vector(0.0, 0.0, 0.0)",
+          "value": "Vector(0, 0, 0)",
           "connections": [
             2058
           ],
@@ -875,12 +1705,27 @@
       "nodeName": "Vector",
       "x": 46.0,
       "y": 1119.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
           "ID": 2057,
-          "type": "ovs.graph.pin.PinVector",
-          "value": "ImVec4{x\u003d0.0, y\u003d0.0, z\u003d0.0, w\u003d0.0}",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1035,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1036,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
           "connections": [],
           "canDelete": false
         }
@@ -901,6 +1746,7 @@
       "nodeName": "Rule",
       "x": 1048.0,
       "y": 200.0,
+      "comment": "",
       "extraData": [
         "EventOnGoing:Ongoing - Each Player",
         "Team:All",
@@ -918,7 +1764,7 @@
         {
           "ID": 1196,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If();\nRespawn(Event Player);\nElse;\nIf();\nKill(Event Player, Event Player);\nSmall Message(Event Player, Custom String(\"Hello\"));\nElse;\nBig Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0.0, 0.0, 0.0));\n\nEnd;\nEnd;",
+          "value": "If();\nRespawn(Event Player);\nElse;\nIf();\nKill(Event Player, Event Player);\nSmall Message(Event Player, Custom String(\"Hello\"));\nElse;\nBig Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0, 0, 0));\n\nEnd;\nEnd;",
           "connections": [
             1200
           ],
@@ -932,6 +1778,7 @@
       "nodeName": "If",
       "x": 808.0,
       "y": 296.0,
+      "comment": "",
       "extraData": [
         "Type:If"
       ],
@@ -955,7 +1802,7 @@
         {
           "ID": 1199,
           "type": "ovs.graph.pin.PinAction",
-          "value": "If();\nKill(Event Player, Event Player);\nSmall Message(Event Player, Custom String(\"Hello\"));\nElse;\nBig Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0.0, 0.0, 0.0));\n\nEnd;",
+          "value": "If();\nKill(Event Player, Event Player);\nSmall Message(Event Player, Custom String(\"Hello\"));\nElse;\nBig Message(Event Player, Custom String(\"Hello Else\"));\nTeleport(Event Player, Vector(0, 0, 0));\n\nEnd;",
           "connections": [
             1647
           ],
@@ -978,6 +1825,7 @@
       "nodeName": "Map",
       "x": 289.0,
       "y": 361.0,
+      "comment": "",
       "extraData": [
         "Map:Ayutthaya"
       ],
@@ -996,6 +1844,7 @@
       "nodeName": "Current Map",
       "x": 283.0,
       "y": 288.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1012,6 +1861,7 @@
       "nodeName": "Respawn",
       "x": 616.0,
       "y": 431.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1040,6 +1890,7 @@
       "nodeName": "Event Player",
       "x": 442.0,
       "y": 449.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1058,6 +1909,7 @@
       "nodeName": "Kill",
       "x": -78.0,
       "y": 703.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -1095,6 +1947,7 @@
       "nodeName": "Event Player",
       "x": -258.0,
       "y": 721.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -1115,7 +1968,11 @@
       "nodeName": "Create Effect",
       "x": -612.0,
       "y": 1307.0,
-      "extraData": [],
+      "comment": "",
+      "extraData": [
+        "Type:",
+        "Reevaluation:Visible To, Position, And Radius"
+      ],
       "inputPins": [
         {
           "ID": 1623,
@@ -1156,8 +2013,8 @@
         },
         {
           "ID": 1628,
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Visible To Position and Radius",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To, Position, And Radius",
           "connections": [],
           "canDelete": false
         }
@@ -1167,6 +2024,66 @@
           "ID": 1629,
           "type": "ovs.graph.pin.PinAction",
           "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroup",
+      "nodeName": "Node Group",
+      "x": 568.0,
+      "y": 90.0,
+      "comment": "",
+      "extraData": [
+        "Group:test2"
+      ],
+      "inputPins": [
+        {
+          "ID": 7652,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Event Ability",
+          "connections": [
+            5797
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 7653,
+          "type": "ovs.graph.pin.PinCondition",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 7654,
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 7655,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeEventAbility",
+      "nodeName": "Event Ability",
+      "x": 350.0,
+      "y": 76.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 5797,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            7652
+          ],
           "canDelete": false
         }
       ]

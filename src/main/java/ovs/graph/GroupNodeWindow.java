@@ -2,16 +2,25 @@ package ovs.graph;
 
 import imgui.ImGui;
 import imgui.ImVec2;
+import imgui.extension.nodeditor.NodeEditor;
 import imgui.flag.ImGuiCond;
+import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
+import imgui.type.ImString;
 import ovs.GlfwWindow;
 import ovs.Global;
 import ovs.ImGuiWindow;
 import ovs.TaskSchedule;
+import ovs.graph.UI.Listeners.ChangeListener;
+import ovs.graph.UI.TextField;
 import ovs.graph.node.Node;
+import ovs.graph.node.NodeGroupInput;
 import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.node.interfaces.NodeGroupOnly;
+import ovs.graph.pin.Pin;
 import ovs.graph.save.GroupSaver;
+
+import java.util.ArrayList;
 
 public class GroupNodeWindow {
 
@@ -40,6 +49,10 @@ public class GroupNodeWindow {
     private String fileName = "untitled";
     public String id;
 
+    private int totalInputs = 0;
+
+    private ArrayList<TextField> tfInputPins = new ArrayList<>();
+
     public GroupNodeWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile) {
         this.imGuiWindow = imGuiWindow;
         this.glfwWindow = window;
@@ -49,6 +62,8 @@ public class GroupNodeWindow {
             load(loadFile);
         }else{
             graph = new Graph();
+            NodeGroupInput inputNode = new NodeGroupInput(graph);
+            graph.addNode(inputNode);
         }
 
 
@@ -59,8 +74,6 @@ public class GroupNodeWindow {
                 promptSave = true;
             }
         });
-
-        //TODO check if loading from file else create blank graph;
     }
 
     public void load(String loadFile){
@@ -127,6 +140,61 @@ public class GroupNodeWindow {
                 ImGui.sameLine();
                 ImGui.text("Saved!");
             }
+
+            if (ImGui.beginChild("GroupSettingsChild", 400, 0)) {
+                ImGui.beginGroup();
+                {
+                    if (ImGui.collapsingHeader("Properties", ImGuiTreeNodeFlags.DefaultOpen)) {
+                        int outputSize = 0;
+                        for(Node node : graph.getNodes().getList()){
+                            if(node instanceof NodeGroupInput){
+                                outputSize += node.outputPins.size();
+                            }
+                        }
+
+                        if(outputSize != tfInputPins.size()){
+                            tfInputPins.clear();
+
+                            for(Node node : graph.getNodes().getList()){
+                                if(node instanceof NodeGroupInput){
+                                    for (int i = 0; i < node.outputPins.size(); i++) {
+                                        Pin pin = node.outputPins.get(i);
+
+                                        TextField tf = new TextField(true);
+                                        tf.addChangedListener((oldValue, newValue) -> {
+                                            pin.setName(newValue);
+                                        });
+                                        tf.setText(pin.getName());
+                                        tfInputPins.add(tf);
+                                    }
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < tfInputPins.size(); i++) {
+                            tfInputPins.get(i).show();
+
+                            if(i != 0){
+                                ImGui.sameLine();
+                                if(ImGui.button("^##ip" + i)){
+//                                    boolean swapped = graph.nodes.swap(ruleNodes.get(i), ruleNodes.get(i - 1));
+                                }
+                            }
+
+                            if(i != tfInputPins.size() - 1){
+                                ImGui.sameLine();
+                                if(ImGui.button("v##ip" + i)){
+//                                    boolean swapped = graph.nodes.swap(ruleNodes.get(i), ruleNodes.get(i + 1));
+                                }
+                            }
+                        }
+                    }
+                }
+                ImGui.endGroup();
+                ImGui.endChild();
+            }
+
+            ImGui.sameLine();
 
             nodeEditorRenderer.show(cursorPos, isLoading);
         }

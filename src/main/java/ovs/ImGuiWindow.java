@@ -131,7 +131,7 @@ public class ImGuiWindow {
 //        ImGui.pushFont(font);
         {
             createMainMenuBar();
-            float menuBarHeight = 20f;
+            float menuBarHeight = 25f;
             float taskbarHeight = 50f;
             ImGui.setNextWindowSize(glfwWindow.getWidth(), glfwWindow.getHeight(), ImGuiCond.Always);
             ImGui.setNextWindowPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY(), ImGuiCond.Always);

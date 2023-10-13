@@ -2,6 +2,8 @@ package ovs.graph.pin;
 
 import imgui.ImColor;
 import imgui.ImDrawList;
+import imgui.ImGui;
+import imgui.ImVec2;
 import ovs.RGBA;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
@@ -141,6 +143,20 @@ public abstract class Pin {
             windowDrawList.addCircle(posX + (pinSize / 2), posY + (pinSize / 2), pinSize / 2, doubleGrey);
         }
     }
+
+    public void drawCenteredText(ImDrawList windowDrawList, float posX, float posY, String text) {
+        // Calculate text size
+        ImVec2 textSize = new ImVec2();
+        ImGui.calcTextSize(textSize, text);
+
+        // Calculate centered position
+        float centeredX = posX + (pinSize / 2) - (textSize.x / 2);
+        float centeredY = posY + (pinSize / 2) - (textSize.y / 2);
+
+        // Draw the text at the centered position
+        windowDrawList.addText(centeredX, centeredY, ImColor.floatToColor(255, 255, 255, 255), text);
+    }
+
 
     public void loadValue(String value){
 

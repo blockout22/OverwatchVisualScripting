@@ -317,7 +317,7 @@ public class GraphSaver {
                 save.extraData.add(extraData);
             }
 
-            for(Pin inputs : node.inputPins){
+            for(Pin inputs : node.inputPins.getList()){
                 PinSave pinSave = new PinSave();
                 pinSave.ID = inputs.getID();
                 pinSave.type = inputs.getClass().getName();
@@ -339,7 +339,7 @@ public class GraphSaver {
                 save.inputPins.add(pinSave);
             }
 
-            for(Pin outputs : node.outputPins){
+            for(Pin outputs : node.outputPins.getList()){
                 PinSave pinSave = new PinSave();
                 pinSave.ID = outputs.getID();
                 pinSave.type = outputs.getClass().getName();

@@ -274,7 +274,6 @@ public class GraphWindow {
 
                         for (int i = 0; i < rule.actions.size(); i++) {
                             String action = rule.actions.get(i);
-                            System.out.println(action);
 
                             for (Node node : nodeEditorRenderer.nodeInstanceCache) {
                                 if(node.getName().equals(action.trim().split("\\(")[0])){

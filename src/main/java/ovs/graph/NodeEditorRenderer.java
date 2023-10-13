@@ -6,10 +6,7 @@ import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
-import imgui.flag.ImDrawFlags;
-import imgui.flag.ImGuiCond;
-import imgui.flag.ImGuiInputTextFlags;
-import imgui.flag.ImGuiWindowFlags;
+import imgui.flag.*;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import ovs.Global;
@@ -38,6 +35,7 @@ public class NodeEditorRenderer {
     private final ImLong LINKA = new ImLong();
     private final ImLong LINKB = new ImLong();
 
+    private ImVec2 size = new ImVec2();
     private ImVec2 headerMin = null;
     private ImVec2 headerMax = null;
     private ImVec2 headerSeparatorMin = new ImVec2();
@@ -113,6 +111,8 @@ public class NodeEditorRenderer {
         float headerMaxY = 0;
         NodeEditor.begin(id);
         {
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.Flow, .5f, .5f, .5f, 1);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.FlowMarker, 1, 1, 1, 1);
             for (Node node : graph.getNodes().getList()) {
                 if (isLoading) {
                     NodeEditor.setNodePosition(node.getID(), node.posX, node.posY);
@@ -218,6 +218,15 @@ public class NodeEditorRenderer {
                         node.UI();
 
                         int max = Math.max(node.outputPins.size(), node.inputPins.size());
+
+                        float maxPinNameWidth = 0.0f;
+                        for (Pin pin : node.outputPins.getList()) {
+                            ImGui.calcTextSize(size, pin.getName());
+                            if (size.x > maxPinNameWidth) {
+                                maxPinNameWidth = size.x;
+                            }
+                        }
+
 //                        ImGui.newLine();
                         for (int i = 0; i < max; i++) {
                             ImGui.newLine();
@@ -232,6 +241,12 @@ public class NodeEditorRenderer {
                                     ImGui.dummy(inPin.pinSize, inPin.pinSize);
 
                                     if (inPin.getName().length() > 0) {
+//                                        ImVec2 size = new ImVec2();
+//                                        ImGui.calcTextSize(size, inPin.getName());
+//                                        float textWidth = size.x;
+//                                        float yOffset = inPin.pinSize / 2.0f;
+//                                        ImGui.setCursorPos(ImGui.getCursorPosX(), ImGui.getCursorPosY() + yOffset);
+//
                                         ImGui.sameLine();
                                         ImGui.text(inPin.getName());
                                     }
@@ -251,7 +266,6 @@ public class NodeEditorRenderer {
                                     ImGui.endGroup();
                                 }
                             }
-
                             if (node.width != -1) {
                                 if (!node.hasTitleBar()) {
                                     ImGui.sameLine(node.width);
@@ -263,23 +277,31 @@ public class NodeEditorRenderer {
                             if (node.outputPins.size() > i) {
                                 Pin outPin = node.outputPins.get(i);
 
-                                NodeEditor.beginPin(outPin.getID(), NodeEditorPinKind.Output);
-                                drawPinShapeAndColor(outPin);
-//                                            ImGui.dummy(10, 10);
-                                ImGui.dummy(outPin.pinSize, outPin.pinSize);
-
-                                if (outPin.getName().length() > 0) {
-                                    ImGui.sameLine();
-                                    ImGui.text(outPin.getName());
+                                float currentX = ImGui.getCursorPosX();
+                                if (outPin.getName().length() == 0) {
+                                    ImGui.setCursorPosX(currentX + maxPinNameWidth);
                                 }
 
-                                NodeEditor.pinPivotAlignment(0, 0.5f);
+                                NodeEditor.beginPin(outPin.getID(), NodeEditorPinKind.Output);
+
+                                currentX = ImGui.getCursorPosX();
+                                float currentY = ImGui.getCursorPosY();
+                                if (outPin.getName().length() > 0) {
+//                                    ImGui.setCursorPosY(currentY - (outPin.pinSize / 2.0f));
+                                    ImGui.text(outPin.getName() + " ");
+//                                    ImGui.calcTextSize(size, outPin.getName());
+                                    ImGui.sameLine();
+                                    ImGui.setCursorPosX(currentX + maxPinNameWidth + 2);
+                                }
+
+                                drawPinShapeAndColor(outPin);
+                                ImGui.dummy(outPin.pinSize, outPin.pinSize);
+                                NodeEditor.pinPivotAlignment(1, 0.5f);
                                 NodeEditor.endPin();
 
                                 if (ImGui.isItemClicked() && holdingPinID == -1) {
                                     lastActivePin = outPin.getID();
                                 }
-//                            ImGui.sameLine();
 
                                 if(i + 1 < node.inputPins.size()){
                                     ImGui.sameLine();
@@ -362,7 +384,7 @@ public class NodeEditorRenderer {
 
         int uniqueLinkId = 1;
         for (Node node : graph.getNodes().getList()) {
-            for (Pin pin : node.inputPins) {
+            for (Pin pin : node.inputPins.getList()) {
                 for (int i = 0; i < pin.connectedToList.size(); i++) {
                     if(!linksMap.containsKey(uniqueLinkId)){
                         Link link = new Link();

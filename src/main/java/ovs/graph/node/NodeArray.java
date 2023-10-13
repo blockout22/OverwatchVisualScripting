@@ -37,7 +37,7 @@ public class NodeArray extends Node {
     public void execute() {
         PinData<ImString> outputData = output.getData();
 
-        if(inputPins.isEmpty()){
+        if(inputPins.getList().isEmpty()){
             outputData.getValue().set("Empty Array");
         }else{
             String outputVal = "";

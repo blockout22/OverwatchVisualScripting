@@ -66,8 +66,8 @@ public class NodeGroup extends Node{
             return;
         }
 
-        inputPins.clear();
-        outputPins.clear();
+        inputPins.getList().clear();
+        outputPins.getList().clear();
 
         groupGraph = g;
 
@@ -77,12 +77,42 @@ public class NodeGroup extends Node{
 
             if(node instanceof NodeGroupInput){
 
-                PinVar pinVar = new PinVar();
-                pinVar.setNode(self);
-                pinVar.setName(node.getName());
-                addCustomInput(pinVar);
+//                PinVar pinVar = new PinVar();
+//                pinVar.setNode(self);
+//                pinVar.setName(node.getName());
+//                addCustomInput(pinVar);
 
-                ((NodeGroupInput) node).bind(pinVar);
+                for (int i = 0; i < node.outputPins.size(); i++) {
+                    Pin pin = node.outputPins.get(i);
+                    if(pin instanceof PinCondition){
+                        PinCondition pinCondition = new PinCondition();
+                        pinCondition.setNode(self);
+                        pinCondition.setName(pin.getName());
+                        addCustomInput(pinCondition);
+
+                        ((NodeGroupInput) node).bind(pinCondition);
+                    }
+
+                    if(pin instanceof PinAction){
+                        PinAction pinAction = new PinAction();
+                        pinAction.setNode(self);
+                        pinAction.setName(pin.getName());
+                        addCustomInput(pinAction);
+
+                        ((NodeGroupInput) node).bind(pinAction);
+                    }
+
+                    if(pin instanceof PinVar){
+                        PinVar pinVar = new PinVar();
+                        pinVar.setNode(self);
+                        pinVar.setName(pin.getName());
+                        addCustomInput(pinVar);
+
+                        ((NodeGroupInput) node).bind(pinVar);
+                    }
+                }
+
+//                ((NodeGroupInput) node).bind(pinVar);
             }
 
             if(node instanceof NodeGroupOutput){
@@ -118,6 +148,11 @@ public class NodeGroup extends Node{
         int inputIndex = 0;
         for(Node node : groupGraph.getNodes().getList()){
             if(node instanceof NodeGroupInput){
+
+//                for (int i = 0; i < outputPins.size(); i++) {
+//                    ((NodeGroupInput) node).bind(inputPins.get(inputIndex), i);
+//                    inputIndex++;
+//                }
                 ((NodeGroupInput) node).bind((PinVar) inputPins.get(inputIndex));
                 inputIndex++;
             }
