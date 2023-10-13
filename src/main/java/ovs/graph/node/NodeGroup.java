@@ -116,21 +116,52 @@ public class NodeGroup extends Node{
             }
 
             if(node instanceof NodeGroupOutput){
-                PinCondition pinCondition = new PinCondition();
-                pinCondition.setNode(self);
-                addCustomOutput(pinCondition);
+//                PinCondition pinCondition = new PinCondition();
+//                pinCondition.setNode(self);
+//                addCustomOutput(pinCondition);
+//
+//                PinAction pinAction = new PinAction();
+//                pinAction.setNode(self);
+//                addCustomOutput(pinAction);
+//
+//                PinVar pinVar = new PinVar();
+//                pinVar.setNode(self);
+//                addCustomOutput(pinVar);
 
-                PinAction pinAction = new PinAction();
-                pinAction.setNode(self);
-                addCustomOutput(pinAction);
+                for (int i = 0; i < node.inputPins.size(); i++) {
+                    Pin pin = node.inputPins.get(i);
 
-                PinVar pinVar = new PinVar();
-                pinVar.setNode(self);
-                addCustomOutput(pinVar);
+                    if(pin instanceof PinCondition){
+                        PinCondition pinCondition = new PinCondition();
+                        pinCondition.setNode(self);
+                        pinCondition.setName(pin.getName());
+                        addCustomOutput(pinCondition);
 
-                ((NodeGroupOutput) node).bindCondition(pinCondition);
-                ((NodeGroupOutput) node).bindAction(pinAction);
-                ((NodeGroupOutput) node).bindVariable(pinVar);
+                        ((NodeGroupOutput) node).bind(pinCondition);
+                    }
+
+                    if(pin instanceof PinAction){
+                        PinAction pinAction = new PinAction();
+                        pinAction.setNode(self);
+                        pinAction.setName(pin.getName());
+                        addCustomOutput(pinAction);
+
+                        ((NodeGroupOutput) node).bind(pinAction);
+                    }
+
+                    if(pin instanceof PinVar){
+                        PinVar pinVar = new PinVar();
+                        pinVar.setNode(self);
+                        pinVar.setName(pin.getName());
+                        addCustomOutput(pinVar);
+
+                        ((NodeGroupOutput) node).bind(pinVar);
+                    }
+                }
+
+//                ((NodeGroupOutput) node).bindCondition(pinCondition);
+//                ((NodeGroupOutput) node).bindAction(pinAction);
+//                ((NodeGroupOutput) node).bindVariable(pinVar);
             }
         }
     }
@@ -163,33 +194,35 @@ public class NodeGroup extends Node{
 
                     if(pin instanceof PinCondition){
                         for (int j = 0; j < outputPins.size(); j++) {
-                            Pin outputPin = outputPins.get(j);
+//                            Pin outputPin = outputPins.get(j);
+//
+//                            if(outputPin instanceof PinCondition){
+////                                ((NodeGroupOutput) node).bindCondition((PinCondition) outputPin);
+//                            }
 
-                            if(outputPin instanceof PinCondition){
-                                ((NodeGroupOutput) node).bindCondition((PinCondition) outputPin);
-                            }
+                            ((NodeGroupOutput) node).bind(outputPins.get(i));
                         }
                     }
 
-                    if(pin instanceof PinAction){
-                        for (int j = 0; j < outputPins.size(); j++) {
-                            Pin outputPin = outputPins.get(j);
-
-                            if(outputPin instanceof PinAction){
-                                ((NodeGroupOutput) node).bindAction((PinAction) outputPin);
-                            }
-                        }
-                    }
-
-                    if(pin instanceof PinVar){
-                        for (int j = 0; j < outputPins.size(); j++) {
-                            Pin outputPin = outputPins.get(j);
-
-                            if(outputPin instanceof PinVar){
-                                ((NodeGroupOutput) node).bindVariable((PinVar) outputPin);
-                            }
-                        }
-                    }
+//                    if(pin instanceof PinAction){
+//                        for (int j = 0; j < outputPins.size(); j++) {
+//                            Pin outputPin = outputPins.get(j);
+//
+//                            if(outputPin instanceof PinAction){
+//                                ((NodeGroupOutput) node).bindAction((PinAction) outputPin);
+//                            }
+//                        }
+//                    }
+//
+//                    if(pin instanceof PinVar){
+//                        for (int j = 0; j < outputPins.size(); j++) {
+//                            Pin outputPin = outputPins.get(j);
+//
+//                            if(outputPin instanceof PinVar){
+//                                ((NodeGroupOutput) node).bindVariable((PinVar) outputPin);
+//                            }
+//                        }
+//                    }
                 }
             }
         }

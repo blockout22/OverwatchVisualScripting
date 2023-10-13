@@ -2031,40 +2031,39 @@
     {
       "className": "ovs.graph.node.NodeGroup",
       "nodeName": "Node Group",
-      "x": 568.0,
-      "y": 90.0,
+      "x": 488.0,
+      "y": -38.0,
       "comment": "",
       "extraData": [
-        "Group:test2"
+        "Group:CreateHud"
       ],
       "inputPins": [
         {
-          "ID": 7652,
+          "ID": 9507,
           "type": "ovs.graph.pin.PinVar",
           "value": "Event Ability",
           "connections": [
             5797
           ],
           "canDelete": false
+        },
+        {
+          "ID": 9508,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Custom String(\"Hello Node group\")",
+          "connections": [
+            10412
+          ],
+          "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 7653,
-          "type": "ovs.graph.pin.PinCondition",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 7654,
+          "ID": 9509,
           "type": "ovs.graph.pin.PinAction",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 7655,
-          "type": "ovs.graph.pin.PinVar",
-          "connections": [],
+          "connections": [
+            10414
+          ],
           "canDelete": false
         }
       ]
@@ -2072,8 +2071,8 @@
     {
       "className": "ovs.graph.node.NodeEventAbility",
       "nodeName": "Event Ability",
-      "x": 350.0,
-      "y": 76.0,
+      "x": 190.0,
+      "y": -16.0,
       "comment": "",
       "extraData": [],
       "inputPins": [],
@@ -2082,11 +2081,91 @@
           "ID": 5797,
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            7652
+            9507
           ],
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCustomString",
+      "nodeName": "Custom String",
+      "x": 178.0,
+      "y": 43.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 10408,
+          "type": "ovs.graph.pin.PinString",
+          "value": "Hello Node group",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 10409,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 10410,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 10411,
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 10412,
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            9508
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeRule",
+      "nodeName": "Rule",
+      "x": 648.0,
+      "y": -98.0,
+      "comment": "",
+      "extraData": [
+        "EventOnGoing:Ongoing - Global",
+        "Team:All",
+        "Player:All",
+        "Sub:"
+      ],
+      "inputPins": [
+        {
+          "ID": 10413,
+          "type": "ovs.graph.pin.PinCondition",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 10414,
+          "type": "ovs.graph.pin.PinAction",
+          "value": "Create HUD Text(Event Ability,Null, Null, Custom String(\"Hello Node group\"), Left, 0, Color(White), Color(White), Color(White), Visible To And String, Default Visibility);",
+          "connections": [
+            9509
+          ],
+          "canDelete": false
+        }
+      ],
+      "outputPins": []
     }
   ]
 }

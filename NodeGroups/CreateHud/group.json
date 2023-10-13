@@ -1,0 +1,154 @@
+{
+  "nodeSaves": [
+    {
+      "className": "ovs.graph.node.NodeGroupInput",
+      "nodeName": "Group Input",
+      "x": -44.0,
+      "y": -75.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [],
+      "outputPins": [
+        {
+          "ID": 9431,
+          "name": "Visible To",
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            9420
+          ],
+          "canDelete": true
+        },
+        {
+          "ID": 9432,
+          "name": "Text",
+          "type": "ovs.graph.pin.PinVar",
+          "connections": [
+            9423
+          ],
+          "canDelete": true
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateHudText",
+      "nodeName": "Create Hud Text",
+      "x": 184.0,
+      "y": -41.0,
+      "comment": "",
+      "extraData": [
+        "Location:Left",
+        "Reevaluation:Visible To And String"
+      ],
+      "inputPins": [
+        {
+          "ID": 9420,
+          "name": "Visible To",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            9431
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 9421,
+          "name": "Header",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9422,
+          "name": "Subheader",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Null",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9423,
+          "name": "Text",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            9432
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 9424,
+          "name": "Reevaluation",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To And String",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9425,
+          "name": "Sort Order",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "0",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9426,
+          "name": "Header Color",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9427,
+          "name": "Subheader Color",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 9428,
+          "name": "Text Color",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Color(White)",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 9429,
+          "name": "",
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [
+            9430
+          ],
+          "canDelete": false
+        }
+      ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 488.0,
+      "y": -92.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 9430,
+          "name": "",
+          "type": "ovs.graph.pin.PinAction",
+          "value": "",
+          "connections": [
+            9429
+          ],
+          "canDelete": true
+        }
+      ],
+      "outputPins": []
+    }
+  ]
+}

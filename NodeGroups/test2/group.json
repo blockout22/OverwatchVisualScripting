@@ -3,7 +3,7 @@
     {
       "className": "ovs.graph.node.NodeGroupInput",
       "nodeName": "Group Input",
-      "x": 58.0,
+      "x": 26.0,
       "y": 149.0,
       "comment": "",
       "extraData": [],
@@ -11,7 +11,7 @@
       "outputPins": [
         {
           "ID": 6699,
-          "name": "player",
+          "name": "Player",
           "type": "ovs.graph.pin.PinVar",
           "connections": [
             7613
@@ -20,49 +20,14 @@
         },
         {
           "ID": 7616,
-          "name": "another nam,e",
+          "name": "Button",
           "type": "ovs.graph.pin.PinVar",
-          "connections": [],
+          "connections": [
+            7614
+          ],
           "canDelete": true
         }
       ]
-    },
-    {
-      "className": "ovs.graph.node.NodeGroupOutput",
-      "nodeName": "Group Output",
-      "x": 568.0,
-      "y": 182.0,
-      "comment": "",
-      "extraData": [],
-      "inputPins": [
-        {
-          "ID": 7610,
-          "name": "",
-          "type": "ovs.graph.pin.PinCondition",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 7611,
-          "name": "",
-          "type": "ovs.graph.pin.PinAction",
-          "value": "",
-          "connections": [],
-          "canDelete": false
-        },
-        {
-          "ID": 7612,
-          "name": "",
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Ability Cooldown(, )",
-          "connections": [
-            7615
-          ],
-          "canDelete": false
-        }
-      ],
-      "outputPins": []
     },
     {
       "className": "ovs.graph.node.NodeAbilityCooldown",
@@ -87,7 +52,9 @@
           "name": "Button",
           "type": "ovs.graph.pin.PinVar",
           "value": "",
-          "connections": [],
+          "connections": [
+            7616
+          ],
           "canDelete": false
         }
       ],
@@ -97,11 +64,32 @@
           "name": "",
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            7612
+            8515
           ],
           "canDelete": false
         }
       ]
+    },
+    {
+      "className": "ovs.graph.node.NodeGroupOutput",
+      "nodeName": "Group Output",
+      "x": 520.0,
+      "y": 130.0,
+      "comment": "",
+      "extraData": [],
+      "inputPins": [
+        {
+          "ID": 8515,
+          "name": "",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [
+            7615
+          ],
+          "canDelete": true
+        }
+      ],
+      "outputPins": []
     }
   ]
 }

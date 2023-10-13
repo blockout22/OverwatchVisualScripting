@@ -69,9 +69,10 @@ public class NodeGroupInput extends Node {
     public void execute() {
         for (int i = 0; i < bindingPins.size(); i++) {
             Pin pin = bindingPins.get(i);
+            Pin output = outputPins.get(i);
 
             PinData<ImString> data = pin.getData();
-            PinData<ImString> outputData = outputPins.get(i).getData();
+            PinData<ImString> outputData = output.getData();
 
             handlePinStringConnection(pin, data);
 
