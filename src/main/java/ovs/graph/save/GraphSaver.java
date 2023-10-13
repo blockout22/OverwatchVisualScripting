@@ -320,6 +320,7 @@ public class GraphSaver {
             for(Pin inputs : node.inputPins.getList()){
                 PinSave pinSave = new PinSave();
                 pinSave.ID = inputs.getID();
+                pinSave.name = inputs.getName();
                 pinSave.type = inputs.getClass().getName();
 //                pinSave.connectedTo = inputs.connectedTo;
                 pinSave.canDelete = inputs.isCanDelete();
@@ -342,6 +343,7 @@ public class GraphSaver {
             for(Pin outputs : node.outputPins.getList()){
                 PinSave pinSave = new PinSave();
                 pinSave.ID = outputs.getID();
+                pinSave.name = outputs.getName();
                 pinSave.type = outputs.getClass().getName();
                 pinSave.canDelete = outputs.isCanDelete();
 //                pinSave.connectedTo = outputs.connectedTo;
@@ -763,6 +765,9 @@ public class GraphSaver {
                             pin.setCanDelete(save.inputPins.get(j).canDelete);
 
 //                            pin.setCanDelete(true);
+                            if(save.inputPins.get(j).name != null){
+                                pin.setName(save.inputPins.get(j).name);
+                            }
                             pin.setPinType(Pin.PinType.Input);
                             node.inputPins.add(pin);
                         }
@@ -794,6 +799,9 @@ public class GraphSaver {
                             pin.setCanDelete(save.outputPins.get(j).canDelete);
 
 //                            pin.setCanDelete(true);
+                            if(save.outputPins.get(j).name != null){
+                                pin.setName(save.outputPins.get(j).name);
+                            }
                             pin.setPinType(Pin.PinType.Output);
                             node.outputPins.add(pin);
                         }
@@ -1080,6 +1088,7 @@ public class GraphSaver {
 
     private static class PinSave{
         private Integer ID;
+        private String name;
         private String type;
         private String value;
 //        private Integer connectedTo;
