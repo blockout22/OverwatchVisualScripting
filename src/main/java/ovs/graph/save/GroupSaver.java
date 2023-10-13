@@ -228,7 +228,7 @@ public class GroupSaver {
                             if(save.outputPins.get(j).name != null) {
                                 pin.setName(save.outputPins.get(j).name);
                             }
-                            pin.setCanDelete(save.outputPins.get(i).canDelete);
+                            pin.setCanDelete(save.outputPins.get(j).canDelete);
                             pin.setPinType(Pin.PinType.Output);
                             node.outputPins.add(pin);
                         }
