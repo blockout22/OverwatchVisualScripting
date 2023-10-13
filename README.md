@@ -1,5 +1,7 @@
 # OverwatchVisualScripting
 
+![Downloads](https://img.shields.io/github/downloads/blockout22/OverwatchVisualScripting/total)
+
 ## Requirements
 ### **If you are not using the Bundle read the following requirements**
   
