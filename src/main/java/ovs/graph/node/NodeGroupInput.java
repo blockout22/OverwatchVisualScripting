@@ -68,6 +68,10 @@ public class NodeGroupInput extends Node {
     @Override
     public void execute() {
         for (int i = 0; i < bindingPins.size(); i++) {
+            if(i > outputPins.size() - 1)
+            {
+                return;
+            }
             Pin pin = bindingPins.get(i);
             Pin output = outputPins.get(i);
 
