@@ -239,6 +239,7 @@ public class GraphWindow {
                         promptSave = false;
                         imGuiWindow.removeGraphWindow(this);
                     }else if(state == 1){
+                        nodeEditorRenderer.setAsCurrentEditor();
                         graphSaver.save(fileName, settings, graph);
                         imGuiWindow.removeGraphWindow(this);
                     }
@@ -310,6 +311,8 @@ public class GraphWindow {
                 for(Node node : graph.getNodes().getList()){
                     node.onSaved();
                 }
+
+                nodeEditorRenderer.setAsCurrentEditor();
                 boolean success = graphSaver.save(fileName, settings, graph);
 
                 if(success){

@@ -105,8 +105,11 @@ public class NodeEditorRenderer {
         changeListeners.remove(listener);
     }
 
-    public void show(ImVec2 cursorPos, boolean isLoading) {
+    public void setAsCurrentEditor(){
         NodeEditor.setCurrentEditor(context);
+    }
+    public void show(ImVec2 cursorPos, boolean isLoading) {
+        setAsCurrentEditor();
         NodeEditor.getStyle().setNodeRounding(2.0f);
         float headerMaxY = 0;
         NodeEditor.begin(id);

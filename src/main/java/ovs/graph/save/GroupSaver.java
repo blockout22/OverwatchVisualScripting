@@ -106,7 +106,7 @@ public class GroupSaver {
             pw.flush();
             pw.close();
             return true;
-        }catch (FileNotFoundException e){
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }

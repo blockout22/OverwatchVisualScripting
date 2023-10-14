@@ -109,6 +109,8 @@ public class GroupNodeWindow {
                         imGuiWindow.removeGroupNodeWindow(this);
                     }else if(state == 1){
 //                        graphSaver.save(fileName, settings, graph);
+                        nodeEditorRenderer.setAsCurrentEditor();
+                        boolean success = groupSaver.save(fileName, graph);
                         imGuiWindow.removeGroupNodeWindow(this);
                     }
                 }else{
@@ -122,6 +124,7 @@ public class GroupNodeWindow {
                     node.onSaved();
                 }
 
+                nodeEditorRenderer.setAsCurrentEditor();
                 boolean success = groupSaver.save(fileName, graph);
 
                 if(success){
