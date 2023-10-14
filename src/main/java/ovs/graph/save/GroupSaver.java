@@ -24,9 +24,9 @@ public class GroupSaver {
         validateDirExists(dir + File.separator + fileName);
 
         File file = new File(dir + File.separator + fileName + File.separator + "group.json");
-        File backup = new File(dir + File.separator + fileName + File.separator + "backup_group.json");
+//        File backup = new File(dir + File.separator + fileName + File.separator + "backup_group.json");
         try {
-            Global.createBackup(file, backup);
+            Global.createBackup(file);
         } catch (IOException e) {
             e.printStackTrace();
         }

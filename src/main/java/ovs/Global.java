@@ -5,6 +5,7 @@ import ovs.graph.node.Node;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -531,12 +532,21 @@ public class Global {
         return null;
     }
 
-    public static void createBackup(File source, File dest) throws IOException {
-        InputStream is = null;
-        OutputStream os = null;
+    public static void createBackup(File source) throws IOException {
+        InputStream is = new FileInputStream(source);
+        File dir = source.getParentFile();
+
+        LocalDateTime now = LocalDateTime.now();
+        String year = String.valueOf(now.getYear());
+        String month = String.valueOf(now.getMonthValue());
+        String day = String.valueOf(now.getDayOfMonth());
+        String hour = String.valueOf(now.getHour());
+        String min = String.valueOf(now.getMinute());
+        String second = String.valueOf(now.getSecond());
+        String timeName = year + month + day + hour + min + second;
+
+        OutputStream os = new FileOutputStream(dir + File.separator + timeName + "_backup_group.json");
         try{
-            is = new FileInputStream(source);
-            os = new FileOutputStream(dest);
             byte[] buffer = new byte[1024];
             int length;
             while((length = is.read(buffer)) > 0){
@@ -544,7 +554,35 @@ public class Global {
             }
 
         }finally {
+            is.close();
+            os.close();
+        }
 
+        if(dir.listFiles().length > 11) {
+            File oldest = null;
+            for (File curFile : dir.listFiles()) {
+                if(curFile.getName().contains("_")) {
+                    String fileTime = curFile.getName().split("_")[0];
+                    System.out.println(fileTime);
+                    try {
+                        long lTime = Long.parseLong(fileTime);
+
+                        if (oldest != null) {
+                            long oldLtime = Long.parseLong(oldest.getName().split("_")[0]);
+                            if (lTime < oldLtime) {
+                                oldest = curFile;
+                            }
+                        } else {
+                            oldest = curFile;
+                        }
+                    }catch (NumberFormatException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            if(oldest != null) {
+                oldest.delete();
+            }
         }
     }
 

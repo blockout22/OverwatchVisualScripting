@@ -30,9 +30,9 @@ public class GraphSaver {
 
 
         File file = new File(dir + File.separator + fileName + File.separator + "script.json");
-        File backup = new File(dir + File.separator + fileName + File.separator + "backup_script.json");
+//        File backup = new File(dir + File.separator + fileName + File.separator + "backup_script.json");
         try {
-            Global.createBackup(file, backup);
+            Global.createBackup(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
