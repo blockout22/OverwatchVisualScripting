@@ -4,12 +4,12 @@ import imgui.type.ImString;
 import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
 public class NodeIconString extends Node {
 
-    ComboBox icons = new ComboBox(Global.icons);
+    PinCombo pinIcon = new PinCombo();
 
     PinVar output = new PinVar();
 
@@ -17,7 +17,12 @@ public class NodeIconString extends Node {
         super(graph);
         setName("Icon String");
 
-        icons.select(0);
+        pinIcon.setNode(this);
+        pinIcon.setName("Icon");
+        addCustomInput(pinIcon);
+
+        pinIcon.getComboBox().addOptions(Global.icons);
+        pinIcon.select(0);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -26,15 +31,22 @@ public class NodeIconString extends Node {
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Icon:" + icons.getSelectedValue());
+        getExtraSaveData().add("Icon:" + pinIcon.getComboBox().getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
         for(String data : getExtraSaveData()){
             if(data.startsWith("Icon")){
-                icons.selectValue(data.split(":")[1]);
+                pinIcon.selectValue(data.split(":")[1]);
             }
+        }
+    }
+
+    @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCreateIcon){
+            pinIcon.getComboBox().selectValue(((NodeCreateIcon) node).pinIcon.getComboBox().getSelectedValue());
         }
     }
 
@@ -42,7 +54,7 @@ public class NodeIconString extends Node {
     public void execute() {
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Icon String(" + icons.getSelectedValue() + ")");
+        outputData.getValue().set(getName() + "(" + pinIcon.getComboBox().getSelectedValue() + ")");
     }
 
     @Override
