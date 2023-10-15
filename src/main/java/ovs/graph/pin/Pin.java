@@ -87,8 +87,10 @@ public abstract class Pin {
             Pin connectedPin = getNode().getGraph().findPinById(connectionID);
 
             connectedPin.remove(ID);
-            remove(connectionID);
+//            remove(connectionID);
         }
+
+        connectedToList.clear();
 
         return true;
     }
@@ -123,12 +125,15 @@ public abstract class Pin {
     }
 
     public void remove(int id){
-        for (int i = 0; i < connectedToList.size(); i++) {
+        for(int i = connectedToList.size() - 1; i >= 0; i--){
             if(connectedToList.get(i) == id){
                 connectedToList.remove(i);
                 break;
             }
         }
+//        for (int i = 0; i < connectedToList.size(); i++) {
+
+//        }
     }
 
     public void draw(ImDrawList windowDrawList, float posX, float posY, boolean isConnected, boolean pinDragSame){
@@ -247,6 +252,8 @@ public abstract class Pin {
     }
 
     public void contextMenu(){
-
+        if(ImGui.menuItem("Delete All Connections")){
+            disconnectAll();
+        }
     }
 }

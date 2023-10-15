@@ -436,6 +436,7 @@ public class NodeEditorRenderer {
             ImLong link2 = new ImLong();
             ImLong link3 = new ImLong();
             if (NodeEditor.queryDeletedLink(link1, link2, link3)) {
+                System.out.println("Delete");
                 Pin pin1 = graph.findPinById((int) link2.get());
                 Pin pin2 = graph.findPinById((int) link3.get());
 
