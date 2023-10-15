@@ -58,7 +58,7 @@ public class NodeWorkshopSettingCombo extends Node {
         handlePinStringConnection(pinSortOrder, sortOrderData, "0");
 
 
-        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + defaultValueData.getValue().get() + ", " + optionsData.getValue().get() + ", " + sortOrderData.getValue().get() + ");");
+        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + defaultValueData.getValue().get() + ", " + optionsData.getValue().get() + ", " + sortOrderData.getValue().get() + ")");
     }
 
     @Override

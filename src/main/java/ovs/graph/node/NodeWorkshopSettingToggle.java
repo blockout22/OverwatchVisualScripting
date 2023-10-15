@@ -57,7 +57,7 @@ public class NodeWorkshopSettingToggle extends Node {
         handlePinStringConnection(pinSortOrder, sortOrderData, "0");
 
 
-        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + (boolData.getValue().get() ? "True" : "False") + ", " + sortOrderData.getValue().get() + ");");
+        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + (boolData.getValue().get() ? "True" : "False") + ", " + sortOrderData.getValue().get() + ")");
     }
 
     @Override

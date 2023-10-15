@@ -83,7 +83,7 @@ public class NodeWorkshopSettingHero extends Node {
         handlePinStringConnection(pinSortOrder, sortOrderData, "0");
 
 
-        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + pinDefault.getComboBox().getSelectedValue() + ", " + sortOrderData.getValue().get() + ");");
+        outputData.getValue().set(getName() + "(" + categoryData.getValue().get() + ", " + nameData.getValue().get() + ", " + pinDefault.getComboBox().getSelectedValue() + ", " + sortOrderData.getValue().get() + ")");
     }
 
     @Override
