@@ -27,6 +27,8 @@ public class NodeAllLivingPlayers extends Node {
         PinData<ImString> teamData = pinTeam.getData();
         PinData<ImString> outputData = output.getData();
 
+        handlePinStringConnection(pinTeam, teamData);
+
         outputData.getValue().set("All Living Players(" + teamData.getValue().get() + ")");
     }
 
