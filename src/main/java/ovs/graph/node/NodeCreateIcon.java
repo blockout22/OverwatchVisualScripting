@@ -79,7 +79,17 @@ public class NodeCreateIcon extends Node {
         for(String data : getExtraSaveData()){
             if(data.startsWith("Icon")){
                 try{
-                    pinIcon.getComboBox().selectValue(data.split(":")[1]);
+                    String[] values = data.split(":");
+                    String value = "";
+
+                    for (int i = 1; i < values.length; i++) {
+                        value += values[i];
+                        System.out.println(i + " : " + values.length);
+                        if(i + 1 < values.length){
+                            value += ":";
+                        }
+                    }
+                    pinIcon.getComboBox().selectValue(value);
                 }catch (ArrayIndexOutOfBoundsException e){
                     pinIcon.getComboBox().select(0);
                 }

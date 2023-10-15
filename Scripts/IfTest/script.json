@@ -2481,6 +2481,76 @@
         }
       ],
       "outputPins": []
+    },
+    {
+      "className": "ovs.graph.node.NodeCreateIcon",
+      "nodeName": "Create Icon",
+      "x": 584.0,
+      "y": 59.0,
+      "comment": "",
+      "extraData": [
+        "Icon:Arrow: Down",
+        "Reevaluation:Visible To And Position"
+      ],
+      "inputPins": [
+        {
+          "ID": 17542,
+          "name": "Visible To",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 17543,
+          "name": "Position",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 17544,
+          "name": "Icon",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Arrow: Down",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 17545,
+          "name": "Reevaluation",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Visible To And Position",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 17546,
+          "name": "Color",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 17547,
+          "name": "Show Off Screen",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connections": [],
+          "canDelete": false
+        }
+      ],
+      "outputPins": [
+        {
+          "ID": 17548,
+          "name": "",
+          "type": "ovs.graph.pin.PinAction",
+          "connections": [],
+          "canDelete": false
+        }
+      ]
     }
   ]
 }
