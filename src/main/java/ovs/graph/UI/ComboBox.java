@@ -1,6 +1,9 @@
 package ovs.graph.UI;
 
 import imgui.ImGui;
+import imgui.ImVec2;
+import imgui.ImVec4;
+import imgui.flag.ImGuiCol;
 import imgui.type.ImString;
 import ovs.graph.Popup;
 import ovs.graph.PopupHandler;
@@ -9,11 +12,15 @@ import ovs.graph.UI.Listeners.OnOpenedListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComboBox extends UiComponent{
 
     private ArrayList<ChangeListener> changeListeners = new ArrayList<>();
     private ArrayList<OnOpenedListener> onOpenedListeners = new ArrayList<OnOpenedListener>();
+
+    private Map<Integer, ImVec4> itemColors = new HashMap<>();
 
     private boolean justOpened = false;
     private boolean requestPopup = false;
@@ -29,7 +36,6 @@ public class ComboBox extends UiComponent{
     Popup popup = new Popup() {
         @Override
         public boolean show() {
-
             if(isSearchable){
                 if(justOpened){
                     ImGui.setKeyboardFocusHere(0);
@@ -40,28 +46,42 @@ public class ComboBox extends UiComponent{
             }
 
             for (int i = 0; i < items.length; i++) {
-                if(itemSearch.get().toLowerCase().length() > 0){
-                    if(!items[i].toLowerCase().contains(itemSearch.get())){
-                        continue;
-                    }
-                }
-                if(ImGui.menuItem(items[i])){
-                    String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
-                    boolean hasChanged = (currentSelectedIndex  !=  i);
-                    currentSelectedIndex = i;
-                    String newValue = items[currentSelectedIndex];
 
-                    if(silentSelect){
-                        silentSelect = false;
-                        return true;
-                    }
-
-                    if(hasChanged) {
-                        for (int j = 0; j < changeListeners.size(); j++) {
-                            changeListeners.get(j).onChanged(oldValue, newValue);
+                    if (itemSearch.get().toLowerCase().length() > 0) {
+                        if (!items[i].toLowerCase().contains(itemSearch.get())) {
+                            continue;
                         }
                     }
-                    return true;
+
+                    boolean hasColor = itemColors.containsKey(i);
+                    try {
+                        if (hasColor) {
+                            ImVec4 color = itemColors.get(i);
+                            ImGui.pushStyleColor(ImGuiCol.Text, color.x, color.y, color.z, color.w);
+                        }
+                        if (ImGui.menuItem(items[i])) {
+                            String oldValue = currentSelectedIndex == -1 ? "" : items[currentSelectedIndex];
+                            boolean hasChanged = (currentSelectedIndex != i);
+                            currentSelectedIndex = i;
+                            String newValue = items[currentSelectedIndex];
+
+                            if (silentSelect) {
+                                silentSelect = false;
+                                return true;
+                            }
+
+                            if (hasChanged) {
+                                for (int j = 0; j < changeListeners.size(); j++) {
+                                    changeListeners.get(j).onChanged(oldValue, newValue);
+                                }
+                            }
+                            return true;
+                        }
+
+                }finally {
+                    if (hasColor) {
+                        ImGui.popStyleColor();
+                    }
                 }
             }
 //            currentSelectedIndex = -1;
@@ -82,6 +102,10 @@ public class ComboBox extends UiComponent{
         for(String option : options){
             addOption(option);
         }
+    }
+
+    public void setItemColor(int index, ImVec4 color){
+        itemColors.put(index, color);
     }
 
     public void select(int index){

@@ -1,5 +1,6 @@
 package ovs.graph.node;
 
+import imgui.ImVec4;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
@@ -71,6 +72,16 @@ public class NodeSetVariable extends Node{
 
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
             comboBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
+        }
+
+        for (int i = 0; i < comboBox.size(); i++) {
+            String option = comboBox.getOptions()[i];
+            System.out.println(option);
+            if(option.startsWith("Global")){
+                comboBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
+            }else{
+                comboBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
+            }
         }
     }
 
