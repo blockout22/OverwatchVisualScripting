@@ -40,7 +40,6 @@ public class Global {
 
     static {
         loadFromJarIntoList(heroes, "heroes.txt");
-        System.out.println("Loaded Heroes");
         loadFromJarIntoList(maps, "maps.txt");
         loadFromJarIntoList(buttons, "buttons.txt");
         loadFromJarIntoList(effectType, "createEffectType.txt");

@@ -76,7 +76,6 @@ public class NodeSetVariable extends Node{
 
         for (int i = 0; i < comboBox.size(); i++) {
             String option = comboBox.getOptions()[i];
-            System.out.println(option);
             if(option.startsWith("Global")){
                 comboBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
             }else{

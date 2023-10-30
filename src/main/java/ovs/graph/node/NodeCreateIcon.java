@@ -84,7 +84,6 @@ public class NodeCreateIcon extends Node {
 
                     for (int i = 1; i < values.length; i++) {
                         value += values[i];
-                        System.out.println(i + " : " + values.length);
                         if(i + 1 < values.length){
                             value += ":";
                         }
