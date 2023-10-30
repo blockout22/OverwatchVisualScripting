@@ -58,7 +58,7 @@ public class NodeCreateEffect extends Node{
         pinType.select(0);
 
         ArrayList<String> reevalOptions = new ArrayList<>();
-        reevalOptions.add("Visible To, Position, And Radius");
+        reevalOptions.add("Visible To Position And Radius");
         reevalOptions.add("Position And Radius");
         reevalOptions.add("Visible To");
         reevalOptions.add("None");
