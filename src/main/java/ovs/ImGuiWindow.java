@@ -68,12 +68,19 @@ public class ImGuiWindow {
 
 //        io.getFonts().addFontDefault();
 //        io.getFonts().addFontFromFileTTF("src/main/resources/OpenSans-Regular.ttf", 18);
+
+        final ImFontGlyphRangesBuilder rangesBuilder = new ImFontGlyphRangesBuilder();
+        rangesBuilder.addRanges(io.getFonts().getGlyphRangesDefault());
+        rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());
+        rangesBuilder.addRanges(io.getFonts().getGlyphRangesJapanese());
+
         InputStream fontStream = getClass().getClassLoader().getResourceAsStream("OpenSans-Regular.ttf");
         if(fontStream != null){
             try{
                 byte[] fontBytes = fontStream.readAllBytes();
                 ImFontAtlas atlas = io.getFonts();
                 ImFontConfig config = new ImFontConfig();
+//                config.setGlyphRanges();
                 atlas.addFontFromMemoryTTF(fontBytes, 18, config);
             }catch (Exception e){
                 e.printStackTrace();
@@ -85,10 +92,7 @@ public class ImGuiWindow {
                 }
             }
         }
-        final ImFontGlyphRangesBuilder rangesBuilder = new ImFontGlyphRangesBuilder();
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesDefault());
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesJapanese());
+
 
 //        final ImFontConfig fontConfig = new ImFontConfig();
 //        fontConfig.setMergeMode(true);

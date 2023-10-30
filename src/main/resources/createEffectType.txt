@@ -34,7 +34,7 @@ Echo Cloning Sound
 Lúcio Sound Barrier Protected Sound
 Mei Frozen Sound
 Mercy Damage Boosted Sound
-Sigma Grvitic Flux Target Sound
+Sigma Gravitic Flux Target Sound
 Sombra Hacking Sound
 Sombra Hacked Sound
 Torbjörn Overloading Sound
