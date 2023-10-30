@@ -45,6 +45,7 @@ public class GraphWindow {
     private Pin curSelectedPinDataType = null;
 
     private boolean isFocused = false;
+    private boolean animationCompleted = false;
     private boolean promptSave = false;
     private boolean showSavedText = false;
     private boolean isLoading = false;
@@ -214,8 +215,9 @@ public class GraphWindow {
                 if(!isFocused) {
                     ImGui.setWindowPos(fileName, ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + taskbarHeight);
                     animation_time = 1.0f;
-                    animation_start_time = ImGui.getTime();
+                    animation_start_time = 0;
                     isFocused = true;
+                    animationCompleted = false;
                 }
             }
 
@@ -228,6 +230,11 @@ public class GraphWindow {
                 pos.x = Global.lerpFloat(ImGui.getWindowPosX(), target_pos.x, t);
                 pos.y = Global.lerpFloat(ImGui.getWindowPosY(), target_pos.y, t);
                 ImGui.setWindowPos(fileName, pos.x, pos.y);
+            }else{
+                if(!animationCompleted){
+                    ImGui.setWindowPos(fileName, target_pos.x, target_pos.y);
+                    animationCompleted = true;
+                }
             }
 
             if(!closable.get())

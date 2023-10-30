@@ -32,6 +32,7 @@ public class GroupNodeWindow {
 
     private boolean promptSave = false;
     private boolean isFocused = false;
+    private boolean animationCompleted = false;
     private boolean isLoading = false;
     private boolean showSavedText = false;
 
@@ -215,6 +216,7 @@ public class GroupNodeWindow {
                 animation_time = 1.0f;
                 animation_start_time = ImGui.getTime();
                 isFocused = true;
+                animationCompleted = false;
             }
         }
 
@@ -227,6 +229,11 @@ public class GroupNodeWindow {
             pos.x = Global.lerpFloat(ImGui.getWindowPosX(), target_pos.x, t);
             pos.y = Global.lerpFloat(ImGui.getWindowPosY(), target_pos.y, t);
             ImGui.setWindowPos(id, pos.x, pos.y);
+        }else{
+            if(!animationCompleted){
+                ImGui.setWindowPos(fileName, target_pos.x, target_pos.y);
+                animationCompleted = true;
+            }
         }
     }
 
