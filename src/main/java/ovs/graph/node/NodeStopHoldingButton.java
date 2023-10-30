@@ -66,7 +66,7 @@ public class NodeStopHoldingButton extends Node {
 
         handlePinStringConnection(pinPlayer, playerData, "Event Player");
 
-        outputData.getValue().set(getName() + "(" + playerData.getValue().get() + ", " + pinButton.getComboBox().getSelectedValue() + ");");
+        outputData.getValue().set(getName() + "(" + playerData.getValue().get() + ", Button(" + pinButton.getComboBox().getSelectedValue() + "));");
 
     }
 
