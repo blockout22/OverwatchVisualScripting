@@ -194,7 +194,7 @@ public class NodeCopyPasteHandler {
                     if (node != null) {
                         NodeCopy copy = nodeList.get(i);
 
-                        for (int j = 0; j < node.inputPins.size(); j++) {
+                        for (int j = 0; j < copy.inputPins.size(); j++) {
                             if (j >= node.inputPins.size()) {
                                 Class classNode = null;
 
@@ -219,7 +219,7 @@ public class NodeCopyPasteHandler {
                             }
                         }
 
-                        for (int j = 0; j < node.outputPins.size(); j++) {
+                        for (int j = 0; j < copy.outputPins.size(); j++) {
                             if (j >= node.outputPins.size()) {
                                 Class classNode = null;
 
@@ -244,7 +244,7 @@ public class NodeCopyPasteHandler {
 
                         for (int j = 0; j < copy.inputPins.size(); j++) {
                             for (int k = 0; k < copy.inputPins.get(j).connections.size(); k++) {
-                                //TDOD apply offset with the highest ID
+                                System.out.println(copy.inputPins.size() + " : " + node.inputPins.size());
                                 int ID = copy.inputPins.get(j).connections.get(k) + offset;
                                 node.inputPins.get(j).connectedToList.add(ID);
                             }
