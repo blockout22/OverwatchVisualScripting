@@ -2,7 +2,7 @@ Asleep
 Burning
 Frozen
 Hacked
-Invisible
+Invincible
 Knocked Down
 Phased Out
 Rooted

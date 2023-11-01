@@ -114,6 +114,34 @@ public class ImGuiWindow {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+//        setStyle();
+    }
+
+    private void setStyle(){
+        ImGuiStyle style = ImGui.getStyle();
+
+        // Overwatch-like Colors
+        int textColor = ImColor.floatToColor(0.90f, 0.90f, 0.90f, 1.00f);
+        int mainColor = ImColor.floatToColor(0.1f, 0.5f, 0.9f, 1.0f);
+        int bgColor = ImColor.floatToColor(0.10f, 0.10f, 0.10f, 1.0f);
+        int accentColor = ImColor.floatToColor(0.20f, 0.20f, 0.20f, 1.0f);
+
+        style.setColor(ImGuiCol.Text, textColor);
+        style.setColor(ImGuiCol.WindowBg, bgColor);
+        style.setColor(ImGuiCol.Header, mainColor);
+        style.setColor(ImGuiCol.Border, accentColor);
+        style.setColor(ImGuiCol.Button, mainColor);
+        style.setColor(ImGuiCol.ButtonHovered, ImColor.floatToColor(0.2f, 0.6f, 1.0f, 1.0f));
+        style.setColor(ImGuiCol.ButtonActive, ImColor.floatToColor(0.05f, 0.4f, 0.8f, 1.0f));
+
+        // UI Element Adjustments
+        style.setWindowRounding(5.0f);
+        style.setFrameRounding(5.0f);
+        style.setFrameBorderSize(1.0f);
+        style.setItemSpacing(10, 5);
+        style.setItemInnerSpacing(5, 5);
+        style.setIndentSpacing(20);
     }
 
     private byte[] loadFromResources(String name){

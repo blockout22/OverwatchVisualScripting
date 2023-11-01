@@ -7,6 +7,7 @@ Blizzard World Winter
 Busan
 Busan Downtown Lunar New Year
 Busan Sanctuary Lunar New Year
+Busan Stadium
 Castillo
 Château Guillard
 Château Guillard Halloween
@@ -14,15 +15,18 @@ Circuit Royal
 Colosseo
 Dorado
 EcoPoint: Antarctica
+EcoPoint: Antarctica Winter
 Eichenwalde
 Eichenwalde Halloween
 Esperança
+Estádio das Rãs
 Hanamura
 Hanamura Winter
 Havana
 Hollywood
 Horizon Lunar Colony
 Ilios
+Ilios Lighthouse
 Ilios Ruins
 Ilois Well
 Junkertown
@@ -44,6 +48,8 @@ Nepal
 Nepal Sanctum
 Nepal Shrine
 Nepal Village
+Nepal Village Winter
+New Junk City
 New Queen Street
 Numbani
 Oasis
@@ -53,8 +59,13 @@ Oasis University
 Paraíso
 Paris
 Petra
+Practice Range
 Rialto
 Route 66
+Samoa
+Shambali Monastry
+Suravasa
+Syndney Harbour Arena
 Temple Of Anubis
 Volskaya Industries
 Watchpoint: Gibraltar
