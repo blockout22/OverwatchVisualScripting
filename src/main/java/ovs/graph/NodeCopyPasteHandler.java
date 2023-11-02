@@ -116,6 +116,10 @@ public class NodeCopyPasteHandler {
     }
 
     public static void paste(Graph graph){
+
+        float averageX = 0;
+        float averageY = 0;
+
         String content = "";
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         if(clipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)){
@@ -135,8 +139,6 @@ public class NodeCopyPasteHandler {
 
                 Node[] loaded = new Node[nodeList.size()];
 
-                System.out.println(nodeList);
-
                 int lowestCopiedPinID = Integer.MAX_VALUE;
 
                 for(NodeCopy copy : nodeList){
@@ -151,7 +153,13 @@ public class NodeCopyPasteHandler {
                             lowestCopiedPinID = pinCopy.ID;
                         }
                     }
+
+                    averageX += copy.x;
+                    averageY += copy.y;
                 }
+
+                averageX /= nodeList.size();
+                averageY /= nodeList.size();
 
                 for (int i = 0; i < nodeList.size(); i++) {
                     NodeCopy copy = nodeList.get(i);
@@ -177,7 +185,8 @@ public class NodeCopyPasteHandler {
                     float nodeRelativePositionX = copy.x;
                     float nodeRelativePositionY = copy.y;
                     Point point = MouseInfo.getPointerInfo().getLocation();
-                    NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(point.x  * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(point.y * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
+//                    NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(point.x  * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(point.y * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
+                    NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(point.x - averageX * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionX, NodeEditor.toCanvasY(point.y - averageY * (1 / NodeEditor.getCurrentZoom())) + nodeRelativePositionY);
 
                     for(String extraData : copy.extraData){
                         node.getExtraSaveData().add(extraData);
@@ -244,7 +253,6 @@ public class NodeCopyPasteHandler {
 
                         for (int j = 0; j < copy.inputPins.size(); j++) {
                             for (int k = 0; k < copy.inputPins.get(j).connections.size(); k++) {
-                                System.out.println(copy.inputPins.size() + " : " + node.inputPins.size());
                                 int ID = copy.inputPins.get(j).connections.get(k) + offset;
                                 node.inputPins.get(j).connectedToList.add(ID);
                             }
@@ -259,6 +267,21 @@ public class NodeCopyPasteHandler {
                         }
                     }
                 }
+
+                for (int i = 0; i < loaded.length; i++) {
+                    Node node = loaded[i];
+                    if (node != null) {
+                        for(Pin pin : node.inputPins.getList()){
+                            pin.validateAllConnections();
+                        }
+
+                        for(Pin pin : node.outputPins.getList()){
+                            pin.validateAllConnections();
+                        }
+                    }
+                }
+
+
             }catch (Exception e){
                 e.printStackTrace();
             }
