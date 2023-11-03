@@ -11,8 +11,8 @@ import ovs.graph.pin.PinVar;
 
 public class NodeGetVariable extends Node{
 
-    PinVar outputPin = new PinVar();
-    private ComboBox comboBox = new ComboBox();
+    private PinVar outputPin = new PinVar();
+    public ComboBox variableBox = new ComboBox();
 
     //private int lastVariableCount = 0;
     //TODO allow users to select a specific players variable
@@ -24,20 +24,20 @@ public class NodeGetVariable extends Node{
         outputPin.setNode(this);
         addCustomOutput(outputPin);
 
-        comboBox.addOnOpenedListener(new OnOpenedListener() {
+        variableBox.addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
-                String lastSelectedValue = comboBox.getSelectedValue();
+                String lastSelectedValue = variableBox.getSelectedValue();
                 populateCombobox();
 
-                comboBox.selectValue(lastSelectedValue);
+                variableBox.selectValue(lastSelectedValue);
                 width = -1;
 
                 //lastVariableCount = getGraph().globalVariables.size() + getGraph().playerVariables.size();
             }
         });
 
-        comboBox.addChangeListener(new ChangeListener() {
+        variableBox.addChangeListener(new ChangeListener() {
             @Override
             public void onChanged(String oldValue, String newValue) {
                 width = -1;
@@ -51,11 +51,11 @@ public class NodeGetVariable extends Node{
 //
 //            return;
 //        }
-        if (outputPin.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
+        if (outputPin.isConnected() && variableBox.size() > 0 && variableBox.getSelectedIndex() != -1) {
             PinData<ImString> data = outputPin.getData();
 //            String[] val = comboBox.getSelectedValue().split(":");
 //            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
-            data.getValue().set(comboBox.getSelectedValue());
+            data.getValue().set(variableBox.getSelectedValue());
         }
     }
 
@@ -63,7 +63,7 @@ public class NodeGetVariable extends Node{
     public void copy(Node node) {
         populateCombobox();
         if(node instanceof NodeGetVariable){
-            comboBox.selectValue(((NodeGetVariable) node).comboBox.getSelectedValue());
+            variableBox.selectValue(((NodeGetVariable) node).variableBox.getSelectedValue());
         }
     }
 
@@ -71,26 +71,27 @@ public class NodeGetVariable extends Node{
     public void onSaved() {
         getExtraSaveData().clear();
 //        System.out.println(comboBox.getSelectedValue());
-        getExtraSaveData().add("Var:" + comboBox.getSelectedValue());
+        getExtraSaveData().add("Var:" + variableBox.getSelectedValue());
     }
 
-    private void populateCombobox(){
+    public void populateCombobox(){
         //Populate combox to allow selection of saved variables
-        comboBox.clear();
+        variableBox.clear();
+        System.out.println("Size@: "  + getGraph().globalVariables.size());
         for (int i = 0; i < getGraph().globalVariables.size(); i++) {
-            comboBox.addOption("Global." + getGraph().globalVariables.get(i).name);
+            variableBox.addOption("Global." + getGraph().globalVariables.get(i).name);
         }
 
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            comboBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
+            variableBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
         }
 
-        for (int i = 0; i < comboBox.size(); i++) {
-            String option = comboBox.getOptions()[i];
+        for (int i = 0; i < variableBox.size(); i++) {
+            String option = variableBox.getOptions()[i];
             if(option.startsWith("Global")){
-                comboBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
+                variableBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
             }else{
-                comboBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
+                variableBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
             }
         }
     }
@@ -105,9 +106,9 @@ public class NodeGetVariable extends Node{
 //                    comboBox.select(index);
 //                }
                 try{
-                    comboBox.selectValue(data.split(":")[1]);
+                    variableBox.selectValue(data.split(":")[1]);
                 }catch (ArrayIndexOutOfBoundsException e){
-                    comboBox.select(-1);
+                    variableBox.select(-1);
                 }
             }
         }
@@ -117,11 +118,11 @@ public class NodeGetVariable extends Node{
     public String getOutput() {
 //        String[] val = comboBox.getSelectedValue().split(":");
 //        return val[0] + "." + val[1].replace(" ", "");
-        return comboBox.getSelectedValue();
+        return variableBox.getSelectedValue();
     }
 
     @Override
     public void UI() {
-        comboBox.show();
+        variableBox.show();
     }
 }

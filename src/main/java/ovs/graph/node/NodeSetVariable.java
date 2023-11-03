@@ -15,7 +15,7 @@ public class NodeSetVariable extends Node{
 
     PinAction output = new PinAction();
     PinVar inputPin = new PinVar();
-    private ComboBox comboBox = new ComboBox();
+    public ComboBox variableBox = new ComboBox();
 
     //TODO allow users to select a specific players variable
     public NodeSetVariable(Graph graph) {
@@ -30,18 +30,18 @@ public class NodeSetVariable extends Node{
         output.setNode(this);
         addCustomOutput(output);
 
-        comboBox.addOnOpenedListener(new OnOpenedListener() {
+        variableBox.addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
-                String lastSelectedValue = comboBox.getSelectedValue();
+                String lastSelectedValue = variableBox.getSelectedValue();
                 populateCombobox();
 
-                comboBox.selectValue(lastSelectedValue);
+                variableBox.selectValue(lastSelectedValue);
                 width = -1;
             }
         });
 
-        comboBox.addChangeListener(new ChangeListener() {
+        variableBox.addChangeListener(new ChangeListener() {
             @Override
             public void onChanged(String oldValue, String newValue) {
                 width = -1;
@@ -53,7 +53,7 @@ public class NodeSetVariable extends Node{
     public void copy(Node node) {
         populateCombobox();
         if(node instanceof NodeSetVariable){
-            comboBox.selectValue(((NodeSetVariable) node).comboBox.getSelectedValue());
+            variableBox.selectValue(((NodeSetVariable) node).variableBox.getSelectedValue());
         }
     }
 
@@ -61,25 +61,25 @@ public class NodeSetVariable extends Node{
     public void onSaved() {
         getExtraSaveData().clear();
         //TODO get variable class and save ID and type
-        getExtraSaveData().add("Var:" + comboBox.getSelectedValue());
+        getExtraSaveData().add("Var:" + variableBox.getSelectedValue());
     }
 
-    private void populateCombobox(){
-        comboBox.clear();
+    public void populateCombobox(){
+        variableBox.clear();
         for (int i = 0; i < getGraph().globalVariables.size(); i++) {
-            comboBox.addOption("Global." + getGraph().globalVariables.get(i).name);
+            variableBox.addOption("Global." + getGraph().globalVariables.get(i).name);
         }
 
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            comboBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
+            variableBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
         }
 
-        for (int i = 0; i < comboBox.size(); i++) {
-            String option = comboBox.getOptions()[i];
+        for (int i = 0; i < variableBox.size(); i++) {
+            String option = variableBox.getOptions()[i];
             if(option.startsWith("Global")){
-                comboBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
+                variableBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
             }else{
-                comboBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
+                variableBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
             }
         }
     }
@@ -94,9 +94,9 @@ public class NodeSetVariable extends Node{
 //                    comboBox.select(index);
 //                }
                 try{
-                    comboBox.selectValue(data.split(":")[1]);
+                    variableBox.selectValue(data.split(":")[1]);
                 }catch (ArrayIndexOutOfBoundsException e){
-                    comboBox.select(-1);
+                    variableBox.select(-1);
                 }
             }
         }
@@ -117,11 +117,11 @@ public class NodeSetVariable extends Node{
             }
         }
 
-        if (output.isConnected() && comboBox.size() > 0 && comboBox.getSelectedIndex() != -1) {
+        if (output.isConnected() && variableBox.size() > 0 && variableBox.getSelectedIndex() != -1) {
 //            PinData<ImString> data = outputPin.getData();
 //            String[] val = comboBox.getSelectedValue().split(":");
 //            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
-            outputData.getValue().set(comboBox.getSelectedValue() + " = " + inputData.getValue().get() + ";");
+            outputData.getValue().set(variableBox.getSelectedValue() + " = " + inputData.getValue().get() + ";");
         }
 
 
@@ -144,6 +144,6 @@ public class NodeSetVariable extends Node{
 
     @Override
     public void UI() {
-        comboBox.show();
+        variableBox.show();
     }
 }

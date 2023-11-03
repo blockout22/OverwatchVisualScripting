@@ -132,6 +132,40 @@ public class GraphWindow {
                                 System.out.println("Error: Variables won't accept spaces" );
                             }
                             graph.globalVariables.get(j).name = newValue;
+
+                            //TODO store the previous value while still allowing user to change the current TextField
+                            //Check for naming conflict
+//                            for (int k = 0; k < graph.globalVariables.size(); k++) {
+//                                if(graph.globalVariables.get(k).name.equals(newValue)){
+//                                    tf.setText(oldValue);
+//                                    break;
+//                                }
+//                            }
+
+                            for(Node node : graph.getNodes().getList()){
+                                //if variable names are changed then update Get and Set nodes that use the changed variables to the new name
+                                if(node instanceof NodeGetVariable){
+                                    NodeGetVariable ngv = (NodeGetVariable) node;
+
+                                    if(ngv.variableBox.getSelectedValue().equals("Global." + oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        ngv.populateCombobox();
+                                        ngv.variableBox.selectValue("Global." + newValue);
+                                        ngv.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeSetVariable)
+                                {
+                                    NodeSetVariable nsr = (NodeSetVariable) node;
+                                    if(nsr.variableBox.getSelectedValue().equals("Global." + oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.variableBox.selectValue("Global." + newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+                            }
                         }
                     });
                     tf.setText(graph.globalVariables.get(i).name);
@@ -151,6 +185,31 @@ public class GraphWindow {
                         @Override
                         public void onChanged(String oldValue, String newValue) {
                             graph.playerVariables.get(j).name = newValue;
+
+                            for(Node node : graph.getNodes().getList()){
+                                //if variable names are changed then update Get and Set nodes that use the changed variables to the new name
+                                if(node instanceof NodeGetVariable){
+                                    NodeGetVariable ngv = (NodeGetVariable) node;
+
+                                    if(ngv.variableBox.getSelectedValue().equals("Event Player." + oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        ngv.populateCombobox();
+                                        ngv.variableBox.selectValue("Event Player." + newValue);
+                                        ngv.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeSetVariable)
+                                {
+                                    NodeSetVariable nsr = (NodeSetVariable) node;
+                                    if(nsr.variableBox.getSelectedValue().equals("Event Player." + oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.variableBox.selectValue("Event Player." + newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+                            }
                         }
                     });
                     tf.setText(graph.playerVariables.get(i).name);
@@ -238,7 +297,6 @@ public class GraphWindow {
                                 Node node = graph.getNodes().getList().get(i);
 
                                 if (node.getName().toLowerCase().contains(searchText.get())) {
-                                    System.out.println(node.getID());
                                     searchResults.add(node);
                                 }
                             }
@@ -453,13 +511,16 @@ public class GraphWindow {
                                         graph.addPlayerVariable("varName" + graph.playerVariables.size());
                                     }
 
+                                    float buttonWidth = 25.0f;
+                                    float spaceWidth = 5.0f;
+
 //                                    ImGui.pushItemWidth(250);
                                     ImGui.text("Global Variable");
                                     for (int i = 0; i < tfGlobalVars.size(); i++) {
                                         ImGui.text(i + ":");
                                         ImGui.sameLine();
                                         tfGlobalVars.get(i).show();
-                                        ImGui.sameLine();
+                                        ImGui.sameLine(400 - (3 * buttonWidth + 2 * spaceWidth));
 
                                         //check if this is not the first element
                                         if(i != 0){
@@ -468,6 +529,9 @@ public class GraphWindow {
 
                                             };
                                             ImGui.sameLine();
+                                        }else{
+                                            ImGui.dummy(buttonWidth / 2 + (ImGui.getStyle().getItemSpacingX() / 2) - 1.0f, 0);
+                                            ImGui.sameLine();
                                         }
 
                                         //check if this is not the last element
@@ -475,6 +539,9 @@ public class GraphWindow {
                                             if(ImGui.button("v" + "##g" + i)){
                                                 graph.globalVariables.swap(i, i + 1);
                                             }
+                                            ImGui.sameLine();
+                                        }else{
+                                            ImGui.dummy(buttonWidth / 2 + (ImGui.getStyle().getItemSpacingX() / 2) - 1.0f, 0);
                                             ImGui.sameLine();
                                         }
 
@@ -489,7 +556,7 @@ public class GraphWindow {
                                         ImGui.text(i + ":");
                                         ImGui.sameLine();
                                         tfPlayerVars.get(i).show();
-                                        ImGui.sameLine();
+                                        ImGui.sameLine(400 - (3 * buttonWidth + 2 * spaceWidth));
 
                                         //check if this is not the first element
                                         if(i != 0){
@@ -498,6 +565,9 @@ public class GraphWindow {
 
                                             };
                                             ImGui.sameLine();
+                                        }else{
+                                            ImGui.dummy(buttonWidth / 2 + (ImGui.getStyle().getItemSpacingX() / 2) - 1.0f, 0);
+                                            ImGui.sameLine();
                                         }
 
                                         //check if this is not the last element
@@ -505,6 +575,9 @@ public class GraphWindow {
                                             if(ImGui.button("v" + "##p" + i)){
                                                 graph.playerVariables.swap(i, i + 1);
                                             }
+                                            ImGui.sameLine();
+                                        }else{
+                                            ImGui.dummy(buttonWidth / 2 + (ImGui.getStyle().getItemSpacingX() / 2) - 1.0f, 0);
                                             ImGui.sameLine();
                                         }
 
