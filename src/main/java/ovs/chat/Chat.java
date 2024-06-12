@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
+@Deprecated
 public class Chat {
 
     private Socket socket;

@@ -15,6 +15,7 @@ Junkrat
 Kiriko
 Lifeweaver
 Lúcio
+Mauga
 Mei
 Mercy
 Moira
@@ -31,6 +32,7 @@ Sombra
 Symmetra
 Torbjörn
 Tracer
+Venture
 Widowmaker
 Winston
 Wrecking Ball
