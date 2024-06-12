@@ -5,6 +5,7 @@ import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImInt;
 import imgui.type.ImString;
+import ovs.Global;
 
 import java.util.ArrayList;
 
@@ -153,6 +154,10 @@ public class Settings {
     public ArrayList<BoolInfoWithName> teamDmMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> skirmishMap = new ArrayList<>();
     public ArrayList<BoolInfoWithName> extensionBools = new ArrayList<>();
+
+    //hero toggles
+    //list of heroes that are enabled
+    public ArrayList<BoolInfoWithName> heroRoster = new ArrayList<>();
 
     //Hero Settings - Abilities
     public int[] abilityCooldownTime = new int[]{100};
@@ -372,6 +377,10 @@ public class Settings {
         skirmishMap.add(new BoolInfoWithName("Workshop Island", new ImBoolean(true)));
         skirmishMap.add(new BoolInfoWithName("Workshop Island Night", new ImBoolean(true)));
 
+        for (String heroName : Global.heroes){
+            heroRoster.add(new BoolInfoWithName(heroName, new ImBoolean(true)));
+        }
+
         extensionBools.add(new BoolInfoWithName("Beam Sounds", new ImBoolean(false)));
         extensionBools.add(new BoolInfoWithName("Beam Effects", new ImBoolean(false)));
         extensionBools.add(new BoolInfoWithName("Buff and Debuff Sounds", new ImBoolean(false)));
@@ -522,100 +531,114 @@ public class Settings {
             }
         }
 
+
+
         if(ImGui.collapsingHeader("Heroes")){
-            ImGui.sliderInt("##AbilityCooldownTime", abilityCooldownTime, 0, 500);
-            ImGui.sameLine();
-            ImGui.text("Ability Cooldown Time");
+            ImGui.indent();
+            if(ImGui.collapsingHeader("General")) {
+                ImGui.sliderInt("##AbilityCooldownTime", abilityCooldownTime, 0, 500);
+                ImGui.sameLine();
+                ImGui.text("Ability Cooldown Time");
 
-            ImGui.checkbox("##QuickMelee", quickMelee);
-            ImGui.sameLine();
-            ImGui.text("Quick Melee");
+                ImGui.checkbox("##QuickMelee", quickMelee);
+                ImGui.sameLine();
+                ImGui.text("Quick Melee");
 
-            ImGui.checkbox("##UltimateAbility", ultimateAbility);
-            ImGui.sameLine();
-            ImGui.text("UltimateAbility");
+                ImGui.checkbox("##UltimateAbility", ultimateAbility);
+                ImGui.sameLine();
+                ImGui.text("UltimateAbility");
 
-            ImGui.sliderInt("##UltimateGeneration", ultimateGeneration, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Ultimate Generation");
+                ImGui.sliderInt("##UltimateGeneration", ultimateGeneration, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Ultimate Generation");
 
-            ImGui.sliderInt("##UltimateGenerationCombat", ultimateGenerationCombat, 0, 500);
-            ImGui.sameLine();
-            ImGui.text("Ultimate Generation - Combat");
+                ImGui.sliderInt("##UltimateGenerationCombat", ultimateGenerationCombat, 0, 500);
+                ImGui.sameLine();
+                ImGui.text("Ultimate Generation - Combat");
 
-            ImGui.sliderInt("##UltimateGenerationPassive", ultimateGenerationPassive, 0, 500);
-            ImGui.sameLine();
-            ImGui.text("Ultimate Generation - Passive");
+                ImGui.sliderInt("##UltimateGenerationPassive", ultimateGenerationPassive, 0, 500);
+                ImGui.sameLine();
+                ImGui.text("Ultimate Generation - Passive");
 
-            ImGui.checkbox("##SpawnWithUltimateReady", spawnWithUltimateReady);
-            ImGui.sameLine();
-            ImGui.text("Spawn With Ultimate Ready");
+                ImGui.checkbox("##SpawnWithUltimateReady", spawnWithUltimateReady);
+                ImGui.sameLine();
+                ImGui.text("Spawn With Ultimate Ready");
 
-            ImGui.sliderInt("##UltimateDuration", ultimateDuration, 25, 500);
-            ImGui.sameLine();
-            ImGui.text("Ultimate Duration");
+                ImGui.sliderInt("##UltimateDuration", ultimateDuration, 25, 500);
+                ImGui.sameLine();
+                ImGui.text("Ultimate Duration");
 
-            ImGui.checkbox("##InfiniateUltimateDuration", infiniteUltimateDuration);
-            ImGui.sameLine();
-            ImGui.text("Infiniate Ultimate Duration");
+                ImGui.checkbox("##InfiniateUltimateDuration", infiniteUltimateDuration);
+                ImGui.sameLine();
+                ImGui.text("Infiniate Ultimate Duration");
 
-            //combat modifiers
-            ImGui.sliderInt("##DamageDealt", damageDealt, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Damage Dealt");
+                //combat modifiers
+                ImGui.sliderInt("##DamageDealt", damageDealt, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Damage Dealt");
 
-            ImGui.sliderInt("##DamageReceived", damageReceived, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Damage Received");
+                ImGui.sliderInt("##DamageReceived", damageReceived, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Damage Received");
 
-            ImGui.sliderInt("##HealingDealt", healingDealt, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Healing Dealt");
+                ImGui.sliderInt("##HealingDealt", healingDealt, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Healing Dealt");
 
-            ImGui.sliderInt("##HealingReceived", healingReceived, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Healing Received");
+                ImGui.sliderInt("##HealingReceived", healingReceived, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Healing Received");
 
-            ImGui.sliderInt("##Health", health, 10, 500);
-            ImGui.sameLine();
-            ImGui.text("Health");
+                ImGui.sliderInt("##Health", health, 10, 500);
+                ImGui.sameLine();
+                ImGui.text("Health");
 
-            ImGui.sliderInt("##JumpVerticalSpeed", jumpVerticalSpeed, 10, 800);
-            ImGui.sameLine();
-            ImGui.text("Jump Vertical Speed");
+                ImGui.sliderInt("##JumpVerticalSpeed", jumpVerticalSpeed, 10, 800);
+                ImGui.sameLine();
+                ImGui.text("Jump Vertical Speed");
 
-            ImGui.sliderInt("##MovementGravity", movementGravity, 25, 400);
-            ImGui.sameLine();
-            ImGui.text("Movement Gravity");
+                ImGui.sliderInt("##MovementGravity", movementGravity, 25, 400);
+                ImGui.sameLine();
+                ImGui.text("Movement Gravity");
 
-            ImGui.sliderInt("##MovementSpeed", movementSpeed, 50, 300);
-            ImGui.sameLine();
-            ImGui.text("Movement Speed");
+                ImGui.sliderInt("##MovementSpeed", movementSpeed, 50, 300);
+                ImGui.sameLine();
+                ImGui.text("Movement Speed");
 
-            ImGui.sliderInt("##Projective Gravity", projectileGravity, 0, 500);
-            ImGui.sameLine();
-            ImGui.text("Projectile Gravity");
+                ImGui.sliderInt("##Projective Gravity", projectileGravity, 0, 500);
+                ImGui.sameLine();
+                ImGui.text("Projectile Gravity");
 
-            ImGui.sliderInt("##ProjectileSpeed", projectileSpeed, 0, 500);
-            ImGui.sameLine();
-            ImGui.text("Projectile Speed");
+                ImGui.sliderInt("##ProjectileSpeed", projectileSpeed, 0, 500);
+                ImGui.sameLine();
+                ImGui.text("Projectile Speed");
 
-            ImGui.checkbox("##ReceiveHeadshotsOnly", receiveHeadshotsOnly);
-            ImGui.sameLine();
-            ImGui.text("Receive Headshots Only");
+                ImGui.checkbox("##ReceiveHeadshotsOnly", receiveHeadshotsOnly);
+                ImGui.sameLine();
+                ImGui.text("Receive Headshots Only");
 
-            //Weapons
-            ImGui.checkbox("##PrimaryFire", primaryFire);
-            ImGui.sameLine();
-            ImGui.text("Primary Fire");
+                //Weapons
+                ImGui.checkbox("##PrimaryFire", primaryFire);
+                ImGui.sameLine();
+                ImGui.text("Primary Fire");
 
-            ImGui.sliderInt("##AmmunitionClipSizeScalar", ammunitionClipSizeScalar, 25, 500);
-            ImGui.sameLine();
-            ImGui.text("Ammunition Clip Size Scalar");
+                ImGui.sliderInt("##AmmunitionClipSizeScalar", ammunitionClipSizeScalar, 25, 500);
+                ImGui.sameLine();
+                ImGui.text("Ammunition Clip Size Scalar");
 
-            ImGui.checkbox("##NoAmmunitionRequirements", noAmmunitionRequirements);
-            ImGui.sameLine();
-            ImGui.text("No Ammunition Requirements");
+                ImGui.checkbox("##NoAmmunitionRequirements", noAmmunitionRequirements);
+                ImGui.sameLine();
+                ImGui.text("No Ammunition Requirements");
+            }
+
+            if(ImGui.collapsingHeader("Hero Roster")){
+                for (BoolInfoWithName biwn : heroRoster){
+                    ImGui.checkbox("##" + biwn.name, biwn.bool);
+                    ImGui.sameLine();
+                    ImGui.text(biwn.name);
+                }
+            }
+            ImGui.unindent();
         }
 
         ImGui.popItemWidth();
@@ -1339,6 +1362,34 @@ public class Settings {
                 output += "General\n";
                 output += "{\n";
                 {
+                    int[] res = getHeroToggles(heroRoster);
+                    if(!(res[0] == 0 || res[1] == 0)){
+                        output += "\n";
+                        if(res[0] >= res[1]){
+                            //Disabled Heroes
+                            output += "disabled heroes\n";
+                            output += "{\n";
+                            for (int i = 0; i < heroRoster.size(); i++) {
+                                BoolInfoWithName info = heroRoster.get(i);
+                                if(!info.bool.get()){
+                                    output += info.name + "\n";
+                                }
+                            }
+                        }else if(res[1] > res[0])
+                        {
+                            //Enabled Heroes
+                            output += "enabled heroes\n";
+                            output += "{\n";
+                            for (int i = 0; i < heroRoster.size(); i++) {
+                                BoolInfoWithName info = heroRoster.get(i);
+                                if(info.bool.get()){
+                                    output += info.name + "\n";
+                                }
+                            }
+                        }
+
+                        output += "}\n";
+                    }
                     output += "Ability Cooldown Time: " + abilityCooldownTime[0] + "%\n";
                     output += "Ammunition Clip Size Scalar: " + ammunitionClipSizeScalar[0] + "%\n";
                     output += "Damage Dealt: " + damageDealt[0] + "%\n";
@@ -1397,6 +1448,23 @@ public class Settings {
         int[] res = new int[2];
         for (int i = 0; i < maps.size(); i++) {
             BoolInfoWithName info = maps.get(i);
+            if(info.bool.get()){
+                res[0] = res[0] + 1;
+            }else{
+                res[1] = res[1] + 1;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * return the number of on/off list of heroes
+     * @return
+     */
+    private int[] getHeroToggles(ArrayList<BoolInfoWithName> heroToggles){
+        int[] res = new int[2];
+        for (int i = 0; i < heroToggles.size(); i++) {
+            BoolInfoWithName info = heroToggles.get(i);
             if(info.bool.get()){
                 res[0] = res[0] + 1;
             }else{

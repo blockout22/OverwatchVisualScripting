@@ -111,6 +111,15 @@ public class GraphSaver {
         graphSave.saveSettings.heroSettings.ammunitionClipSizeScaler = settings.ammunitionClipSizeScalar[0];
         graphSave.saveSettings.heroSettings.noAmmunitionRequirements = settings.noAmmunitionRequirements.get();
 
+        //Hero roster
+        graphSave.saveSettings.heroSettings.heroRoster.clear();
+        for (Settings.BoolInfoWithName biwn : settings.heroRoster){
+            BoolInfo boolInfo = new BoolInfo();
+            boolInfo.name = biwn.name;
+            boolInfo.value = biwn.bool.get();
+            graphSave.saveSettings.heroSettings.heroRoster.add(boolInfo);
+        }
+
         for (int i = 0; i < settings.extensionBools.size(); i++) {
             Settings.BoolInfoWithName info = settings.extensionBools.get(i);
             BoolInfo saveInfo = new BoolInfo();
@@ -457,6 +466,16 @@ public class GraphSaver {
             settings.primaryFire.set(gs.saveSettings.heroSettings.primaryFire);
             settings.ammunitionClipSizeScalar[0] = (gs.saveSettings.heroSettings.ammunitionClipSizeScaler);
             settings.noAmmunitionRequirements.set(gs.saveSettings.heroSettings.noAmmunitionRequirements);
+
+            for (int i = 0; i < gs.saveSettings.heroSettings.heroRoster.size(); i++) {
+                BoolInfo info = gs.saveSettings.heroSettings.heroRoster.get(i);
+                for (int j = 0; j < settings.heroRoster.size(); j++) {
+                    Settings.BoolInfoWithName biwn = settings.heroRoster.get(j);
+                    if(info.name.equals(biwn.name)){
+                        biwn.bool.set(info.value);
+                    }
+                }
+            }
 
             for (int i = 0; i < gs.saveSettings.extensionToggle.size(); i++) {
                 BoolInfo info = gs.saveSettings.extensionToggle.get(i);
@@ -1079,6 +1098,8 @@ public class GraphSaver {
         private boolean primaryFire = true;
         private int ammunitionClipSizeScaler = 100;
         private boolean noAmmunitionRequirements = false;
+
+        private ArrayList<BoolInfo> heroRoster = new ArrayList<>();
     }
 
     private static class BoolInfo{
