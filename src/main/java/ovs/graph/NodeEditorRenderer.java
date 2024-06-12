@@ -9,6 +9,7 @@ import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.flag.*;
 import imgui.type.ImLong;
 import imgui.type.ImString;
+import org.lwjgl.glfw.GLFW;
 import ovs.Global;
 import ovs.RGBA;
 import ovs.graph.UI.UiComponent;
@@ -18,10 +19,7 @@ import ovs.graph.pin.Pin;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 
 public class NodeEditorRenderer {
 
@@ -727,6 +725,66 @@ public class NodeEditorRenderer {
 
         NodeEditor.resume();
         NodeEditor.end();
+
+        if(ImGui.isKeyDown(GLFW.GLFW_KEY_LEFT_ALT) && NodeEditor.hasSelectionChanged())
+        {
+            int size = NodeEditor.getSelectedObjectCount();
+            long[] selectedNodes = new long[size];
+            NodeEditor.getSelectedNodes(selectedNodes, size);
+
+            System.out.println(selectedNodes.length);
+
+            HashSet<Node> nodeList = new HashSet<>();
+
+            if(size > 0) {
+                for (int i = 0; i < selectedNodes.length; i++) {
+                    Node node = graph.findNodeById(selectedNodes[i]);
+                    nextConnectedNodes(node, nodeList);
+                }
+
+                for (Node nodes : nodeList) {
+                    NodeEditor.selectNode(nodes.getID(), true);
+                }
+            }
+        }
+    }
+
+    private void nextConnectedNodes(Node node, HashSet<Node> nodeList) {
+        if (node == null || nodeList.contains(node)) {
+            return; // Base case: No node or no input pins
+        }
+
+        // Add the current node to the list if not already added
+        nodeList.add(node);
+
+        // Process each input pin
+        for (Pin pin : node.inputPins.getList()) {
+            List<Integer> connections = pin.connectedToList;
+
+            // Recursively process each connected node
+            for (Integer pinId : connections) {
+                Node connectedNode = graph.findNodeFromPinId(pinId);
+
+                // Only continue recursion if the connected node has not been processed yet
+                if (!nodeList.contains(connectedNode)) {
+                    nextConnectedNodes(connectedNode, nodeList);
+                }
+            }
+        }
+
+        for (Pin pin : node.outputPins.getList()) {
+            List<Integer> connections = pin.connectedToList;
+
+            // Recursively process each connected node
+            for (Integer pinId : connections) {
+                Node connectedNode = graph.findNodeFromPinId(pinId);
+
+                // Only continue recursion if the connected node has not been processed yet
+                if (!nodeList.contains(connectedNode)) {
+                    nextConnectedNodes(connectedNode, nodeList);
+                }
+            }
+        }
     }
 
     private void createRerouteNode(int targetLink) {

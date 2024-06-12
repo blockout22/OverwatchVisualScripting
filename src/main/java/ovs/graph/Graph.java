@@ -137,4 +137,22 @@ public class Graph {
 
         return null;
     }
+
+    public Node findNodeFromPinId(final int ID){
+        for(Node node : nodes.getList()){
+            for(Pin pin : node.inputPins.getList()){
+                if(pin.getID() == ID){
+                    return node;
+                }
+            }
+
+            for(Pin pin : node.outputPins.getList()){
+                if(pin.getID() == ID){
+                    return node;
+                }
+            }
+        }
+
+        return null;
+    }
 }
