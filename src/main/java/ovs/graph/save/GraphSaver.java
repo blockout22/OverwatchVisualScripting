@@ -130,6 +130,23 @@ public class GraphSaver {
 
         //TODO save other game mode settings
 
+        //Modes All
+        graphSave.saveSettings.modesAllSettings.enemyHealthBar = settings.enemyHealthBarsOnOff.get();
+        graphSave.saveSettings.modesAllSettings.gameModeStart = settings.gameModeStartSelection.get();
+        graphSave.saveSettings.modesAllSettings.healthPackRespawnTimeScalar = settings.healthRespawnTimeScalar[0];
+        graphSave.saveSettings.modesAllSettings.killCam = settings.killCamOnOff.get();
+        graphSave.saveSettings.modesAllSettings.killFeed = settings.killFeedOnOff.get();
+        graphSave.saveSettings.modesAllSettings.skins = settings.skinsOnOff.get();
+        graphSave.saveSettings.modesAllSettings.spawnHealthPacks = settings.spawnHealthPacksSelection.get();
+
+        graphSave.saveSettings.modesAllSettings.allowHeroSwitching = settings.allowHeroSwitchingOnOff.get();
+        graphSave.saveSettings.modesAllSettings.heroLimit = settings.heroLimitSelection.get();
+        graphSave.saveSettings.modesAllSettings.limitRoles = settings.limitRolesSelection.get();
+        graphSave.saveSettings.modesAllSettings.respawnAsRandomHero = settings.respawnAsRandomHeroOnOff.get();
+        graphSave.saveSettings.modesAllSettings.randomHeroRoleLimitPerTeam = settings.randomHeroRoleLimitPerTeam[0];
+        graphSave.saveSettings.modesAllSettings.respawnTimeScalar = settings.respawnTimeScalar[0];
+        graphSave.saveSettings.modesAllSettings.tankRolePassiveHealthBonus = settings.tankRolePassiveHealthBonusSelection.get();
+
         //Assault Options
         graphSave.saveSettings.assaultSettings.speedModifier = settings.assaultSpeedModifier[0];
         graphSave.saveSettings.assaultSettings.compRules = settings.assaultCompRulesOnOff.get();
@@ -488,6 +505,22 @@ public class GraphSaver {
                     }
                 }
             }
+
+            //Modes All
+            settings.enemyHealthBarsOnOff.set(gs.saveSettings.modesAllSettings.enemyHealthBar);
+            settings.gameModeStartSelection.set(gs.saveSettings.modesAllSettings.gameModeStart);
+            settings.healthRespawnTimeScalar[0] = gs.saveSettings.modesAllSettings.healthPackRespawnTimeScalar;
+            settings.killCamOnOff.set(gs.saveSettings.modesAllSettings.killCam);
+            settings.killFeedOnOff.set(gs.saveSettings.modesAllSettings.killFeed);
+            settings.skinsOnOff.set(gs.saveSettings.modesAllSettings.skins);
+            settings.spawnHealthPacksSelection.set(gs.saveSettings.modesAllSettings.spawnHealthPacks);
+
+            settings.allowHeroSwitchingOnOff.set(gs.saveSettings.modesAllSettings.allowHeroSwitching);
+            settings.heroLimitSelection.set(gs.saveSettings.modesAllSettings.heroLimit);
+            settings.limitRolesSelection.set(gs.saveSettings.modesAllSettings.limitRoles);
+            settings.respawnAsRandomHeroOnOff.set(gs.saveSettings.modesAllSettings.respawnAsRandomHero);
+            settings.randomHeroRoleLimitPerTeam[0] = gs.saveSettings.modesAllSettings.randomHeroRoleLimitPerTeam;
+            settings.tankRolePassiveHealthBonusSelection.set(gs.saveSettings.modesAllSettings.tankRolePassiveHealthBonus);
 
             //Assault Options
             settings.assaultSpeedModifier[0] = gs.saveSettings.assaultSettings.speedModifier;
@@ -950,6 +983,7 @@ public class GraphSaver {
 
         private ArrayList<BoolInfo> extensionToggle = new ArrayList<>();
 
+        private ModesAllSettings modesAllSettings = new ModesAllSettings();
         private AssaultSettings assaultSettings = new AssaultSettings();
         private ControlSettings controlSettings = new ControlSettings();
         private EscortSettings escortSettings = new EscortSettings();
@@ -964,6 +998,24 @@ public class GraphSaver {
         private SkirmishSettings skirmishSettings = new SkirmishSettings();
 
         private HeroSettings heroSettings = new HeroSettings();
+    }
+
+    private static class ModesAllSettings{
+        private boolean enemyHealthBar = true;
+        private int gameModeStart = 0;
+        private int healthPackRespawnTimeScalar = 100;
+        private boolean killCam = true;
+        private boolean killFeed = true;
+        private boolean skins = true;
+        private int spawnHealthPacks = 0;
+
+        private boolean allowHeroSwitching = true;
+        private int heroLimit = 1;
+        private int limitRoles = 2;
+        private boolean respawnAsRandomHero = false;
+        private int randomHeroRoleLimitPerTeam = 6;
+        private int respawnTimeScalar = 100;
+        private int tankRolePassiveHealthBonus = 1;
     }
 
     private static class AssaultSettings{

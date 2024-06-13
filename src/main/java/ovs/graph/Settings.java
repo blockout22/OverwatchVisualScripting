@@ -51,9 +51,30 @@ public class Settings {
     public ImBoolean practiceRangeOnOff = new ImBoolean(false);
     public ImBoolean skirmishOnOff = new ImBoolean(false);
 
+    //All Settings for Modes
+    public ImBoolean enemyHealthBarsOnOff = new ImBoolean(true);
+    public ImInt gameModeStartSelection = new ImInt();
+    public String[] gameModeStartOptions = {"All Slots Filled", "Immediately", "Manual"};
+    public int[] healthRespawnTimeScalar = new int[]{100};
+    public ImBoolean killCamOnOff = new ImBoolean(true);
+    public ImBoolean killFeedOnOff = new ImBoolean(true);
+    public ImBoolean skinsOnOff = new ImBoolean(true);
+    public ImInt spawnHealthPacksSelection = new ImInt();
+    public String[] spawnHealthPacksOptions = {"Determined By Mode", "Enabled", "Disabled"};
+    public ImBoolean allowHeroSwitchingOnOff = new ImBoolean(true);
+    public ImInt heroLimitSelection = new ImInt(1);
+    public String[] heroLimitOptions = {"Off", "1 Per Team", "2 Per Team", "1 Per Game", "2 Per Game"};
+    public ImInt limitRolesSelection = new ImInt(1);
+    public String[] limitRolesOptions = {"Off", "2 Of Each Role Per Team", "1 Tank, 2 Offence, 2 Support"};
+    public ImBoolean respawnAsRandomHeroOnOff = new ImBoolean(false);
+    public int[] randomHeroRoleLimitPerTeam = new int[]{6};
+    public int[] respawnTimeScalar = new int[]{100};
+    public ImInt tankRolePassiveHealthBonusSelection = new ImInt(1);
+    public String[] tankRolePassiveHealthBonusOptions = {"Always Enabled", "1 Tank, 2 Offence, 2 Support", "Disabled"};
 
     //Assault Settings
     public int[] assaultSpeedModifier = new int[]{100};
+
     public ImBoolean assaultCompRulesOnOff = new ImBoolean(false);
 
     //Control Settings
@@ -445,90 +466,132 @@ public class Settings {
 
 //        ImGui.newLine();
         if(ImGui.collapsingHeader("Modes", ImGuiTreeNodeFlags.DefaultOpen)) {
-            ImGui.checkbox("##Assault", assaultOnOff);
-            ImGui.sameLine();
-            ImGui.text("Assault");
-            ImGui.sameLine();
-            if (ImGui.button("Assault Options")) {
-                ImGui.openPopup("Assault_options");
+            float available_width = ImGui.getContentRegionAvailX();
+            if(ImGui.button("All", available_width, 0)){
+                ImGui.openPopup("Settings_Modes_All");
             }
-            ImGui.checkbox("##Control", controlOnOff);
-            ImGui.sameLine();
-            ImGui.text("Control");
-            ImGui.sameLine();
-            if (ImGui.button("Control Options")) {
-                ImGui.openPopup("Control_options");
-            }
-            ImGui.checkbox("##Escort", escortOnOff);
-            ImGui.sameLine();
-            ImGui.text("Escort");
-            ImGui.sameLine();
-            if (ImGui.button("Escort Options")) {
-                ImGui.openPopup("Escort_options");
-            }
-            ImGui.checkbox("##Hybrid", hybridOnOff);
-            ImGui.sameLine();
-            ImGui.text("Hybrid");
-            ImGui.sameLine();
-            if (ImGui.button("Hybrid Options")) {
-                ImGui.openPopup("Hybrid_options");
-            }
-            ImGui.checkbox("##Push", pushOnOff);
-            ImGui.sameLine();
-            ImGui.text("Push");
-            ImGui.sameLine();
-            if (ImGui.button("Push Options")) {
-                ImGui.openPopup("Push_options");
-            }
-            ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
-            ImGui.sameLine();
-            ImGui.text("Bouty Hunter");
-            ImGui.sameLine();
-            if(ImGui.button("Bounty Hunter Options")){
-                ImGui.openPopup("Bountyhunter_options");
-            }
-            ImGui.checkbox("##CTF", ctfOnOff);
-            ImGui.sameLine();
-            ImGui.text("CTF");
-            ImGui.sameLine();
-            if(ImGui.button("CTF Options")){
-                ImGui.openPopup("Ctf_options");
-            }
-            ImGui.checkbox("##DeathMatch", deathmatchOnOff);
-            ImGui.sameLine();
-            ImGui.text("DeathMatch");
-            ImGui.sameLine();
-            if (ImGui.button("Deathmatch Options")) {
-                ImGui.openPopup("Deathmatch_options");
-            }
-            ImGui.checkbox("##Elimination", eliminationOnOff);
-            ImGui.sameLine();
-            ImGui.text("Elimination");
-            ImGui.sameLine();
-            if(ImGui.button("Elimination Options")){
-                ImGui.openPopup("Elimination_options");
-            }
-            ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
-            ImGui.sameLine();
-            ImGui.text("Team DeathMatch");
-            ImGui.sameLine();
-            if(ImGui.button("Team DeathMatch Options")){
-                ImGui.openPopup("Teamdeathmatch_options");
-            }
-            ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
-            ImGui.sameLine();
-            ImGui.text("Practice Range");
-            ImGui.sameLine();
-            if(ImGui.button("Practice Range Options")){
-                ImGui.openPopup("Practicerange_options");
-            }
-            ImGui.checkbox("##Skirmish", skirmishOnOff);
-            ImGui.sameLine();
-            ImGui.text("Skirmish");
+
+            ImGui.indent();
+            if(ImGui.collapsingHeader("Assault")){
+                ImGui.checkbox("##Assault", assaultOnOff);
                 ImGui.sameLine();
-            if(ImGui.button("Skirmish Options")){
-                ImGui.openPopup("Skirmish_options");
+                ImGui.text("Assault");
+                ImGui.sameLine();
+                if (ImGui.button("Assault Options")) {
+                    ImGui.openPopup("Assault_options");
+                }
             }
+
+            if(ImGui.collapsingHeader("Control")) {
+                ImGui.checkbox("##Control", controlOnOff);
+                ImGui.sameLine();
+                ImGui.text("Control");
+                ImGui.sameLine();
+                if (ImGui.button("Control Options")) {
+                    ImGui.openPopup("Control_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("Escort")) {
+                ImGui.checkbox("##Escort", escortOnOff);
+                ImGui.sameLine();
+                ImGui.text("Escort");
+                ImGui.sameLine();
+                if (ImGui.button("Escort Options")) {
+                    ImGui.openPopup("Escort_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("Hybrid")) {
+                ImGui.checkbox("##Hybrid", hybridOnOff);
+                ImGui.sameLine();
+                ImGui.text("Hybrid");
+                ImGui.sameLine();
+                if (ImGui.button("Hybrid Options")) {
+                    ImGui.openPopup("Hybrid_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("Push")) {
+                ImGui.checkbox("##Push", pushOnOff);
+                ImGui.sameLine();
+                ImGui.text("Push");
+                ImGui.sameLine();
+                if (ImGui.button("Push Options")) {
+                    ImGui.openPopup("Push_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("BountyHunter")) {
+                ImGui.checkbox("##BountyHunter", bountyHunterOnOff);
+                ImGui.sameLine();
+                ImGui.text("Bouty Hunter");
+                ImGui.sameLine();
+                if (ImGui.button("Bounty Hunter Options")) {
+                    ImGui.openPopup("Bountyhunter_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("CTF")) {
+                ImGui.checkbox("##CTF", ctfOnOff);
+                ImGui.sameLine();
+                ImGui.text("CTF");
+                ImGui.sameLine();
+                if (ImGui.button("CTF Options")) {
+                    ImGui.openPopup("Ctf_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("DeathMatch")) {
+                ImGui.checkbox("##DeathMatch", deathmatchOnOff);
+                ImGui.sameLine();
+                ImGui.text("DeathMatch");
+                ImGui.sameLine();
+                if (ImGui.button("Deathmatch Options")) {
+                    ImGui.openPopup("Deathmatch_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("Elimination")) {
+                ImGui.checkbox("##Elimination", eliminationOnOff);
+                ImGui.sameLine();
+                ImGui.text("Elimination");
+                ImGui.sameLine();
+                if (ImGui.button("Elimination Options")) {
+                    ImGui.openPopup("Elimination_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("TeamDeathMatch")) {
+                ImGui.checkbox("##TeamDeathMatch", teamDeathmatchOnOff);
+                ImGui.sameLine();
+                ImGui.text("Team DeathMatch");
+                ImGui.sameLine();
+                if (ImGui.button("Team DeathMatch Options")) {
+                    ImGui.openPopup("Teamdeathmatch_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("PracticeRange")) {
+                ImGui.checkbox("##PracticeRange", practiceRangeOnOff);
+                ImGui.sameLine();
+                ImGui.text("Practice Range");
+                ImGui.sameLine();
+                if (ImGui.button("Practice Range Options")) {
+                    ImGui.openPopup("Practicerange_options");
+                }
+            }
+
+            if(ImGui.collapsingHeader("Skirmish")) {
+                ImGui.checkbox("##Skirmish", skirmishOnOff);
+                ImGui.sameLine();
+                ImGui.text("Skirmish");
+                ImGui.sameLine();
+                if (ImGui.button("Skirmish Options")) {
+                    ImGui.openPopup("Skirmish_options");
+                }
+            }
+            ImGui.unindent();
         }
 
 
@@ -642,6 +705,48 @@ public class Settings {
         }
 
         ImGui.popItemWidth();
+
+        //settings for all modes
+        if(ImGui.isPopupOpen("Settings_Modes_All")){
+            if(ImGui.beginPopup("Settings_Modes_All")){
+                ImGui.text("General");
+                ImGui.separator();
+                //Generate
+                ImGui.checkbox("##enemyHealthBars", enemyHealthBarsOnOff);
+                ImGui.sameLine();
+                ImGui.text("Enemy Health Bars");
+
+                ImGui.combo("Game Mode Start", gameModeStartSelection, gameModeStartOptions);
+
+                ImGui.sliderInt("Health Pack Respawn Time Scalar", healthRespawnTimeScalar, 10, 500);
+
+                ImGui.checkbox("##killCam", killCamOnOff);
+                ImGui.sameLine();
+                ImGui.text("Kill Cam");
+
+                ImGui.checkbox("##killFeed", killFeedOnOff);
+                ImGui.sameLine();
+                ImGui.text("Kill Feed");
+
+                ImGui.checkbox("##skins", skinsOnOff);
+                ImGui.sameLine();
+                ImGui.text("Skins");
+
+                ImGui.combo("Spawn Health Packs", spawnHealthPacksSelection, spawnHealthPacksOptions);
+
+                ImGui.text("Heroes");
+                ImGui.separator();
+                //Heroes
+                ImGui.checkbox("Allow Hero Switching", allowHeroSwitchingOnOff);
+                ImGui.combo("Hero Limit", heroLimitSelection, heroLimitOptions);
+                ImGui.combo("Limit Roles", limitRolesSelection, limitRolesOptions);
+                ImGui.checkbox("Respawn As Random Hero", respawnAsRandomHeroOnOff);
+                ImGui.sliderInt("Random Hero Role Limit Per Team", randomHeroRoleLimitPerTeam, 1, 6);
+                ImGui.sliderInt("Respawn Time Scalar", respawnTimeScalar, 0, 100);
+                ImGui.combo("Tank Role Passive Health Bonus", tankRolePassiveHealthBonusSelection, tankRolePassiveHealthBonusOptions);
+                ImGui.endPopup();
+            }
+        }
 
         //Assault Options popup
         if(ImGui.isPopupOpen("Assault_options")){
@@ -1350,7 +1455,25 @@ public class Settings {
                 output += "}\n";
             }
 
+            output += "General\n";
+            output += "{\n";
+            {
+                output += "Enemy Health Bars: " + (enemyHealthBarsOnOff.get() ? "On" : "Off") + "\n";
+                output += "Game Mode Start: " + gameModeStartOptions[gameModeStartSelection.get()] + "\n";
+                output += "Health Pack Respawn Time Scalar: " + healthRespawnTimeScalar[0] + "%\n";
+                output += "Kill Cam: " + (killCamOnOff.get() ? "On" : "Off") + "\n";
+                output += "Skins: " + (skinsOnOff.get() ? "Om" : "Off") + "\n";
+                output += "Spawn Health Packs: " + spawnHealthPacksOptions[spawnHealthPacksSelection.get()] + "\n";
 
+                output += "Allow Hero Switching: " + (allowHeroSwitchingOnOff.get() ? "On" : "Off") + "\n";
+                output += "Hero Limit: " + heroLimitOptions[heroLimitSelection.get()] + "\n";
+                output += "Limit Roles: " + limitRolesOptions[limitRolesSelection.get()] + "\n";
+                output += "Respawn As Random Hero: " + (respawnAsRandomHeroOnOff.get() ? "On" : "Off") + "\n";
+                output += "Random Hero Role Limit Per Team: " + randomHeroRoleLimitPerTeam[0] + "\n";
+                output += "Respawn Time Scalar: " + respawnTimeScalar[0] + "%\n";
+                output += "Tank Role Passive Health Bonus: " + tankRolePassiveHealthBonusOptions[tankRolePassiveHealthBonusSelection.get()] + "\n";
+            }
+            output += "}\n";
             output += "}\n";
         }
 
