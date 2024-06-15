@@ -358,7 +358,6 @@ public class GraphWindow {
             if(importDialog.isOpen()){
                 int state = importDialog.show();
                 if(state == 1){
-
                     List<ScriptImporter.Rule> rules = ScriptImporter.importFromString(importDialog.getContent());
 
                     for(ScriptImporter.Rule rule : rules){

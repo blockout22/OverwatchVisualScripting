@@ -4,16 +4,21 @@ import imgui.*;
 import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
+import imgui.extension.nodeditor.NodeEditorStyle;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
+import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.flag.*;
+import imgui.type.ImBoolean;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
+import ovs.Debugger;
 import ovs.Global;
 import ovs.RGBA;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.Node;
+import ovs.graph.node.NodeComment;
 import ovs.graph.node.NodeReroute;
 import ovs.graph.pin.Pin;
 
@@ -85,6 +90,26 @@ public class NodeEditorRenderer {
             e.printStackTrace();
             System.out.println("Error Finding Nodes");
         }
+
+        ImGuiStyle style = ImGui.getStyle();
+        style.setFrameRounding(5.0f);
+        style.setWindowRounding(5.0f);
+        style.setGrabRounding(5.0f);
+        style.setScrollbarRounding(5.0f);
+        style.setWindowBorderSize(1.0f);
+        style.setFrameBorderSize(1.0f);
+
+        // Set custom colors using setColor()
+//        style.setColor(ImGuiCol.WindowBg, 0.1f, 0.1f, 0.1f, 1.0f);
+//        style.setColor(ImGuiCol.TitleBg, 0.1f, 0.1f, 0.1f, 1.0f);
+//        style.setColor(ImGuiCol.TitleBgActive, 0.2f, 0.2f, 0.2f, 1.0f);
+//        style.setColor(ImGuiCol.TitleBgCollapsed, 0.05f, 0.05f, 0.05f, 1.0f);
+//        style.setColor(ImGuiCol.FrameBg, 0.2f, 0.2f, 0.2f, 1.0f);
+//        style.setColor(ImGuiCol.FrameBgHovered, 0.3f, 0.3f, 0.3f, 1.0f);
+//        style.setColor(ImGuiCol.FrameBgActive, 0.3f, 0.3f, 0.3f, 1.0f);
+//        style.setColor(ImGuiCol.Button, 0.2f, 0.2f, 0.2f, 1.0f);
+//        style.setColor(ImGuiCol.ButtonHovered, 0.3f, 0.3f, 0.3f, 1.0f);
+//        style.setColor(ImGuiCol.ButtonActive, 0.4f, 0.4f, 0.4f, 1.0f);
     }
 
     public void setGraph(Graph graph){
@@ -117,6 +142,83 @@ public class NodeEditorRenderer {
             for (Node node : graph.getNodes().getList()) {
                 if (isLoading) {
                     NodeEditor.setNodePosition(node.getID(), node.posX, node.posY);
+                }
+            }
+
+            for (Node node : graph.getNodes().getList()) {
+                if(node instanceof NodeComment){
+                    float nodePosX;
+                    float nodePosY;
+                    NodeComment commentNode = (NodeComment) node;
+
+                    float commentAlpha = 0.75f;
+                    ImGui.pushStyleVar(ImGuiStyleVar.Alpha, commentAlpha);
+                    NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, commentNode.rgba[0], commentNode.rgba[1], commentNode.rgba[2], commentNode.rgba[3]);
+                    NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBorder, commentNode.rgba[0], commentNode.rgba[1], commentNode.rgba[2], commentNode.rgba[3]);
+                    NodeEditor.beginNode(node.getID());
+                    ImGui.pushID(node.getID());
+                    {
+                        if (commentNode.isEditingTitle && editingNodeTitle == commentNode) {
+                            ImString string = new ImString();
+                            string.set(node.getName());
+                            ImGui.pushItemWidth(150);
+                            if (ImGui.inputText("##", string, ImGuiInputTextFlags.EnterReturnsTrue)) {
+                                node.setName(string.get());
+                                node.isEditingTitle = false;
+                                graph.getNodes().triggerOnChanged();
+                            }
+                            ImGui.popItemWidth();
+                        }else {
+                            ImGui.textUnformatted(commentNode.getName());
+                        }
+                        NodeEditor.group(commentNode.sizeX, commentNode.sizeY);
+                        ImVec2 contentSize = ImGui.getItemRectSize();
+                        if(contentSize.x != commentNode.sizeX){
+                            commentNode.sizeX = (int) contentSize.x;
+                        }
+
+                        if(contentSize.y != commentNode.sizeY){
+                            commentNode.sizeY = (int) contentSize.y;
+                        }
+//                        if (ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && node.canEditTitle)
+
+//                        System.out.println(contentSize);
+                        nodePosX = NodeEditor.getNodePositionX(commentNode.getID());
+                        nodePosY = NodeEditor.getNodePositionY(commentNode.getID());
+//
+//                        ImGui.setCursorPos(nodePosX + commentNode.sizeX - 16, nodePosY + (16f / 2f));
+//                        if(ImGui.button("I", 16, 16)){
+//                            commentNode.showColorPicker = true;
+//                        }
+//
+//                        if(commentNode.showColorPicker){
+//                            ImGui.begin("ColorPicker", new ImBoolean(commentNode.showColorPicker));
+//                            if(ImGui.colorPicker4("CommentColorPicker", commentNode.rgba)){
+//                                System.out.println(commentNode.rgba[0] + " : " + commentNode.rgba[1] + " : " + commentNode.rgba[2] + " : " + commentNode.rgba[3]);
+//                            }
+//                            ImGui.end();
+//
+//                        }
+//                        ImGui.button("resize", 16, 16);
+////                        Debugger.drawImGuiBounds();
+//                        if(ImGui.isItemActive()){
+//                            comment.sizeX += (int) ImGui.getIO().getMouseDeltaX();
+//                            comment.sizeY += (int) ImGui.getIO().getMouseDeltaY();
+//                        }
+
+
+                    }
+                    ImGui.popID();
+                    NodeEditor.endNode();
+
+                    if (ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && commentNode.canEditTitle && !commentNode.isEditingTitle) {
+                        commentNode.isEditingTitle = true;
+                        editingNodeTitle = commentNode;
+                        System.out.println("Clicked");
+                    }
+
+                    NodeEditor.popStyleColor(2);
+                    ImGui.popStyleVar();
                 }
             }
 
@@ -167,6 +269,8 @@ public class NodeEditorRenderer {
 
                     style.setItemSpacing(originalItemSpacing.x, originalItemSpacing.y);
                     style.setItemInnerSpacing(originalItemInnerSpacing.x, originalItemInnerSpacing.y);
+                }else if(node instanceof NodeComment){
+                    continue;
                 }else {
                     NodeEditor.beginNode(node.getID());
                     {

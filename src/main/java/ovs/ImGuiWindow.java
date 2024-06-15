@@ -53,6 +53,7 @@ public class ImGuiWindow {
     private ImString userNameText = new ImString(30);
 
 //    Texture texture;
+//    private Texture bgTexture;
 
     public ImGuiWindow(GlfwWindow glfwWindow){
         this.glfwWindow = glfwWindow;
@@ -111,6 +112,7 @@ public class ImGuiWindow {
 
 //        try {
 //            texture = TextureLoader.loadTexture("blizzard_world.jpg");
+//            bgTexture = TextureLoader.loadTexture("");
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -180,6 +182,7 @@ public class ImGuiWindow {
             if(ImGui.begin("New Window", NoBringToFrontOnFocus | NoBackground | NoTitleBar | NoDocking | NoScrollbar)){
                 ImGui.setCursorScreenPos(ImGui.getMainViewport().getPosX(), ImGui.getMainViewport().getPosY() + menuBarHeight);
                 //fill screen widget here to enable snapping on viewport it's self
+//                ImGui.image(bgTexture.getId(), bgTexture.getWidth(), bgTexture.getHeight());
                 ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, NoResize | NoScrollbar);
             }
             ImGui.end();
@@ -613,6 +616,7 @@ public class ImGuiWindow {
 
     public void close(){
 //        texture.cleanup();
+//        bgTexture.cleanup();
         chat.disconnect();
         ImNodes.destroyContext();
         ImGui.destroyContext();
