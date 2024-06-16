@@ -12,6 +12,8 @@ import java.util.jar.JarFile;
 
 public class Global {
 
+    public static boolean isRunning = false;
+
     protected static int BUILD = -1;
     protected static int LATEST_BUILD = -1;
     protected static boolean devMode = false;

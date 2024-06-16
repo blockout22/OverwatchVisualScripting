@@ -18,6 +18,7 @@ public class OwVS {
     public ImGuiWindow imGuiWindow;
 
     public OwVS(){
+        Global.isRunning = true;
         try {
             checkLatestReleases("blockout22", "OverwatchVisualScripting");
         } catch (Exception e) {
@@ -46,6 +47,7 @@ public class OwVS {
 
         imGuiWindow.close();
         window.close();
+        Global.isRunning = false;
     }
 
     private void checkLatestReleases(String user, String repo) throws Exception {

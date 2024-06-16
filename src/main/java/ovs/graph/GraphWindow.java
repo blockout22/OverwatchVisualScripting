@@ -19,6 +19,7 @@ import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
 import ovs.graph.save.GraphSaver;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,8 @@ public class GraphWindow {
 
     private GraphChangeListener graphChangeListener;
 
+    private long lastSaveTime = System.currentTimeMillis();
+
     public GraphWindow(ImGuiWindow imGuiWindow, GlfwWindow window, String loadFile){
         this.imGuiWindow = imGuiWindow;
         this.glfwWindow = window;
@@ -85,6 +88,38 @@ public class GraphWindow {
             graph = new Graph();
             System.out.println("Created New Graph");
         }
+
+        //auto save thread
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(closable.get() && Global.isRunning){
+                    try {
+                        Thread.sleep(5000);
+                        if(!Global.isRunning){
+                            break;
+                        }
+                        if(lastSaveTime + Duration.ofMinutes(5).toMillis() < System.currentTimeMillis()){
+                            nodeEditorRenderer.setAsCurrentEditor();
+                            boolean success = graphSaver.save(fileName, settings, graph);
+                            if(success){
+                                showSavedText = true;
+                                lastSaveTime = System.currentTimeMillis();
+                                TaskSchedule.addTask(new Task() {
+                                    @Override
+                                    public void onFinished() {
+                                        showSavedText = false;
+                                    }
+                                }, 5000);
+                            }
+                        }
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }).start();
 
         EDITOR = new TextEditor();
 
@@ -422,6 +457,7 @@ public class GraphWindow {
                 if(success){
                     promptSave = false;
                     showSavedText = true;
+                    lastSaveTime = System.currentTimeMillis();
                     TaskSchedule.addTask(new Task() {
                         @Override
                         public void onFinished() {

@@ -67,6 +67,8 @@ public class NodeEditorRenderer {
 
     private HashMap<Integer, Link> linksMap = new HashMap<>();
 
+//    private long[] prevousSelectedNodes;
+
     class Link{
         private int id;
         private int sourcePinId;
@@ -892,10 +894,13 @@ public class NodeEditorRenderer {
             HashSet<Node> nodeList = new HashSet<>();
 
             if(size > 0) {
-                for (int i = 0; i < selectedNodes.length; i++) {
-                    Node node = graph.findNodeById(selectedNodes[i]);
-                    nextConnectedNodes(node, nodeList);
+                for (int i = 0; i < selectedNodes.length - 1; i++) {
+                    nodeList.add(graph.findNodeById(selectedNodes[i]));
                 }
+//                for (int i = 0; i < selectedNodes.length; i++) {
+                    Node node = graph.findNodeById(selectedNodes[selectedNodes.length - 1]);
+                    nextConnectedNodes(node, nodeList);
+//                }
 
                 for (Node nodes : nodeList) {
                     NodeEditor.selectNode(nodes.getID(), true);

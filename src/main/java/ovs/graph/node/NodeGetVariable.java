@@ -77,7 +77,6 @@ public class NodeGetVariable extends Node{
     public void populateCombobox(){
         //Populate combox to allow selection of saved variables
         variableBox.clear();
-        System.out.println("Size@: "  + getGraph().globalVariables.size());
         for (int i = 0; i < getGraph().globalVariables.size(); i++) {
             variableBox.addOption("Global." + getGraph().globalVariables.get(i).name);
         }
