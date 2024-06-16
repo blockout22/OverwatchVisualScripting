@@ -61,7 +61,7 @@ public class NodeComment extends Node{
 
     @Override
     public String getOutput() {
-        return null;
+        return "";
     }
 
     @Override

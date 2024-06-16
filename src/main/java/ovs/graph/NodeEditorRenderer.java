@@ -169,7 +169,10 @@ public class NodeEditorRenderer {
                             }
                             ImGui.popItemWidth();
                         }else {
-                            ImGui.textUnformatted(commentNode.getName());
+//                            ImGui.textWrapped();
+                            ImGui.pushTextWrapPos(commentNode.sizeX);
+                            ImGui.textWrapped(commentNode.getName());
+                            ImGui.popTextWrapPos();
                         }
                         NodeEditor.group(commentNode.sizeX, commentNode.sizeY);
                         ImVec2 contentSize = ImGui.getItemRectSize();
@@ -181,15 +184,18 @@ public class NodeEditorRenderer {
                             commentNode.sizeY = (int) contentSize.y;
                         }
 //                        if (ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && node.canEditTitle)
-
-//                        System.out.println(contentSize);
                         nodePosX = NodeEditor.getNodePositionX(commentNode.getID());
                         nodePosY = NodeEditor.getNodePositionY(commentNode.getID());
 //
-//                        ImGui.setCursorPos(nodePosX + commentNode.sizeX - 16, nodePosY + (16f / 2f));
-//                        if(ImGui.button("I", 16, 16)){
-//                            commentNode.showColorPicker = true;
-//                        }
+                        float buttonSize = 20;
+                        ImGui.setCursorPos(nodePosX + commentNode.sizeX - buttonSize, nodePosY + (buttonSize / 2f));
+                        if(ImGui.button("i", buttonSize, buttonSize)){
+                            ImGui.getStateStorage().setInt(ImGui.getID("node_id"), commentNode.getID());
+                            Global.setStorage("selected_comment", commentNode);
+                            Global.setStorage("comment_open_request", 1);
+//                            ImGui.openPopup("comment_popup");
+//                            System.out.println("Request Popup Open");
+                        }
 //
 //                        if(commentNode.showColorPicker){
 //                            ImGui.begin("ColorPicker", new ImBoolean(commentNode.showColorPicker));
@@ -206,10 +212,25 @@ public class NodeEditorRenderer {
 //                            comment.sizeY += (int) ImGui.getIO().getMouseDeltaY();
 //                        }
 
-
                     }
                     ImGui.popID();
                     NodeEditor.endNode();
+
+                    //Comment bubble
+//                    float zoomLevel = NodeEditor.getCurrentZoom();
+//                    if(zoomLevel > 1f){
+//                        float scale = 3.0f / zoomLevel;
+//                        System.out.println("Showing Bubble");
+//
+//                        float baseButtonWidth = 150.0f;
+//                        float baseButtonHeight = 50.0f;
+//                        float zoomedButtonWidth = baseButtonWidth * zoomLevel;
+//                        float zoomedButtonHeight = baseButtonHeight * zoomLevel;
+//                        ImGui.beginGroup();
+//                        ImGui.setCursorPos(NodeEditor.getNodePositionX(node.getID()), NodeEditor.getNodePositionY(node.getID()) - 25 - zoomedButtonHeight);
+//                        ImGui.button("Zoomable Button", zoomedButtonWidth, zoomedButtonHeight);
+//                        ImGui.endGroup();
+//                    }
 
                     if (ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && commentNode.canEditTitle && !commentNode.isEditingTitle) {
                         commentNode.isEditingTitle = true;
@@ -615,6 +636,11 @@ public class NodeEditorRenderer {
             if(ImGui.beginPopup("node_menu" + id)){
                 //TODO Duplicate all info attatched to this node
                 Node selectedNode = graph.findNodeById(targetNode);
+                if(ImGui.menuItem("Edit Properties")){
+                    ImGui.openPopup("comment_popup");
+                    ImGui.getStateStorage().setInt(ImGui.getID("node_id"), targetNode);
+                    System.out.println("Request Popup Open");
+                }
                 if(ImGui.menuItem("Duplicate Node " + selectedNode.getName()))
                 {
                     Node newInstance = null;
@@ -659,6 +685,25 @@ public class NodeEditorRenderer {
             }
         }
 
+        if(ImGui.isPopupOpen("comment_popup")){
+            NodeComment commentNode = (NodeComment) Global.getStorage("selected_comment");
+
+            if(ImGui.beginPopup("comment_popup")) {
+                ImString title = new ImString();
+                title.set(commentNode.getName());
+                ImGui.pushItemWidth(250);
+                if (ImGui.inputText("##", title, ImGuiInputTextFlags.EnterReturnsTrue)) {
+                    commentNode.setName(title.get());
+                    commentNode.isEditingTitle = false;
+                    graph.getNodes().triggerOnChanged();
+                }
+                ImGui.popItemWidth();
+                if(ImGui.colorPicker4("ColorPicker", commentNode.rgba)) {
+                }
+                ImGui.endPopup();
+            }
+        }
+
         final long linkWithContextMenu = NodeEditor.getLinkWithContextMenu();
         if(linkWithContextMenu != -1){
             ImGui.openPopup("link_menu" + id);
@@ -691,6 +736,12 @@ public class NodeEditorRenderer {
         if((int)Global.getStorage("preview_open_request") == 1){
             ImGui.openPopup("PreviewSource" + id);
             Global.setStorage("preview_open_request", 0);
+        }
+
+        if((int)Global.getStorage("comment_open_request") == 1)
+        {
+            ImGui.openPopup("comment_popup");
+            Global.setStorage("comment_open_request", 0);
         }
 
         if(ImGui.isPopupOpen("PreviewSource" + id))
