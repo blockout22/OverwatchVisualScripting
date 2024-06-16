@@ -638,11 +638,6 @@ public class NodeEditorRenderer {
             if(ImGui.beginPopup("node_menu" + id)){
                 //TODO Duplicate all info attatched to this node
                 Node selectedNode = graph.findNodeById(targetNode);
-                if(ImGui.menuItem("Edit Properties")){
-                    ImGui.openPopup("comment_popup");
-                    ImGui.getStateStorage().setInt(ImGui.getID("node_id"), targetNode);
-                    System.out.println("Request Popup Open");
-                }
                 if(ImGui.menuItem("Duplicate Node " + selectedNode.getName()))
                 {
                     Node newInstance = null;

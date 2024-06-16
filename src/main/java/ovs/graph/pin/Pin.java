@@ -116,7 +116,8 @@ public abstract class Pin {
     public void validateAllConnections(){
         for (int i = connectedToList.size() - 1; i >= 0 ; i--) {
             Pin pin = getNode().getGraph().findPinById(connectedToList.get(i));
-            if(pin == null){
+//            System.out.println(getClass() + " : " + pin.getClass() + " : " + (pin == null));
+            if(pin == null || (getPinType() == pin.getPinType())){
                 //If pin is null then remove invalid pin
                 System.out.println("Removed invalid pin");
                 connectedToList.remove(i);

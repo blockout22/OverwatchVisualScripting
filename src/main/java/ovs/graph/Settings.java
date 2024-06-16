@@ -65,12 +65,12 @@ public class Settings {
     public ImInt heroLimitSelection = new ImInt(1);
     public String[] heroLimitOptions = {"Off", "1 Per Team", "2 Per Team", "1 Per Game", "2 Per Game"};
     public ImInt limitRolesSelection = new ImInt(1);
-    public String[] limitRolesOptions = {"Off", "2 Of Each Role Per Team", "1 Tank, 2 Offence, 2 Support"};
+    public String[] limitRolesOptions = {"Off", "2 Of Each Role Per Team", "1 Tank 2 Offense 2 Support"};
     public ImBoolean respawnAsRandomHeroOnOff = new ImBoolean(false);
     public int[] randomHeroRoleLimitPerTeam = new int[]{6};
     public int[] respawnTimeScalar = new int[]{100};
     public ImInt tankRolePassiveHealthBonusSelection = new ImInt(1);
-    public String[] tankRolePassiveHealthBonusOptions = {"Always Enabled", "1 Tank, 2 Offence, 2 Support", "Disabled"};
+    public String[] tankRolePassiveHealthBonusOptions = {"Always Enabled", "1 Tank 2 Offense 2 Support", "Disabled"};
 
     //Assault Settings
     public int[] assaultSpeedModifier = new int[]{100};
@@ -1462,7 +1462,7 @@ public class Settings {
                 output += "Game Mode Start: " + gameModeStartOptions[gameModeStartSelection.get()] + "\n";
                 output += "Health Pack Respawn Time Scalar: " + healthRespawnTimeScalar[0] + "%\n";
                 output += "Kill Cam: " + (killCamOnOff.get() ? "On" : "Off") + "\n";
-                output += "Skins: " + (skinsOnOff.get() ? "Om" : "Off") + "\n";
+                output += "Skins: " + (skinsOnOff.get() ? "On" : "Off") + "\n";
                 output += "Spawn Health Packs: " + spawnHealthPacksOptions[spawnHealthPacksSelection.get()] + "\n";
 
                 output += "Allow Hero Switching: " + (allowHeroSwitchingOnOff.get() ? "On" : "Off") + "\n";
