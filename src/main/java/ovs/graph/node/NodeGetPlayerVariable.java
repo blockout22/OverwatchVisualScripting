@@ -9,16 +9,20 @@ import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.OnOpenedListener;
 import ovs.graph.pin.PinVar;
 
-public class NodeGetVariable extends Node{
+public class NodeGetPlayerVariable extends Node{
 
+    private PinVar pinPlayer = new PinVar();
     private PinVar outputPin = new PinVar();
     public ComboBox variableBox = new ComboBox();
 
-    //TODO allow users to select a specific players variable
-    public NodeGetVariable(Graph graph) {
+    public NodeGetPlayerVariable(Graph graph) {
         super(graph);
-        setName("Get Variable");
+        setName("Get Player Variable");
         setColor(0, 125, 255);
+
+        pinPlayer.setNode(this);
+        pinPlayer.setName("Player");
+        addCustomInput(pinPlayer);
 
         outputPin.setNode(this);
         addCustomOutput(outputPin);
@@ -31,8 +35,6 @@ public class NodeGetVariable extends Node{
 
                 variableBox.selectValue(lastSelectedValue);
                 width = -1;
-
-                //lastVariableCount = getGraph().globalVariables.size() + getGraph().playerVariables.size();
             }
         });
 
@@ -46,51 +48,38 @@ public class NodeGetVariable extends Node{
 
     @Override
     public void execute() {
-//        if(lastVariableCount != getGraph().globalVariables.size() + getGraph().playerVariables.size()){
-//
-//            return;
-//        }
-        if (outputPin.isConnected() && variableBox.size() > 0 && variableBox.getSelectedIndex() != -1) {
+//        if (outputPin.isConnected() && variableBox.size() > 0 && variableBox.getSelectedIndex() != -1) {
+            PinData<ImString> playerData = pinPlayer.getData();
             PinData<ImString> data = outputPin.getData();
-//            String[] val = comboBox.getSelectedValue().split(":");
-//            data.getValue().set(val[0] + "." + val[1].replace(" ", ""));
-            data.getValue().set(variableBox.getSelectedValue());
-        }
+
+            handlePinStringConnection(pinPlayer, playerData, "Event Player");
+            data.getValue().set(playerData.getValue().get() + "." + variableBox.getSelectedValue());
+//        }
     }
 
     @Override
     public void copy(Node node) {
         populateCombobox();
-        if(node instanceof NodeGetVariable){
-            variableBox.selectValue(((NodeGetVariable) node).variableBox.getSelectedValue());
+        if(node instanceof NodeGetPlayerVariable){
+            variableBox.selectValue(((NodeGetPlayerVariable) node).variableBox.getSelectedValue());
         }
     }
 
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-//        System.out.println(comboBox.getSelectedValue());
         getExtraSaveData().add("Var:" + variableBox.getSelectedValue());
     }
 
     public void populateCombobox(){
         //Populate combox to allow selection of saved variables
         variableBox.clear();
-        for (int i = 0; i < getGraph().globalVariables.size(); i++) {
-            variableBox.addOption("Global." + getGraph().globalVariables.get(i).name);
-        }
-
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            variableBox.addOption("Event Player." + getGraph().playerVariables.get(i).name);
+            variableBox.addOption(getGraph().playerVariables.get(i).name);
         }
 
         for (int i = 0; i < variableBox.size(); i++) {
-            String option = variableBox.getOptions()[i];
-            if(option.startsWith("Global")){
-                variableBox.setItemColor(i, new ImVec4(.75f, .75f, .75f, 255));
-            }else{
-                variableBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
-            }
+            variableBox.setItemColor(i, new ImVec4(.75f, 1, .75f, 255));
         }
     }
 
@@ -99,10 +88,6 @@ public class NodeGetVariable extends Node{
         populateCombobox();
         for(String data : getExtraSaveData()){
             if(data.startsWith("Var")){
-//                int index = Integer.valueOf(data.split(":")[1]);
-//                if(index > -1) {
-//                    comboBox.select(index);
-//                }
                 try{
                     variableBox.selectValue(data.split(":")[1]);
                 }catch (ArrayIndexOutOfBoundsException e){
@@ -114,9 +99,8 @@ public class NodeGetVariable extends Node{
 
     @Override
     public String getOutput() {
-//        String[] val = comboBox.getSelectedValue().split(":");
-//        return val[0] + "." + val[1].replace(" ", "");
-        return variableBox.getSelectedValue();
+        PinData<ImString> outputData = outputPin.getData();
+        return outputData.getValue().get();
     }
 
     @Override
