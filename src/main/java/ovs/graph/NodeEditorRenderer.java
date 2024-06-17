@@ -158,6 +158,8 @@ public class NodeEditorRenderer {
                     NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, commentNode.rgba[0], commentNode.rgba[1], commentNode.rgba[2], commentNode.rgba[3]);
                     NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBorder, commentNode.rgba[0], commentNode.rgba[1], commentNode.rgba[2], commentNode.rgba[3]);
                     NodeEditor.beginNode(node.getID());
+                    nodePosX = NodeEditor.getNodePositionX(commentNode.getID());
+                    nodePosY = NodeEditor.getNodePositionY(commentNode.getID());
                     ImGui.pushID(node.getID());
                     {
                         if (commentNode.isEditingTitle && editingNodeTitle == commentNode) {
@@ -172,7 +174,7 @@ public class NodeEditorRenderer {
                             ImGui.popItemWidth();
                         }else {
 //                            ImGui.textWrapped();
-                            ImGui.pushTextWrapPos(commentNode.sizeX);
+                            ImGui.pushTextWrapPos(nodePosX + commentNode.sizeX - 32);
                             ImGui.textWrapped(commentNode.getName());
                             ImGui.popTextWrapPos();
                         }
@@ -180,14 +182,16 @@ public class NodeEditorRenderer {
                         ImVec2 contentSize = ImGui.getItemRectSize();
                         if(contentSize.x != commentNode.sizeX){
                             commentNode.sizeX = (int) contentSize.x;
+                            if(commentNode.sizeX < 150){
+                                commentNode.sizeX = 150;
+                            }
                         }
 
                         if(contentSize.y != commentNode.sizeY){
                             commentNode.sizeY = (int) contentSize.y;
                         }
 //                        if (ImGui.isItemHovered() && ImGui.isMouseDoubleClicked(0) && node.canEditTitle)
-                        nodePosX = NodeEditor.getNodePositionX(commentNode.getID());
-                        nodePosY = NodeEditor.getNodePositionY(commentNode.getID());
+
 //
                         float buttonSize = 20;
                         ImGui.setCursorPos(nodePosX + commentNode.sizeX - buttonSize, nodePosY + (buttonSize / 2f));
