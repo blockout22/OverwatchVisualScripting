@@ -331,7 +331,7 @@ public class GraphWindow {
                             for (int i = 0; i < graph.getNodes().getList().size(); i++) {
                                 Node node = graph.getNodes().getList().get(i);
 
-                                if (node.getName().toLowerCase().contains(searchText.get())) {
+                                if (node.getName().toLowerCase().contains(searchText.get().toLowerCase())) {
                                     searchResults.add(node);
                                 }
                             }
