@@ -3,9 +3,9 @@
     {
       "className": "ovs.graph.node.NodeIsInSetup",
       "nodeName": "Is In Setup",
-      "x": 989.0,
-      "y": 540.0,
-      "comment": "null",
+      "x": 1037.0,
+      "y": 236.0,
+      "comment": "",
       "extraData": [],
       "inputPins": [],
       "outputPins": [
@@ -14,7 +14,7 @@
           "name": "",
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            15635
+            16569
           ],
           "canDelete": false
         }
@@ -25,7 +25,7 @@
       "nodeName": "Set Match Time",
       "x": 974.0,
       "y": 444.0,
-      "comment": "null",
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -54,7 +54,7 @@
       "nodeName": "Group Output",
       "x": 1384.0,
       "y": 300.0,
-      "comment": "null",
+      "comment": "",
       "extraData": [],
       "inputPins": [
         {
@@ -63,7 +63,7 @@
           "type": "ovs.graph.pin.PinCondition",
           "value": "",
           "connections": [
-            15634
+            16571
           ],
           "canDelete": false
         },
@@ -89,27 +89,39 @@
       "outputPins": []
     },
     {
-      "className": "ovs.graph.node.NodeToCondition",
-      "nodeName": "To Condition",
-      "x": 1097.0,
-      "y": 294.0,
-      "comment": "null",
-      "extraData": [],
+      "className": "ovs.graph.node.NodeCondition",
+      "nodeName": "Condition",
+      "x": 1224.0,
+      "y": 202.0,
+      "comment": "",
+      "extraData": [
+        "Condition:\u003d\u003d"
+      ],
       "inputPins": [
         {
-          "ID": 15633,
-          "name": "",
-          "type": "ovs.graph.pin.PinIf",
-          "value": "Is In Setup \u003d\u003d True",
+          "ID": 16569,
+          "name": "Value",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "Is In Setup",
           "connections": [
-            15637
+            15638
+          ],
+          "canDelete": false
+        },
+        {
+          "ID": 16570,
+          "name": "Value",
+          "type": "ovs.graph.pin.PinVar",
+          "value": "True",
+          "connections": [
+            16573
           ],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 15634,
+          "ID": 16571,
           "name": "",
           "type": "ovs.graph.pin.PinCondition",
           "connections": [
@@ -120,41 +132,29 @@
       ]
     },
     {
-      "className": "ovs.graph.node.NodeCompare",
-      "nodeName": "Compare",
-      "x": 904.0,
-      "y": 277.0,
-      "comment": "null",
-      "extraData": [
-        "Compare:\u003d\u003d"
-      ],
+      "className": "ovs.graph.node.NodeBoolean",
+      "nodeName": "Boolean",
+      "x": 1035.0,
+      "y": 326.0,
+      "comment": "",
+      "extraData": [],
       "inputPins": [
         {
-          "ID": 15635,
-          "name": "Left Condition",
-          "type": "ovs.graph.pin.PinVar",
-          "value": "Is In Setup",
-          "connections": [
-            15638
-          ],
-          "canDelete": false
-        },
-        {
-          "ID": 15636,
-          "name": "Right Condition",
-          "type": "ovs.graph.pin.PinVar",
-          "value": "True",
+          "ID": 16572,
+          "name": "",
+          "type": "ovs.graph.pin.PinBoolean",
+          "value": "true",
           "connections": [],
           "canDelete": false
         }
       ],
       "outputPins": [
         {
-          "ID": 15637,
+          "ID": 16573,
           "name": "",
-          "type": "ovs.graph.pin.PinIf",
+          "type": "ovs.graph.pin.PinVar",
           "connections": [
-            15633
+            16570
           ],
           "canDelete": false
         }
