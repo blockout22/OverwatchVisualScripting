@@ -4,24 +4,21 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.node.interfaces.NodeDisabled;
-import ovs.graph.pin.PinIf;
+import ovs.graph.pin.PinCondition;
 import ovs.graph.pin.PinVar;
 
-//TODO possibly remove this as it may not be needed anymore
-@NodeDisabled()
-public class NodeConditionCompare extends Node{
+public class NodeCondition extends Node {
 
     ComboBox conditionBox = new ComboBox();
 
-    PinVar pinLeft = new PinVar();
-    PinVar pinRight = new PinVar();
+    PinVar pinValue1 = new PinVar();
+    PinVar pinValue2 = new PinVar();
 
-    PinIf output = new PinIf();
+    PinCondition output = new PinCondition();
 
-    public NodeConditionCompare(Graph graph) {
+    public NodeCondition(Graph graph) {
         super(graph);
-        setName("Condition Compare");
+        setName("Condition");
 
         conditionBox.addOption("<");
         conditionBox.addOption(">");
@@ -31,19 +28,18 @@ public class NodeConditionCompare extends Node{
         conditionBox.addOption("==");
 
         conditionBox.select(5);
+        addUiComponent(conditionBox);
 
-        pinLeft.setNode(this);
-        pinLeft.setName("Left Condition");
-        addCustomInput(pinLeft);
+        pinValue1.setNode(this);
+        pinValue1.setName("Value");
+        addCustomInput(pinValue1);
 
-        pinRight.setNode(this);
-        pinRight.setName("Right Condition");
-        addCustomInput(pinRight);
+        pinValue2.setNode(this);
+        pinValue2.setName("Value");
+        addCustomInput(pinValue2);
 
         output.setNode(this);
         addCustomOutput(output);
-
-        addUiComponent(conditionBox);
     }
 
     @Override
@@ -63,16 +59,22 @@ public class NodeConditionCompare extends Node{
     }
 
     @Override
+    public void copy(Node node) {
+        if(node instanceof NodeCondition){
+            conditionBox.selectValue(((NodeCondition) node).conditionBox.getSelectedValue());
+        }
+    }
+
+    @Override
     public void execute() {
-        PinData<ImString> leftData = pinLeft.getData();
-        PinData<ImString> rightData = pinRight.getData();
+        PinData<ImString> value1Data = pinValue1.getData();
+        PinData<ImString> value2Data = pinValue2.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(pinLeft, leftData);
-        handlePinStringConnection(pinRight, rightData);
+        handlePinStringConnection(pinValue1, value1Data);
+        handlePinStringConnection(pinValue2, value2Data);
 
-        outputData.getValue().set(leftData.getValue().get() + " " + conditionBox.getSelectedValue() + " " + rightData.getValue().get());
-
+        outputData.getValue().set("(" + value1Data.getValue().get() + ") " + conditionBox.getSelectedValue() + " (" + value2Data.getValue().get() + ");");
     }
 
     @Override

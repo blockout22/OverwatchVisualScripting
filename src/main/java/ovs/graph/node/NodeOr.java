@@ -3,14 +3,14 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.pin.PinIf;
+import ovs.graph.pin.PinVar;
 
 public class NodeOr extends Node{
 
-    PinIf leftPin = new PinIf();
-    PinIf rightPin = new PinIf();
+    PinVar leftPin = new PinVar();
+    PinVar rightPin = new PinVar();
 
-    PinIf output = new PinIf();
+    PinVar output = new PinVar();
 
     public NodeOr(Graph graph) {
         super(graph);

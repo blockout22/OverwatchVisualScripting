@@ -4,17 +4,15 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.PinIf;
 import ovs.graph.pin.PinVar;
 
-public class NodeCompare extends Node{
+public class NodeCompare extends Node {
 
     ComboBox conditionBox = new ComboBox();
 
     PinVar leftPin = new PinVar();
     PinVar rightPin = new PinVar();
-
-    PinIf output = new PinIf();
+    PinVar output = new PinVar();
 
     public NodeCompare(Graph graph) {
         super(graph);
@@ -85,5 +83,6 @@ public class NodeCompare extends Node{
 
     @Override
     public void UI() {
+
     }
 }

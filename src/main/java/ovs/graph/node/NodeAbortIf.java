@@ -4,11 +4,11 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinIf;
+import ovs.graph.pin.PinVar;
 
 public class NodeAbortIf extends Node{
 
-    PinIf inputPin = new PinIf();
+    PinVar inputPin = new PinVar();
 
     PinAction output = new PinAction();
 
