@@ -1052,9 +1052,23 @@ public class NodeEditorRenderer {
         });
     }
 
+    private boolean isMatch(String instanceName, String searchQuery) {
+        String[] searchTerms = searchQuery.split("\\s+");
+        for (String term : searchTerms) {
+            if (!instanceName.contains(term)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void createContextMenuItem(Node instance, int depth) {
-        if(nodeSearch.get().toLowerCase().length() > 0){
-            if(!instance.getName().toLowerCase().contains(nodeSearch.get())){
+        String searchQuery = nodeSearch.get().toLowerCase();
+        if(searchQuery.length() > 0){
+            String instanceName = instance.getName().toLowerCase();
+//            if(!instanceName.contains(nodeSearch.get()))
+            if(!isMatch(instanceName, searchQuery))
+            {
                 return;
             }
         }
