@@ -10,11 +10,16 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class TextureLoader {
 
-    public static Texture loadTexture(String textureFile) throws IOException {
+    public static Texture loadTexture(String textureFile) {
 
         InputStream stream = TextureLoader.class.getClassLoader().getResourceAsStream(textureFile);
 
-        BufferedImage image = ImageIO.read(stream);
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(stream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         int[] pixels = new int[image.getWidth() * image.getHeight()];
         image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
