@@ -23,12 +23,15 @@ Estádio das Rãs
 Hanamura
 Hanamura Winter
 Havana
+Hero Mastery: Gauntlet
 Hollywood
+Hollywood Halloween
 Horizon Lunar Colony
 Ilios
 Ilios Lighthouse
 Ilios Ruins
 Ilois Well
+Junkenstein's Revenge
 Junkertown
 Kanezeka
 King's Row
@@ -40,7 +43,7 @@ Lijiang Garden Lunar New Year
 Lijiang Night Market
 Lijiang Night Market Lunar New Year
 Lijiang Tower
-Lijiang Tower Winter
+Lijiang Tower Lunar New Year
 Malevento
 Midtown
 Necropolis
@@ -62,6 +65,7 @@ Petra
 Practice Range
 Rialto
 Route 66
+Runasapi
 Samoa
 Shambali Monastry
 Suravasa
@@ -69,6 +73,7 @@ Syndney Harbour Arena
 Temple Of Anubis
 Volskaya Industries
 Watchpoint: Gibraltar
+Watchpoint: Gibraltar Talon
 Workshop Chamber
 Workshop Expanse
 Workshop Expanse Night

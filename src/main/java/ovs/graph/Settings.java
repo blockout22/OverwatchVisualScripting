@@ -226,6 +226,7 @@ public class Settings {
         controlMap.add(new BoolInfoWithName("Lijiang Tower Lunar New Year", new ImBoolean(true)));
         controlMap.add(new BoolInfoWithName("Nepal", new ImBoolean(true)));
         controlMap.add(new BoolInfoWithName("Oasis", new ImBoolean(true)));
+        controlMap.add(new BoolInfoWithName("Samoa", new ImBoolean(true)));
 
         escortMap.add(new BoolInfoWithName("Circuit Royal", new ImBoolean(true)));
         escortMap.add(new BoolInfoWithName("Dorado", new ImBoolean(true)));
@@ -250,7 +251,8 @@ public class Settings {
 
         pushMap.add(new BoolInfoWithName("Colossea", new ImBoolean(true)));
         pushMap.add(new BoolInfoWithName("Esperança", new ImBoolean(true)));
-        pushMap.add(new BoolInfoWithName("new Queen Street", new ImBoolean(true)));
+        pushMap.add(new BoolInfoWithName("New Queen Street", new ImBoolean(true)));
+        pushMap.add(new BoolInfoWithName("Runasapi", new ImBoolean(true)));
 
         ctfMap.add(new BoolInfoWithName("Ayutthaya", new ImBoolean(true)));
         ctfMap.add(new BoolInfoWithName("Busan Downtown Lunar New Year", new ImBoolean(true)));
