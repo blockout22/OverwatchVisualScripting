@@ -42,4 +42,9 @@ public class NodeVelocityOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current velocity of a player as a vector if the player is on a surface, the y component of this velocity will be 0, even when traveling up or down a slope.";
+    }
 }

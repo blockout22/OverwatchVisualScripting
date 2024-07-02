@@ -45,4 +45,9 @@ public class NodeEnableDeathSpectateAllPlayers extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Allows one or more players to spectate all players when dead, as opposed to only allies.";
+    }
 }

@@ -63,4 +63,9 @@ public class NodeSetInvisible extends Node {
         invisTo.show();
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Causes one or more players to become invisible to either all other players or just the enemies.";
+    }
 }

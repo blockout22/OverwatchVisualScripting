@@ -36,4 +36,9 @@ public class NodeUp extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Shorthand for the direction vector(0,1,0), which points upward.";
+    }
 }

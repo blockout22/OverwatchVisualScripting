@@ -33,4 +33,9 @@ public class NodeEnd extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Denotes the end of a series of actions started by if, else if, else, while, or for action.";
+    }
 }

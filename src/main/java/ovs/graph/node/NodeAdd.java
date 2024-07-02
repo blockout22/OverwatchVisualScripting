@@ -59,4 +59,9 @@ public class NodeAdd extends Node{
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "The sum of two numbers or vectors.";
+    }
 }

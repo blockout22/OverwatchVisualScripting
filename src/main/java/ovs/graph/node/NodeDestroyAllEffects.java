@@ -35,4 +35,9 @@ public class NodeDestroyAllEffects extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys all effect entities created by create effect or create beam effect";
+    }
 }

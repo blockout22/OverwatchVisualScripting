@@ -120,4 +120,9 @@ public class NodeChaseGlobalVariableAtRate extends Node{
         variables.show();
         reevaluation.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Gradually modifies the value of a global variables at a specific rate. (a global variable is a variable that belongs to the game itself).";
+    }
 }

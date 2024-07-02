@@ -34,4 +34,9 @@ public class NodeDisableBuiltInGameModeScoring extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables changes to player and team scores from the game mode itself, only allowing scores to be changed by scripting commands.";
+    }
 }

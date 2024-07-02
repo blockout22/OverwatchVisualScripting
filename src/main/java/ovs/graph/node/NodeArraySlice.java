@@ -56,4 +56,9 @@ public class NodeArraySlice extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of the specified array containing only values from a specified index range.";
+    }
 }

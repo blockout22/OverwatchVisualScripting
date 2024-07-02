@@ -42,4 +42,9 @@ public class NodeObjectivePosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position in the world of the specified objective (either a control point, a payload checkpoint, or a payload destination). valid in assault, escort, hybrid, and control.";
+    }
 }

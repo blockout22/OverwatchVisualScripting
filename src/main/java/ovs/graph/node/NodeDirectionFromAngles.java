@@ -49,4 +49,9 @@ public class NodeDirectionFromAngles extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The unit-length direction vector corresponding to the specified angles.";
+    }
 }

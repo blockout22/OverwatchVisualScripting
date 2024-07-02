@@ -42,4 +42,9 @@ public class NodeAbsoluteValue extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The absolute value of the specified value.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeFacingDirectionOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The unit-length directional vector of a player's current facing relative to the world. this value includes both horizontal and vertical facing.";
+    }
 }

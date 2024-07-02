@@ -42,4 +42,9 @@ public class NodeZComponentOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The z component of the specified vector, usually representing a forward amount.";
+    }
 }

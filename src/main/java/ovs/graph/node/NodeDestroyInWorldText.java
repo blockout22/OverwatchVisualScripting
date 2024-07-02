@@ -44,4 +44,9 @@ public class NodeDestroyInWorldText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys in-world text that was created by create in-world text.";
+    }
 }

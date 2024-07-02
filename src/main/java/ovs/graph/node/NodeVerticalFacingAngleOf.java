@@ -42,4 +42,9 @@ public class NodeVerticalFacingAngleOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The vertical angle in degrees of a player's current facing relative to the world. this value increases as the player looks down.";
+    }
 }

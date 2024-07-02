@@ -42,4 +42,9 @@ public class NodeIsObjectiveComplete extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified objective has been completed. results in false if the game mode is not assault, escort, or hybrid.";
+    }
 }

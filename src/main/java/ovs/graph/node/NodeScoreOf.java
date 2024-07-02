@@ -42,4 +42,9 @@ public class NodeScoreOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current score of a player. results in 0 if the gam mode is not free-for-all.";
+    }
 }

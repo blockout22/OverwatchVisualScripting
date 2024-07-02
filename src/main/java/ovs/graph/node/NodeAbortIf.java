@@ -43,4 +43,9 @@ public class NodeAbortIf extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stops execution of the action list if this action's condition evaluations to true, if it does not, execution continues with the next action.";
+    }
 }

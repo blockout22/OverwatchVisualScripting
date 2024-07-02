@@ -44,4 +44,9 @@ public class NodeDestroyEffect extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys an effect entity that was created by create effect or create beam effect.";
+    }
 }

@@ -78,4 +78,9 @@ public class NodeWorkshopSettingReal extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides the value of a new real number setting that will appear in the workshop settings card as a slider.";
+    }
 }

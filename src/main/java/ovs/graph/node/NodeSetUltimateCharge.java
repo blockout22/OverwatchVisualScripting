@@ -51,4 +51,9 @@ public class NodeSetUltimateCharge extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the ultimate charge for one or more players as a percentage of maximum charge";
+    }
 }

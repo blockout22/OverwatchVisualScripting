@@ -42,4 +42,9 @@ public class NodeFlagPosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position of a specific team's flag in capture the flag.";
+    }
 }

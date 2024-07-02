@@ -44,4 +44,9 @@ public class NodeDestroyHudText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys hud text that was created by create hud text.";
+    }
 }

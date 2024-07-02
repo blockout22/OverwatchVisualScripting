@@ -34,4 +34,9 @@ public class NodeDamageModificationCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of damage modification instances started from the start damage modification action.";
+    }
 }

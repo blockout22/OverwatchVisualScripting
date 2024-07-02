@@ -43,4 +43,9 @@ public class NodeDisableDeathSpectateTargetHud extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the enable death spectate target hud action for one or more players.";
+    }
 }

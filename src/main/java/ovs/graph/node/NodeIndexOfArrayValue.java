@@ -49,4 +49,9 @@ public class NodeIndexOfArrayValue extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The index of a value within an array or -1 if no such value can be found.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeFirstOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The value at the start of the specified array, results in 0 if the specified array is empty.";
+    }
 }

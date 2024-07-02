@@ -49,4 +49,9 @@ public class NodeVerticalAngleTowards extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The vertical angle in degrees from a player's current forward direction to the specified position. the result is positive if the position is below the player, otherwise the result is zero or negative.";
+    }
 }

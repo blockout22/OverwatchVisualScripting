@@ -58,4 +58,9 @@ public class NodeTeam extends Node{
     public void UI() {
         team.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A team constant, the all option represents both teams in a team game or all players in free-for-all game.";
+    }
 }

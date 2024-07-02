@@ -34,4 +34,9 @@ public class NodeBackward extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Shorthand for the directional vector(0,0,-1), which points backward.";
+    }
 }

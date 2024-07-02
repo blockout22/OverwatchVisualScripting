@@ -49,4 +49,9 @@ public class NodePlayerClosestToReticle extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player closest to the reticle of the specified player, optionally restricted by team.";
+    }
 }

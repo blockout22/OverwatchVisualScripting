@@ -34,4 +34,9 @@ public class NodeDisableBuiltInGameModeCompletion extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables completion of the match from the game mode itself, only allowing the match to be completed by scripting commands.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeBoolean extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The Boolean Value or either true or false";
+    }
 }

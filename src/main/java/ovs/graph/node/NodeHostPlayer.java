@@ -37,4 +37,9 @@ public class NodeHostPlayer extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player that is currently the host of the custom game. this value will change if the current host player leaves the match.";
+    }
 }

@@ -245,4 +245,6 @@ public abstract class Node {
         }
         return "";
     }
+
+    public abstract String getTooltip();
 }

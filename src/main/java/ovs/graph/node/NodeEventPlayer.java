@@ -37,4 +37,9 @@ public class NodeEventPlayer extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player executing this rule, as specified by the event. may be the same as the attacker or victim.";
+    }
 }

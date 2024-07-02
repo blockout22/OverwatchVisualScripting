@@ -34,4 +34,9 @@ public class NodeDamageOverTimeCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of damage over time instances started from the damage over time action.";
+    }
 }

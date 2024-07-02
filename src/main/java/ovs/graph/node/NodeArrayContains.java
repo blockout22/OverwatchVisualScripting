@@ -49,4 +49,9 @@ public class NodeArrayContains extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified array contains the specified value.";
+    }
 }

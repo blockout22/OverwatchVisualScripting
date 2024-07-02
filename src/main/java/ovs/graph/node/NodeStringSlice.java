@@ -56,4 +56,9 @@ public class NodeStringSlice extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in the specified substring of the string value.";
+    }
 }

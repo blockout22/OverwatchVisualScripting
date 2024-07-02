@@ -49,4 +49,9 @@ public class NodeIsInViewAngle extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a location is within view of a player.";
+    }
 }

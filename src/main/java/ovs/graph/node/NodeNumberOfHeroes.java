@@ -49,4 +49,9 @@ public class NodeNumberOfHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of players playing a specific hero on a team or in the match.";
+    }
 }

@@ -43,4 +43,9 @@ public class NodeIsUsingAbility1 extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player is using ability 1.";
+    }
 }

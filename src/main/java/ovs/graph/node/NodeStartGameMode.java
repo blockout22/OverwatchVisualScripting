@@ -31,4 +31,9 @@ public class NodeStartGameMode extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Starts the game mode. this action doesn't have an effect if the game is already in progress";
+    }
 }

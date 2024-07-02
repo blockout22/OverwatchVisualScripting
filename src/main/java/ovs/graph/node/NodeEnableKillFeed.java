@@ -45,4 +45,9 @@ public class NodeEnableKillFeed extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the disable kill feed action for one or more players.";
+    }
 }

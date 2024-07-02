@@ -42,4 +42,9 @@ public class NodeNumberOfSlots extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of slots on a team or in the match.";
+    }
 }

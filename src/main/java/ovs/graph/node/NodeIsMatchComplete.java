@@ -34,4 +34,9 @@ public class NodeIsMatchComplete extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the match has finished.";
+    }
 }

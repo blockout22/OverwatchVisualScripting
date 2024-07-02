@@ -34,4 +34,9 @@ public class NodeEventWasEnvironment extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the elimination was due to the environment for the event currently being processed by this rule";
+    }
 }

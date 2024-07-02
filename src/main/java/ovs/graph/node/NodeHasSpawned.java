@@ -42,4 +42,9 @@ public class NodeHasSpawned extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether an entity has spawned in the world. results in false for players who has not chosen a hero yet.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodePayloadProgressPercentage extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current progress towards the destination for the active payload (expressed as a percentage).";
+    }
 }

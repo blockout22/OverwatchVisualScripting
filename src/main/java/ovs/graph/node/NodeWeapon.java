@@ -42,4 +42,9 @@ public class NodeWeapon extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current weapon of a player.";
+    }
 }

@@ -105,4 +105,9 @@ public class NodeCustomString extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Custom text with optional inserted values.";
+    }
 }

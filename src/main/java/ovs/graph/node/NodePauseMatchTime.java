@@ -34,4 +34,9 @@ public class NodePauseMatchTime extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Pauses the match time. players, objective logic, and game mode advancement criteria are unaffected by this pause.";
+    }
 }

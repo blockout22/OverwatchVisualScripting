@@ -145,4 +145,9 @@ public class NodeCreateEffect extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Creates an in-world effect entity. this effect entity will persist until destroyed, to obtain a reference to this entity, use the last created entity value, this action will fail if too many entities have been created";
+    }
 }

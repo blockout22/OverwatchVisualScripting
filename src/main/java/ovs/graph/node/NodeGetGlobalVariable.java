@@ -99,4 +99,9 @@ public class NodeGetGlobalVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current value of a global variable, which is a variable that belongs to the game itself.";
+    }
 }

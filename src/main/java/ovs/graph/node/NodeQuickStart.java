@@ -103,4 +103,9 @@ public class NodeQuickStart extends NodeEntry {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Skips assembling and setup match time.";
+    }
 }

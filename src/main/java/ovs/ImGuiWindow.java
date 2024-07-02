@@ -1,29 +1,29 @@
 package ovs;
 
 import imgui.*;
-import imgui.extension.imguifiledialog.ImGuiFileDialog;
 import imgui.extension.imnodes.ImNodes;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiInputTextFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import imgui.type.ImString;
 import org.lwjgl.glfw.GLFW;
-import ovs.chat.Chat;
-import ovs.chat.ScriptInfo;
 import ovs.chat.packet.FilePacket;
-import ovs.chat.packet.JSonPacket;
 import ovs.graph.GraphWindow;
 import ovs.graph.GroupNodeWindow;
+//import ovs.renderer.opengl.*;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static imgui.flag.ImGuiWindowFlags.*;
+import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 
 public class ImGuiWindow {
 
@@ -48,9 +48,12 @@ public class ImGuiWindow {
     private ArrayList<String> alreadyExistingNodeGroups = new ArrayList<>();
 //    private ImFont font;
 
-    private Chat chat = new Chat();
+//    private Chat chat = new Chat();
     private ImString inputChat = new ImString();
     private ImString userNameText = new ImString(30);
+
+//    private OpenGlRenderer openGlRenderer;
+
 
 //    Texture texture;
 //    private Texture bgTexture;
@@ -109,6 +112,8 @@ public class ImGuiWindow {
 
         imGuiGLFW.init(glfwWindow.getWindowID(), true);
         imGuiGl3.init("#version 150");
+
+//        openGlRenderer = new OpenGlRenderer();
 
 //        try {
 //            texture = TextureLoader.loadTexture("blizzard_world.jpg");
@@ -174,6 +179,7 @@ public class ImGuiWindow {
 //            ImGui.showDemoWindow();
 
 //            ImGui.image(texture.getId(), texture.getWidth(), texture.getHeight());
+
 //            float xPos = ImGui.getMousePosX() - ImGui.getWindowPosX();
 //            float yPos = ImGui.getMousePosY() - ImGui.getWindowPosY();
 //            System.out.println(Global.map(xPos, 0, texture.getWidth(), 0, 1));
@@ -186,6 +192,29 @@ public class ImGuiWindow {
                 ImGui.dockSpace(1, glfwWindow.getWidth(), glfwWindow.getHeight() - menuBarHeight - taskbarHeight, NoResize | NoScrollbar);
             }
             ImGui.end();
+
+//            if(ImGui.begin("Viewport")) {
+//                ImVec2 viewportPosition = new ImVec2();
+//                ImGui.getWindowPos(viewportPosition);
+//                ImVec2 viewportSize = new ImVec2();
+//                ImGui.getWindowSize(viewportSize);
+//                //get the glfw cursor position
+//
+//                double[] xpos = new double[1];
+//                double[] ypos = new double[1];
+//                glfwGetCursorPos(glfwWindow.getWindowID(), xpos, ypos);
+//                double[] cursorPos = new double[]{xpos[0], ypos[0]};
+//                Ray ray = openGlRenderer.generateRayFromCamera();
+//                System.out.println(ray.direction);
+//                List<MeshInstance> intersections = new ArrayList<>();
+//                for(MeshInstance instance : openGlRenderer.getInstances()) {
+//                    openGlRenderer.intersect(ray, instance, intersections);
+//                }
+////                System.out.println(intersections.size());
+//                int bufferID = openGlRenderer.render();
+//                ImGui.image(bufferID, 800, 600);
+//            }
+//            ImGui.end();
 
 //            ImGui.setNextWindowPos(-200, -200, ImGuiCond.Always);
 //            chatWindow();
@@ -417,7 +446,7 @@ public class ImGuiWindow {
                            jsonPacket.type = "FILE";
                            jsonPacket.data = content;
                            jsonPacket.fileName = scriptFileName;
-                           chat.sendJSon(jsonPacket);
+//                           chat.sendJSon(jsonPacket);
                        } catch (Exception e) {
                            e.printStackTrace();
                        }
@@ -497,73 +526,73 @@ public class ImGuiWindow {
         }
     }
 
-    private void chatWindow(){
-        ImGui.setNextWindowSize(1000, 800, ImGuiCond.Once);
-        if(ImGui.begin("ChatWindow", NoBringToFrontOnFocus | NoDocking | NoNavFocus | NoFocusOnAppearing)){
-            if(!chat.isConnected()){
-                ImGui.text("UserName");
-                if(ImGui.inputText("##UserName", userNameText)){
-                    chat.userName = userNameText.get();
-                }
-
-                if(chat.isConnecting() || chat.userName.length() <= 0)
-                {
-                    ImGui.beginDisabled();
-                }
-                if(ImGui.button((chat.isConnecting() ? "Attempting to connect..." : "Connect To Chat"))){
-                    chat.connect();
-                }
-
-                if(chat.isConnecting() || chat.userName.length() <= 0)
-                {
-                    ImGui.endDisabled();
-                }
-            }else{
-
-                if(ImGui.button("Disconnect")){
-                    chat.disconnect();
-                }
-
-                ImGui.text("Connected Users: " + chat.getUserCount());
-
-                ImGui.beginDisabled();
-                ImGui.inputTextMultiline("##ChatHistory", chat.chatHistory);
-                ImGui.endDisabled();
-
-                if(ImGui.inputText("##ChatInput", inputChat, ImGuiInputTextFlags.EnterReturnsTrue)){
-//                        chat.sendMessage(inputChat.get());
-//                        chat.sendPacket(new PacketMessage(inputChat.get()));
-                    JSonPacket jsonPacket = new JSonPacket();
-                    jsonPacket.type = "MESSAGE";
-                    jsonPacket.data = inputChat.get();
-                    chat.sendJSon(jsonPacket);
-                    inputChat.set("");
-                };
-
-                if(ImGui.button("Send Script")){
-                    lastMenuAction = "SendScriptFile";
-                }
-
-                ImGui.separator();
-                ImGui.text("Scripts");
-
-                if(ImGui.beginChild("Chat-Scripts", 500, 500)){
-                    for (int i = 0; i < chat.scripts.size(); i++) {
-                        ScriptInfo filePacket = chat.scripts.get(i);
-
-                        if(ImGui.button(filePacket.fileName)){
-                            GraphWindow window = new GraphWindow(this, glfwWindow, null);
-                            window.setFileName(filePacket.fileName);
-                            window.loadFromString(filePacket.data);
-                            graphWindows.add(window);
-                        }
-                    }
-                }
-                ImGui.endChild();
-            }
-        }
-        ImGui.end();
-    }
+//    private void chatWindow(){
+//        ImGui.setNextWindowSize(1000, 800, ImGuiCond.Once);
+//        if(ImGui.begin("ChatWindow", NoBringToFrontOnFocus | NoDocking | NoNavFocus | NoFocusOnAppearing)){
+//            if(!chat.isConnected()){
+//                ImGui.text("UserName");
+//                if(ImGui.inputText("##UserName", userNameText)){
+//                    chat.userName = userNameText.get();
+//                }
+//
+//                if(chat.isConnecting() || chat.userName.length() <= 0)
+//                {
+//                    ImGui.beginDisabled();
+//                }
+//                if(ImGui.button((chat.isConnecting() ? "Attempting to connect..." : "Connect To Chat"))){
+//                    chat.connect();
+//                }
+//
+//                if(chat.isConnecting() || chat.userName.length() <= 0)
+//                {
+//                    ImGui.endDisabled();
+//                }
+//            }else{
+//
+//                if(ImGui.button("Disconnect")){
+//                    chat.disconnect();
+//                }
+//
+//                ImGui.text("Connected Users: " + chat.getUserCount());
+//
+//                ImGui.beginDisabled();
+//                ImGui.inputTextMultiline("##ChatHistory", chat.chatHistory);
+//                ImGui.endDisabled();
+//
+//                if(ImGui.inputText("##ChatInput", inputChat, ImGuiInputTextFlags.EnterReturnsTrue)){
+////                        chat.sendMessage(inputChat.get());
+////                        chat.sendPacket(new PacketMessage(inputChat.get()));
+//                    JSonPacket jsonPacket = new JSonPacket();
+//                    jsonPacket.type = "MESSAGE";
+//                    jsonPacket.data = inputChat.get();
+//                    chat.sendJSon(jsonPacket);
+//                    inputChat.set("");
+//                };
+//
+//                if(ImGui.button("Send Script")){
+//                    lastMenuAction = "SendScriptFile";
+//                }
+//
+//                ImGui.separator();
+//                ImGui.text("Scripts");
+//
+//                if(ImGui.beginChild("Chat-Scripts", 500, 500)){
+//                    for (int i = 0; i < chat.scripts.size(); i++) {
+//                        ScriptInfo filePacket = chat.scripts.get(i);
+//
+//                        if(ImGui.button(filePacket.fileName)){
+//                            GraphWindow window = new GraphWindow(this, glfwWindow, null);
+//                            window.setFileName(filePacket.fileName);
+//                            window.loadFromString(filePacket.data);
+//                            graphWindows.add(window);
+//                        }
+//                    }
+//                }
+//                ImGui.endChild();
+//            }
+//        }
+//        ImGui.end();
+//    }
 
     private void tipsWindow() {
         ImGui.setNextWindowSize(250, 250, ImGuiCond.Once);
@@ -617,7 +646,8 @@ public class ImGuiWindow {
     public void close(){
 //        texture.cleanup();
 //        bgTexture.cleanup();
-        chat.disconnect();
+//        openGlRenderer.close();
+//        chat.disconnect();
         ImNodes.destroyContext();
         ImGui.destroyContext();
     }

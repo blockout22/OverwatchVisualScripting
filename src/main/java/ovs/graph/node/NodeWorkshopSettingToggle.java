@@ -70,4 +70,9 @@ public class NodeWorkshopSettingToggle extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides the value (true or false) of a new toggle setting that will appear in the workshop settings card as a checkbox.";
+    }
 }

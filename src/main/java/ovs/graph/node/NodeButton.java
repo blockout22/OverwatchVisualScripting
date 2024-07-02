@@ -65,4 +65,9 @@ public class NodeButton extends Node{
     public void UI() {
         buttons.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A button constant.";
+    }
 }

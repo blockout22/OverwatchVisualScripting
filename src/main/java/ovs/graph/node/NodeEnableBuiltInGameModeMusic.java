@@ -35,4 +35,9 @@ public class NodeEnableBuiltInGameModeMusic extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "undoes the effect of the disable built-in game mode music action.";
+    }
 }

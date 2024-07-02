@@ -42,4 +42,9 @@ public class NodeSlotOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The slot number of the specified player. in team games, each team has slots 0 through 5. in free-for-all games, slots are numbered 0 through 11.";
+    }
 }

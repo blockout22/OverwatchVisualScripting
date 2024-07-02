@@ -70,4 +70,9 @@ public class NodeRayCastHitNormal extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The surface normal at the ray cast hit position (or from end position to start position if no hit occurs).";
+    }
 }

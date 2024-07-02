@@ -49,4 +49,9 @@ public class NodeRemoveFromArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of an array with on or more values removed (if found).";
+    }
 }

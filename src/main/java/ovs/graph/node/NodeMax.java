@@ -49,4 +49,9 @@ public class NodeMax extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The greater of two numbers.";
+    }
 }

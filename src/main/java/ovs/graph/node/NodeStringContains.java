@@ -49,4 +49,9 @@ public class NodeStringContains extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified string contains the specified value.";
+    }
 }

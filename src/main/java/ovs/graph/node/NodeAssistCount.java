@@ -34,4 +34,9 @@ public class NodeAssistCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of assist instances started from the start assist action.";
+    }
 }

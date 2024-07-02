@@ -42,4 +42,9 @@ public class NodeHealth extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current health of a player, including armor and shields.";
+    }
 }

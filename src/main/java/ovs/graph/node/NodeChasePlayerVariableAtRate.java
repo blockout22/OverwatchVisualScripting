@@ -127,4 +127,9 @@ public class NodeChasePlayerVariableAtRate extends Node{
         variables.show();
         reevaluation.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Gradually modifies the value of a player variables at a specific rate. (a player variable is a variable that belongs to a specific player).";
+    }
 }

@@ -35,4 +35,9 @@ public class NodeEnableBuiltInGameModeCompletion extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the disable built-in game mode completion action.";
+    }
 }

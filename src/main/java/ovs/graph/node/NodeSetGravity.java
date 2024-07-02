@@ -52,4 +52,9 @@ public class NodeSetGravity extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the movement gravity for one or more players to a percentage of regular movement gravity.";
+    }
 }

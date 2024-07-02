@@ -42,4 +42,9 @@ public class NodeVerticalSpeedOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current vertical speed of a player in meters per second, this measurement excludes all horizontal motion, including motion while traveling up and down slopes.";
+    }
 }

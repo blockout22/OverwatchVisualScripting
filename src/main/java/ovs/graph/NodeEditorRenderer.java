@@ -147,6 +147,7 @@ public class NodeEditorRenderer {
                 }
             }
 
+
             for (Node node : graph.getNodes().getList()) {
                 if(node instanceof NodeComment){
                     float nodePosX;
@@ -301,7 +302,6 @@ public class NodeEditorRenderer {
                 }else {
                     NodeEditor.beginNode(node.getID());
                     {
-
                         if (!ImGui.isMouseDown(0)) {
                             if (node.posX != NodeEditor.getNodePositionX(node.getID()) || node.posY != NodeEditor.getNodePositionY(node.getID())) {
                                 node.posX = NodeEditor.getNodePositionX(node.getID());
@@ -454,6 +454,14 @@ public class NodeEditorRenderer {
 //                                    headerMax = new ImVec2(maxWidth, headerMaxY);
                     }
                     NodeEditor.endNode();
+
+                    if(ImGui.isItemHovered()){
+                        ImGui.setNextWindowPos(cursorPos.x, cursorPos.y + 25);
+                        ImGui.beginTooltip();
+                        ImGui.pushTextWrapPos(ImGui.getFontSize() * 35.0f);
+                        ImGui.text(node.getTooltip());
+                        ImGui.endTooltip();
+                    }
                 }
                 float x = ImGui.getMousePosX();
                 float y = ImGui.getMousePosY();

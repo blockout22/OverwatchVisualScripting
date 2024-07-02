@@ -50,4 +50,9 @@ public class NodeModifyPlayerScore extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Modifies the score (Kill Count) of one or more players. this action only has an effect in free-for-all modes.";
+    }
 }

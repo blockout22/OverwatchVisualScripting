@@ -42,4 +42,9 @@ public class NodeCosineFromDegrees extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Cosine of the specified angle in degrees.";
+    }
 }

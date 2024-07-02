@@ -66,4 +66,9 @@ public class NodeStartCamera extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Places your camera at a location, facing a direction.";
+    }
 }

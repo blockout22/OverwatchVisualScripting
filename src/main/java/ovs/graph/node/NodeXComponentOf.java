@@ -42,4 +42,9 @@ public class NodeXComponentOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The x component of the specified vector, usually representing a leftward amount.";
+    }
 }

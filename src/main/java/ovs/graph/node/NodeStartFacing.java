@@ -113,4 +113,9 @@ public class NodeStartFacing extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Starts turning one or more players to face the specified direction.";
+    }
 }

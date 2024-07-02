@@ -42,4 +42,9 @@ public class NodeLastOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The value at the end of the specified array. results in 0 if the specified array is empty.";
+    }
 }

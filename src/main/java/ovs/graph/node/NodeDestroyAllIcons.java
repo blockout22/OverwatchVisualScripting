@@ -35,4 +35,9 @@ public class NodeDestroyAllIcons extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys all icons created by create icon.";
+    }
 }

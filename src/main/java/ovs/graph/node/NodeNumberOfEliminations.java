@@ -42,4 +42,9 @@ public class NodeNumberOfEliminations extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of eliminations a specific player has earned, this value only accumulates while a game is in progress.";
+    }
 }

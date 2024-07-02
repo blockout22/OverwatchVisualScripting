@@ -43,4 +43,9 @@ public class NodeDisableBuiltInGameModeRespawning extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables automatic respawning for one or more players, only allowing respawning by scripting commands.";
+    }
 }

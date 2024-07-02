@@ -42,4 +42,9 @@ public class NodeAllowedHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The array of heroes from which the specified player is currently allowed to select.";
+    }
 }

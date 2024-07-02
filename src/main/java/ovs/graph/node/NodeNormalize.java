@@ -42,4 +42,9 @@ public class NodeNormalize extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The unit-length normalization of a vector.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeStringLength extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in the number of characters in the string value (or 0 if the value is not a string).";
+    }
 }

@@ -49,4 +49,9 @@ public class NodeDotProduct extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The dot product of the specified values.";
+    }
 }

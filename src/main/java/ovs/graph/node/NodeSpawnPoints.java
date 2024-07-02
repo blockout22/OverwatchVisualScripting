@@ -42,4 +42,9 @@ public class NodeSpawnPoints extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The active spawn points for a team or for the match, provided as an array of entities.";
+    }
 }

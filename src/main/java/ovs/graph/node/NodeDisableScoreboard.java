@@ -43,4 +43,9 @@ public class NodeDisableScoreboard extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables the scoreboard for one or more players until reenabled.";
+    }
 }

@@ -59,4 +59,9 @@ public class NodeNumber extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A real number constant.";
+    }
 }

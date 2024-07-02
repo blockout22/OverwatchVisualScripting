@@ -45,4 +45,9 @@ public class NodeEnableDeathSpectateTargetHud extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Causes one or more players to see their spectate target's hud instead of their own while death spectating.";
+    }
 }

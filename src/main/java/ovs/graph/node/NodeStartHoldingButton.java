@@ -80,4 +80,9 @@ public class NodeStartHoldingButton extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Forces one or more players to hold a button virtually until stopped by the stop holding button action.";
+    }
 }

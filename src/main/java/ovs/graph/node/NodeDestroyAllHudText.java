@@ -35,4 +35,9 @@ public class NodeDestroyAllHudText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys all hud text that were created by the create hub text action.";
+    }
 }

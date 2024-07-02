@@ -43,4 +43,9 @@ public class NodeDisableMovementWithPlayers extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Causes a player or players to stop colliding with other players.";
+    }
 }

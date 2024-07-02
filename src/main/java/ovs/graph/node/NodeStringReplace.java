@@ -56,4 +56,9 @@ public class NodeStringReplace extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in a string value, this string value will be build from the specified string value, where all occurrences of the pattern string are replaced with the replacement string.";
+    }
 }

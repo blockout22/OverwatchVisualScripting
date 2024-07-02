@@ -71,4 +71,9 @@ public class NodeSetFacing extends Node {
     public void UI() {
         relative.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the facing of one or more players to the specified direction.";
+    }
 }

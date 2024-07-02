@@ -34,4 +34,9 @@ public class NodeDisableBuiltInGameModeMusic extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disabled all game mode music until reeanbled or the match ends.";
+    }
 }

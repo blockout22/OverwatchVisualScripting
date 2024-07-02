@@ -44,4 +44,9 @@ public class NodePositionOf extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current position of a player as a vector.";
+    }
 }

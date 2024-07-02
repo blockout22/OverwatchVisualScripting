@@ -58,4 +58,9 @@ public class NodeSetAmmo extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the ammo of one or more players.";
+    }
 }

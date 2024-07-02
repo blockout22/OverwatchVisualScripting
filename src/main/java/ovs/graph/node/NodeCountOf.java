@@ -41,4 +41,9 @@ public class NodeCountOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "the number of elements in the specified array.";
+    }
 }

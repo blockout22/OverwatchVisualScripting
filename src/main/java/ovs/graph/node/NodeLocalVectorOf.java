@@ -52,4 +52,9 @@ public class NodeLocalVectorOf extends Node {
     public void UI() {
         transform.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The vector in local coordinates corresponding to the provided vector in the world coordinates.";
+    }
 }

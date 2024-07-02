@@ -49,4 +49,9 @@ public class NodeArcTangentInDegrees extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Arctangent in degrees of the specified numerator and denominator (often referred to as atan2).";
+    }
 }

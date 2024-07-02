@@ -43,4 +43,9 @@ public class NodeDisableMessages extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables messages for one or more players until reenabled.";
+    }
 }

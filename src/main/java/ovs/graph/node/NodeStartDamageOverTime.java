@@ -65,4 +65,9 @@ public class NodeStartDamageOverTime extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Starts an instance of damage overtime, this will persist for a specified duration or until stopped by script. to obtain a reference to this, use the last damage over time id value";
+    }
 }

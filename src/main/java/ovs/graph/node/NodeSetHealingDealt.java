@@ -52,4 +52,9 @@ public class NodeSetHealingDealt extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the healing dealt of one or more players to a percentage of their raw healing dealt.";
+    }
 }

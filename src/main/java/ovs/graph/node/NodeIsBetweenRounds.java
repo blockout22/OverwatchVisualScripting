@@ -34,4 +34,9 @@ public class NodeIsBetweenRounds extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the match is between rounds.";
+    }
 }

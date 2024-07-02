@@ -42,4 +42,9 @@ public class NodeHorizontalFacingAngleOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The horizontal angle in degrees of a player's current facing relative to the world, this value increases as the player rotates to the left (wrapping around +/- 180).";
+    }
 }

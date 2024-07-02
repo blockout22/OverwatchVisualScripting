@@ -166,4 +166,9 @@ public class NodeCreateProgressBarHUDText extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Creates a progress bar hud text visible to a specific players at a specific position in the world. this text will persist until destroyed, to obtain a reference to this text, use the last text id value, this action will fail if too many text elements have been created.";
+    }
 }

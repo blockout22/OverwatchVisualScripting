@@ -42,4 +42,9 @@ public class NodeNot extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the input is false (or equivalent to false).";
+    }
 }

@@ -49,4 +49,9 @@ public class NodeHorizontalAngleTowards extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The horizontal angle in degrees from a player's current forward direction to the specified position. the result is positive if the position on the player's left, otherwise, the result is zero or negative.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeIsDuplicating extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player is duplicating another hero. (to check which hero, use the hero being duplicated value).";
+    }
 }

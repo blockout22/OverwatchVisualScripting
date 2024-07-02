@@ -51,4 +51,9 @@ public class NodeSmallMessage extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Displays a small message beneath the reticle that is visible to specific players.";
+    }
 }

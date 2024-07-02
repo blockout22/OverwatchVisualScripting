@@ -34,4 +34,9 @@ public class NodeIsAssemblingHeroes extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the match is currently in its assemble heroes phase.";
+    }
 }

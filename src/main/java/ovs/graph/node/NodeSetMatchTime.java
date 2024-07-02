@@ -49,4 +49,9 @@ public class NodeSetMatchTime extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the current match time (which is visible at the top of the screen). this can be used to shorten or extend the duration of a match or to change the duration of assemble heroes or setup.";
+    }
 }

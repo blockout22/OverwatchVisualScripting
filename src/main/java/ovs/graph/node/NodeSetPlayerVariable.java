@@ -115,4 +115,9 @@ public class NodeSetPlayerVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stores a value into a player variable, which is a variable that belongs to a specific player.";
+    }
 }

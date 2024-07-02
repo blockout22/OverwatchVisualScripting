@@ -34,4 +34,9 @@ public class NodeIsControlModePointLocked extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the point is locked in control mode.";
+    }
 }

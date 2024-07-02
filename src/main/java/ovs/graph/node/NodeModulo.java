@@ -49,4 +49,9 @@ public class NodeModulo extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The remainder of the left-hand operand divided by the right-hand operand, any number modulo zero results in zero.";
+    }
 }

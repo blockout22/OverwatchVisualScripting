@@ -34,4 +34,9 @@ public class NodeCurrentGameMode extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current game mode of the custom game.";
+    }
 }

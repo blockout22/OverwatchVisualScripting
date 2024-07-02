@@ -42,4 +42,9 @@ public class NodeIsFlagAtBase extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific team's flag is at its base in capture the flag.";
+    }
 }

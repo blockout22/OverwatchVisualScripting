@@ -34,4 +34,9 @@ public class NodeDown extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "shorthand for directional vector(0, -1, 0), which points downward.";
+    }
 }

@@ -69,4 +69,9 @@ public class NodeIsInLineOfSight extends Node {
     public void UI() {
         los.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether two positions have ling of sight with each other.";
+    }
 }

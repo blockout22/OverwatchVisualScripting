@@ -42,4 +42,9 @@ public class NodeEyePosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position of a player's first person view (used for aiming).";
+    }
 }

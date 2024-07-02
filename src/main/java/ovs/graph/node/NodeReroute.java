@@ -41,4 +41,9 @@ public class NodeReroute extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "";
+    }
 }

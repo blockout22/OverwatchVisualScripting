@@ -43,4 +43,9 @@ public class NodeStopFacing extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stops the turning started by the start facing action for one or more players.";
+    }
 }

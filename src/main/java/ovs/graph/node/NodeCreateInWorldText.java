@@ -154,4 +154,9 @@ public class NodeCreateInWorldText extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Creates in-world text visible to specific players at a specific position in the world, this text will persist until destroyed, to obtain a reference to this text, use the last text id value, this action will fail if too many text elements have been created.";
+    }
 }

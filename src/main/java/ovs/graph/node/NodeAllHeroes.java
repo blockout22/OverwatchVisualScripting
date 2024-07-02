@@ -34,4 +34,9 @@ public class NodeAllHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The array of all heroes in overwatch.";
+    }
 }

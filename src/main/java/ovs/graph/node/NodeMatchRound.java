@@ -34,4 +34,9 @@ public class NodeMatchRound extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current round of the match, counting up from 1.";
+    }
 }

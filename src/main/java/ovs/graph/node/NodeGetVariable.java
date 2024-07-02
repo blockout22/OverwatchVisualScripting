@@ -123,4 +123,9 @@ public class NodeGetVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current value of a either global or player variable (player variables default to using variables from event player, use 'GetPlayerVariable' to specify the player).";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeCurrentArrayElement extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current array element being considered. only meaningful during the evaluation of values such as filtered array and sorted array.";
+    }
 }

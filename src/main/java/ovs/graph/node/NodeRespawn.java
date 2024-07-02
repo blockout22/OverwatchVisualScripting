@@ -49,4 +49,9 @@ public class NodeRespawn extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Respawns one or more players at an appropriate spawn location with full health, even if they were already alive.";
+    }
 }

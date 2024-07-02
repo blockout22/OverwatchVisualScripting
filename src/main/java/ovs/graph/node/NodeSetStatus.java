@@ -79,4 +79,9 @@ public class NodeSetStatus extends Node {
     public void UI() {
         status.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Applies a status to one or more players. this status will remain in effect for the specified duration or until it is cleared by the clear status action.";
+    }
 }

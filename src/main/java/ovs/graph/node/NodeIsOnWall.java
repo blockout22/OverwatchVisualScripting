@@ -42,4 +42,9 @@ public class NodeIsOnWall extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is on a wall (climbing or riding).";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeEventDirection extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The incoming direction for the event currently being processed by this rule";
+    }
 }

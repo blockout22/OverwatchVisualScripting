@@ -52,4 +52,9 @@ public class NodeDestroyDummyBot extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Removes the specified dummy bot from the match.";
+    }
 }

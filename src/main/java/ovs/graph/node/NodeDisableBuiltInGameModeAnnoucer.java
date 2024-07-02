@@ -34,4 +34,9 @@ public class NodeDisableBuiltInGameModeAnnoucer extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables game mode announcements from the announcer until reenabled or the match ends.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeIsGameInProgress extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the main phases of the match is in progress (during which time combat and scoring are allowed).";
+    }
 }

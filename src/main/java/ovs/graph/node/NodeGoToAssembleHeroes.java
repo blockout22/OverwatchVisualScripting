@@ -34,4 +34,9 @@ public class NodeGoToAssembleHeroes extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Returns the match to the assemble heroes phase of the game mode. only works if the game is in progress";
+    }
 }

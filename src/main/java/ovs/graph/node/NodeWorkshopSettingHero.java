@@ -96,4 +96,9 @@ public class NodeWorkshopSettingHero extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides the value of a new hero setting that will appear in the workshop settings card as a combo box.";
+    }
 }

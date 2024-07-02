@@ -42,4 +42,9 @@ public class NodeIsPortraitOnFire extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific player's portrait is on fire.";
+    }
 }

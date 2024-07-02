@@ -42,4 +42,9 @@ public class NodeIsFlagBeingCarried extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific team's flag is being carried by a member of the opposing team in capture the flag.";
+    }
 }

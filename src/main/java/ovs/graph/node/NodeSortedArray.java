@@ -49,4 +49,9 @@ public class NodeSortedArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of the specified array with the values sorted according to the value rank that is evaluated for each element.";
+    }
 }

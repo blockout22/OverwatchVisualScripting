@@ -34,4 +34,9 @@ public class NodeHealee extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player that received the healing for the event currently being processed.";
+    }
 }

@@ -50,4 +50,9 @@ public class NodeSetPlayerAllowedHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the list of heroes available to one or more players, if a player's current hero becomes unavailable, the player is forced to choose a different hero and respawn at an appropriate spawn location.";
+    }
 }

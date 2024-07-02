@@ -35,4 +35,9 @@ public class NodeEventDamage extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The amount of damage received by the victim for the even currently being processed by this rule.";
+    }
 }

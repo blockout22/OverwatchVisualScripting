@@ -36,4 +36,9 @@ public class NodeVictim extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player that received the damage for the event currently being processed by this rule. may be the same as the attacker or the event player.";
+    }
 }

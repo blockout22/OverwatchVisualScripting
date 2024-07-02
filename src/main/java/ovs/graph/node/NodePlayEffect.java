@@ -98,4 +98,9 @@ public class NodePlayEffect extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Players an effect at a position in the world, the lifetime of this effect is short, so it does not need to be updated or destroyed.";
+    }
 }

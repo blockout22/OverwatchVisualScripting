@@ -42,4 +42,9 @@ public class NodeNumberOfDeadPlayers extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of dead players on a team or in the match.";
+    }
 }

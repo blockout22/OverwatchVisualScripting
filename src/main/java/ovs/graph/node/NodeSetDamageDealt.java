@@ -52,4 +52,9 @@ public class NodeSetDamageDealt extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the damage dealt of one or more players to a percentage of their raw damage dealt.";
+    }
 }

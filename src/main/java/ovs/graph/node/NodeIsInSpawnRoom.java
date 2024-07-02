@@ -42,4 +42,9 @@ public class NodeIsInSpawnRoom extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific player is in the spawn room (and is thus being healed and able to change heroes).";
+    }
 }

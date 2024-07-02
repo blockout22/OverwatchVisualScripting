@@ -6,24 +6,24 @@ import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeStartFocingPlayerPosition extends Node{
+public class NodeDisallowButton extends Node{
 
     PinVar pinPlayer = new PinVar();
-    PinVar pinPosition = new PinVar();
+    PinVar pinButton = new PinVar();
 
     PinAction output = new PinAction();
 
-    public NodeStartFocingPlayerPosition(Graph graph) {
+    public NodeDisallowButton(Graph graph) {
         super(graph);
-        setName("Start Forcing Player Position");
+        setName("Disallow Button");
 
         pinPlayer.setNode(this);
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
 
-        pinPosition.setNode(this);
-        pinPosition.setName("Position");
-        addCustomInput(pinPosition);
+        pinButton.setNode(this);
+        pinButton.setName("Button");
+        addCustomInput(pinButton);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -32,13 +32,13 @@ public class NodeStartFocingPlayerPosition extends Node{
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> positionData = pinPosition.getData();
+        PinData<ImString> buttonData = pinButton.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(pinPosition, positionData);
+        handlePinStringConnection(pinButton, buttonData);
 
-        outputData.getValue().set("Start Forcing Player Position(" + playerData.getValue().get() + ", " + positionData.getValue().get() + ", True);");
+        outputData.getValue().set(getName() + "(" + playerData.getValue().get() + ", " + buttonData.getValue().get() + ");");
     }
 
     @Override
@@ -50,5 +50,10 @@ public class NodeStartFocingPlayerPosition extends Node{
     @Override
     public void UI() {
 
+    }
+
+    @Override
+    public String getTooltip() {
+        return "Disables a logical button for one or more players such that pressing it has no effect.";
     }
 }

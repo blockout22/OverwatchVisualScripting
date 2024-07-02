@@ -49,4 +49,9 @@ public class NodeRaiseToPower extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The left-hand operand raised to the power of the right-hand operand, if the left-hand operand is negative, the result is always zero.";
+    }
 }

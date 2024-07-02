@@ -31,4 +31,9 @@ public class NodeBreak extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Denotes an action that will abort execution of the current while or for loop. execution jumps to the next action after the end action.";
+    }
 }

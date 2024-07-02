@@ -64,4 +64,9 @@ public class NodeRoundToInteger extends Node {
     public void UI() {
         round.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The integer to which the specified values rounds.";
+    }
 }

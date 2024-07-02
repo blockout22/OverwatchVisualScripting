@@ -68,4 +68,9 @@ public class NodeComment extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "";
+    }
 }

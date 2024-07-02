@@ -41,4 +41,9 @@ public class NodeIsCommunicatingAnyEmote extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is using an emote.";
+    }
 }

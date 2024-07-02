@@ -58,4 +58,9 @@ public class NodeSetAbilityCharge extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Set the ability charge count for one or more players if supported.";
+    }
 }

@@ -56,4 +56,9 @@ public class NodeWorldVectorOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The vector in world coordinates corresponding to the provided vector in local coordinates.";
+    }
 }

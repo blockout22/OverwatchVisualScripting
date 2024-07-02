@@ -42,4 +42,9 @@ public class NodeHeroOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current hero of a player.";
+    }
 }

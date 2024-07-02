@@ -34,4 +34,9 @@ public class NodeLastCreatedEntity extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A reference to the last effect, icon entity, or dummy bot created by the event player (or created at the global level).";
+    }
 }

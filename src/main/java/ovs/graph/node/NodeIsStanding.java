@@ -42,4 +42,9 @@ public class NodeIsStanding extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is standing (defined as both not moving and not in the air).";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeIsDummyBot extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is a dummy bot.";
+    }
 }

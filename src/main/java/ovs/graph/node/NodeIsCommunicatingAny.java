@@ -43,4 +43,9 @@ public class NodeIsCommunicatingAny extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is using any commmunication type (such as emoting, using a voice line, using a spray, etc.).";
+    }
 }

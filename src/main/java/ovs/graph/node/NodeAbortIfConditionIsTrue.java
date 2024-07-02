@@ -34,4 +34,9 @@ public class NodeAbortIfConditionIsTrue extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stops execution of the action list if all conditions in the condition list are true. if any are false, execution continues with the next action.";
+    }
 }

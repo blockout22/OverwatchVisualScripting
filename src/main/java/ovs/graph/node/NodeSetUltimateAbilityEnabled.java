@@ -52,4 +52,9 @@ public class NodeSetUltimateAbilityEnabled extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Enables or disables the ultimate ability for one or more players.";
+    }
 }

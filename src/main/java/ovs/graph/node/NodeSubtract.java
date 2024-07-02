@@ -49,4 +49,9 @@ public class NodeSubtract extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The difference between two numbers of vectors.";
+    }
 }

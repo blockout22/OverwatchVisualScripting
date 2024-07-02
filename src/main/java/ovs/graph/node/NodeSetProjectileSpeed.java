@@ -52,4 +52,9 @@ public class NodeSetProjectileSpeed extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the projectile speed for one or more players to a percentage of the regular projectile speed.";
+    }
 }

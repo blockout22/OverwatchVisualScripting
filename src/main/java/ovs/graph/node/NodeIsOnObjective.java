@@ -42,4 +42,9 @@ public class NodeIsOnObjective extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific player is currently occupying a payload or capture point.";
+    }
 }

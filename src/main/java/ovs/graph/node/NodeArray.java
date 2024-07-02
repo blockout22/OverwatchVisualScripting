@@ -74,4 +74,9 @@ public class NodeArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array constructed from the listed values.";
+    }
 }

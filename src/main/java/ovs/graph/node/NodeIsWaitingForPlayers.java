@@ -34,4 +34,9 @@ public class NodeIsWaitingForPlayers extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the match is waiting for players to join before starting.";
+    }
 }

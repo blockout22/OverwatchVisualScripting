@@ -34,4 +34,9 @@ public class NodeAbort extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stops execution of the action list.";
+    }
 }

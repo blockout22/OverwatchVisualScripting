@@ -42,4 +42,9 @@ public class NodeYComponentOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The y component of the specified vector, usually representing a upward amount.";
+    }
 }

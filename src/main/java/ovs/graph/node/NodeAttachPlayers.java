@@ -58,4 +58,10 @@ public class NodeAttachPlayers extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Attaches on player (the child) to another player (the parent). once attached, the child will be unable to move freely until detached or teleported away. multiple children may be attached to the same parent (but not vice versa).";
+
+    }
 }

@@ -43,4 +43,9 @@ public class NodeDisableDeathSpectateAllPlayers extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "undoes the effect of the enable death spectate all players action for one or more players.";
+    }
 }

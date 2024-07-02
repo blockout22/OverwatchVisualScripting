@@ -50,4 +50,9 @@ public class NodeStringSplit extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in an array of string values, these string values will be build from the specified string value, split around the separator string.";
+    }
 }

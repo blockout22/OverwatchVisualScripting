@@ -49,4 +49,9 @@ public class NodeMaxAmmo extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current max ammo of a player.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeLastDamageOverTimeID extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An id representing the most recent damage over time action that was executed by the event player (or executed at the global level).";
+    }
 }

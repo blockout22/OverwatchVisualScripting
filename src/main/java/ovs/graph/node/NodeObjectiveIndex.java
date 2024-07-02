@@ -34,4 +34,9 @@ public class NodeObjectiveIndex extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The control point, payload checkpoint, or payload destination currently active (either 0, 1, or 2). valid in assault, escort, hybrid, and control.";
+    }
 }

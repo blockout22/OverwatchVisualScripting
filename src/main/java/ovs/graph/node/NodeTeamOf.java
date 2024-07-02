@@ -42,4 +42,9 @@ public class NodeTeamOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The team of player. if the game mode is free-for-all, the team is considered to be all.";
+    }
 }

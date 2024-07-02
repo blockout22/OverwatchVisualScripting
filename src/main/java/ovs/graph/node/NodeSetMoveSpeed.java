@@ -52,4 +52,9 @@ public class NodeSetMoveSpeed extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the move speed of one or more players to a percentage of their raw move speed.";
+    }
 }

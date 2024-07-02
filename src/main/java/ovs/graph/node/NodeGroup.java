@@ -293,4 +293,9 @@ public class NodeGroup extends Node{
     public void UI() {
         group.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Access prebuilt function build in the node group graph.";
+    }
 }

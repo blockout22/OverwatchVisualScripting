@@ -34,4 +34,9 @@ public class NodeAllDamageHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The array of all damage heroes in overwatch.";
+    }
 }

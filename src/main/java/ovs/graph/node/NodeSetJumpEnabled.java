@@ -51,4 +51,9 @@ public class NodeSetJumpEnabled extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Enables or disables jump for one or more players.";
+    }
 }

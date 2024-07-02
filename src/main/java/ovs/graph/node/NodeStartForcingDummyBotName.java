@@ -52,4 +52,9 @@ public class NodeStartForcingDummyBotName extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Start forcing the name for a specified player or players.";
+    }
 }

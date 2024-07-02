@@ -5,13 +5,13 @@ import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 
-public class NodeRestart extends Node{
+public class NodeDeclareMatchDraw extends Node {
 
     PinAction output = new PinAction();
 
-    public NodeRestart(Graph graph) {
+    public NodeDeclareMatchDraw(Graph graph) {
         super(graph);
-        setName("Restart");
+        setName("Declare Match Draw");
 
         output.setNode(this);
         addCustomOutput(output);
@@ -21,7 +21,7 @@ public class NodeRestart extends Node{
     public void execute() {
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Restart Match;");
+        outputData.getValue().set(getName() + ";");
     }
 
     @Override
@@ -33,5 +33,10 @@ public class NodeRestart extends Node{
     @Override
     public void UI() {
 
+    }
+
+    @Override
+    public String getTooltip() {
+        return "Instantly ends the match in a draw. this action has no effect in free-for-all modes.";
     }
 }

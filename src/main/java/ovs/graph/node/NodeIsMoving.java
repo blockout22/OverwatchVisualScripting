@@ -42,4 +42,9 @@ public class NodeIsMoving extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is moving (defined as having a non-zero current speed).";
+    }
 }

@@ -124,4 +124,9 @@ public class NodeCustomColor extends Node{
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Custom color with specified rgb and alpha values.";
+    }
 }

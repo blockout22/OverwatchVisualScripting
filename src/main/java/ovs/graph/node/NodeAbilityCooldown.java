@@ -49,4 +49,9 @@ public class NodeAbilityCooldown extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The ability charge count for a player associated by button.";
+    }
 }

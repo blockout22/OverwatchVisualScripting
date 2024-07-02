@@ -45,4 +45,9 @@ public class NodeEnableHeroHud extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the disable hero hud action for one or more players.";
+    }
 }

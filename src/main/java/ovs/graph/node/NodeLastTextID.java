@@ -34,4 +34,9 @@ public class NodeLastTextID extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A reference to the last piece of text created by the event player (or created at the global level) via the create hud text, create in-world text, create progress bar hud text, or create progress bar in-world text action.";
+    }
 }

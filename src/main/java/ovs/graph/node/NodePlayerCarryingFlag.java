@@ -42,4 +42,9 @@ public class NodePlayerCarryingFlag extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player carrying a particular team's flag in capture the flag. results in null if no player is carrying the flag.";
+    }
 }

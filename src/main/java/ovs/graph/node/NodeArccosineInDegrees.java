@@ -42,4 +42,9 @@ public class NodeArccosineInDegrees extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Arccosine in degrees of the specified value.";
+    }
 }

@@ -49,4 +49,9 @@ public class NodeAngleBetweenVectors extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The angle in degrees between two directional vectors (no normalization required).";
+    }
 }

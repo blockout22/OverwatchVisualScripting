@@ -43,4 +43,9 @@ public class NodeDisableGameModeInWorldUI extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables the game mode in-world ui for one or more players until reenabled.";
+    }
 }

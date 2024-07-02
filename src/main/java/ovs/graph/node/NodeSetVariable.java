@@ -146,4 +146,9 @@ public class NodeSetVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets a global or player variable. ";
+    }
 }

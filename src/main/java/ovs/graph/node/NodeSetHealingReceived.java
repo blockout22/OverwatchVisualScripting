@@ -51,4 +51,9 @@ public class NodeSetHealingReceived extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the healing received of one or more players to a percentage of their raw healing received.";
+    }
 }

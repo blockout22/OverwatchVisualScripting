@@ -36,4 +36,9 @@ public class NodeTotalTimeElapsed extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The total time in seconds that have elapsed since the game instance was created (including setup time and transitions).";
+    }
 }

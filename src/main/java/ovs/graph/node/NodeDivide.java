@@ -48,4 +48,9 @@ public class NodeDivide extends Node{
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "The ratio of two numbers or vectors. a vector divided by a number will yield a scaled vector, division by zero results in zero.";
+    }
 }

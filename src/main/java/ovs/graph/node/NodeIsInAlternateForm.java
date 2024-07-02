@@ -42,4 +42,9 @@ public class NodeIsInAlternateForm extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player is currently in an alternate form (such as d.va outside of mech, lucio using his speed song, bastion in a different configuration, mercy and torjorn with their secondary weapon equipped, etc.). for echo duplication, use the is duplicating value instead.";
+    }
 }

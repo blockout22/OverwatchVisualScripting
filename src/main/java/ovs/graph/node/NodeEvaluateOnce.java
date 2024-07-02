@@ -42,4 +42,9 @@ public class NodeEvaluateOnce extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in the first value that was provided to the input value parameter for the given action or condition (useful for selectively not reevaluating certain parts of a value when used in conjunction with an action that is capable of reevaluation).";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeIsInSetup extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the match is currently in its setup phase.";
+    }
 }

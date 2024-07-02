@@ -45,4 +45,9 @@ public class NodeCancelPrimaryAction extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Cancels the active abilities for one or more players.";
+    }
 }

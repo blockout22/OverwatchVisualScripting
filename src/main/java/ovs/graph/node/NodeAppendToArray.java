@@ -87,4 +87,9 @@ public class NodeAppendToArray extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of an array with one or more values appended to the end.";
+    }
 }

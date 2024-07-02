@@ -43,4 +43,9 @@ public class NodeDisableGameModeHud extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables the game mode hud for one or more players until reeanbled.";
+    }
 }

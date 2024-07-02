@@ -42,4 +42,9 @@ public class NodeVerticalAngleFromDirection extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The vertical angle in degrees corresponding to the specified direction vector.";
+    }
 }

@@ -48,4 +48,9 @@ public class NodeAnd extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether both of the two inputs are true (or equivalent to true).";
+    }
 }

@@ -63,4 +63,9 @@ public class NodeHasStatus extends Node {
     public void UI() {
         status.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player has the specified status, either from the set status action or from a not-scripted game mechanic.";
+    }
 }

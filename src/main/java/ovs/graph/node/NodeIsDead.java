@@ -42,4 +42,9 @@ public class NodeIsDead extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is dead.";
+    }
 }

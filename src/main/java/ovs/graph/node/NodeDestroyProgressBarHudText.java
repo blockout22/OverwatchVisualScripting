@@ -44,4 +44,9 @@ public class NodeDestroyProgressBarHudText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys progress bar hud text that was created by create progress bar hud text.";
+    }
 }

@@ -56,4 +56,9 @@ public class NodePlayersInViewAngle extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The players who are within a specific view angle of a specific player's reticle, optionally restricted by team.";
+    }
 }

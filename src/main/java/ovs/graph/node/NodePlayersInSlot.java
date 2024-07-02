@@ -49,4 +49,9 @@ public class NodePlayersInSlot extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player or array of players who occupy a specific slot in the game.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeMatchTime extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The amount of time in seconds remaining in the current game mode phase.";
+    }
 }

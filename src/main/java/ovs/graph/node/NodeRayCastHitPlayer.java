@@ -70,4 +70,9 @@ public class NodeRayCastHitPlayer extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player hit by the ray cast (or null if no player is hit).";
+    }
 }

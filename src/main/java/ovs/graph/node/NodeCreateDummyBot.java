@@ -73,4 +73,9 @@ public class NodeCreateDummyBot extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Adds a new bot to the specified slot on the specified team so long as the slot is available. this bos will only move, fire, or use abilities if executing workshop actions. extra dummy bots may be created if corresponding workshop extension is enabled.";
+    }
 }

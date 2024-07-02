@@ -80,4 +80,9 @@ public class NodeStopHoldingButton extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the start holding button action for one or more players.";
+    }
 }

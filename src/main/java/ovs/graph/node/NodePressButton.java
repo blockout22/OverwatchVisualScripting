@@ -51,4 +51,9 @@ public class NodePressButton extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Forces on or more players to press a button virtually for a single frame.";
+    }
 }

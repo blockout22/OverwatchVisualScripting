@@ -42,4 +42,9 @@ public class NodeUpdateEveryFrame extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Results in the value that is provided to the input value parameter and increases the update frequency of the value to once per frame. useful for smoothing the appearance of certain values -- such as position of -- that normally only update every few frames. applies to conditions as well as action parameters that reevaluate, may increase server load and/or lower framerate.";
+    }
 }

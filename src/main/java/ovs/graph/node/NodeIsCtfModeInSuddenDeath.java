@@ -34,4 +34,9 @@ public class NodeIsCtfModeInSuddenDeath extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the current game of capture the flag is in sudden death.";
+    }
 }

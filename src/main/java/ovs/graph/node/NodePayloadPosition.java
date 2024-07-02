@@ -34,4 +34,9 @@ public class NodePayloadPosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position in the world of the active payload.";
+    }
 }

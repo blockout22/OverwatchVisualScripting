@@ -94,4 +94,9 @@ public class NodeWhile extends Node{
     public void UI() {
         box.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Denotes the beginning of the series of actions that will execute in a loop as long as the specified condition is true. the next end action at the current level denotes the end of the loop, if the condition evaluates to false when execution is at the top of the loop, then the loop exits, and execution jumps to the next action after the end action.";
+    }
 }

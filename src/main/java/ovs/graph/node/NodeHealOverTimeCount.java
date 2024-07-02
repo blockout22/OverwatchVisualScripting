@@ -34,4 +34,9 @@ public class NodeHealOverTimeCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of heal over time instances started from the heal over time actions.";
+    }
 }

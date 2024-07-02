@@ -44,4 +44,9 @@ public class NodeDestroyProgressBarInWorldText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys progress bar in-world text that was created by create progress bar in-world text.";
+    }
 }

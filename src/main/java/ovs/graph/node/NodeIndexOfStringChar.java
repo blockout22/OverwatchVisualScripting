@@ -49,4 +49,9 @@ public class NodeIndexOfStringChar extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The index of a character within a string or -1 if no such character can be found.";
+    }
 }

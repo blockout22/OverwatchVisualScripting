@@ -43,4 +43,9 @@ public class NodeStopForcingPlayerPosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Cancels the behaviour of start forcing player position for the specified player or players. regular movement will resume from the last forced position(s).";
+    }
 }

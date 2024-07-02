@@ -87,4 +87,9 @@ public class NodeCondition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "used to compare numbers";
+    }
 }

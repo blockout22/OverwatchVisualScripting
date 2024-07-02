@@ -49,4 +49,9 @@ public class NodeDirectionToward extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The unit-length direction vector from one position to another.";
+    }
 }

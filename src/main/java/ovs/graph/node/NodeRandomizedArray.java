@@ -42,4 +42,9 @@ public class NodeRandomizedArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of the specified array with the values in a random order.";
+    }
 }

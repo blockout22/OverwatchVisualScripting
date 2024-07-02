@@ -53,4 +53,9 @@ public class NodeTeleport extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Teleports one or more players to the specified position.";
+    }
 }

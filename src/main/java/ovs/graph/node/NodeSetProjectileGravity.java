@@ -52,4 +52,9 @@ public class NodeSetProjectileGravity extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the projectile gravity for one or more players to a percentage of regular projectile gravity.";
+    }
 }

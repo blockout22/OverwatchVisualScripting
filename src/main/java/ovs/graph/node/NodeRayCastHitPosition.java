@@ -70,4 +70,9 @@ public class NodeRayCastHitPosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position where the ray cast hits a surface, object, or player (or the end position if no hit occurs).";
+    }
 }

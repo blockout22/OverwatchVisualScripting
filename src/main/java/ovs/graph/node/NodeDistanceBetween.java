@@ -67,4 +67,9 @@ public class NodeDistanceBetween extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The distance between two positions. in meters.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeSineFromDegrees extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sine of the specified angle in degrees.";
+    }
 }

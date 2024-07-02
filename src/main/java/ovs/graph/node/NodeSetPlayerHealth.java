@@ -51,4 +51,9 @@ public class NodeSetPlayerHealth extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the health of a player or players without affecting stats or granting damage/healing credit. this action only has an effect on living players.(for dead players, use the resurrect player action instead.)";
+    }
 }

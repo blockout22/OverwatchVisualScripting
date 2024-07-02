@@ -50,4 +50,9 @@ public class NodeEnableNamePlates extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of disable nameplates for one or more viewed players from the perspective of one or more viewing players.";
+    }
 }

@@ -35,4 +35,9 @@ public class NodeEmptyArray extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array with no elements.";
+    }
 }

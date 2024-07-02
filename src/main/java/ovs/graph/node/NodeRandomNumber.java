@@ -73,4 +73,9 @@ public class NodeRandomNumber extends Node {
     public void UI() {
         randomType.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A random number between the specified min and max.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeIsOnGround extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is on the ground (or other walkable surface).";
+    }
 }

@@ -74,4 +74,9 @@ public class NodeConditionList extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "multiple condition combined into one output to connect to the Rule node.";
+    }
 }

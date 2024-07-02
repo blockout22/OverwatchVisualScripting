@@ -45,4 +45,9 @@ public class NodeEnableBuiltInGameModeRespawning extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Undoes the effect of the disable built-in game mode respawning action for one or more players.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeLeft extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Shorthand for the directional vector(1,0,0), which points to the left.";
+    }
 }

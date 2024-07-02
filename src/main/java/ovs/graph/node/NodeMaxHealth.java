@@ -42,4 +42,9 @@ public class NodeMaxHealth extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The max health of a player, including amor and shields.";
+    }
 }

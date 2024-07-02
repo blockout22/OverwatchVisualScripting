@@ -42,4 +42,9 @@ public class NodeNumberOfPlayersOnObjective extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of players occupying a payload or control point (either on a team or in the match).";
+    }
 }

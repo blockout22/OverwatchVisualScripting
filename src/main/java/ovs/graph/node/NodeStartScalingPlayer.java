@@ -79,4 +79,9 @@ public class NodeStartScalingPlayer extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Starts modifying the size of a player or players (including mode, movement collision, hit detection, and certain abilities). node that large players places into complex environments will severely impact server load, so consider also applying the disable movement collision with environment action.";
+    }
 }

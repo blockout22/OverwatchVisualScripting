@@ -42,4 +42,9 @@ public class NodeTeamScore extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current score for the specified team, results in 0 in free-for-all game modes.";
+    }
 }

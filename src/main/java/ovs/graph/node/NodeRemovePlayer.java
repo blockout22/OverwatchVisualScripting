@@ -43,4 +43,9 @@ public class NodeRemovePlayer extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Removes one or more players from the custom game. this action doesn't work on dummy bots.";
+    }
 }

@@ -82,4 +82,9 @@ public class NodeIsButtonHeld extends Node{
     public void UI() {
         comboBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is holding a specific button.";
+    }
 }

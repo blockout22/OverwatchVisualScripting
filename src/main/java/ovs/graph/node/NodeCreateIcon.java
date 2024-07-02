@@ -137,4 +137,9 @@ public class NodeCreateIcon extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Create an in-world icon entity, this icon entity will persist until destroyed. to obtain a reference to this entity, use the last created entity value, this action will fail if too many entities have been created.";
+    }
 }

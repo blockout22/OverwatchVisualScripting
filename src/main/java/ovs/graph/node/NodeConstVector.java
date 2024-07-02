@@ -60,4 +60,9 @@ public class NodeConstVector extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A constant vector for hard coded values.";
+    }
 }

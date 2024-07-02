@@ -42,4 +42,9 @@ public class NodeInputBindingString extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Converts a button parameter into a string that shows up based on the player's input bindings. this value cannot be stored in variables.";
+    }
 }

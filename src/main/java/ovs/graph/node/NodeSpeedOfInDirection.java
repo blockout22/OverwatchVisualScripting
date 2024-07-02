@@ -49,4 +49,9 @@ public class NodeSpeedOfInDirection extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current speed of a player in a specific direction in meters per second.";
+    }
 }

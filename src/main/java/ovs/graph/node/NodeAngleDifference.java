@@ -49,4 +49,9 @@ public class NodeAngleDifference extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The difference in degrees between two angles. after the angles are wrapped to be withing +/- 180 of each other, the result is positive if the second angle is greater than the first angle. otherwise, the result is zero or negative.";
+    }
 }

@@ -71,4 +71,9 @@ public class NodeWorkshopSettingCombo extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides the value (a choice of custom strings) of a new option setting that will appear in the workshop settings card as a combo box, this value returns the index of the select choice.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeControlModeScoringTeam extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The team that is currently accumulating score percentage in control mode. results in all if neither team is accumulating score.";
+    }
 }

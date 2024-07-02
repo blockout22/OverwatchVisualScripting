@@ -49,4 +49,9 @@ public class NodeMultiply extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The product of two numbers or vectors. a vector multiplied by a number will yield a scaled vector.";
+    }
 }

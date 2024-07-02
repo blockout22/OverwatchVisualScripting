@@ -296,4 +296,9 @@ public class NodeRule extends NodeEntry{
             comboSub.show();
         }
     }
+
+    @Override
+    public String getTooltip() {
+        return "Outputs rules to readable Overwatch scripts.";
+    }
 }

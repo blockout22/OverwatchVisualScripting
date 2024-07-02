@@ -63,4 +63,9 @@ public class NodeHealthOfType extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current health of a player by type (health, armor, or shields).";
+    }
 }

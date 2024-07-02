@@ -42,4 +42,9 @@ public class NodeIsFiringPrimary extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player's primary weapon attack is being used.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeEventHealing extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The amount of healing received bny the healee for the event currently being processed by this rule.";
+    }
 }

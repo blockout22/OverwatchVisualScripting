@@ -85,4 +85,9 @@ public class NodeCompare extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the comparison of the two inputs is true.";
+    }
 }

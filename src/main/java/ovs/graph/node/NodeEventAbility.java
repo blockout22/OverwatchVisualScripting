@@ -34,4 +34,9 @@ public class NodeEventAbility extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The ability for the event currently being processed by this rule associated by button.";
+    }
 }

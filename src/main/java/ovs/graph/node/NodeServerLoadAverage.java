@@ -34,4 +34,9 @@ public class NodeServerLoadAverage extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides a percentage representing the average cpu load of the current game instance of the last two seconds. as this number approaches or exceeds 100, it becomes increasingly likely that the instance will be shut down because it is consuming too many resources.";
+    }
 }

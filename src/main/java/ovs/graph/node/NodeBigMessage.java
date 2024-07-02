@@ -51,4 +51,9 @@ public class NodeBigMessage extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Displays a large message above the reticle that is visible to specific players.";
+    }
 }

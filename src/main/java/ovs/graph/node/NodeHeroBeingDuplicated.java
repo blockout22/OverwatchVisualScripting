@@ -42,4 +42,9 @@ public class NodeHeroBeingDuplicated extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The hero currently being duplicated by the specified player. if no hero is being duplicated, the resulting value is 0.";
+    }
 }

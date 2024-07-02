@@ -43,4 +43,9 @@ public class NodeElseIf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Denotes the beginning of a series of actions that will only execute if the specified condition is true and the previous if or else if action's condition was false.";
+    }
 }

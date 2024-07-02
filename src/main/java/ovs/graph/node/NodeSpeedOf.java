@@ -42,4 +42,9 @@ public class NodeSpeedOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current speed of a player in meters per second.";
+    }
 }

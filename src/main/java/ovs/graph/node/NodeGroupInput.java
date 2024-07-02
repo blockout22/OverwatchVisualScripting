@@ -106,6 +106,11 @@ public class NodeGroupInput extends Node {
 
     }
 
+    @Override
+    public String getTooltip() {
+        return "An input argument for the Ground node to pass in";
+    }
+
 //    public void bind(PinVar pin){
 //        this.pinBinding = pin;
 //    }

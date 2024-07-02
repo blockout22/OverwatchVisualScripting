@@ -49,4 +49,9 @@ public class NodeClosestPlayerTo extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player closest to a position, optionally restricted by team.";
+    }
 }

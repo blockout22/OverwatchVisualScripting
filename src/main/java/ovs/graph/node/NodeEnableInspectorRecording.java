@@ -35,4 +35,9 @@ public class NodeEnableInspectorRecording extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "causes the workshop inspector to resume recoding new entries (in case i had been disabled earlier). enabling recording at specific times may make it easier to debug problematic areas in your logic.";
+    }
 }

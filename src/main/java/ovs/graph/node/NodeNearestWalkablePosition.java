@@ -42,4 +42,9 @@ public class NodeNearestWalkablePosition extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The position closest to the specified position that can be stood on and is accessible from a spawn point.";
+    }
 }

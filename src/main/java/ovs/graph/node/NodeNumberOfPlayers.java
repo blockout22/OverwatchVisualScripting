@@ -42,4 +42,9 @@ public class NodeNumberOfPlayers extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The number of players on a team or in the match.";
+    }
 }

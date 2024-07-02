@@ -86,4 +86,9 @@ public class NodeAddHealthPoolToPlayer extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Adds a temporary health pool to a player or players. the health pool can be referenced using the last created health pool value, up to 16 health pools of a given health type (Health, armor, or shields) may exist on a player (including base pools and pools granted by abilities).";
+    }
 }

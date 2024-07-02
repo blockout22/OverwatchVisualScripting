@@ -50,4 +50,9 @@ public class NodeSetTeamScore extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the score for one or both teams, this action has no effect in free-for-all modes or modes without a team score.";
+    }
 }

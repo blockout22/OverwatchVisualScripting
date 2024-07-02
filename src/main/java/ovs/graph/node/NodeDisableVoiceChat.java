@@ -64,4 +64,9 @@ public class NodeDisableVoiceChat extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables voice chat for one or more players until reenabled.";
+    }
 }

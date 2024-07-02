@@ -52,4 +52,9 @@ public class NodeSetAbility1Enabled extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Enables or disables ability 1 for one or more players";
+    }
 }

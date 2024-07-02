@@ -70,4 +70,9 @@ public class NodeHero extends Node{
     public void UI() {
         heroes.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A hero constant.";
+    }
 }

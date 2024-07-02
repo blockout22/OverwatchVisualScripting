@@ -42,4 +42,9 @@ public class NodeSquareRoot extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The square root of the specified value.";
+    }
 }

@@ -34,4 +34,9 @@ public class NodeAllTankHeroes extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The array of all tank heroes in overwatch.";
+    }
 }

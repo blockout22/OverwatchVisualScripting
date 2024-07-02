@@ -68,4 +68,15 @@ public class NodeLoop extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        switch (type.getSelectedValue()) {
+            case "Loop If Condition Is True":
+                return "Restarts the action list from the beginning if every condition in the condition list is true. if any are false, execution continues with the next action.";
+            case "Loop If Condition Is False":
+                return "Restarts the action list from the beginning if ay least on condition in the condition list is false, if all conditions are true, execution continues with the next action.";
+        }
+        return "Restarts the action list from the beginning.";
+    }
 }

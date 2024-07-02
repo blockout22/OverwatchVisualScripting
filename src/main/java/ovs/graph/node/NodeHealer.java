@@ -34,4 +34,9 @@ public class NodeHealer extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player that dealt the healing for the event currently being processed by this rule. may be the same as the healee or the event player.";
+    }
 }

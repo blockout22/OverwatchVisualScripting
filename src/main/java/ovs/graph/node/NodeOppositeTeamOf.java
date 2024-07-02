@@ -42,4 +42,9 @@ public class NodeOppositeTeamOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The team opposite the specified team.";
+    }
 }

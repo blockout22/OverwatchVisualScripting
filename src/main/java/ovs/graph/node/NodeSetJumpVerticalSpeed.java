@@ -51,4 +51,9 @@ public class NodeSetJumpVerticalSpeed extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the jump vertical speed of one or more players to a percentage of their raw jump vertical speed.";
+    }
 }

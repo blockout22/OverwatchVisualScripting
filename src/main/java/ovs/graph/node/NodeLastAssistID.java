@@ -34,4 +34,9 @@ public class NodeLastAssistID extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An id representing the most recent start assist action that was executed by the event player (or executed at the global level).";
+    }
 }

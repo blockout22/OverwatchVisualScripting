@@ -35,4 +35,9 @@ public class NodeDestroyAllProgressBarInWorldText extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys all progress bar in-world text that were created by the create progress bar in-world text action.";
+    }
 }

@@ -141,4 +141,9 @@ public class NodeGroupOutput extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "An output value that can be used with the Group node.";
+    }
 }

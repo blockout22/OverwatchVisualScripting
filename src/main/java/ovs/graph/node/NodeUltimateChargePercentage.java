@@ -42,4 +42,9 @@ public class NodeUltimateChargePercentage extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current ultimate ability charge percentage of a player.";
+    }
 }

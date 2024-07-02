@@ -60,4 +60,9 @@ public class NodeVector extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A vector composed of three real numbers (x,y,z) where x is left, y is up, and z is forward, vectors are used for position, direction, and velocity.";
+    }
 }

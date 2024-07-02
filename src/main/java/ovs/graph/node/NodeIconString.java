@@ -80,4 +80,9 @@ public class NodeIconString extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Allows you to use an icon inside of a string (up to 4 per string).";
+    }
 }

@@ -41,4 +41,9 @@ public class NodeIsCommunicatingAnyVoiceLine extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is using a voice line. (the duration of voice lines is assumed to be 4 seconds.).";
+    }
 }

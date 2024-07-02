@@ -49,4 +49,9 @@ public class NodeValueInArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The value found at a specific element of an array. results in 0 if the element does not exist.";
+    }
 }

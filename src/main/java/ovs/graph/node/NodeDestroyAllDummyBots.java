@@ -35,4 +35,9 @@ public class NodeDestroyAllDummyBots extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Removes all dummy bots from the match.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeControlModeScoringPercentage extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The score percentage for the specified team in control mode.";
+    }
 }

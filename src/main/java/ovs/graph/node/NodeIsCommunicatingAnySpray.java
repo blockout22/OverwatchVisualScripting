@@ -41,4 +41,9 @@ public class NodeIsCommunicatingAnySpray extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a player is using a spray.";
+    }
 }

@@ -44,4 +44,9 @@ public class NodeStopCamera extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Restores the camera to the default view.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeTangentFromRadians extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Tangent of the specified angle in radians.";
+    }
 }

@@ -44,4 +44,9 @@ public class NodeSetSlowMotion extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the simulation rate for the entire game, including all players, projectiles, effects, and game mode logic.";
+    }
 }

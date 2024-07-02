@@ -42,4 +42,9 @@ public class NodeIsCrouching extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether aa player is crouching.";
+    }
 }

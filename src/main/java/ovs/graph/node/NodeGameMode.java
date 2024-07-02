@@ -54,4 +54,9 @@ public class NodeGameMode extends Node {
     public void UI() {
         combo.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A game mode constant";
+    }
 }

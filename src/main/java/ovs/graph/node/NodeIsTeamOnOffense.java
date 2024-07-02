@@ -42,4 +42,9 @@ public class NodeIsTeamOnOffense extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified team is current on offense. results in false if the game mode is not assault. escort, or assault/escort";
+    }
 }

@@ -49,4 +49,9 @@ public class NodeIsHeroBeingPlayed extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether a specific hero is being played (either on a team or in the match).";
+    }
 }

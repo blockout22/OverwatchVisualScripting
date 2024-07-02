@@ -59,4 +59,9 @@ public class NodeHeal extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides an instantaneous heal to one or more players. this heal will not resurrect dead players.";
+    }
 }

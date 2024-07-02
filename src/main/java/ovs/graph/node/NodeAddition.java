@@ -73,4 +73,9 @@ public class NodeAddition extends Node{
     public void UI() {
         addition.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Add, subtract, multiply and divide combined into 1 node";
+    }
 }

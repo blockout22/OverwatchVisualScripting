@@ -49,4 +49,9 @@ public class NodeAbilityResource extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The ability resource percentage for a player associated by button.";
+    }
 }

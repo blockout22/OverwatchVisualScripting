@@ -40,4 +40,9 @@ public class NodeAllPlayersOnObjective extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array containing all players occupying a payload or control point (either on a team or in the match).";
+    }
 }

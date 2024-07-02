@@ -44,4 +44,9 @@ public class NodeResurrect extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Instantly resurrects one or more players a the location they died with no transition.";
+    }
 }

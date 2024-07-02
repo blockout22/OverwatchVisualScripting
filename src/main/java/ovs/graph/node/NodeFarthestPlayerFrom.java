@@ -49,4 +49,9 @@ public class NodeFarthestPlayerFrom extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player farthest from a position, optionally restricted by team.";
+    }
 }

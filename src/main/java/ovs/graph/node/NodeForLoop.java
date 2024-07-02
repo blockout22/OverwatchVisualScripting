@@ -105,4 +105,9 @@ public class NodeForLoop extends Node {
     @Override
     public void UI() {
     }
+
+    @Override
+    public String getTooltip() {
+        return "Denotes the beginning of a series of actions that will execute in a loop, modifying the control variable on each loop, the corresponding end action denotes the end of the loop. if the control variable reaches or passes the range stop value, then the loop exists, and execution jumps to the next action after the end action.";
+    }
 }

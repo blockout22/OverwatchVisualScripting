@@ -34,4 +34,9 @@ public class NodeDisableInspectorRecording extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Causes the workshop inspector to stop recording new entries. ths has the benefit or reducing your script's server load, particularly when modifying arrays.";
+    }
 }

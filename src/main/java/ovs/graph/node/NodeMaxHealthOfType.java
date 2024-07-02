@@ -67,4 +67,9 @@ public class NodeMaxHealthOfType extends Node {
     public void UI() {
         healthType.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The max health of a player by type (health, armor, or shields).";
+    }
 }

@@ -91,4 +91,9 @@ public class NodeWait extends Node{
     public void UI() {
         waitBehavior.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Pauses the execution of the action list, unless the wait is interrupted, the remainder of the actions will execute after the pause.";
+    }
 }

@@ -75,4 +75,9 @@ public class NodeActionList extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "multiple actions combined into 1, can be connected to a rule or another action list";
+    }
 }

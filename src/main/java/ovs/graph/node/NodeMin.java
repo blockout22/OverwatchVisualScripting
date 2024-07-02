@@ -49,4 +49,9 @@ public class NodeMin extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The lesser of two numbers.";
+    }
 }

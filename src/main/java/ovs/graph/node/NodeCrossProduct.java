@@ -49,4 +49,9 @@ public class NodeCrossProduct extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The cross product of the specified values. (left cross up equals forward.)";
+    }
 }

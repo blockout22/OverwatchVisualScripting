@@ -42,4 +42,9 @@ public class NodeHorizontalSpeedOf extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current horizontal speed of a player in meters per second, this measurement excludes all vertical motion.";
+    }
 }

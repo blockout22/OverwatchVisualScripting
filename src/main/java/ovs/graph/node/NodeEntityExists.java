@@ -42,4 +42,9 @@ public class NodeEntityExists extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the specified player, icon entity, or effect entity still exists. useful for determining if a player has left the match or an entity has been destroyed.";
+    }
 }

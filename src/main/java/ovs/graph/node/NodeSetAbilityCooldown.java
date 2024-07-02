@@ -58,4 +58,9 @@ public class NodeSetAbilityCooldown extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Set the ability cooldown time for one or more players if supported.";
+    }
 }

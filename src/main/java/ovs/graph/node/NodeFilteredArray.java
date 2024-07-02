@@ -49,4 +49,9 @@ public class NodeFilteredArray extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "A copy of a specified array with any values that do not match the specified condition removed.";
+    }
 }

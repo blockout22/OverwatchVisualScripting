@@ -84,4 +84,9 @@ public class NodeApplyImpulse extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Applies an instantaneous change in velocity to the movement of one or more players.";
+    }
 }

@@ -49,4 +49,9 @@ public class NodeVectorTowards extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The displacement vector from one position to another.";
+    }
 }

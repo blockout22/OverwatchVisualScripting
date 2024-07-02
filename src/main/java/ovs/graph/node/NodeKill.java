@@ -66,4 +66,9 @@ public class NodeKill extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Instantly kills one or more players.";
+    }
 }

@@ -74,4 +74,9 @@ public class NodePlayerHeroStat extends Node {
     public void UI() {
         stats.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Provides a statistic of the specified player's time playing a specific hero (limited to the current match). statistics are only gathered when the game is in progress. dummy bots do not gather statistics.";
+    }
 }

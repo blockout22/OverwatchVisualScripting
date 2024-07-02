@@ -34,4 +34,9 @@ public class NodeCurrentMap extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current map of the custom game.";
+    }
 }

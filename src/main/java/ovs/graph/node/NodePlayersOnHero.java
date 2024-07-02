@@ -49,4 +49,9 @@ public class NodePlayersOnHero extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The array of players playing a specific hero on a team or in the match.";
+    }
 }

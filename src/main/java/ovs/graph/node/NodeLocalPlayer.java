@@ -34,4 +34,9 @@ public class NodeLocalPlayer extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The player being controlled on the end user's device. this value is different for each end user and this can only be accessed in action which affect visuals or the hud, this value cannot be stored in variables.";
+    }
 }

@@ -43,4 +43,9 @@ public class NodeHeroIconString extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Converts a hero parameter into a string that shows up as an icon (up to 4 per string).";
+    }
 }

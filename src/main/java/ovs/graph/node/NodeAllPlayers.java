@@ -44,4 +44,9 @@ public class NodeAllPlayers extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array containing all players on a team or in the match.";
+    }
 }

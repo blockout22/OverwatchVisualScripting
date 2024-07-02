@@ -50,4 +50,9 @@ public class NodeDisableMovementCollisionWithEnvironment extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Causes a player or players to stop colliding with the environment (walls, ceilings, certain objects, etc.).";
+    }
 }

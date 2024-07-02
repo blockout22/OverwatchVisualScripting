@@ -34,4 +34,9 @@ public class NodePointCapturePercentage extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current progress towards capture for the active control point (expressed as a percentage).";
+    }
 }

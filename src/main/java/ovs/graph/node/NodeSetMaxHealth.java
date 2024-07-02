@@ -67,4 +67,9 @@ public class NodeSetMaxHealth extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Sets the max health of one or more players as a percentage of their raw max health. this action will ensure that a player's current health will not exceed the new max health. health pools added by workshop actions are not affected by this action.";
+    }
 }

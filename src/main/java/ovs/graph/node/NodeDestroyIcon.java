@@ -44,4 +44,9 @@ public class NodeDestroyIcon extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Destroys an icon entity that was created by create icon.";
+    }
 }

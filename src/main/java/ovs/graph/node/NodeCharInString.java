@@ -49,4 +49,9 @@ public class NodeCharInString extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The character fount at a specified index of a string.";
+    }
 }

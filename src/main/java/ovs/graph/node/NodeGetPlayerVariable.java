@@ -107,4 +107,9 @@ public class NodeGetPlayerVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current value of a player variable, which is a variable that belongs to a specific player.";
+    }
 }

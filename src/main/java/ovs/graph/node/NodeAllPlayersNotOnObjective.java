@@ -40,4 +40,9 @@ public class NodeAllPlayersNotOnObjective extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array containing all players occupying neither a payload nor a control point (either on a team or in the match).";
+    }
 }

@@ -4,21 +4,14 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinVar;
 
-public class NodeDetachPlayer extends Node{
-
-    PinVar pinChildren = new PinVar();
+public class NodeReturnToLobby extends Node {
 
     PinAction output = new PinAction();
 
-    public NodeDetachPlayer(Graph graph) {
+    public NodeReturnToLobby(Graph graph) {
         super(graph);
-        setName("Detach Player");
-
-        pinChildren.setNode(this);
-        pinChildren.setName("Children");
-        addCustomInput(pinChildren);
+        setName("Return To Lobby");
 
         output.setNode(this);
         addCustomOutput(output);
@@ -26,13 +19,9 @@ public class NodeDetachPlayer extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> childData = pinChildren.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(pinChildren, childData);
-
-        outputData.getValue().set("Detach Players(" + childData.getValue().get() + ");");
-
+        outputData.getValue().set(getName() + ";");
     }
 
     @Override
@@ -44,5 +33,10 @@ public class NodeDetachPlayer extends Node{
     @Override
     public void UI() {
 
+    }
+
+    @Override
+    public String getTooltip() {
+        return "Returns the game mode back to the custom game lobby.";
     }
 }

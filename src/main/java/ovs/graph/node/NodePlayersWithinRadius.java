@@ -81,4 +81,9 @@ public class NodePlayersWithinRadius extends Node {
     public void UI() {
         losCheck.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "An array containing all players within a certain distance of a position, optionally restricted by team and line of sight.";
+    }
 }

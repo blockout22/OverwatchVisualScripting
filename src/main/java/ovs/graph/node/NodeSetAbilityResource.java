@@ -58,4 +58,9 @@ public class NodeSetAbilityResource extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Set the ability resource percentage for one or more players if supported.";
+    }
 }

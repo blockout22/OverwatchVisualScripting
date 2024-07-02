@@ -51,4 +51,9 @@ public class NodeStartForcingPlayerToBeHero extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Starts forcing one or more players to be a specific hero and, if necessary, respawns them immediately in their current location. this will be the only hero available to the player or players until the stop forcing player to be hero action is executed.";
+    }
 }

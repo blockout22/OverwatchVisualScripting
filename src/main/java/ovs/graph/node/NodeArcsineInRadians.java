@@ -42,4 +42,9 @@ public class NodeArcsineInRadians extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Arcsine in radians of the specified value.";
+    }
 }

@@ -42,4 +42,9 @@ public class NodeNormalizedHealth extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current health of a playerr, including amor and shields, normalized  between 0 and 1. (for example, 0 is no health, 0.5 is half health, 1 is full health, etc.).";
+    }
 }

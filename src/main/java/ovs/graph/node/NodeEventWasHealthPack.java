@@ -34,4 +34,9 @@ public class NodeEventWasHealthPack extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Whether the healing was from a health pack for the event currently being processed by this rule.";
+    }
 }

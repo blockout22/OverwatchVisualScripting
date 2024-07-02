@@ -43,4 +43,9 @@ public class NodeDisableTextChat extends Node{
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "Disables text chat for one or more players until reenabled.";
+    }
 }

@@ -87,4 +87,9 @@ public class NodeCallSubroutine extends Node{
     public void UI() {
         comboBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Pauses execution of the current rule and begins executing a subroutine rule (which is a rule with a subroutine event type). when the subroutine rule finishes, the original rule resumes execution, the subroutine will have access to the same contextual values (such as event player) as the original rule.";
+    }
 }

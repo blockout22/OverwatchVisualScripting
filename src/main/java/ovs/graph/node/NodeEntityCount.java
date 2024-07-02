@@ -34,4 +34,9 @@ public class NodeEntityCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of entities created from the create effect, create beam effect, or create icon action.";
+    }
 }

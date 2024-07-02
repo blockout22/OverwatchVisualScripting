@@ -160,4 +160,9 @@ public class NodeMap extends Node{
     public void UI() {
         selectedMap.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "A map constant.";
+    }
 }

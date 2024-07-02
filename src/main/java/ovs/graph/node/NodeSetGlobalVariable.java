@@ -107,4 +107,9 @@ public class NodeSetGlobalVariable extends Node{
     public void UI() {
         variableBox.show();
     }
+
+    @Override
+    public String getTooltip() {
+        return "Stores a value into a global variable, which is a variable that belongs to the game itself.";
+    }
 }

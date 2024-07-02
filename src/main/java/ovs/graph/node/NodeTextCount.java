@@ -36,4 +36,9 @@ public class NodeTextCount extends Node {
     public void UI() {
 
     }
+
+    @Override
+    public String getTooltip() {
+        return "The current number of text instances started from the create hud text, create in-world text, create progress bar hud text, or create progress bar in-world text action.";
+    }
 }
