@@ -16,6 +16,7 @@ import org.lwjgl.glfw.GLFW;
 import ovs.Debugger;
 import ovs.Global;
 import ovs.RGBA;
+import ovs.TooltipHandler;
 import ovs.graph.UI.UiComponent;
 import ovs.graph.node.Node;
 import ovs.graph.node.NodeComment;
@@ -456,11 +457,8 @@ public class NodeEditorRenderer {
                     NodeEditor.endNode();
 
                     if(ImGui.isItemHovered()){
-                        ImGui.setNextWindowPos(cursorPos.x, cursorPos.y + 25);
-                        ImGui.beginTooltip();
-                        ImGui.pushTextWrapPos(ImGui.getFontSize() * 35.0f);
-                        ImGui.text(node.getTooltip());
-                        ImGui.endTooltip();
+
+                        TooltipHandler.set(node.getTooltip());
                     }
                 }
                 float x = ImGui.getMousePosX();

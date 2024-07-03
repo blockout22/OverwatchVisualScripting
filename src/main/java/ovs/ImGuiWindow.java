@@ -495,6 +495,15 @@ public class ImGuiWindow {
                     }
                     ImGui.sameLine();
                 }
+
+                if(!TooltipHandler.getTooltip().isEmpty()) {
+                    ImGui.setNextWindowPos(ImGui.getMousePos().x, ImGui.getMousePos().y + 25);
+                    ImGui.beginTooltip();
+                    ImGui.pushTextWrapPos(ImGui.getFontSize() * 35.0f);
+                    ImGui.text(TooltipHandler.getTooltip());
+                    ImGui.endTooltip();
+                    TooltipHandler.set("");
+                }
             }
             ImGui.end();
             ImGui.popStyleColor();
