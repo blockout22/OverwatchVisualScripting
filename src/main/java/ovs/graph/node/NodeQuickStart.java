@@ -15,7 +15,7 @@ public class NodeQuickStart extends NodeEntry {
     public NodeQuickStart(Graph graph) {
         super(graph);
         setName("QuickStart");
-        setColor(175, 255, 50);
+        setColor(0, 255, 0);
 
         skipAssembleHeroes.setNode(this);
         skipAssembleHeroes.setName("Skip Assemble Heroes");

@@ -45,7 +45,7 @@ public class NodeGetGlobalVariable extends Node{
     public void execute() {
         if (outputPin.isConnected() && variableBox.size() > 0 && variableBox.getSelectedIndex() != -1) {
             PinData<ImString> data = outputPin.getData();
-            data.getValue().set(variableBox.getSelectedValue());
+            data.getValue().set("Global." + variableBox.getSelectedValue());
         }
     }
 
