@@ -32,6 +32,11 @@ public class Graph {
     }
 
     public void addGlobalVariable(String name){
+        for(Variable var : globalVariables.getList()){
+            if(var.name.equals(name)){
+                return;
+            }
+        }
         Variable var = new Variable();
         var.type = Variable.Type.GLOBAL;
 //        var.ID = globalVariables.size();
@@ -40,6 +45,11 @@ public class Graph {
     }
 
     public void addPlayerVariable(String name){
+        for(Variable var : playerVariables.getList()){
+            if(var.name.equals(name)){
+                return;
+            }
+        }
         Variable var = new Variable();
         var.type = Variable.Type.PLAYER;
 //        var.ID = playerVariables.size();

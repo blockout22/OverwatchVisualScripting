@@ -32,12 +32,20 @@ public class NodeActionList extends Node{
         button.addLeftClickListener(new LeftClickListener() {
             @Override
             public void onClicked() {
-                Pin pin = new PinAction();
-                pin.setNode(self);
-                pin.setCanDelete(true);
-                addCustomInput(pin);
+                addInputPin();
+//                Pin pin = new PinAction();
+//                pin.setNode(self);
+//                pin.setCanDelete(true);
+//                addCustomInput(pin);
             }
         });
+    }
+
+    public void addInputPin(){
+        Pin pin = new PinAction();
+        pin.setNode(self);
+        pin.setCanDelete(true);
+        addCustomInput(pin);
     }
 
     @Override

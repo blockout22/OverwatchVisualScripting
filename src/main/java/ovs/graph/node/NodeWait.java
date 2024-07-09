@@ -5,34 +5,30 @@ import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
-import ovs.graph.pin.Pin;
-import ovs.graph.pin.PinAction;
-import ovs.graph.pin.PinFloat;
+import ovs.graph.pin.*;
 
 public class NodeWait extends Node{
 
-    ComboBox waitBehavior = new ComboBox();
-
-    PinFloat inputPin;
-    PinAction outputPin;
-
-    PinData<ImFloat> data;
+    PinVar pinTime = new PinVar();
+    PinCombo pinWaitBehaviour = new PinCombo();
+    PinAction outputPin = new PinAction();
 
     public NodeWait(Graph graph){
         super(graph);
         setName("Wait");
 
-        waitBehavior.addOption("Ignore Condition");
-        waitBehavior.addOption("Abort When False");
-        waitBehavior.addOption("Restart When True");
+        pinTime.setNode(this);
+        pinTime.setName("Time");
+        addCustomInput(pinTime);
 
-        waitBehavior.select(0);
+        pinWaitBehaviour.setNode(this);
+        pinWaitBehaviour.setName("Wait Behaviour");
+        addCustomInput(pinWaitBehaviour);
 
-        inputPin = new PinFloat();
-        inputPin.setNode(this);
-        addCustomInput(inputPin);
+        pinWaitBehaviour.addOption("Ignore Condition");
+        pinWaitBehaviour.addOption("Abort When False");
+        pinWaitBehaviour.addOption("Restart When True");
 
-        data = inputPin.getData();
 
         outputPin = new PinAction();
         outputPin.setNode(this);
@@ -42,14 +38,14 @@ public class NodeWait extends Node{
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("WaitBehavior:" + waitBehavior.getSelectedValue());
+        getExtraSaveData().add("WaitBehavior:" + pinWaitBehaviour.getComboBox().getSelectedValue());
     }
 
     @Override
     public void onLoaded() {
         for(String data : getExtraSaveData()){
             if(data.startsWith("WaitBehavior")){
-                waitBehavior.selectValue(data.split(":")[1]);
+                pinWaitBehaviour.selectValue(data.split(":")[1]);
             }
         }
     }
@@ -57,28 +53,20 @@ public class NodeWait extends Node{
     @Override
     public void copy(Node node) {
         if(node instanceof NodeWait){
-            waitBehavior.selectValue(((NodeWait) node).waitBehavior.getSelectedValue());
-
-            PinData<ImFloat> copyData = ((NodeWait) node).inputPin.getData();
-
-            data.getValue().set(copyData.value.get());
+            pinWaitBehaviour.selectValue(((NodeWait) node).pinWaitBehaviour.getComboBox().getSelectedValue());
         }
     }
 
     @Override
     public void execute() {
-        PinData<ImString> inputData = inputPin.getData();
+        PinData<ImString> timeData = pinTime.getData();
+        PinData<ImString> waitBehaviourData = pinWaitBehaviour.getData();
         PinData<ImString> outputData = outputPin.getData();
 
-        if(inputPin.isConnected()){
-            Pin connectedPin = inputPin.getConnectedPin();
+        handlePinStringConnection(pinTime, timeData, "0.25");
+        handlePinStringConnection(pinWaitBehaviour, waitBehaviourData, pinWaitBehaviour.getComboBox().getSelectedValue());
 
-            PinData<ImString> connectedData = connectedPin.getData();
-
-            inputData.getValue().set(connectedData.getValue().get());
-        }
-
-        outputData.getValue().set((getFormattedComment()) + "Wait(" + data.getValue() + ", "+ waitBehavior.getSelectedValue() +");");
+        outputData.getValue().set((getFormattedComment()) + "Wait(" + timeData.getValue().get() + ", "+ waitBehaviourData.getValue().get() +");");
     }
 
     @Override
@@ -89,7 +77,7 @@ public class NodeWait extends Node{
 
     @Override
     public void UI() {
-        waitBehavior.show();
+
     }
 
     @Override

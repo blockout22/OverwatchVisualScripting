@@ -17,8 +17,10 @@ import ovs.graph.node.*;
 import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
+import ovs.graph.pin.PinCombo;
 import ovs.graph.save.GraphSaver;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -301,6 +303,78 @@ public class GraphWindow {
         nodeEditorRenderer.setId(id);
     }
 
+    private void handleImportAction(String[] actions, Node parentNode, ClassLoader loader, ImVec2 offset) {
+        String packageName = "ovs.graph.node.";
+        for (int i = 0; i < actions.length; i++) {
+            String name = ScriptImporter.getActionName(actions[i]);
+            if(name.startsWith("\"") && name.endsWith("\""))
+            {
+                System.out.println("This is a string constant so I am skipping");
+                continue;
+            }
+            try{
+                float value = Float.parseFloat(name);
+//                System.out.println("Skipping number");
+                continue;
+            }catch (NumberFormatException e){
+
+            }
+
+            if(parentNode.inputPins.get(i) instanceof PinCombo){
+                PinCombo comboPin = (PinCombo) parentNode.inputPins.get(i);
+                comboPin.selectValue(name);
+                continue;
+            }
+
+            Node node = null;
+            if(name.startsWith("Global.")){
+                String varName = name.substring(0, name.lastIndexOf("=")).split("\\.")[1].trim();
+                graph.addGlobalVariable(varName);
+                node = new NodeSetGlobalVariable(graph);
+            }else if(name.contains("=")){
+                String varName = name.substring(0, name.lastIndexOf("=")).split("\\.")[1].trim();
+                graph.addPlayerVariable(varName);
+                node = new NodeSetPlayerVariable(graph);
+//                ((NodeSetPlayerVariable) node).variableBox.selectValue(varName);
+            }else{
+
+                String className = "Node" + name.replace(" ", "").replace("-", "");
+                Class nodeClass = null;
+                try {
+                    nodeClass = Class.forName(packageName + className, true, loader);
+                } catch (ClassNotFoundException e) {
+                    System.err.println("ClassName: " + className);
+                    e.printStackTrace();
+                    continue;
+                }
+
+                try {
+                    node = (Node) nodeClass.getDeclaredConstructor(Graph.class).newInstance(graph);
+                } catch (InstantiationException | InvocationTargetException | NoSuchMethodException |
+                         IllegalAccessException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+            node.posX = parentNode.posX - offset.x;
+            node.posY = parentNode.posY - offset.y;
+
+            offset.y -= 100;
+            graph.addNode(node);
+            NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(node.posX), NodeEditor.toCanvasY(node.posY));
+            parentNode.inputPins.get(i).connect(node.outputPins.get(0));
+
+            String[] args = ScriptImporter.getActionArguments(actions[i]);
+            if(args.length > 0){
+                try {
+                    handleImportAction(args, node, loader, offset);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void show(float menuBarHeight, float taskbarHeight){
         cursorPos = ImGui.getMousePos();
         graph.update();
@@ -393,42 +467,99 @@ public class GraphWindow {
             if(importDialog.isOpen()){
                 int state = importDialog.show();
                 if(state == 1){
-                    List<ScriptImporter.Rule> rules = ScriptImporter.importFromString(importDialog.getContent());
+                    String[] rules = ScriptImporter.splitRules(importDialog.getContent());
 
-                    for(ScriptImporter.Rule rule : rules){
-                        NodeRule nodeRule = new NodeRule(graph);
-                        nodeRule.comboEventOnGoing.selectValue(rule.eventType);
+                    String packageName = "ovs.graph.node.";
+                    ClassLoader loader = NodeCopyPasteHandler.class.getClassLoader();
+                    float canvasXPos = NodeEditor.toCanvasX(ImGui.getMousePosX());
+                    float canvasYPos = NodeEditor.toCanvasY(ImGui.getMousePosY());
+                    ImVec2 offset = new ImVec2();
+                    for(String rule : rules){
+                        String ruleName = ScriptImporter.getRuleName(rule);
+                        offset.x = 0;
+                        try {
+                            String[] event = ScriptImporter.getActionLines(ScriptImporter.LineType.event, rule);
+                            String[] conditions = ScriptImporter.getActionLines(ScriptImporter.LineType.conditions, rule);
+                            String[] actions = ScriptImporter.getActionLines(ScriptImporter.LineType.actions, rule);
 
-                        if(rule.playerType != null){
-                            nodeRule.comboPlayers.selectValue(rule.playerType);
-                        }
-
-                        if(rule.teamType != null){
-                            nodeRule.comboTeam.selectValue(rule.teamType);
-                        }
-
-                        //TODO set positions
-                        nodeRule.posX = 0;
-                        nodeRule.posY = 0;
-                        graph.addNode(nodeRule);
-
-                        for (int i = 0; i < rule.actions.size(); i++) {
-                            String action = rule.actions.get(i);
-
-                            for (Node node : nodeEditorRenderer.nodeInstanceCache) {
-                                if(node.getName().equals(action.trim().split("\\(")[0])){
-                                    try {
-                                        Node newInstance = node.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
-                                        graph.addNode(newInstance);
-                                    } catch (Exception e) {
-                                        throw new RuntimeException(e);
-                                    }
-
-                                    break;
-                                }
+                            Class ruleClass = Class.forName(packageName + "NodeRule", true, loader);
+                            NodeRule ruleNode = (NodeRule) ruleClass.getDeclaredConstructor(Graph.class).newInstance(graph);
+                            ruleNode.setName(ruleName);
+                            ruleNode.comboEventOnGoing.selectValue(event[0]);
+                            if(event.length == 2){
+                                ruleNode.comboSub.selectValue(event[1]);
+                            }else if(event.length == 3){
+                                ruleNode.comboTeam.selectValue(event[1]);
+                                ruleNode.comboPlayers.selectValue(event[2]);
                             }
+//                            ruleNode.setComment();
+                            ruleNode.posX = canvasXPos - offset.x;
+                            ruleNode.posY = canvasYPos - offset.y;
+                            offset.x += 100;
+                            graph.addNode(ruleNode);
+                            NodeEditor.setNodePosition(ruleNode.getID(), NodeEditor.toCanvasX(ruleNode.posX), NodeEditor.toCanvasY(ruleNode.posY));
+
+                            Node parentNode;
+
+                            NodeActionList actionList = new NodeActionList(graph);
+                            for (int i = 0; i < actions.length - 1; i++) {
+                                actionList.addInputPin();
+                            }
+                            actionList.posX = canvasXPos - offset.x;
+                            actionList.posY = canvasYPos - offset.y;
+                            offset.x += 200;
+                            graph.addNode(actionList);
+                            parentNode = actionList;
+                            ruleNode.inputPins.get(1).connect(actionList.outputPins.get(0));
+                            NodeEditor.setNodePosition(actionList.getID(), NodeEditor.toCanvasX(actionList.posX), NodeEditor.toCanvasY(actionList.posY));
+
+                            try {
+                                handleImportAction(actions, parentNode, loader, offset);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
+//                    String content = importDialog.getContent();
+
+//                    List<ScriptImporter.Rule> rules = ScriptImporter.importFromString(importDialog.getContent());
+//
+//                    for(ScriptImporter.Rule rule : rules){
+//                        NodeRule nodeRule = new NodeRule(graph);
+//                        nodeRule.comboEventOnGoing.selectValue(rule.eventType);
+//
+//                        if(rule.playerType != null){
+//                            nodeRule.comboPlayers.selectValue(rule.playerType);
+//                        }
+//
+//                        if(rule.teamType != null){
+//                            nodeRule.comboTeam.selectValue(rule.teamType);
+//                        }
+//
+//                        //TODO set positions
+//                        nodeRule.posX = 0;
+//                        nodeRule.posY = 0;
+//                        graph.addNode(nodeRule);
+//
+//                        for (int i = 0; i < rule.actions.size(); i++) {
+//                            String action = rule.actions.get(i);
+//
+//                            for (Node node : nodeEditorRenderer.nodeInstanceCache) {
+//                                if(node.getName().equals(action.trim().split("\\(")[0])){
+//                                    try {
+//                                        Node newInstance = node.getClass().getDeclaredConstructor(Graph.class).newInstance(graph);
+//                                        graph.addNode(newInstance);
+//                                    } catch (Exception e) {
+//                                        throw new RuntimeException(e);
+//                                    }
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
                 }
             }
 

@@ -1,6 +1,7 @@
 package ovs.graph.node;
 
 import imgui.ImGui;
+import imgui.extension.nodeditor.NodeEditor;
 import imgui.type.ImString;
 import ovs.Global;
 import ovs.graph.Graph;
@@ -284,7 +285,7 @@ public class NodeRule extends NodeEntry{
     @Override
     public void UI() {
         ImGui.text("Event");
-        ImGui.textWrapped(error);
+        ImGui.text(error);
         comboEventOnGoing.show();
 
         if(!isGlobal && !isSub){
