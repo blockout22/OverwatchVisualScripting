@@ -2,6 +2,8 @@
 
 ![Downloads](https://img.shields.io/github/downloads/blockout22/OverwatchVisualScripting/total)
 
+[![Maven Build](https://github.com/blockout22/OverwatchVisualScripting/actions/workflows/maven.yml/badge.svg)](https://github.com/blockout22/OverwatchVisualScripting/actions/workflows/maven.yml)
+
 ## Requirements
 ### **If you are not using the Bundle read the following requirements**
   
