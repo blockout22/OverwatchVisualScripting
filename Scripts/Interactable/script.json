@@ -1612,8 +1612,8 @@
     {
       "className": "ovs.graph.node.NodeConstVector",
       "nodeName": "Const Vector",
-      "x": -110.0,
-      "y": 52.0,
+      "x": -120.0,
+      "y": 54.0,
       "comment": "",
       "extraData": [],
       "inputPins": [
@@ -1632,7 +1632,7 @@
           "name": "",
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            2037
+            1018
           ],
           "canDelete": false
         }
@@ -1723,6 +1723,14 @@
       "inputPins": [
         {
           "ID": 2037,
+          "name": "Variable",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "CircleLocation",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1018,
           "name": "Value",
           "type": "ovs.graph.pin.PinVar",
           "value": "Vector(0.0, 0.5, 0.0)",
@@ -2321,6 +2329,14 @@
       "inputPins": [
         {
           "ID": 3123,
+          "name": "Variable",
+          "type": "ovs.graph.pin.PinCombo",
+          "value": "Radius",
+          "connections": [],
+          "canDelete": false
+        },
+        {
+          "ID": 1057,
           "name": "Value",
           "type": "ovs.graph.pin.PinVar",
           "value": "2.0",
@@ -2345,7 +2361,7 @@
     {
       "className": "ovs.graph.node.NodeNumber",
       "nodeName": "Number",
-      "x": -40.0,
+      "x": -104.0,
       "y": 182.0,
       "comment": "",
       "extraData": [],
@@ -2365,7 +2381,7 @@
           "name": "",
           "type": "ovs.graph.pin.PinVar",
           "connections": [
-            3123
+            1057
           ],
           "canDelete": false
         }
