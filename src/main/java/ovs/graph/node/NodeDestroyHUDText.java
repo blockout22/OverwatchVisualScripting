@@ -6,12 +6,12 @@ import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeDestroyHudText extends Node{
+public class NodeDestroyHUDText extends Node{
 
     PinVar pinEntity = new PinVar();
     PinAction output = new PinAction();
 
-    public NodeDestroyHudText(Graph graph) {
+    public NodeDestroyHUDText(Graph graph) {
         super(graph);
         setName("Destroy Hud Text");
 

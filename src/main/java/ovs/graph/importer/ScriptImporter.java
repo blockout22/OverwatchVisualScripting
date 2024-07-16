@@ -2,8 +2,6 @@ package ovs.graph.importer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ScriptImporter {
 
@@ -120,17 +118,7 @@ public class ScriptImporter {
         return rule.split("\n")[0].split("\"")[1];
     }
 
-    public static String[] getActionArguments(String actionLine) {
-        if(actionLine.startsWith("Global.")){
-            String variable = actionLine.split("=")[0].split("\\.")[1].trim();
-            String value = actionLine.split("=")[1].trim();
-            return new String[]{variable, value};
-        }else if(actionLine.contains("=")){
-            String player = actionLine.split("=")[0].split("\\.")[0].trim();;
-            String variable = actionLine.split("=")[0].split("\\.")[1].trim();
-            String value = actionLine.split("=")[1].trim();
-            return new String[]{player, variable, value};
-        }
+    public static String[] getArguments(String actionLine) {
         int startIndex = actionLine.indexOf('(');
         int endIndex = actionLine.lastIndexOf(')');
         if (startIndex != -1 && endIndex != -1) {

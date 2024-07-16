@@ -25,6 +25,9 @@ public class PinFloat extends Pin{
         return true;
     }
 
+    public void setValue(float value){
+        data.getValue().set(value);
+    }
     @Override
     public void loadValue(String value) {
         float val = Float.valueOf(value);

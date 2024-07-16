@@ -34,6 +34,8 @@ public class NodeSetGlobalVariable extends Node{
         output.setNode(this);
         addCustomOutput(output);
 
+        populateCombobox();
+
         pinVariable.getComboBox().addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {

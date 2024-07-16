@@ -15,6 +15,10 @@ public class PinString extends Pin{
         data.setValue(new ImString(50000));
     }
 
+    public void setValue(String value){
+        data.getValue().set(value);
+    }
+
     @Override
     public void loadValue(String value) {
         data.getValue().set(value);

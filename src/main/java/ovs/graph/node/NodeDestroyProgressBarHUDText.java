@@ -6,18 +6,18 @@ import ovs.graph.PinData;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
-public class NodeDisableHeroHud extends Node{
+public class NodeDestroyProgressBarHUDText extends Node{
 
-    PinVar pinPlayer = new PinVar();
+    PinVar pinEntity = new PinVar();
     PinAction output = new PinAction();
 
-    public NodeDisableHeroHud(Graph graph) {
+    public NodeDestroyProgressBarHUDText(Graph graph) {
         super(graph);
-        setName("Disable Hero Hud");
+        setName("Destroy Progress Bar Hud Text");
 
-        pinPlayer.setNode(this);
-        pinPlayer.setName("Player");
-        addCustomInput(pinPlayer);
+        pinEntity.setNode(this);
+        pinEntity.setName("Text ID");
+        addCustomInput(pinEntity);
 
         output.setNode(this);
         addCustomOutput(output);
@@ -25,12 +25,13 @@ public class NodeDisableHeroHud extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> playerData = pinPlayer.getData();
+        PinData<ImString> entityData = pinEntity.getData();
         PinData<ImString> outputData = output.getData();
 
-        handlePinStringConnection(pinPlayer, playerData);
+        handlePinStringConnection(pinEntity, entityData);
 
-        outputData.getValue().set("Disable Hero HUD(" + playerData.getValue().get() + ");");
+        outputData.getValue().set("Destroy Progress Bar HUD Text(" + entityData.getValue().get() + ");");
+
     }
 
     @Override
@@ -46,6 +47,6 @@ public class NodeDisableHeroHud extends Node{
 
     @Override
     public String getTooltip() {
-        return "Disables the hero hud for one or more players until reenabled.";
+        return "Destroys progress bar hud text that was created by create progress bar hud text.";
     }
 }

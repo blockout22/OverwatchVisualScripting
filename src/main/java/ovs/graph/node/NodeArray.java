@@ -21,16 +21,26 @@ public class NodeArray extends Node {
         output.setNode(this);
         addCustomOutput(output);
 
+        addInputPin();
+        addInputPin();
+        addInputPin();
+        addInputPin();
+        addInputPin();
+
         addUiComponent(button);
         button.addLeftClickListener(new LeftClickListener() {
             @Override
             public void onClicked() {
-                Pin pin = new PinVar();
-                pin.setNode(self);
-                pin.setCanDelete(true);
-                addCustomInput(pin);
+                addInputPin();
             }
         });
+    }
+
+    public void addInputPin(){
+        PinVar pin = new PinVar();
+        pin.setNode(self);
+        pin.setCanDelete(true);
+        addCustomInput(pin);
     }
 
     @Override

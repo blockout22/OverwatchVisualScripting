@@ -24,6 +24,10 @@ public class NodeNumber extends Node{
         addCustomOutput(output);
     }
 
+    public void setValue(float value){
+        input.setValue(value);
+    }
+
     @Override
     public void copy(Node node) {
         if(node instanceof NodeNumber){

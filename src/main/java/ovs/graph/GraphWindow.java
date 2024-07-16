@@ -18,14 +18,12 @@ import ovs.graph.node.interfaces.NodeDisabled;
 import ovs.graph.node.interfaces.NodeGroupOnly;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinCombo;
+import ovs.graph.pin.PinString;
 import ovs.graph.save.GraphSaver;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.List;
-
-import static imgui.flag.ImGuiWindowFlags.AlwaysAutoResize;
 
 public class GraphWindow {
     private ImGuiWindow imGuiWindow;
@@ -102,7 +100,7 @@ public class GraphWindow {
                         if(!Global.isRunning){
                             break;
                         }
-                        if(lastSaveTime + Duration.ofMinutes(5).toMillis() < System.currentTimeMillis()){
+                        if(lastSaveTime + Duration.ofMinutes(15).toMillis() < System.currentTimeMillis()){
                             nodeEditorRenderer.setAsCurrentEditor();
                             boolean success = graphSaver.save(fileName, settings, graph);
                             if(success){
@@ -303,21 +301,98 @@ public class GraphWindow {
         nodeEditorRenderer.setId(id);
     }
 
-    private void handleImportAction(String[] actions, Node parentNode, ClassLoader loader, ImVec2 offset) {
+    private void handleImportActions(String[] actions, Node parentNode, ClassLoader loader, ImVec2 offset)
+    {
         String packageName = "ovs.graph.node.";
         for (int i = 0; i < actions.length; i++) {
+
             String name = ScriptImporter.getActionName(actions[i]);
+
+            Node node = null;
+            if(name.startsWith("Global.")){
+                String varName = name.split("=")[0].split("\\.")[1].trim();
+                graph.addGlobalVariable(varName);
+                node = new NodeSetGlobalVariable(graph);
+            }else if(name.contains("=")){
+                String varName = name.substring(0, name.lastIndexOf("=")).split("\\.")[1].trim();
+                graph.addPlayerVariable(varName);
+                node = new NodeSetPlayerVariable(graph);
+            }else{
+                String className = "Node" + name.replace(" ", "").replace("-", "");
+                Class nodeClass = null;
+                try {
+                    nodeClass = Class.forName(packageName + className, true, loader);
+                } catch (ClassNotFoundException e) {
+                    System.err.println("ClassName: " + className);
+                    e.printStackTrace();
+                    continue;
+                }
+
+                try {
+                    node = (Node) nodeClass.getDeclaredConstructor(Graph.class).newInstance(graph);
+                } catch (InstantiationException | InvocationTargetException | NoSuchMethodException |
+                         IllegalAccessException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+
+            node.posX = parentNode.posX - offset.x;
+            node.posY = parentNode.posY - offset.y;
+
+            offset.y -= 100;
+            graph.addNode(node);
+            NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(node.posX), NodeEditor.toCanvasY(node.posY));
+            parentNode.inputPins.get(i).connect(node.outputPins.get(0));
+
+            if(actions[i].startsWith("Global.")){
+                String variable = actions[i].split("=")[0].split("\\.")[1].trim();
+                String value = actions[i].split("=")[1].trim();
+                handleImportArguments(new String[]{variable, value}, node, loader, offset);
+            }else if(name.contains("=")){
+                String player = name.split("=")[0].split("\\.")[0].trim();;
+                String variable = name.split("=")[0].split("\\.")[1].trim();
+                String value = name.split("=")[1].trim();
+                handleImportArguments(new String[]{player, variable, value}, node, loader, offset);
+            }
+
+            String[] args = ScriptImporter.getArguments(actions[i]);
+            for (int j = 0; j < args.length; j++) {
+//                System.out.println("Arg: " + args[j]);
+            }
+            if (args.length > 0) {
+                try {
+                    handleImportArguments(args, node, loader, offset);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private boolean isNumber(String name){
+        try{
+            float value = Float.parseFloat(name);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    private void handleImportArguments(String[] arguments, Node parentNode, ClassLoader loader, ImVec2 offset) {
+        String packageName = "ovs.graph.node.";
+        for (int i = 0; i < arguments.length; i++) {
+            String name = ScriptImporter.getActionName(arguments[i]);
+            Node node = null;
+
             if(name.startsWith("\"") && name.endsWith("\""))
             {
-                System.out.println("This is a string constant so I am skipping");
+                if(parentNode.inputPins.get(i) instanceof PinString){
+                    PinString pinString = (PinString)parentNode.inputPins.get(i);
+                    pinString.setValue(name.substring(1, name.length() - 1));
+                    continue;
+                }
                 continue;
-            }
-            try{
-                float value = Float.parseFloat(name);
-//                System.out.println("Skipping number");
-                continue;
-            }catch (NumberFormatException e){
-
             }
 
             if(parentNode.inputPins.get(i) instanceof PinCombo){
@@ -326,16 +401,23 @@ public class GraphWindow {
                 continue;
             }
 
-            Node node = null;
-            if(name.startsWith("Global.")){
-                String varName = name.substring(0, name.lastIndexOf("=")).split("\\.")[1].trim();
+
+            if(isNumber(name)){
+                float value = Float.valueOf(name);
+                node = new NodeNumber(graph);
+                System.out.println("Created Number...");
+                ((NodeNumber) node).setValue(value);
+            }
+            else if(name.startsWith("Global.")){
+//                String varName = name.substring(0, name.lastIndexOf(" ")).split("\\.")[1].trim();
+                String varName = name.split("=")[0].split("\\.")[1].trim();
                 graph.addGlobalVariable(varName);
-                node = new NodeSetGlobalVariable(graph);
+                node = new NodeGetGlobalVariable(graph);
+
             }else if(name.contains("=")){
                 String varName = name.substring(0, name.lastIndexOf("=")).split("\\.")[1].trim();
                 graph.addPlayerVariable(varName);
-                node = new NodeSetPlayerVariable(graph);
-//                ((NodeSetPlayerVariable) node).variableBox.selectValue(varName);
+                node = new NodeGetPlayerVariable(graph);
             }else{
 
                 String className = "Node" + name.replace(" ", "").replace("-", "");
@@ -364,14 +446,36 @@ public class GraphWindow {
             NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(node.posX), NodeEditor.toCanvasY(node.posY));
             parentNode.inputPins.get(i).connect(node.outputPins.get(0));
 
-            String[] args = ScriptImporter.getActionArguments(actions[i]);
-            if(args.length > 0){
+            System.out.println("Connected node: " + node.getClass().getSimpleName() + " to parent node " + parentNode.getClass().getSimpleName());
+
+//            //if it contains these symbols it's probably using a compare
+//            if(arguments[i].contains("=") || arguments[i].contains(">") || arguments[i].contains("<"))
+//            {
+//
+//            }
+
+            if(arguments[i].startsWith("Global.")){
+                String variable = arguments[i].split("=")[0].split("\\.")[1].trim();
+//                String value = arguments[i].split("=")[1].trim();
+                handleImportArguments(new String[]{variable}, node, loader, offset);
+                continue;
+            }
+
+            String[] args = ScriptImporter.getArguments(arguments[i]);
+            System.out.println("Arguments for node: " + node.getClass().getSimpleName() + " are [" + args.length + "] " + String.join(", ", args));
+//            if(node instanceof NodeArray){
+//                for (int j = 0; j < args.length; j++) {
+//                    ((NodeArray) node).addInputPin();
+//                }
+//            }
+            if (args.length > 0) {
                 try {
-                    handleImportAction(args, node, loader, offset);
-                }catch (Exception e){
+                    handleImportArguments(args, node, loader, offset);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
         }
     }
 
@@ -514,7 +618,7 @@ public class GraphWindow {
                             NodeEditor.setNodePosition(actionList.getID(), NodeEditor.toCanvasX(actionList.posX), NodeEditor.toCanvasY(actionList.posY));
 
                             try {
-                                handleImportAction(actions, parentNode, loader, offset);
+                                handleImportActions(actions, parentNode, loader, offset);
                             }catch (Exception e){
                                 e.printStackTrace();
                             }

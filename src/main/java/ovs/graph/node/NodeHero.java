@@ -5,11 +5,12 @@ import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
 public class NodeHero extends Node{
 
-    ComboBox heroes = new ComboBox();
+    PinCombo pinHero = new PinCombo();
 
     PinVar output = new PinVar();
 
@@ -17,20 +18,22 @@ public class NodeHero extends Node{
         super(graph);
         setName("Hero");
 
+        pinHero.setNode(this);
+        pinHero.setName("Hero");
+        addCustomInput(pinHero);
+
         output.setNode(this);
         addCustomOutput(output);
 
-        for (int i = 0; i < Global.heroes.size(); i++) {
-            heroes.addOption(Global.heroes.get(i));
-        }
+        pinHero.getComboBox().addOptions(Global.heroes);
 
-        heroes.select(0);
+        pinHero.select(0);
     }
 
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Hero:" + heroes.getSelectedValue());
+        getExtraSaveData().add("Hero:" + pinHero.getComboBox().getSelectedValue());
     }
 
     @Override
@@ -38,9 +41,9 @@ public class NodeHero extends Node{
         for(String data : getExtraSaveData()){
             if(data.startsWith("Hero")){
                 try {
-                    heroes.selectValue(data.split(":")[1]);
+                    pinHero.selectValue(data.split(":")[1]);
                 }catch (ArrayIndexOutOfBoundsException e){
-                    heroes.select(0);
+                    pinHero.select(0);
                 }
             }
         }
@@ -49,15 +52,18 @@ public class NodeHero extends Node{
     @Override
     public void copy(Node node) {
         if(node instanceof NodeHero){
-            heroes.selectValue(((NodeHero) node).heroes.getSelectedValue());
+            pinHero.selectValue(((NodeHero) node).pinHero.getComboBox().getSelectedValue());
         }
     }
 
     @Override
     public void execute() {
+        PinData<ImString> heroData = pinHero.getData();
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Hero(" + heroes.getSelectedValue() + ")");
+        handlePinStringConnection(pinHero, heroData, pinHero.getComboBox().getSelectedValue());
+
+        outputData.getValue().set("Hero(" + heroData.getValue().get() + ")");
     }
 
     @Override
@@ -68,7 +74,7 @@ public class NodeHero extends Node{
 
     @Override
     public void UI() {
-        heroes.show();
+
     }
 
     @Override

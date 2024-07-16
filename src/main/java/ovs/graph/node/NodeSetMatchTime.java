@@ -7,10 +7,11 @@ import ovs.graph.PinData;
 import ovs.graph.pin.Pin;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinFloat;
+import ovs.graph.pin.PinVar;
 
 public class NodeSetMatchTime extends Node{
 
-    PinFloat pinTime = new PinFloat();
+    PinVar pinTime = new PinVar();
     PinAction output = new PinAction();
 
     public NodeSetMatchTime(Graph graph) {
@@ -26,15 +27,10 @@ public class NodeSetMatchTime extends Node{
 
     @Override
     public void execute() {
-        PinData<ImFloat> timeData = pinTime.getData();
+        PinData<ImString> timeData = pinTime.getData();
         PinData<ImString> outputData = output.getData();
 
-        if(pinTime.isConnected()){
-            Pin connectedPin = pinTime.getConnectedPin();
-
-            PinData<ImFloat> connectedData = connectedPin.getData();
-            timeData.getValue().set(connectedData.getValue().get());
-        }
+        handlePinStringConnection(pinTime, timeData, "0.0");
 
         outputData.getValue().set("Set Match Time(" + timeData.getValue().get() + ");");
     }
