@@ -24,6 +24,9 @@ import ovs.graph.save.GraphSaver;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GraphWindow {
     private ImGuiWindow imGuiWindow;
@@ -301,11 +304,20 @@ public class GraphWindow {
         nodeEditorRenderer.setId(id);
     }
 
-    private void handleImportActions(String[] actions, Node parentNode, ClassLoader loader, ImVec2 offset)
+    private List<Node> findParentChildren(List<NodeParentChildList> npcl, Node parentNode){
+        for (int i = 0; i < npcl.size(); i++) {
+            if(npcl.get(i).parent == parentNode){
+                return npcl.get(i).children;
+            }
+        }
+        return null;
+    }
+
+    private void handleImportActions(String[] actions, Node parentNode, ClassLoader loader, List<NodeParentChildList> nodeMap)
     {
         String packageName = "ovs.graph.node.";
+        List<Node> childrenNodes = findParentChildren(nodeMap, parentNode);
         for (int i = 0; i < actions.length; i++) {
-
             String name = ScriptImporter.getActionName(actions[i]);
 
             Node node = null;
@@ -337,32 +349,31 @@ public class GraphWindow {
                 }
             }
 
-            node.posX = parentNode.posX - offset.x;
-            node.posY = parentNode.posY - offset.y;
+//            node.posX = parentNode.posX - offset.x;
+//            node.posY = parentNode.posY - offset.y;
 
-            offset.y -= 100;
+//            offset.y -= 100;
             graph.addNode(node);
+            nodeMap.add(new NodeParentChildList(node));
+            childrenNodes.add(node);
             NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(node.posX), NodeEditor.toCanvasY(node.posY));
             parentNode.inputPins.get(i).connect(node.outputPins.get(0));
 
             if(actions[i].startsWith("Global.")){
                 String variable = actions[i].split("=")[0].split("\\.")[1].trim();
                 String value = actions[i].split("=")[1].trim();
-                handleImportArguments(new String[]{variable, value}, node, loader, offset);
+                handleImportArguments(new String[]{variable, value}, node, loader, nodeMap);
             }else if(name.contains("=")){
                 String player = name.split("=")[0].split("\\.")[0].trim();;
                 String variable = name.split("=")[0].split("\\.")[1].trim();
                 String value = name.split("=")[1].trim();
-                handleImportArguments(new String[]{player, variable, value}, node, loader, offset);
+                handleImportArguments(new String[]{player, variable, value}, node, loader, nodeMap);
             }
 
             String[] args = ScriptImporter.getArguments(actions[i]);
-            for (int j = 0; j < args.length; j++) {
-//                System.out.println("Arg: " + args[j]);
-            }
             if (args.length > 0) {
                 try {
-                    handleImportArguments(args, node, loader, offset);
+                    handleImportArguments(args, node, loader, nodeMap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -379,8 +390,9 @@ public class GraphWindow {
         }
     }
 
-    private void handleImportArguments(String[] arguments, Node parentNode, ClassLoader loader, ImVec2 offset) {
+    private void handleImportArguments(String[] arguments, Node parentNode, ClassLoader loader,  List<NodeParentChildList> nodeMap) {
         String packageName = "ovs.graph.node.";
+        List<Node> childrenNodes = findParentChildren(nodeMap, parentNode);
         for (int i = 0; i < arguments.length; i++) {
             String name = ScriptImporter.getActionName(arguments[i]);
             Node node = null;
@@ -438,13 +450,16 @@ public class GraphWindow {
                     continue;
                 }
             }
-            node.posX = parentNode.posX - offset.x;
-            node.posY = parentNode.posY - offset.y;
+//            node.posX = parentNode.posX - offset.x;
+//            node.posY = parentNode.posY - offset.y;
 
-            offset.y -= 100;
+//            offset.y -= 100;
             graph.addNode(node);
+            nodeMap.add(new NodeParentChildList(node));
+            childrenNodes.add(node);
             NodeEditor.setNodePosition(node.getID(), NodeEditor.toCanvasX(node.posX), NodeEditor.toCanvasY(node.posY));
             parentNode.inputPins.get(i).connect(node.outputPins.get(0));
+
 
             System.out.println("Connected node: " + node.getClass().getSimpleName() + " to parent node " + parentNode.getClass().getSimpleName());
 
@@ -457,12 +472,12 @@ public class GraphWindow {
             if(arguments[i].startsWith("Global.")){
                 String variable = arguments[i].split("=")[0].split("\\.")[1].trim();
 //                String value = arguments[i].split("=")[1].trim();
-                handleImportArguments(new String[]{variable}, node, loader, offset);
+                handleImportArguments(new String[]{variable}, node, loader, nodeMap);
                 continue;
             }
 
             String[] args = ScriptImporter.getArguments(arguments[i]);
-            System.out.println("Arguments for node: " + node.getClass().getSimpleName() + " are [" + args.length + "] " + String.join(", ", args));
+//            System.out.println("Arguments for node: " + node.getClass().getSimpleName() + " are [" + args.length + "] " + String.join(", ", args));
 //            if(node instanceof NodeArray){
 //                for (int j = 0; j < args.length; j++) {
 //                    ((NodeArray) node).addInputPin();
@@ -470,13 +485,67 @@ public class GraphWindow {
 //            }
             if (args.length > 0) {
                 try {
-                    handleImportArguments(args, node, loader, offset);
+                    handleImportArguments(args, node, loader, nodeMap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
         }
+    }
+
+    private void alignNodes(List<NodeParentChildList> nodeMap){
+        for(NodeParentChildList npcl : nodeMap){
+            
+            Node parent = npcl.parent;
+            for (int i = 0; i < npcl.children.size(); i++) {
+                Node child = npcl.children.get(i);
+                float childSizeX = NodeEditor.getNodeSizeX(child.getID());
+                float childSizeY = NodeEditor.getNodeSizeY(child.getID());
+                child.posX = parent.posX - childSizeX - 25;
+                child.posY = parent.posY;// + childSizeY - 25;
+                if(i > 0){
+                    child.posY += NodeEditor.getNodeSizeY(npcl.children.get(i - 1).getID()) + 25;
+                }
+                NodeEditor.setNodePosition(child.getID(), child.posX, child.posY);
+            }
+        }
+//        for(Map.Entry<Node, Integer> entry : nodeMap.entrySet()){
+//            Node node = entry.getKey();
+//            int depth = entry.getValue();
+//
+//            Node parentNode = null;
+//            for (Map.Entry<Node, Integer> e : nodeMap.entrySet()) {
+//                if (e.getValue() == depth - 1) {
+//                    parentNode = e.getKey();
+//                    break;
+//                }
+//            }
+//
+//            float nodeSizeX = NodeEditor.getNodeSizeX(node.getID());
+//            float nodeSizeY = NodeEditor.getNodeSizeY(node.getID());
+//
+//            float newPosX;
+//            float newPosY;
+//            if (parentNode != null) {
+//                newPosX = parentNode.posX - 200;
+//
+//                newPosY = lastYPositionMap.getOrDefault(depth, parentNode.posY + nodeSizeY + 100);
+//            } else {
+//                newPosX = node.posX;
+//                newPosY = lastYPositionMap.getOrDefault(depth, node.posY);
+//                root = node;
+//            }
+//
+//            if(root != null && !lastYPositionMap.containsKey(depth)){
+//                lastYPositionMap.put(depth, root.posY);
+//            }
+//
+//            node.posX = newPosX;
+//            node.posY = newPosY;
+//
+//            NodeEditor.setNodePosition(node.getID(), newPosX, newPosY);
+//        }
     }
 
     public void show(float menuBarHeight, float taskbarHeight){
@@ -577,10 +646,8 @@ public class GraphWindow {
                     ClassLoader loader = NodeCopyPasteHandler.class.getClassLoader();
                     float canvasXPos = NodeEditor.toCanvasX(ImGui.getMousePosX());
                     float canvasYPos = NodeEditor.toCanvasY(ImGui.getMousePosY());
-                    ImVec2 offset = new ImVec2();
                     for(String rule : rules){
                         String ruleName = ScriptImporter.getRuleName(rule);
-                        offset.x = 0;
                         try {
                             String[] event = ScriptImporter.getActionLines(ScriptImporter.LineType.event, rule);
                             String[] conditions = ScriptImporter.getActionLines(ScriptImporter.LineType.conditions, rule);
@@ -597,11 +664,12 @@ public class GraphWindow {
                                 ruleNode.comboPlayers.selectValue(event[2]);
                             }
 //                            ruleNode.setComment();
-                            ruleNode.posX = canvasXPos - offset.x;
-                            ruleNode.posY = canvasYPos - offset.y;
-                            offset.x += 100;
+                            ruleNode.posX = NodeEditor.toCanvasX(ImGui.getMousePosX());
+                            ruleNode.posY = NodeEditor.toCanvasY(ImGui.getMousePosY());
                             graph.addNode(ruleNode);
-                            NodeEditor.setNodePosition(ruleNode.getID(), NodeEditor.toCanvasX(ruleNode.posX), NodeEditor.toCanvasY(ruleNode.posY));
+                            canvasXPos = NodeEditor.toCanvasX(ImGui.getMousePosX());
+                            canvasYPos = NodeEditor.toCanvasY(ImGui.getMousePosY());
+                            NodeEditor.setNodePosition(ruleNode.getID(), ruleNode.posX, ruleNode.posY);
 
                             Node parentNode;
 
@@ -609,16 +677,24 @@ public class GraphWindow {
                             for (int i = 0; i < actions.length - 1; i++) {
                                 actionList.addInputPin();
                             }
-                            actionList.posX = canvasXPos - offset.x;
-                            actionList.posY = canvasYPos - offset.y;
-                            offset.x += 200;
+                            actionList.posX = canvasXPos - NodeEditor.toCanvasX(ImGui.getMousePosX() - 25);
+                            actionList.posY = NodeEditor.toCanvasY(ImGui.getMousePosY());
                             graph.addNode(actionList);
                             parentNode = actionList;
                             ruleNode.inputPins.get(1).connect(actionList.outputPins.get(0));
-                            NodeEditor.setNodePosition(actionList.getID(), NodeEditor.toCanvasX(actionList.posX), NodeEditor.toCanvasY(actionList.posY));
+                            NodeEditor.setNodePosition(actionList.getID(), actionList.posX, actionList.posY);
 
                             try {
-                                handleImportActions(actions, parentNode, loader, offset);
+//                                Map<Node, List<Node>> nodeMaps = new HashMap<>();
+                                List<NodeParentChildList> npcl = new ArrayList<>();
+                                npcl.add(new NodeParentChildList(actionList));
+                                handleImportActions(actions, parentNode, loader, npcl);
+                                TaskSchedule.addTask(() -> {
+//                                    for (Map<Node, Integer> nodeMap : nodeMaps){
+                                        alignNodes(npcl);
+//                                    }
+                                }, 2500);
+
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
