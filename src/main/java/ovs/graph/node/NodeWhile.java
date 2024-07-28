@@ -3,16 +3,15 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.UI.ComboBox;
 import ovs.graph.pin.PinAction;
 import ovs.graph.pin.PinVar;
 
 public class NodeWhile extends Node{
 
-    ComboBox box = new ComboBox();
+//    ComboBox box = new ComboBox();
 
-    PinVar leftPin = new PinVar();
-    PinVar rightPin = new PinVar();
+    PinVar pinCondition = new PinVar();
+//    PinVar rightPin = new PinVar();
 
     PinAction actionPin = new PinAction();
 
@@ -21,20 +20,9 @@ public class NodeWhile extends Node{
         super(graph);
         setName("While");
 
-        box.addOption("<");
-        box.addOption(">");
-        box.addOption("<=");
-        box.addOption(">=");
-        box.addOption("!=");
-        box.addOption("==");
-
-        box.select(5);
-
-        leftPin.setNode(this);
-        addCustomInput(leftPin);
-
-        rightPin.setNode(this);
-        addCustomInput(rightPin);
+        pinCondition.setNode(this);
+        pinCondition.setName("Condition");
+        addCustomInput(pinCondition);
 
         actionPin.setNode(this);
         addCustomInput(actionPin);
@@ -44,44 +32,14 @@ public class NodeWhile extends Node{
     }
 
     @Override
-    public void onSaved() {
-        getExtraSaveData().clear();
-        getExtraSaveData().add("Condition:" + box.getSelectedValue());
-    }
-
-    @Override
-    public void onLoaded() {
-        for(String data : getExtraSaveData()){
-            if(data.startsWith("Condition:"))
-            {
-                box.selectValue(data.split(":")[1]);
-            }
-        }
-    }
-
-    @Override
     public void execute() {
-        if(leftPin.isConnected() && rightPin.isConnected() && actionPin.isConnected()){
-            PinData<ImString> dataLeft = leftPin.getData();
-            PinData<ImString> dataRight = rightPin.getData();
-            PinData<ImString> actionData = actionPin.getData();
-            PinData<ImString> outputData = output.getData();
 
-            dataLeft.getValue().set(((ImString)leftPin.getConnectedPin().getData().getValue()).get());
-            dataRight.getValue().set(((ImString)rightPin.getConnectedPin().getData().getValue()).get());
-            actionData.getValue().set(((ImString)actionPin.getConnectedPin().getData().getValue()).get());
+        PinData<ImString> conditionData = pinCondition.getData();
+        PinData<ImString> outputData = output.getData();
 
-            String out = "";
-            String[] lines = actionData.getValue().get().split("\n");
-            for (int i = 0; i < lines.length; i++) {
-                out += "" + lines[i] + "\n";
-            }
+        handlePinStringConnection(pinCondition, conditionData);
 
-
-            outputData.getValue().set("While(" + dataLeft.getValue().get() + " " + box.getSelectedValue() + " " + dataRight.getValue().get() + ");\n" +
-                    out +
-                    "End;");
-        }
+        outputData.getValue().set(getName() + "(" + conditionData.getValue().get() + ");");
     }
 
     @Override
@@ -92,7 +50,6 @@ public class NodeWhile extends Node{
 
     @Override
     public void UI() {
-        box.show();
     }
 
     @Override

@@ -495,57 +495,30 @@ public class GraphWindow {
     }
 
     private void alignNodes(List<NodeParentChildList> nodeMap){
-        for(NodeParentChildList npcl : nodeMap){
-            
+        Map<Float, Float> posXToNextAvailablePosY = new HashMap<>();
+        for (int k = 0; k < nodeMap.size(); k++) {
+            NodeParentChildList npcl = nodeMap.get(k);
             Node parent = npcl.parent;
+
+            float currentPosY = parent.posY;
+            float parentPosX = parent.posX;
+
+            posXToNextAvailablePosY.putIfAbsent(parentPosX, currentPosY);
+
+
             for (int i = 0; i < npcl.children.size(); i++) {
                 Node child = npcl.children.get(i);
                 float childSizeX = NodeEditor.getNodeSizeX(child.getID());
                 float childSizeY = NodeEditor.getNodeSizeY(child.getID());
-                child.posX = parent.posX - childSizeX - 25;
-                child.posY = parent.posY;// + childSizeY - 25;
-                if(i > 0){
-                    child.posY += NodeEditor.getNodeSizeY(npcl.children.get(i - 1).getID()) + 25;
-                }
+
+                child.posX = parentPosX - childSizeX - 25;
+
+                float childPosY = posXToNextAvailablePosY.getOrDefault(child.posX, currentPosY);
+                posXToNextAvailablePosY.put(child.posX, childPosY + childSizeY + 25);
+                child.posY = childPosY;
                 NodeEditor.setNodePosition(child.getID(), child.posX, child.posY);
             }
         }
-//        for(Map.Entry<Node, Integer> entry : nodeMap.entrySet()){
-//            Node node = entry.getKey();
-//            int depth = entry.getValue();
-//
-//            Node parentNode = null;
-//            for (Map.Entry<Node, Integer> e : nodeMap.entrySet()) {
-//                if (e.getValue() == depth - 1) {
-//                    parentNode = e.getKey();
-//                    break;
-//                }
-//            }
-//
-//            float nodeSizeX = NodeEditor.getNodeSizeX(node.getID());
-//            float nodeSizeY = NodeEditor.getNodeSizeY(node.getID());
-//
-//            float newPosX;
-//            float newPosY;
-//            if (parentNode != null) {
-//                newPosX = parentNode.posX - 200;
-//
-//                newPosY = lastYPositionMap.getOrDefault(depth, parentNode.posY + nodeSizeY + 100);
-//            } else {
-//                newPosX = node.posX;
-//                newPosY = lastYPositionMap.getOrDefault(depth, node.posY);
-//                root = node;
-//            }
-//
-//            if(root != null && !lastYPositionMap.containsKey(depth)){
-//                lastYPositionMap.put(depth, root.posY);
-//            }
-//
-//            node.posX = newPosX;
-//            node.posY = newPosY;
-//
-//            NodeEditor.setNodePosition(node.getID(), newPosX, newPosY);
-//        }
     }
 
     public void show(float menuBarHeight, float taskbarHeight){
