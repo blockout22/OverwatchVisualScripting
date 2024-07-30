@@ -5,15 +5,17 @@ import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
 public class NodePlayersWithinRadius extends Node {
 
-    ComboBox losCheck = new ComboBox(Global.LOSCheck);
+//    ComboBox losCheck = new ComboBox(Global.LOSCheck);
 
     PinVar pinCenter = new PinVar();
     PinVar pinRadius = new PinVar();
     PinVar pinTeam = new PinVar();
+    PinCombo losCheck = new PinCombo();
     PinVar output = new PinVar();
 
     public NodePlayersWithinRadius(Graph graph) {
@@ -32,6 +34,10 @@ public class NodePlayersWithinRadius extends Node {
         pinTeam.setName("Team");
         addCustomInput(pinTeam);
 
+        losCheck.setNode(this);
+        losCheck.setName("LOS Check");
+        addCustomInput(losCheck);
+
         losCheck.select(0);
 
         output.setNode(this);
@@ -41,7 +47,7 @@ public class NodePlayersWithinRadius extends Node {
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("LOS:" + losCheck.getSelectedValue());
+        getExtraSaveData().add("LOS:" + losCheck.getComboBox().getSelectedValue());
     }
 
     @Override
@@ -62,13 +68,15 @@ public class NodePlayersWithinRadius extends Node {
         PinData<ImString> centerData = pinCenter.getData();
         PinData<ImString> radiusData = pinRadius.getData();
         PinData<ImString> teamData = pinTeam.getData();
+        PinData<ImString> losCheckData = losCheck.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinCenter, centerData);
         handlePinStringConnection(pinRadius, radiusData);
         handlePinStringConnection(pinTeam, teamData);
+        handlePinStringConnection(losCheck, losCheckData, losCheck.getComboBox().getSelectedValue());
 
-        outputData.getValue().set(getName() + "(" + centerData.getValue().get() + ", " + radiusData.getValue().get() + ", " + teamData.getValue().get() + ", " + losCheck.getSelectedValue() + ")");
+        outputData.getValue().set(getName() + "(" + centerData.getValue().get() + ", " + radiusData.getValue().get() + ", " + teamData.getValue().get() + ", " + losCheckData.getValue().get() + ")");
     }
 
     @Override
@@ -78,8 +86,7 @@ public class NodePlayersWithinRadius extends Node {
     }
 
     @Override
-    public void UI() {
-        losCheck.show();
+    public void UI(){
     }
 
     @Override
