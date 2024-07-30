@@ -5,11 +5,12 @@ import ovs.Global;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
 import ovs.graph.UI.ComboBox;
+import ovs.graph.pin.PinCombo;
 import ovs.graph.pin.PinVar;
 
 public class NodeButton extends Node{
 
-    ComboBox buttons = new ComboBox();
+    PinCombo buttons = new PinCombo();
     PinVar output = new PinVar();
 
     public NodeButton(Graph graph) {
@@ -29,7 +30,7 @@ public class NodeButton extends Node{
     @Override
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Button:" + buttons.getSelectedValue());
+        getExtraSaveData().add("Button:" + buttons.getComboBox().getSelectedValue());
     }
 
     @Override
@@ -44,15 +45,19 @@ public class NodeButton extends Node{
     @Override
     public void copy(Node node) {
         if(node instanceof NodeButton){
-            buttons.selectValue(((NodeButton) node).buttons.getSelectedValue());
+            buttons.selectValue(((NodeButton) node).buttons.getComboBox().getSelectedValue());
         }
     }
 
     @Override
     public void execute() {
+
+        PinData<ImString> buttonData = buttons.getData();
         PinData<ImString> outputData = output.getData();
 
-        outputData.getValue().set("Button(" + buttons.getSelectedValue() + ")");
+        handlePinStringConnection(buttons, buttonData, buttons.getComboBox().getSelectedValue());
+
+        outputData.getValue().set("Button(" + buttonData.getValue().get() + ")");
     }
 
     @Override
@@ -63,7 +68,6 @@ public class NodeButton extends Node{
 
     @Override
     public void UI() {
-        buttons.show();
     }
 
     @Override
