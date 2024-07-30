@@ -17,6 +17,10 @@ public class NodeButton extends Node{
         super(graph);
         setName("Button");
 
+        buttons.setNode(this);
+        buttons.setName("Button");
+        addCustomInput(buttons);
+
         for (int i = 0; i < Global.buttons.size(); i++) {
             buttons.addOption(Global.buttons.get(i));
         }
