@@ -38,6 +38,8 @@ public class NodePlayersWithinRadius extends Node {
         losCheck.setName("LOS Check");
         addCustomInput(losCheck);
 
+        losCheck.getComboBox().addOptions(Global.LOSCheck);
+
         losCheck.select(0);
 
         output.setNode(this);
