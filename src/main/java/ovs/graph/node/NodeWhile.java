@@ -13,7 +13,7 @@ public class NodeWhile extends Node{
     PinVar pinCondition = new PinVar();
 //    PinVar rightPin = new PinVar();
 
-    PinAction actionPin = new PinAction();
+//    PinAction actionPin = new PinAction();
 
     PinAction output = new PinAction();
     public NodeWhile(Graph graph) {
@@ -24,8 +24,8 @@ public class NodeWhile extends Node{
         pinCondition.setName("Condition");
         addCustomInput(pinCondition);
 
-        actionPin.setNode(this);
-        addCustomInput(actionPin);
+//        actionPin.setNode(this);
+//        addCustomInput(actionPin);
 
         output.setNode(this);
         addCustomOutput(output);
