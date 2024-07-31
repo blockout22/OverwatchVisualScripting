@@ -103,7 +103,7 @@ public class NodeChaseGlobalVariableAtRate extends Node{
     private void populateCombobox(){
         variables.getComboBox().clear();
         for (int i = 0; i < getGraph().globalVariables.size(); i++) {
-            variables.addOption("Global." + getGraph().globalVariables.get(i).name);
+            variables.addOption(getGraph().globalVariables.get(i).name);
         }
     }
 

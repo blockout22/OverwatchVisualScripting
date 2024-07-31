@@ -109,7 +109,7 @@ public class NodeChasePlayerVariableAtRate extends Node{
     private void populateCombobox(){
         variables.getComboBox().clear();
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            variables.addOption("Event Player." + getGraph().playerVariables.get(i).name);
+            variables.addOption(getGraph().playerVariables.get(i).name);
         }
     }
 
