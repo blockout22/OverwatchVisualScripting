@@ -16,6 +16,7 @@ public class TextField extends UiComponent{
     private ArrayList<ChangeListener> changeListeners = new ArrayList<>();
 
     private boolean allowSpaces = false;
+    public float size = -1;
 
     public TextField(){
     }
@@ -34,14 +35,23 @@ public class TextField extends UiComponent{
 
     @Override
     public void show() {
+        if(size != -1){
+            ImGui.pushItemWidth(size);
+        }
+
         if(!allowSpaces) {
+
             if (ImGui.inputText("##" + uniqueID, string, ImGuiInputTextFlags.CharsNoBlank)) {
 
             }
+
         }else{
             if (ImGui.inputText("##" + uniqueID, string)) {
 
             }
+        }
+        if(size != -1) {
+            ImGui.popItemWidth();
         }
 
         if(lastText != string.get()){

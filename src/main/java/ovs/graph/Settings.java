@@ -596,8 +596,6 @@ public class Settings {
             ImGui.unindent();
         }
 
-
-
         if(ImGui.collapsingHeader("Heroes")){
             ImGui.indent();
             if(ImGui.collapsingHeader("General")) {

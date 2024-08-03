@@ -6,10 +6,7 @@ import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import ovs.Global;
 import ovs.TaskSchedule;
-import ovs.graph.Graph;
-import ovs.graph.Settings;
-import ovs.graph.Task;
-import ovs.graph.Variable;
+import ovs.graph.*;
 import ovs.graph.node.Node;
 import ovs.graph.pin.Pin;
 
@@ -49,6 +46,7 @@ public class GraphSaver {
         graphSave.globalVariables.clear();
         graphSave.playerVariables.clear();
         graphSave.subroutines.clear();
+        graphSave.constants.clear();
         graphSave.saveSettings.extensionToggle.clear();
         graphSave.saveSettings.assaultSettings.MapToggle.clear();
         graphSave.saveSettings.controlSettings.MapToggle.clear();
@@ -323,6 +321,10 @@ public class GraphSaver {
 
         for (int i = 0; i < graph.subroutines.size(); i++) {
             graphSave.subroutines.add(i + ":" + graph.subroutines.get(i));
+        }
+
+        for (int i = 0; i < graph.constants.size(); i++) {
+            graphSave.constants.add(graph.constants.get(i));
         }
 
 
@@ -761,6 +763,10 @@ public class GraphSaver {
                 graph.subroutines.add(split[1]);
             }
 
+            for (Constant con : gs.constants){
+                graph.constants.add(con);
+            }
+
             for (int i = 0; i < gs.nodeSaves.size(); i++) {
                 NodeSave save = gs.nodeSaves.get(i);
                 Class classNode = null;
@@ -952,6 +958,7 @@ public class GraphSaver {
         private ArrayList<String> globalVariables = new ArrayList<>();
         private ArrayList<String> playerVariables = new ArrayList<>();
         private ArrayList<String> subroutines = new ArrayList<>();
+        private ArrayList<Constant> constants = new ArrayList<>();
         private ArrayList<NodeSave> nodeSaves = new ArrayList<>();
     }
 

@@ -15,6 +15,7 @@ public class Graph {
     public final AdvancedArrayList<Variable> globalVariables = new AdvancedArrayList<>();
     public final AdvancedArrayList<Variable> playerVariables = new AdvancedArrayList<>();
     public final AdvancedArrayList<String> subroutines = new AdvancedArrayList<>();
+    public final AdvancedArrayList<Constant> constants = new AdvancedArrayList<>();
 
     private static int nextNodeID = 1;
     private static int nextPinID = 1000;
@@ -59,6 +60,19 @@ public class Graph {
 
     public void addSubroutine(String name){
         subroutines.add(name);
+    }
+
+    public void addConstant(){
+        constants.add(new Constant());
+    }
+
+    public String getConstantOutput(String key){
+        for (int i = 0; i < constants.size(); i++) {
+            if(constants.get(i).key.equals(key)){
+                return constants.get(i).output;
+            }
+        }
+        return null;
     }
 
     public AdvancedArrayList<Node> getNodes()
