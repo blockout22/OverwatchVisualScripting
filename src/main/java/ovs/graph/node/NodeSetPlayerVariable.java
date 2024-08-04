@@ -77,10 +77,8 @@ public class NodeSetPlayerVariable extends Node{
 
     public void populateCombobox(){
         pinVariable.getComboBox().clear();
-        System.out.println("Populating...");
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
             pinVariable.getComboBox().addOption(getGraph().playerVariables.get(i).name);
-            System.out.println("added Variable: " + getGraph().playerVariables.get(i).name);
         }
 
         for (int i = 0; i < pinVariable.getComboBox().size(); i++) {

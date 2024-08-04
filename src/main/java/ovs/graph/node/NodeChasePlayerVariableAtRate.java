@@ -3,7 +3,6 @@ package ovs.graph.node;
 import imgui.type.ImString;
 import ovs.graph.Graph;
 import ovs.graph.PinData;
-import ovs.graph.UI.ComboBox;
 import ovs.graph.UI.Listeners.ChangeListener;
 import ovs.graph.UI.Listeners.OnOpenedListener;
 import ovs.graph.pin.PinAction;
@@ -14,7 +13,7 @@ public class NodeChasePlayerVariableAtRate extends Node{
 
 
     PinVar pinPlayer = new PinVar();
-    PinCombo variables = new PinCombo();
+    public PinCombo pinVariable = new PinCombo();
     PinVar pinDest = new PinVar();
     PinVar pinRate = new PinVar();
     PinCombo reevaluation = new PinCombo();
@@ -29,9 +28,9 @@ public class NodeChasePlayerVariableAtRate extends Node{
         pinPlayer.setName("Player");
         addCustomInput(pinPlayer);
 
-        variables.setNode(this);
-        variables.setName("Variable");
-        addCustomInput(variables);
+        pinVariable.setNode(this);
+        pinVariable.setName("Variable");
+        addCustomInput(pinVariable);
 
         pinDest.setNode(this);
         pinDest.setName("Destination");
@@ -53,18 +52,18 @@ public class NodeChasePlayerVariableAtRate extends Node{
         output.setNode(this);
         addCustomOutput(output);
 
-        variables.getComboBox().addOnOpenedListener(new OnOpenedListener() {
+        pinVariable.getComboBox().addOnOpenedListener(new OnOpenedListener() {
             @Override
             public void onOpen() {
-                String lastSelectedValue = variables.getComboBox().getSelectedValue();
+                String lastSelectedValue = pinVariable.getComboBox().getSelectedValue();
                 populateCombobox();
 
-                variables.selectValue(lastSelectedValue);
+                pinVariable.selectValue(lastSelectedValue);
                 width = -1;
             }
         });
 
-        variables.getComboBox().addChangeListener(new ChangeListener() {
+        pinVariable.getComboBox().addChangeListener(new ChangeListener() {
             @Override
             public void onChanged(String oldValue, String newValue) {
                 width = -1;
@@ -76,13 +75,13 @@ public class NodeChasePlayerVariableAtRate extends Node{
     public void copy(Node node) {
         populateCombobox();
         if(node instanceof NodeChasePlayerVariableAtRate){
-            variables.selectValue(((NodeChasePlayerVariableAtRate) node).variables.getComboBox().getSelectedValue());
+            pinVariable.selectValue(((NodeChasePlayerVariableAtRate) node).pinVariable.getComboBox().getSelectedValue());
         }
     }
 
     public void onSaved() {
         getExtraSaveData().clear();
-        getExtraSaveData().add("Var:" + variables.getComboBox().getSelectedValue());
+        getExtraSaveData().add("Var:" + pinVariable.getComboBox().getSelectedValue());
         getExtraSaveData().add("Reeval:" + reevaluation.getComboBox().getSelectedValue());
     }
 
@@ -92,9 +91,9 @@ public class NodeChasePlayerVariableAtRate extends Node{
         for(String data : getExtraSaveData()){
             if(data.startsWith("Var")){
                 try{
-                    variables.selectValue(data.split(":")[1]);
+                    pinVariable.selectValue(data.split(":")[1]);
                 }catch (ArrayIndexOutOfBoundsException e){
-                    variables.select(-1);
+                    pinVariable.select(-1);
                 }
             }else if(data.startsWith("Reeval")){
                 try{
@@ -106,24 +105,24 @@ public class NodeChasePlayerVariableAtRate extends Node{
         }
     }
 
-    private void populateCombobox(){
-        variables.getComboBox().clear();
+    public void populateCombobox(){
+        pinVariable.getComboBox().clear();
         for (int i = 0; i < getGraph().playerVariables.size(); i++) {
-            variables.addOption(getGraph().playerVariables.get(i).name);
+            pinVariable.addOption(getGraph().playerVariables.get(i).name);
         }
     }
 
     @Override
     public void execute() {
         PinData<ImString> playerData = pinPlayer.getData();
-        PinData<ImString> varData = variables.getData();
+        PinData<ImString> varData = pinVariable.getData();
         PinData<ImString> destData = pinDest.getData();
         PinData<ImString> rateData = pinRate.getData();
         PinData<ImString> reevaluationData = reevaluation.getData();
         PinData<ImString> outputData = output.getData();
 
         handlePinStringConnection(pinPlayer, playerData);
-        handlePinStringConnection(variables, varData, variables.getComboBox().getSelectedValue());
+        handlePinStringConnection(pinVariable, varData, pinVariable.getComboBox().getSelectedValue());
         handlePinStringConnection(pinDest, destData);
         handlePinStringConnection(pinRate, rateData, "1");
         handlePinStringConnection(reevaluation, reevaluationData, reevaluation.getComboBox().getSelectedValue());

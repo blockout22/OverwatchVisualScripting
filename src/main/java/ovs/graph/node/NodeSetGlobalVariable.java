@@ -13,7 +13,7 @@ import ovs.graph.pin.PinVar;
 
 public class NodeSetGlobalVariable extends Node{
 
-    private PinCombo pinVariable = new PinCombo();
+    public PinCombo pinVariable = new PinCombo();
     private PinVar inputPin = new PinVar();
     private PinAction output = new PinAction();
 

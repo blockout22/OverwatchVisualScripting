@@ -182,6 +182,7 @@ public class GraphWindow {
 //                                }
 //                            }
 
+                            //Handle variable name changes
                             for(Node node : graph.getNodes().getList()){
                                 //if variable names are changed then update Get and Set nodes that use the changed variables to the new name
                                 if(node instanceof NodeGetVariable){
@@ -202,6 +203,39 @@ public class GraphWindow {
                                         //this will refresh the options list inside the combobox
                                         nsr.populateCombobox();
                                         nsr.variableBox.selectValue("Global." + newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeGetGlobalVariable)
+                                {
+                                    NodeGetGlobalVariable nsr = (NodeGetGlobalVariable) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeSetGlobalVariable)
+                                {
+                                    NodeSetGlobalVariable nsr = (NodeSetGlobalVariable) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeChaseGlobalVariableAtRate)
+                                {
+                                    NodeChaseGlobalVariableAtRate nsr = (NodeChaseGlobalVariableAtRate) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
                                         nsr.width = -1;
                                     }
                                 }
@@ -246,6 +280,39 @@ public class GraphWindow {
                                         //this will refresh the options list inside the combobox
                                         nsr.populateCombobox();
                                         nsr.variableBox.selectValue("Event Player." + newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeGetPlayerVariable)
+                                {
+                                    NodeGetPlayerVariable nsr = (NodeGetPlayerVariable) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeSetPlayerVariable)
+                                {
+                                    NodeSetPlayerVariable nsr = (NodeSetPlayerVariable) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
+                                        nsr.width = -1;
+                                    }
+                                }
+
+                                if(node instanceof NodeChasePlayerVariableAtRate)
+                                {
+                                    NodeChasePlayerVariableAtRate nsr = (NodeChasePlayerVariableAtRate) node;
+                                    if(nsr.pinVariable.getComboBox().getSelectedValue().equals(oldValue)){
+                                        //this will refresh the options list inside the combobox
+                                        nsr.populateCombobox();
+                                        nsr.pinVariable.getComboBox().selectValue(newValue);
                                         nsr.width = -1;
                                     }
                                 }

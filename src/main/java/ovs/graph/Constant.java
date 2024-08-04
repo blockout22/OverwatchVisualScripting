@@ -32,6 +32,9 @@ public class Constant extends UiComponent {
 
     public Constant(Type _type) {
         type = _type;
+        if(type == null){
+            type = Type.NUMBER;
+        }
         listOfTypes = Arrays.stream(Type.values())
                 .map(Type::name)
                 .toArray(String[]::new);
