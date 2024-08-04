@@ -63,7 +63,7 @@ public class Graph {
     }
 
     public void addConstant(){
-        constants.add(new Constant(Constant.Type.NUMBER));
+        constants.add(new Constant(this, Constant.Type.NUMBER));
     }
 
     public String getConstantOutput(String key){

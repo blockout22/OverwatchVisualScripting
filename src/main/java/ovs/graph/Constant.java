@@ -13,6 +13,8 @@ import java.util.Arrays;
 
 public class Constant extends UiComponent {
 
+    private Graph graph;
+
     public ImString keyValue = new ImString();
     public ImFloat numberValue = new ImFloat();
     public ImString stringValue = new ImString();
@@ -30,7 +32,8 @@ public class Constant extends UiComponent {
 
     private Type type;
 
-    public Constant(Type _type) {
+    public Constant(Graph graph, Type _type) {
+        this.graph = graph;
         type = _type;
         if(type == null){
             type = Type.NUMBER;
@@ -62,7 +65,7 @@ public class Constant extends UiComponent {
         ImGui.popItemWidth();
         ImGui.sameLine();
         if(ImGui.button("X##Constant_Remove" + uniqueID)){
-
+            graph.constants.remove(this);
         }
         switch (type){
             case NUMBER:

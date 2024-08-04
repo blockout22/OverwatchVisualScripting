@@ -777,7 +777,7 @@ public class GraphSaver {
             }
 
             for (ConstantSave con : gs.constants){
-                Constant constant = new Constant(con.type);
+                Constant constant = new Constant(graph, con.type);
                 constant.keyValue.set(con.key);
                 constant.numberValue.set(con.numberValue);
                 constant.stringValue.set(con.stringValue);
