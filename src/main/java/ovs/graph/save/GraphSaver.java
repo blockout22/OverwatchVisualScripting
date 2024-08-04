@@ -324,7 +324,18 @@ public class GraphSaver {
         }
 
         for (int i = 0; i < graph.constants.size(); i++) {
-            graphSave.constants.add(graph.constants.get(i));
+//            graphSave.constants.add(graph.constants.get(i));
+            Constant constant = graph.constants.get(i);
+            ConstantSave constSave = new ConstantSave();
+            constSave.key = constant.keyValue.get();
+            constSave.numberValue = constant.numberValue.get();
+            constSave.stringValue = constant.stringValue.get();
+            constSave.vectorValue[0] = constant.vectorValues[0];
+            constSave.vectorValue[1] = constant.vectorValues[1];
+            constSave.vectorValue[2] = constant.vectorValues[2];
+            constSave.type = constant.getType();
+
+            graphSave.constants.add(constSave);
         }
 
 
@@ -763,8 +774,15 @@ public class GraphSaver {
                 graph.subroutines.add(split[1]);
             }
 
-            for (Constant con : gs.constants){
-                graph.constants.add(con);
+            for (ConstantSave con : gs.constants){
+                Constant constant = new Constant(con.type);
+                constant.keyValue.set(con.key);
+                constant.numberValue.set(con.numberValue);
+                constant.stringValue.set(con.stringValue);
+                constant.vectorValues[0] = con.vectorValue[0];
+                constant.vectorValues[1] = con.vectorValue[1];
+                constant.vectorValues[2] = con.vectorValue[2];
+                graph.constants.add(constant);
             }
 
             for (int i = 0; i < gs.nodeSaves.size(); i++) {
@@ -958,7 +976,7 @@ public class GraphSaver {
         private ArrayList<String> globalVariables = new ArrayList<>();
         private ArrayList<String> playerVariables = new ArrayList<>();
         private ArrayList<String> subroutines = new ArrayList<>();
-        private ArrayList<Constant> constants = new ArrayList<>();
+        private ArrayList<ConstantSave> constants = new ArrayList<>();
         private ArrayList<NodeSave> nodeSaves = new ArrayList<>();
     }
 
@@ -1176,6 +1194,14 @@ public class GraphSaver {
         private boolean canDelete;
     }
 
+    private static class ConstantSave{
+        private String key;
+        private float numberValue;
+        private String stringValue;
+        private float[] vectorValue = new float[3];
+
+        private Constant.Type type;
+    }
 
     private static class NodeSave{
         private String className;

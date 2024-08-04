@@ -64,7 +64,7 @@ public class GraphWindow {
     private final ArrayList<TextField> tfPlayerVars = new ArrayList<>();
     private final ArrayList<TextField> tfSubroutines = new ArrayList<>();
     private final ArrayList<TextField> tfConstantsKey = new ArrayList<>();
-    private final ArrayList<TextField> tfConstantsValue = new ArrayList<>();
+//    private final ArrayList<TextField> tfConstantsValue = new ArrayList<>();
     private ArrayList<Node> searchResults = new ArrayList<>();
 
     private Settings settings = new Settings();
@@ -277,39 +277,39 @@ public class GraphWindow {
             }
         });
 
-        graph.constants.addListChangedListener(() -> {
-            tfConstantsKey.clear();
-            tfConstantsValue.clear();
-            for (int i = 0; i < graph.constants.size(); i++) {
-                TextField tfKey = new TextField(true);
-                tfKey.size = 100f;
-                TextField tfValue = new TextField(true);
-                tfValue.size = 250f;
-                int j = i;
-
-                Constant newConstant = new Constant();
-
-                tfKey.addChangedListener(new ChangeListener() {
-                    @Override
-                    public void onChanged(String oldValue, String newValue) {
-                        newConstant.key = newValue;
-                    }
-                });
-                tfKey.setText(graph.constants.get(i).key);
-                tfConstantsKey.add(tfKey);
-
-                tfValue.addChangedListener(new ChangeListener() {
-                    @Override
-                    public void onChanged(String oldValue, String newValue) {
-                        newConstant.output = newValue;
-                    }
-                });
-                tfValue.setText(graph.constants.get(i).output);
-                tfConstantsValue.add(tfValue);
-
-                graph.constants.set(j, newConstant);
-            }
-        });
+//        graph.constants.addListChangedListener(() -> {
+//            tfConstantsKey.clear();
+////            tfConstantsValue.clear();
+//            for (int i = 0; i < graph.constants.size(); i++) {
+//                TextField tfKey = new TextField(true);
+//                tfKey.size = 100f;
+//                TextField tfValue = new TextField(true);
+//                tfValue.size = 250f;
+//                int j = i;
+//
+//                Constant newConstant = new Constant();
+//
+//                tfKey.addChangedListener(new ChangeListener() {
+//                    @Override
+//                    public void onChanged(String oldValue, String newValue) {
+//                        newConstant.key = newValue;
+//                    }
+//                });
+//                tfKey.setText(graph.constants.get(i).key);
+//                tfConstantsKey.add(tfKey);
+//
+////                tfValue.addChangedListener(new ChangeListener() {
+////                    @Override
+////                    public void onChanged(String oldValue, String newValue) {
+////                        newConstant.output = newValue;
+////                    }
+////                });
+////                tfValue.setText(graph.constants.get(i).output);
+////                tfConstantsValue.add(tfValue);
+//
+//                graph.constants.set(j, newConstant);
+//            }
+//        });
 
         graph.getNodes().triggerOnChanged();
         graph.playerVariables.triggerOnChanged();
@@ -967,13 +967,11 @@ public class GraphWindow {
                                     }
 
                                     for (int i = 0; i < graph.constants.size(); i++) {
-                                        tfConstantsKey.get(i).show();
-                                        ImGui.sameLine();
-                                        tfConstantsValue.get(i).show();
-                                        ImGui.sameLine();
-                                        if(ImGui.button("X##Constant_Remove" + i)){
+//                                        tfConstantsKey.get(i).show();
 
-                                        }
+                                        graph.constants.get(i).show();
+
+                                        ImGui.separator();
                                     }
                                 }
 

@@ -87,7 +87,7 @@ public class NodeConst extends Node{
     public void populateCombobox(){
         pinCombo.getComboBox().clear();
         for (int i = 0; i < getGraph().constants.size(); i++) {
-            pinCombo.addOption(getGraph().constants.get(i).key);
+            pinCombo.addOption(getGraph().constants.get(i).keyValue.get());
         }
     }
 

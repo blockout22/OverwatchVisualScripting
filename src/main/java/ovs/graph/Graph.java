@@ -63,13 +63,13 @@ public class Graph {
     }
 
     public void addConstant(){
-        constants.add(new Constant());
+        constants.add(new Constant(Constant.Type.NUMBER));
     }
 
     public String getConstantOutput(String key){
         for (int i = 0; i < constants.size(); i++) {
-            if(constants.get(i).key.equals(key)){
-                return constants.get(i).output;
+            if(constants.get(i).keyValue.get().equals(key)){
+                return constants.get(i).getOutput();
             }
         }
         return null;
