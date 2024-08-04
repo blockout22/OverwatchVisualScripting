@@ -820,9 +820,29 @@ public class GraphWindow {
                                 ImGui.separator();
                                 if(ImGui.collapsingHeader("Rules"))
                                 {
-//                                    ImGui.pushItemWidth(400);
-//                                    ImGui.listBox("##Rules", ruleListSelected, items);
                                     for (int i = 0; i < tfRulesList.size(); i++) {
+                                        ImGui.pushStyleColor(ImGuiCol.Button, 0);
+                                        ImGui.pushStyleColor(ImGuiCol.Border, 0);
+                                        ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0);
+                                        ImGui.pushStyleColor(ImGuiCol.ButtonActive, 0);
+                                        ImGui.button("::##" + i);
+                                        ImGui.popStyleColor(4);
+                                        if(ImGui.beginDragDropSource()){
+                                            int j = i;
+                                            ImGui.setDragDropPayload("DND", i, 0);
+                                            ImGui.text(tfRulesList.get(i).getText());
+                                            ImGui.endDragDropSource();
+                                        }
+
+                                        if(ImGui.beginDragDropTarget()){
+                                            Object payload = ImGui.acceptDragDropPayload("DND", ImGuiDragDropFlags.None);
+                                            if(payload instanceof Integer){
+                                                int payloadIndex = (Integer) payload;
+                                                graph.nodes.move(payloadIndex, i);
+                                            }
+                                            ImGui.endDragDropTarget();
+                                        }
+                                        ImGui.sameLine();
                                         tfRulesList.get(i).show();
                                         ImGui.sameLine();
 

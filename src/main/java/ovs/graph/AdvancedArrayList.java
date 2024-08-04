@@ -50,6 +50,14 @@ public class AdvancedArrayList<E> {
         triggerOnChanged();
     }
 
+    public void move(int from, int to){
+        System.out.println(from + " : " + to);
+        E store = getList().get(from);
+        getList().remove(from);
+        getList().add(to, store);
+        triggerOnChanged();
+    }
+
     public boolean swap(E a, E b){
         int _a = -1;
         int _b = -1;
