@@ -333,6 +333,8 @@ public class GraphSaver {
             constSave.vectorValue[0] = constant.vectorValues[0];
             constSave.vectorValue[1] = constant.vectorValues[1];
             constSave.vectorValue[2] = constant.vectorValues[2];
+            constSave.booleanValue = constant.booleanValue.get();
+            constSave.hero = constant.getSelectedHero();
             constSave.type = constant.getType();
 
             graphSave.constants.add(constSave);
@@ -782,6 +784,8 @@ public class GraphSaver {
                 constant.vectorValues[0] = con.vectorValue[0];
                 constant.vectorValues[1] = con.vectorValue[1];
                 constant.vectorValues[2] = con.vectorValue[2];
+                constant.booleanValue.set(con.booleanValue);
+                constant.setSelectedHero(con.hero);
                 graph.constants.add(constant);
             }
 
@@ -1199,6 +1203,8 @@ public class GraphSaver {
         private float numberValue;
         private String stringValue;
         private float[] vectorValue = new float[3];
+        private boolean booleanValue;
+        private String hero;
 
         private Constant.Type type;
     }
