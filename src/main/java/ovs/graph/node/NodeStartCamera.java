@@ -41,7 +41,7 @@ public class NodeStartCamera extends Node{
 
     @Override
     public void execute() {
-        PinData<ImString> playerData = pinLookAt.getData();
+        PinData<ImString> playerData = pinPlayer.getData();
         PinData<ImString> eyePosData = pinEyePos.getData();
         PinData<ImString> lookAtData = pinLookAt.getData();
         PinData<ImString> blendSpeedData = pinBlendSpeed.getData();
