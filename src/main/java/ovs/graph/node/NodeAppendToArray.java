@@ -45,8 +45,6 @@ public class NodeAppendToArray extends Node{
         handlePinStringConnection(pinVariable, varData);
         handlePinStringConnection(input, inputData);
 
-//        System.out.println(varData);
-
         String type = "";
         String var = "";
 
@@ -57,7 +55,9 @@ public class NodeAppendToArray extends Node{
                 type = "Global";
             }
 
-            var = varData.getValue().get().split("\\.")[1];
+            if(varData.getValue().get().split("\\.").length > 1) {
+                var = varData.getValue().get().split("\\.")[1];
+            }
         }
 
         if(type.equals("Player")) {
